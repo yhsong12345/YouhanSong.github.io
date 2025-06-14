@@ -36,6 +36,7 @@
 										<li>
 											<a href="../experience_and_projects/Project_cubox.html">SECERN AI (formerly CUBOX) &hellip;</a>
 											<ul>
+												<li><a href="../experience_and_projects/secern/ko_llm.html">LLM</a></li>
 												<li><a href="../experience_and_projects/secern/seeu_track.html">Seeu Track</a></li>
 												<li><a href="../experience_and_projects/secern/face_recognition.html">Face Recognition System</a></li>
 												<li><a href="../experience_and_projects/secern/seeu_id.html">Seeu ID</a></li>
@@ -82,7 +83,7 @@
 				<div class="container">
 					<div class="row">
 						<img src="../images/ava/ava_img_4.png" alt="" width="1200" height="300" />
-						<iframe src="https://drive.google.com/file/d/19BRf0V9czcVtZQbf3K742GdMdbiiK0EY/preview" width="480" height="360" allow="autoplay"></iframe>
+						<iframe src="https://drive.google.com/file/d/19BRf0V9czcVtZQbf3K742GdMdbiiK0EY/preview" width="520" height="480" allow="autoplay"></iframe>
 						<article class="col-6">
 							<header>
 								<h3>AVA: Autonomous Vehicle for All</h3>
@@ -103,21 +104,30 @@
 							<p>Project Website: <a href="https://avadataportal.web.illinois.edu/index.html">AVA: Autonomous Vehicle for All</a></p>
 						</article>
 
+						<br>
+
 						<article class="col-12">
 							<img src="../images/ava/ava_img_1.png" alt="" width="400" height="300" />
 							<img src="../images/ava/ava_img_2.png" alt="" width="400" height="300" />
 							<img src="../images/ava/ava_img_3.jpg" alt="" width="350" height="300" />
 						</article>
 
+						<br>
+
 						<img src="../images/ava/ava_img_5.jpg" alt="" width="500" height="300" />
 						<article class="col-6">
 							<header>
-								<h3>1. Data Annotation</h3>
+								<h3>1. Data Collection & Annotation</h3>
 							</header>
 							<p>
-
+								To develop models for autonomous vehicle, the data is collected and labeled. 
+								We collect a data by driving the vehicle around college and selected route. The collected
+								data includes image, video, point cloud, IMU and GPS data, and etc and recorded in rosbag.
+								The data is labeled for 2D obejct detection, segmentation, and road & lane detection.
 							</p>
 						</article>
+
+						<br>
 
 						<img src="../images/ava/ava_img_6.jpg" alt="" width="500" height="300" />
 						<article class="col-6">
@@ -125,29 +135,42 @@
 								<h3>2. Edit and Create Vector Map</h3>
 							</header>
 							<p>
-
+								From the rosbag, we extract the point cloud data and create the vector map by cleaning, filtering
+								and vectorizing the raw data. Through this work, multiple vector maps are created and with these
+								maps, we integrate to make them in single vector map. Finally, we validate and refine the vector 
+								map by comparing the shape of route to fianl work.
 							</p>
 						</article>
+
+						<br>
 
 						<iframe src="https://drive.google.com/file/d/1zbqhoitxoYKCDdrSCQzKWvWvAeaH2MW7/preview" width="500" height="300" allow="autoplay"></iframe>
 						<article class="col-6">
 							<header>
-								<h3>3. Inference Algorithm in Simlation</h3>
+								<h3>3. Implement Algorithm in Simlation</h3>
 							</header>
 							<p>
-
+								By implementing models in environment from recorded rosbag, we validate models and algorithms
+								are working properly before loading to the vehicle and testing in real time and real world.
 							</p>
 						</article>
+
+						<br>
 
 						<iframe src="https://drive.google.com/file/d/1ifeu-waA8TNrYYe8D2kDoMEj82qUVqUC/preview" width="500" height="300" allow="autoplay"></iframe>
 						<article class="col-6">
 							<header>
-								<h3>4. Implement Algorithms in the field (real time and real world)</h3>
+								<h3>4. Test Algorithms in the field (in Real Time & Real World)</h3>
 							</header>
 							<p>
-
+								Once models and algorithms are verified in simulation, we load them in actual vehicle.
+								And we integrate them in launch file to run simultaneously. While testing in real time and real world,
+								if any defects or weaknesses are observed, we collect the data by recording them in rosbag.
+								After several reviews and compensation, we repeat step 3 and 4 repeatedly.
 							</p>
 						</article>
+
+						<br>
 
 						<iframe src="https://drive.google.com/file/d/1pFxwZvQl5oDzrdrfNlDIeAfDrIKJWl0L/preview" width="400" height="300" allow="autoplay"></iframe>
 						<iframe src="https://drive.google.com/file/d/1pPxBjNG5qk5l54-y_pXmhynm-8bgh5c_/preview" width="400" height="300" allow="autoplay"></iframe>
