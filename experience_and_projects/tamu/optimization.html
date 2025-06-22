@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Mechanics of Robotics</title>
+		<title>Power Plant Scheduling</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
@@ -21,7 +21,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="#" id="logo">Mechanics of Robotics</a></h1>
+								<h1><a href="#" id="logo">Power Plant Scheduling</a></h1>
 							</header>
 						</div>
 
@@ -90,7 +90,50 @@
 								<h3>Power Plant Scheduling (January 2022 ~ May 2022)</h3>
 							</header>
 							<p>
-
+								Objective: In this project, we developed an integer linear optimization model to make a schedule
+								of power plant to produce the electricity based on the given condition. 
+							</p>
+							<p>
+								Electricity has become a critical part of modern life. Hence meeting the energy demand, and at the 
+								same time, saving several millions of dollars require power-plant schedules that uses the best 
+								optimization models. ERCOT (Texas’ energy grid manager) has requested us to develop a model 
+								that can determine the optimal schedule of the state’s power plants which minimizes the electricity 
+								cost while guaranteeing that the electricity demand is met at all times. 
+								ERCOT will provide the forecasted hourly electricity demand for one day, as well as the available 
+								number of plants along with their respective operating characteristics. 
+								ERCOT also wants the schedule to satisfy certain conditions as given below. 
+								<br> <br>
+								Condition 1: To avoid the power plants from producing less energy than they consume, as well as 
+								to prevent the plants from overloading, each power plant must produce between a minimum and 
+								maximum number of megawatts.  
+								<br> <br>
+								Condition 2: Once a power plant is turned ON, it must run for at least a power-plant-specific 
+								number of hours before it can be turned back OFF. This enables the efficient use of each power 
+								plant. 
+								<br><br>
+								Condition 3: Once a power plant is turned OFF, it must be inspected and cleaned. Hence, the plant 
+								must remain OFF for at least a power-plant-specific number of hours before it can be turned back 
+								ON. 
+								<br><br>
+								Condition 4: In the case that the actual demand is higher than the forecasted electricity demand, 
+								the currently ON power plants must have enough production capacity to cover any unexpected 
+								electricity surges of up to 12% above the forecasted demand. 
+								<br><br>
+								Condition 5: To model the start-of-day, and end-of-day conditions, the model has to based on a 
+								cyclic fashion. That is, it must be assumed that the provided 24-hour forecasts repeat every single 
+								day. 
+								<br><br>
+								The costs associated with operating any given plant is as follows. It must be noted that each of 
+								these costs are plant specific. 
+								<br>
+								1. A start-up cost, each time a power plant changes from an OFF to ON state. <br>
+								2. A fixed cost per hour a power plant is ON. <br>
+								3. A cost per hour for each megawatt that a power plant generates above its minimum 
+								generation level. <br>
+								After reviewing the objective, the information that will be provided, and the conditions that must 
+								be satisfied, our team decided to formally define the parameters, the decision variables, the 
+								objective function, and the constraints our model will use. It must be noted that the model we 
+								developed was a linear model.
 							</p>
 						</article>
 					</div>
