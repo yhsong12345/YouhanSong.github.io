@@ -84,7 +84,7 @@
 
 				<div class="container">
 					<div class="row">
-						<img src="../../images/seeutrack/seeutrack_5.png" alt="" width="550" height="400" />
+						<img src="../../images/seeutrack/seeutrack_5.png" alt="" width="550" height="450" />
 						<article class="col-6">
 							<header>
 								<h3>SeeU Track (November 2024 ~ May 2025)</h3>
@@ -98,8 +98,11 @@
 								object detection model to detect person and person attribute recognition model to
 								recognize the person's attribute in terms of gender, age, type and color of cloth, etc.
 							</p>
+							<p>
+								We accomplished 87.52% accuracy for the integrated system.
+							</p>
 						</article>
-						<img src="../../images/object_detection_image.png" alt="" width="550" height="300" />
+						<img src="../../images/object_detection_image.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
 								<h3>1. Person, Vehicle, License plate detection with Object Detection Model </h3>
@@ -108,8 +111,12 @@
 								the target accurately. To select the most decent model in the desired environment, 
 								we searched and tested the open source model, and decide to use YOLOv11 model.
 							</p>
+							<p>
+								We achieved 97.48% for detecting person and vehicle and
+								98.41% for detecting license plate.
+							</p>
 						</article>
-						<img src="../../images/classification_image.png" alt="" width="550" height="300" />
+						<img src="../../images/classification_image.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
 								<h3>2. Vehicle recognition with Object Classification Model </h3>
@@ -117,6 +124,9 @@
 							<p>We use Object Classification model to extract the MMC (maker, model, color) Information
 								of the vehicle. For this task, many open source models are tested and YOLOv11 model
 								is chosen since it has a higher accuracy than others.
+							</p>
+							<p>
+								We achieved 80.1% accuracy in the test dataset.
 							</p>
 						</article>
 						<img src="../../images/ocr_image.png" alt="" width="550" height="300" />
@@ -128,8 +138,11 @@
 								OCR model is used for this task. OCR model is consist of text detection and recognition.
 								We tested and evaluated models and dbnet and svtr models are chosen. 
 							</p>
+							<p>
+								We achieved 97.84% for the accuracy.
+							</p>
 						</article>
-						<img src="../../images/seeutrack/seeutrack_6.png" alt="" width="550" height="300" />
+						<img src="../../images/seeutrack/seeutrack_6.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
 								<h3>4. Person Attribute Recognition</h3>
@@ -141,6 +154,9 @@
 								Resnet, vision transformers (ex. swin transformer), and etc. After many test, we
 								decide to employ vision language model for extraction and transformer
 								for classification task.
+							</p>
+							<p>
+								We achieved 82.34% for the accuracy in the test dataset.
 							</p>
 						</article>
 						<img src="../../images/seeutrack/seeutrack_1.png" alt="" width="600" height="350" />

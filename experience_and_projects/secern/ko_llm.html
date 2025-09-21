@@ -84,14 +84,75 @@
 
 				<div class="container">
 					<div class="row">
-						<img src="../../images/gumi/gumi_1.jpg" alt="" width="350" height="500" />
+						<img src="../../images/ko_llm/ko_llm_5.jpg" alt="" width="540" height="400" />
 						<article class="col-6">
 							<header>
-								<h3>LLM specialized in Korean (June 2025 ~ Present)</h3>
+								<h3>LLM specialized in Korean (June 2025 ~ September 2025)</h3>
 							</header>
 							<p>
-								Empty since this is ongoing project. This page will be written
-								once the project is completely done.
+								In this project, we studied and developed LLM(Large Language Model) specialized in
+								Korean. Since many prominent LLM are specialized in English, they are likely to 
+								have a lower understanding of context in korean. Therefore, we aim to study and
+								develop the LLM specialized in Korean.
+							</p>
+						</article>
+
+						<img src="../../images/ko_llm/ko_llm_6.png" alt="" width="540" height="250" />
+						<article class="col-6">
+							<header>
+								<h3>1. Curation of Dataset</h3>
+							</header>
+							<p>
+								We exploit Nemo Curator provided by Nvidia to cleanse, deduplication, deduplication of 
+								fuzzy data, and quality filtering for Korean corpus.
+
+							</p>
+						</article>
+
+						<img src="../../images/ko_llm/ko_llm_2.jpg" alt="" width="540" height="450" />
+						<article class="col-6">
+							<header>
+								<h3>2. Tokenization of Korean and Expansion of Tokenizer </h3>
+							</header>
+							<p>
+								With curated Korean corpus, we used tokenizer of pre-trained Large Language Model(LLM)
+								to get the information of the method that how they tokenize the words in order to
+								expand the tokenizer without any concerns. In this step, we	tokenize the Korean corpus
+							 	and expand the tokenizer by adding additional tokens which are not in the original vocabulary.
+								When expanding tokenizer, we average the weight of embedding if new token is
+								comprised of tokens in the original vocabulary. Otherwise, we randomly initialized the weights
+								of embedding.
+							</p>
+							<p>
+								After expanding the tokenizer, we trained the LLM by freezing transformer layers
+								to align the text for both new tokenizer and LLM.
+							</p>
+						</article>
+
+						
+						<img src="../../images/ko_llm/ko_llm_3.png" alt="" width="540" height="300" />
+						<article class="col-6">
+							<header>
+								<h3>3. Generating proper prompt for the conversation corpus </h3>
+							</header>
+							<p>
+								To improve better understanding of question, we generate and select the proper prompt
+								with LLM (such as GPT-4o, Gemini, etc.). And we impose chain of thought prompting
+								to make the model answering the question step by step whcih could possibly
+								make model to answer the question more reasonable.
+							</p>
+						</article>
+
+						<img src="../../images/ko_llm/ko_llm_4.png" alt="" width="540" height="400" />
+						<article class="col-6">
+							<header>
+								<h3>4. Training model with recipe</h3>
+							</header>
+							<p>
+								With various dataset(corpus), we trained the entire model (tokenizer and LLM)
+								with CPT(Continued Pre-training), SFT(Supervised Fine-Tuning), Direct Preference
+								Optimization(DPO), and Group Preference Optimization(GRPO). In this stage,
+								we tested and explored the best hyper-paramter to train a decent model.
 							</p>
 						</article>
 

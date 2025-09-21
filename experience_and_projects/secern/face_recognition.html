@@ -93,8 +93,11 @@
 								ID verification purpose. The system is composed with face and its landmark detection 
 								model and face recognition model. 
 							</p>
+							<p>
+								The integrated system is recorded 97.89% for the accuracy.
+							</p>
 						</article>
-						<img src="../../images/face/face_1.png" alt="" width="550" height="300" />
+						<img src="../../images/face/face_1.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
 								<h3>1. Face and its landmark detection with Pose Estimation Model</h3>
@@ -104,8 +107,11 @@
 								Among many models, we decide to employ pose estimation model from YOLOv11 since
 								it runs with face detection and pose estimation simultaneously.
 							</p>
+							<p>
+								We achieved 98.41% of accuracy for this task.
+							</p>
 						</article>
-						<img src="../../images/face/face_2.png" alt="" width="550" height="300" />
+						<img src="../../images/face/face_2.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
 								<h3>2. Face Alignment</h3>
@@ -114,7 +120,7 @@
 								face detection model.
 							</p>
 						</article>
-						<img src="../../images/face/face_3.png" alt="" width="550" height="300" />
+						<img src="../../images/face/face_3.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
 								<h3>3. Face Recognition</h3>
@@ -123,6 +129,9 @@
 								classification layer for the head of the architecture. Moreover, we employed
 								different loss function. Finally, we build the model with LResnet for backbone,
 								linear layer for head, and subcenter arcface for loss function.
+							</p>
+							<p>
+								We achieved 98.54% for the accuracy.
 							</p>
 						</article>
 

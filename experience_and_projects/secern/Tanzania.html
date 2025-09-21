@@ -84,7 +84,7 @@
 
 				<div class="container">
 					<div class="row">
-						<img src="../../images/tanzania/tanzania_5.jpg" alt="" width="450" height="400" />
+						<img src="../../images/tanzania/tanzania_5.jpg" alt="" width="480" height="400" />
 						<article class="col-6">
 							<header>
 								<h3>Tanzania SmartGate (January 2024 ~ December 2024)</h3>
@@ -102,7 +102,7 @@
 								in the database.
 							</p>
 						</article>
-						<img src="../../images/tanzania/tanzania_2.png" alt="" width="450" height="400" />
+						<img src="../../images/tanzania/tanzania_2.png" alt="" width="480" height="400" />
 						<article class="col-6">
 							<header>
 								<h3>1. LPR (License Plate Recognition) & CNR (Container Number Recongition)</h3>
@@ -115,11 +115,16 @@
 								Likewise, we test many different model and its combination
 								related to the OCR and decide to use dbnet and svtr model.
 							</p>
+							<p>
+								we achieved 97.82% for detection of License plate and container area
+								and 94.28% for detection of text in license plate and container, and
+								92.35% for recognition.
+							</p>
 						</article>
-						<img src="../../images/tanzania/tanzania_6.png" alt="" width="450" height="400" />
+						<img src="../../images/tanzania/tanzania_6.png" alt="" width="480" height="400" />
 						<article class="col-6">
 							<header>
-								<h3>2. Face Recongition</h3>
+								<h3>2. Face Detection & Recongition</h3>
 							</header>
 							<p> 
 								To build a face recognition system, face detection and recognition model
@@ -131,10 +136,25 @@
 								we select ResNet101 for feature extraction and sub-center Arcface for 
 								head algorithm.
 							</p>
+							<p>
+								We achieved 97.84% accuracy for average of detection and recognition.
+							</p>
+						</article>
+						<iframe src="https://drive.google.com/file/d/1jUaOmgu0Q_cII6b1p_KZKltHiNWfvipa/preview" width="480" height="400" allow="autoplay"></iframe>
+						<article class="col-6">
+							<header>
+								<h3>3. System Integraion</h3>
+							</header>
+							<p> 
+								Finally, we integrated every AI model in one scripts to verify and provide
+								the entire system to customer. 
+							</p>
+							<p>
+								The final accuracy of the integrated system is 90.85%
+							</p>
 						</article>
 						<img src="../../images/tanzania/tanzania_1.png" alt="" width="850" height="400" />
 						<img src="../../images/tanzania/tanzania_4.jpg" alt="" width="350" height="400" />
-						<iframe src="https://drive.google.com/file/d/1jUaOmgu0Q_cII6b1p_KZKltHiNWfvipa/preview" width="640" height="480" allow="autoplay"></iframe>
 						<p>
 							(PS) During the model development, we tested many scheme such as changing the architecutre,
 							modifing number of layers, activation function, loss function, and etc to 
