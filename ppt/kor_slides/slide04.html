@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Core Competencies &amp; Skills</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Print styles for PDF export */
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #0f172a;
+            }
+            .slide-container {
+                width: 1280px;
+                height: 720px;
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                overflow: visible;
+            }
+            .slide-container:last-child {
+                page-break-after: auto;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            /* Ensure charts and canvas elements render in PDF */
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            /* Prevent unwanted page breaks inside content */
+            .glass-panel, .metric-card, .stat-card, .skill-card {
+                page-break-inside: avoid;
+            }
+        }
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/2ade8d0d9147df5250666843cb12f339.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        /* Grid Layout for Cards */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 12px;
+            height: 100%;
+        }
+        .skill-card {
+            background-color: rgba(30, 41, 59, 0.6); /* Slate 800 with opacity */
+            border: 1px solid rgba(56, 189, 248, 0.2); /* Sky 400 with opacity */
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-card:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            background-color: rgba(30, 41, 59, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.05);
+            z-index: 0;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+        /* Theme Colors for Cards */
+        .theme-blue .header-icon-box { background-color: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .theme-cyan .header-icon-box { background-color: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+        .theme-teal .header-icon-box { background-color: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
+        .theme-indigo .header-icon-box { background-color: rgba(99, 102, 241, 0.2); color: #818cf8; }
+
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+            position: relative;
+            z-index: 1;
+            transition: border-color 0.2s;
+        }
+        .tech-badge:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            color: white;
+        }
+        .tech-badge i {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+        .badge-highlight {
+            border-color: rgba(34, 211, 238, 0.4);
+            background-color: rgba(34, 211, 238, 0.1);
+            color: #22d3ee;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+            flex: 1;
+        }
+        .highlight-item {
+            padding-left: 12px;
+            border-left: 3px solid #0ea5e9;
+            margin-bottom: 8px;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.absolute{position:absolute}.relative{position:relative}.-left-20{left:-5rem}.bottom-0{bottom:0px}.bottom-6{bottom:1.5rem}.right-0{right:0px}.right-6{right:1.5rem}.top-40{top:10rem}.z-10{z-index:10}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-1{margin-left:0.25rem}.mt-auto{margin-top:auto}.flex{display:flex}.h-80{height:20rem}.h-96{height:24rem}.w-1\/3{width:33.333333%}.w-2\/3{width:66.666667%}.w-80{width:20rem}.w-96{width:24rem}.flex-1{flex:1 1 0%}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.content-start{align-content:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-8{gap:2rem}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.border{border-width:1px}.border-t{border-top-width:1px}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-700\/50{border-color:rgb(51 65 85 / 0.5)}.bg-blue-600\/10{background-color:rgb(37 99 235 / 0.1)}.bg-cyan-500\/10{background-color:rgb(6 182 212 / 0.1)}.bg-slate-800\/50{background-color:rgb(30 41 59 / 0.5)}.p-6{padding:1.5rem}.px-12{padding-left:3rem;padding-right:3rem}.pb-12{padding-bottom:3rem}.pt-10{padding-top:2.5rem}.pt-3{padding-top:0.75rem}.text-right{text-align:right}.font-\[\'Montserrat\'\]{font-family:'Montserrat'}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(165 180 252 / var(--tw-text-opacity, 1))}.text-orange-500{--tw-text-opacity:1;color:rgb(249 115 22 / var(--tw-text-opacity, 1))}.text-teal-300{--tw-text-opacity:1;color:rgb(94 234 212 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}</style></head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-overlay"></div>
+<div class="absolute -left-20 top-40 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute right-0 bottom-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Header -->
+<div class="relative z-10 px-8 pt-6 mb-4 flex justify-between items-end">
+<div>
+<div class="flex items-center space-x-3 text-cyan-400 mb-2">
+<i class="fa-solid fa-layer-group text-lg"></i>
+<p class="font-bold tracking-widest text-sm uppercase">Core Competencies</p>
+</div>
+<h1 class="text-4xl font-black text-white font-['Montserrat']">Technical Skills &amp; Expertise</h1>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="relative z-10 flex flex-1 px-8 pb-5 gap-5">
+<!-- Left Column: Expertise Radar & Summary -->
+<div class="w-1/3 flex flex-col">
+<!-- Radar Chart Card -->
+<div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-4 mb-4 flex-1 relative flex flex-col">
+<h3 class="text-lg font-bold text-white mb-2 font-['Montserrat']">Expertise Fields</h3>
+<div class="chart-container" id="expertiseChart"></div>
+<!-- Absolute positioned stats for visual balance if needed -->
+<div class="absolute bottom-6 right-6 text-right">
+<p class="text-3xl font-bold text-cyan-400">95<span class="text-sm text-gray-400 ml-1">%</span></p>
+<p class="text-xs text-gray-400 uppercase tracking-wider">Vision Accuracy</p>
+</div>
+</div>
+<!-- Key Strengths -->
+<div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-4">
+<h3 class="text-lg font-bold text-white mb-4 font-['Montserrat']">Key Strengths</h3>
+<div class="highlight-item">
+<p class="text-sm font-bold text-cyan-300 mb-1">End-to-End Pipeline</p>
+<p class="text-xs text-gray-300">데이터 전처리부터 모델 학습, 추론 최적화까지 전주기 개발 역량</p>
+</div>
+<div class="highlight-item" style="border-left-color: #818cf8;">
+<p class="text-sm font-bold text-indigo-300 mb-1">On-Device AI</p>
+<p class="text-xs text-gray-300">Jetson, 로컬 서버 등 자원 제약 환경에서의 모델 경량화 및 배포</p>
+</div>
+<div class="highlight-item" style="border-left-color: #2dd4bf; margin-bottom: 0;">
+<p class="text-sm font-bold text-teal-300 mb-1">Problem Solving</p>
+<p class="text-xs text-gray-300">현장 이슈(CCTV 화질, 조명 등)에 대응하는 강인한 모델 설계</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Skills Grid -->
+<div class="w-2/3 skills-grid">
+<!-- Card 1: Languages -->
+<div class="skill-card theme-blue">
+<i class="fa-brands fa-python card-icon"></i>
+<div class="card-header">
+<div class="header-icon-box">
+<i class="fa-solid fa-code"></i>
+</div>
+<h3 class="text-xl font-bold text-white">Languages</h3>
+</div>
+<div class="flex flex-wrap content-start">
+<div class="tech-badge badge-highlight"><i class="fa-brands fa-python text-blue-400"></i> Python</div>
+<div class="tech-badge"><i class="fa-solid fa-c"></i> C / C++</div>
+<!-- <div class="tech-badge"><i class="fa-solid fa-database"></i> SQL</div> -->
+<div class="tech-badge"><i class="fa-solid fa-terminal"></i> Bash/Shell</div>
+</div>
+<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+                        Python 기반의 AI 리서치 및 프로토타이핑에 능숙하며, C++를 활용한 시스템 통합 및 로봇 제어 코드 작성 가능
+                    </p>
+</div>
+<!-- Card 2: AI Frameworks -->
+<div class="skill-card theme-cyan">
+<i class="fa-solid fa-brain card-icon"></i>
+<div class="card-header">
+<div class="header-icon-box">
+<i class="fa-solid fa-microchip"></i>
+</div>
+<h3 class="text-xl font-bold text-white">AI Frameworks</h3>
+</div>
+<div class="flex flex-wrap content-start">
+<div class="tech-badge badge-highlight"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</div>
+<div class="tech-badge"><i class="fa-brands fa-google text-yellow-500"></i> TensorFlow</div>
+<div class="tech-badge"><i class="fa-solid fa-k"></i> Keras</div>
+<div class="tech-badge"><i class="fa-solid fa-cube"></i> ONNX</div>
+<div class="tech-badge"><i class="fa-solid fa-bolt"></i> OpenVINO</div>
+<div class="tech-badge"><i class="fa-solid fa-chart-simple"></i> Scikit-learn</div>
+</div>
+<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+                        PyTorch를 주력으로 사용하며, ONNX/OpenVINO를 활용한 모델 변환 및 추론 가속화 경험 보유
+                    </p>
+</div>
+<!-- Card 3: MLOps & Infra -->
+<div class="skill-card theme-indigo">
+<i class="fa-brands fa-docker card-icon"></i>
+<div class="card-header">
+<div class="header-icon-box">
+<i class="fa-solid fa-server"></i>
+</div>
+<h3 class="text-xl font-bold text-white">MLOps &amp; Infra</h3>
+</div>
+<div class="flex flex-wrap content-start">
+<div class="tech-badge badge-highlight"><i class="fa-brands fa-docker text-blue-500"></i> Docker</div>
+<div class="tech-badge"><i class="fa-solid fa-box-open"></i> Singularity</div>
+<div class="tech-badge"><i class="fa-brands fa-linux"></i> Linux (Ubuntu)</div>
+<div class="tech-badge"><i class="fa-solid fa-network-wired"></i> Slurm</div>
+<div class="tech-badge"><i class="fa-brands fa-git-alt"></i> Git/GitHub</div>
+</div>
+<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+    H100/A100 GPU 클러스터 환경에서의 학습 파이프라인 구축 및 Docker 컨테이너 기반 배포 환경 구성
+</p>
+</div>
+<!-- Card 4: Robotics & Tools -->
+<div class="skill-card theme-teal">
+<i class="fa-solid fa-robot card-icon"></i>
+<div class="card-header">
+<div class="header-icon-box">
+<i class="fa-solid fa-robot"></i>
+</div>
+<h3 class="text-xl font-bold text-white">Robotics &amp; Tools</h3>
+</div>
+<div class="flex flex-wrap content-start">
+<div class="tech-badge badge-highlight"><i class="fa-solid fa-robot"></i> ROS / ROS2</div>
+<div class="tech-badge"><i class="fa-solid fa-microchip"></i> Arduino</div>
+<div class="tech-badge"><i class="fa-solid fa-cube"></i> SolidWorks</div>
+<div class="tech-badge"><i class="fa-solid fa-square-root-variable"></i> Matlab</div>
+<div class="tech-badge"><i class="fa-solid fa-microchip"></i> NVIDIA Jetson</div>
+</div>
+<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+                        ROS 기반의 자율주행/로봇 시스템 제어 및 시뮬레이션 환경 구축 경험, 하드웨어 제어 이해도 보유
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Initialize ECharts
+        document.addEventListener('DOMContentLoaded', function() {
+            var chartDom = document.getElementById('expertiseChart');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                color: ['#38bdf8'],
+                grid: {
+                    containLabel: true
+                },
+                radar: {
+                    indicator: [
+                        { name: 'Computer\nVision', max: 100 },
+                        { name: 'LLM\n(NLP)', max: 100 },
+                        { name: 'Auto\nDriving', max: 100 },
+                        { name: 'Robotics', max: 100 },
+                        { name: 'MLOps', max: 100 },
+                        { name: 'Data\nEng.', max: 100 }
+                    ],
+                    shape: 'circle',
+                    splitNumber: 4,
+                    center: ['50%', '55%'],
+                    radius: '70%',
+                    axisName: {
+                        color: '#94a3b8',
+                        fontWeight: 'bold',
+                        fontSize: 11
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: [
+                                'rgba(148, 163, 184, 0.1)', 
+                                'rgba(148, 163, 184, 0.2)',
+                                'rgba(148, 163, 184, 0.2)',
+                                'rgba(148, 163, 184, 0.2)'
+                            ]
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(148, 163, 184, 0.3)'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'Expertise',
+                        type: 'radar',
+                        data: [
+                            {
+                                value: [95, 85, 90, 80, 75, 85],
+                                name: 'Skill Level',
+                                areaStyle: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                        { offset: 0, color: 'rgba(56, 189, 248, 0.6)' },
+                                        { offset: 1, color: 'rgba(6, 182, 212, 0.1)' }
+                                    ])
+                                },
+                                lineStyle: {
+                                    width: 2,
+                                    color: '#38bdf8'
+                                },
+                                itemStyle: {
+                                    color: '#22d3ee'
+                                }
+                            }
+                        ]
+                    }
+                ],
+                animationDuration: 1500,
+                animationEasing: 'cubicOut'
+            };
+
+            myChart.setOption(option);
+            
+            // Ensure chart fits container on initial load
+            setTimeout(function() {
+                myChart.resize();
+            }, 100);
+            
+            // Resize chart on window resize
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
+        });
+    </script>
+
+</body></html>

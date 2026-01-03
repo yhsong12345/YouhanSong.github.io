@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Face Recognition System</title>
+		<title>Smart Monitoring System</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
@@ -21,7 +21,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="#" id="logo">Face Recognition System</a></h1>
+								<h1><a href="#" id="logo">Smart Monitoring System</a></h1>
 							</header>
 						</div>
 
@@ -85,10 +85,10 @@
 
 				<div class="container">
 					<div class="row">
-						<img src="../../images/face_recognition_image.png" alt="" width="550" height="350" />
+						<img src="../../images/smart_control_system/" alt="" width="540" height="400" />
 						<article class="col-6">
 							<header>
-								<h3>Face Recognition System (November 2024 ~ Feburary 2025)</h3>
+								<h3>LLM specialized in Korean (October 2025 ~ Current)</h3>
 							</header>
 							<p>
 								sponsor: SECERN AI
@@ -96,49 +96,70 @@
 							<p>
 								Consolidated/Affiliated Institution: SECERN AI
 							</p>
-							<p>In this project, we develop AI model to detect and recognize the face for
-								ID verification purpose. The system is composed with face and its landmark detection 
-								model and face recognition model. 
-							</p>
 							<p>
-								The integrated system is recorded 97.89% for the accuracy.
+								In this project, we studied and developed AI models to detect person and vehicles, and recongize its identity and attributes.
+								For person, we developed to detect the person and recongize his/her attributes (including upperbody, lowerbody, shoe, and etc.)
+								and identify him/her by comparing the input image to image in the gallery.
+								For vehicles, we developed to detect the vehicle and its licens plate to recongize the brand, model, and color of the vehicle and identify the vehicle in the database.
 							</p>
 						</article>
-						<img src="../../images/face/face_1.png" alt="" width="550" height="350" />
+
+						<img src="../../images/smart_control_system/" alt="" width="540" height="250" />
 						<article class="col-6">
 							<header>
-								<h3>1. Face and its landmark detection with Pose Estimation Model</h3>
+								<h3>1. Collection and Curation of the Dataset</h3>
 							</header>
-							<p>We exploit Object Detection and Pose Estimation model to detect face and
-								its landamrk including eye, nose, and mouth for the purpose of higher accuracy.
-								Among many models, we decide to employ pose estimation model from YOLOv11 since
-								it runs with face detection and pose estimation simultaneously.
-							</p>
 							<p>
-								We achieved 98.41% of accuracy for this task.
+								We exploit Nemo Curator provided by Nvidia to cleanse, deduplication, deduplication of 
+								fuzzy data, and quality filtering for Korean corpus.
+
 							</p>
 						</article>
-						<img src="../../images/face/face_2.png" alt="" width="550" height="350" />
+
+						<img src="../../images/smart_control_system/" alt="" width="540" height="450" />
 						<article class="col-6">
 							<header>
-								<h3>2. Face Alignment</h3>
+								<h3>2. </h3>
 							</header>
-							<p>To increase and ease of face recognition, we applied image alignment for face image from
-								face detection model.
-							</p>
-						</article>
-						<img src="../../images/face/face_3.png" alt="" width="550" height="350" />
-						<article class="col-6">
-							<header>
-								<h3>3. Face Recognition</h3>
-							</header>
-							<p>We developed and tested many different feature extraction model for backbone and 
-								classification layer for the head of the architecture. Moreover, we employed
-								different loss function. Finally, we build the model with LResnet for backbone,
-								linear layer for head, and subcenter arcface for loss function.
+							<p>
+								With curated Korean corpus, we used tokenizer of pre-trained Large Language Model(LLM)
+								to get the information of the method that how they tokenize the words in order to
+								expand the tokenizer without any concerns. In this step, we	tokenize the Korean corpus
+							 	and expand the tokenizer by adding additional tokens which are not in the original vocabulary.
+								When expanding tokenizer, we average the weight of embedding if new token is
+								comprised of tokens in the original vocabulary. Otherwise, we randomly initialized the weights
+								of embedding.
 							</p>
 							<p>
-								We achieved 98.54% for the accuracy.
+								After expanding the tokenizer, we trained the LLM by freezing transformer layers
+								to align the text for both new tokenizer and LLM.
+							</p>
+						</article>
+
+						
+						<img src="../../images/smart_control_system/" alt="" width="540" height="300" />
+						<article class="col-6">
+							<header>
+								<h3>3. </h3>
+							</header>
+							<p>
+								To improve better understanding of question, we generate and select the proper prompt
+								with LLM (such as GPT-4o, Gemini, etc.). And we impose chain of thought prompting
+								to make the model answering the question step by step whcih could possibly
+								make model to answer the question more reasonable.
+							</p>
+						</article>
+
+						<img src="../../images/smart_control_system/" alt="" width="540" height="400" />
+						<article class="col-6">
+							<header>
+								<h3>4. </h3>
+							</header>
+							<p>
+								With various dataset(corpus), we trained the entire model (tokenizer and LLM)
+								with CPT(Continued Pre-training), SFT(Supervised Fine-Tuning), Direct Preference
+								Optimization(DPO), and Group Preference Optimization(GRPO). In this stage,
+								we tested and explored the best hyper-paramter to train a decent model.
 							</p>
 						</article>
 

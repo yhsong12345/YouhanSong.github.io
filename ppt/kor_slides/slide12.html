@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Case Study: Robotic Arm Object Relocator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/2ade8d0d9147df5250666843cb12f339.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+        }
+        .glass-panel-dark {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Tech Badges */
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+        }
+        .tech-badge i { margin-right: 4px; }
+        
+        /* Process Flow Styles */
+        .process-step {
+            position: relative;
+            padding: 16px;
+            border-left: 2px solid rgba(34, 211, 238, 0.3);
+            margin-left: 10px;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 16px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            border: 2px solid #22d3ee;
+        }
+        .process-step:last-child {
+            border-left-color: transparent;
+        }
+
+        .highlight-text { color: #38bdf8; font-weight: 700; }
+        
+        /* Diagram Container */
+        .diagram-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .arrow-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(148, 163, 184, 0.5);
+        }
+        
+        /* Tall Image - Adjust height value here */
+        .tall-image {
+            height: 1200px !important;
+            max-height: 1200px !important;
+            width: auto !important;
+        }
+        
+        /* Print/PDF Export Styles */
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                width: 1280px;
+                height: 720px;
+                overflow: hidden;
+            }
+            .slide-container {
+                width: 1280px;
+                height: 720px;
+                margin: 0;
+                padding: 0;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            /* Ensure backgrounds print */
+            .glass-panel,
+            .glass-panel-dark {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .bg-overlay {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            /* Prevent page breaks */
+            * {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-overlay"></div>
+<div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+<!-- Header -->
+<div class="relative z-10 px-8 pt-5 mb-3 flex justify-between items-start">
+<div>
+<div class="flex items-center space-x-3 text-cyan-400 mb-1.5">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10">Project 08</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Robotics Engineering</span>
+</div>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">Robotic Arm Object Relocator</h1>
+<p class="text-base text-gray-300 font-light">3D Printed Robotic Arm &amp; Automated Conveyor System</p>
+</div>
+<div class="text-right">
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
+<p class="text-sm font-medium text-white">2022.09 - 2022.12</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 px-6 pb-4 gap-4">
+<!-- Left Panel: Project Overview & Specs -->
+<div class="flex flex-col gap-3" style="width: calc(33.333% - 30px);">
+<!-- Overview Card -->
+<div class="glass-panel p-3 flex-1 overflow-y-auto" style="max-height: 100%;">
+<h3 class="text-lg font-bold text-white mb-2 flex items-center">
+<i class="fa-solid fa-robot text-cyan-400 mr-2"></i>
+                    Project Goal
+                </h3>
+<p class="text-sm text-gray-300 leading-relaxed mb-2">
+                    한 컨베이어 벨트에서 다른 컨베이어 벨트로 물체를 이송할 수 있는 로봇 팔을 <span class="highlight-text">직접 디자인 및 3D 프린팅</span>으로 제작하고, 센서 기반 자동 제어 시스템 구현
+                </p>
+<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5">Key Responsibilities</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">기구학 계산 및 제어 알고리즘 구현</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">센서 통합 및 자동화 시스템 개발</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">Arduino 기반 임베디드 시스템 통합</span>
+</li>
+</ul>
+<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5">Key Achievements</h4>
+<ul class="text-sm text-gray-300 leading-relaxed mb-2 list-disc list-inside space-y-0.5">
+<li>Servo 모터와 Gripper의 정확한 위치 제어를 위해 <span class="text-white">기구학(Kinematics) 계산</span>을 수행하고 이를 C언어 코드로 구현하여 정밀 제어 달성</li>
+<li>거리 센서를 활용하여 물체가 감지 범위 내로 들어오면 자동으로 집어서 이송하고 복귀하는 <span class="text-white">자동화 루틴(Automation Routine)</span> 구현</li>
+<li>Arduino 보드에 제어 알고리즘을 탑재하여 센서 데이터 처리와 모터 제어를 실시간으로 연동하는 <span class="text-white">임베디드 시스템 통합</span> 성공</li>
+</ul>
+<h4 class="text-sm font-bold text-gray-400 uppercase mb-2">Tech Stack</h4>
+<div class="flex flex-wrap gap-1 mb-0">
+<span class="tech-badge"><i class="fa-solid fa-microchip text-blue-400"></i> Arduino</span>
+<span class="tech-badge"><i class="fa-solid fa-code text-orange-500"></i> C/C++</span>
+<span class="tech-badge"><i class="fa-solid fa-cube text-green-400"></i> Solidworks</span>
+<span class="tech-badge"><i class="fa-solid fa-print text-purple-400"></i> 3D Printing</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Technical Details & Process -->
+<div class="w-2/3 flex flex-col gap-3">
+<!-- Architecture Diagram Section (Modified with Image) -->
+<div class="glass-panel-dark p-3">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-base font-bold text-white font-['Montserrat']">System &amp; Hardware Design</h3>
+<span class="text-xs text-cyan-400 border border-cyan-500/30 px-2 py-1 rounded bg-cyan-900/20">Hardware Implementation</span>
+</div>
+<!-- Steps Section (Grid Layout) -->
+<div class="grid grid-cols-3 gap-3">
+<!-- Step 1 -->
+<div class="bg-slate-800/60 p-3 rounded-lg border border-cyan-500/30 hover:border-cyan-500/60 hover:bg-slate-800/80 transition-all">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-lg bg-cyan-900/60 flex items-center justify-center text-cyan-400 font-bold text-sm shrink-0 border border-cyan-500/30">
+<i class="fa-solid fa-cube text-xs"></i>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-cyan-200">3D Design &amp; Printing</p>
+</div>
+</div>
+<p class="text-[10px] text-gray-400 leading-relaxed">Solidworks Modeling / Custom Parts Manufacturing</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-slate-800/60 p-3 rounded-lg border border-blue-500/30 hover:border-blue-500/60 hover:bg-slate-800/80 transition-all">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-lg bg-blue-900/60 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0 border border-blue-500/30">
+<i class="fa-solid fa-code text-xs"></i>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-blue-200">Kinematics &amp; Control</p>
+</div>
+</div>
+<p class="text-[10px] text-gray-400 leading-relaxed">Inverse Kinematics Calculation / C Programming</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-slate-800/60 p-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 hover:bg-slate-800/80 transition-all">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-lg bg-purple-900/60 flex items-center justify-center text-purple-400 font-bold text-sm shrink-0 border border-purple-500/30">
+<i class="fa-solid fa-robot text-xs"></i>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-purple-200">Sensor Integration</p>
+</div>
+</div>
+<p class="text-[10px] text-gray-400 leading-relaxed">Object Detection / Automated Relocation System</p>
+</div>
+</div>
+</div>
+<!-- Image Section -->
+<div class="glass-panel p-2.5 flex-1 flex flex-col">
+<h3 class="text-sm font-bold text-white mb-2">Project Images</h3>
+<div class="grid grid-cols-4 gap-2.5 h-full">
+<!-- Image 1 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center h-full">
+<img src="../../images/robotic_arm_object_relocator_2.jpg" alt="Project Image 1" class="max-w-full max-h-full object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="flex items-center justify-center h-full w-full" style="display: none;">
+<span class="text-xs text-gray-500">Image 1</span>
+</div>
+</div>
+<!-- Image 2 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center h-full">
+<img src="../../images/robotic_arm_object_relocator_3.jpg" alt="Project Image 2" class="max-w-full max-h-full object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="flex items-center justify-center h-full w-full" style="display: none;">
+<span class="text-xs text-gray-500">Image 2</span>
+</div>
+</div>
+<!-- Image 3 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center h-full">
+<img src="../../images/robotic_arm_object_relocator_5.jpg" alt="Project Image 3" class="max-w-full max-h-full object-contain rounded" style="transform: scaleY(2.5);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="flex items-center justify-center h-full w-full" style="display: none;">
+<span class="text-xs text-gray-500">Image 3</span>
+</div>
+</div>
+<!-- Image 4 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center h-full">
+<img src="../../images/robotic_arm_object_relocator.jpg" alt="Project Image 2" class="max-w-full max-h-full object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="flex items-center justify-center h-full w-full" style="display: none;">
+<span class="text-xs text-gray-500">Image 4</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Accent -->
+<div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+</div>
+</body>
+</html>

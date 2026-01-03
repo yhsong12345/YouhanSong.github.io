@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Case Study: Korean LLM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Print styles for PDF export */
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #0f172a;
+            }
+            .slide-container {
+                width: 1280px;
+                height: 720px;
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                overflow: visible;
+            }
+            .slide-container:last-child {
+                page-break-after: auto;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            /* Ensure charts and canvas elements render in PDF */
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            /* Prevent unwanted page breaks inside content */
+            .glass-panel, .metric-card, .stat-card, .skill-card {
+                page-break-inside: avoid;
+            }
+        }
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/2ade8d0d9147df5250666843cb12f339.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+        }
+        .glass-panel-dark {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Tech Badges */
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+        }
+        .tech-badge i { margin-right: 4px; }
+        
+        /* Process Flow Styles */
+        .process-step {
+            position: relative;
+            padding: 16px;
+            border-left: 2px solid rgba(34, 211, 238, 0.3);
+            margin-left: 10px;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 24px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            border: 2px solid #22d3ee;
+            z-index: 1;
+        }
+
+        .highlight-text { color: #38bdf8; font-weight: 700; }
+        
+        /* Diagram Container */
+        .diagram-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .arrow-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(148, 163, 184, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-overlay"></div>
+<div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+<!-- Header -->
+<div class="relative z-10 px-8 pt-5 mb-4 flex justify-between items-start">
+<div>
+<div class="flex items-center space-x-3 text-cyan-400 mb-2">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10">Project 01</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Natural Language Processing</span>
+</div>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">한국어 특화 LLM 개발</h1>
+<div class="flex items-center space-x-4">
+<p class="text-lg text-gray-300 font-light">Korean Specific Large Language Model Research &amp; Development</p>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">사내 R&amp;D</span>
+</div>
+</div>
+<div class="text-right">
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
+<p class="text-sm font-medium text-white">2025.06 - 2025.10</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 px-6 pb-4 gap-4">
+<!-- Left Panel: Project Overview & Specs -->
+<div class="w-1/3 flex flex-col gap-5">
+<!-- Overview Card -->
+<div class="glass-panel p-3 flex-1">
+<h3 class="text-lg font-bold text-white mb-4 flex items-center">
+<i class="fa-solid fa-crosshairs text-cyan-400 mr-2"></i>
+                        Project Goal
+                    </h3>
+<p class="text-sm text-gray-300 leading-relaxed mb-4">
+                        오픈소스 베이스 모델(Llama, Qwen)을 기반으로 한국어 데이터 처리에 특화된 <span class="highlight-text">전처리 파이프라인 구축</span> 및 <span class="highlight-text">Instruction Tuning</span>을 수행하여 한국어 추론 능력을 극대화한 LLM 개발
+                    </p>
+<div class="mb-6">
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Key Responsibilities</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">데이터 전처리 파이프라인 설계 및 구현 (NeMo Curator 기반)</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">한국어 특화 Tokenizer 연구 및 최적화</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">LLM Fine-tuning (CPT, SFT, DPO, PPO) 실험 및 성능 개선</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">벤치마크 평가 및 성능 분석 리포트 작성</span>
+</li>
+</ul>
+</div>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Tech Stack</h4>
+<div class="flex flex-wrap gap-1 mb-6">
+<span class="tech-badge"><i class="fa-brands fa-python text-blue-400"></i> Python</span>
+<span class="tech-badge"><i class="fa-solid fa-terminal text-gray-400"></i> Bash</span>
+<span class="tech-badge"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</span>
+<span class="tech-badge"><i class="fa-solid fa-layer-group text-green-400"></i> NeMo Curator</span>
+<span class="tech-badge"><i class="fa-solid fa-microchip text-purple-400"></i> HuggingFace</span>
+</div>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Environment</h4>
+<div class="flex flex-wrap gap-1 mb-6">
+<span class="tech-badge"><i class="fa-solid fa-server text-green-400"></i> H100 Cluster</span>
+<span class="tech-badge"><i class="fa-solid fa-server text-green-400"></i> A100 Cluster</span>
+<span class="tech-badge"><i class="fa-brands fa-linux text-orange-400"></i> Ubuntu 22.04</span>
+<span class="tech-badge"><i class="fa-solid fa-users text-cyan-400"></i> Team: 5명</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Technical Details & Process -->
+<div class="w-2/3 flex flex-col gap-5">
+<!-- Architecture Diagram Section -->
+<div class="glass-panel-dark p-4">
+<h3 class="text-lg font-bold text-white mb-4 font-['Montserrat']">Data &amp; Training Pipeline</h3>
+<div class="flex items-stretch justify-between gap-2 text-xs">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-cyan-900/20 border border-cyan-500/30 rounded-t-lg p-2 text-center text-cyan-300 font-bold">
+    Data Pre-processing
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-filter mr-1"></i> NeMo Curator</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1">
+<li>Clean Architecture 적용</li>
+<li>데이터 정제 파이프라인 구축</li>
+<li>한국어 Corpus(말뭉치) 필터링</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xl"></i>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-blue-900/20 border border-blue-500/30 rounded-t-lg p-2 text-center text-blue-300 font-bold">
+                                Model Training
+                            </div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-brain mr-1"></i> Fine-tuning</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1">
+<li>Continued Pre-training (CPT)</li>
+<li>Supervised Fine-tuning (SFT)</li>
+<li>DPO / PPO Reinforcement</li>
+<li>한국어 Tokenizer 확장</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xl"></i>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-purple-900/20 border border-purple-500/30 rounded-t-lg p-2 text-center text-purple-300 font-bold">
+                                Evaluation
+                            </div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-chart-bar mr-1"></i> Benchmarks</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1">
+<li>GSM8K (Reasoning)</li>
+<li>IFEval_Ko (Instruction)</li>
+<li>성능 지표 리포팅</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Key Achievements -->
+<div class="glass-panel p-4 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-white mb-4">Key Achievements &amp; Tasks</h3>
+<div class="grid grid-cols-2 gap-4 h-full">
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Advanced Data Pipeline</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+    Nvidia NeMo Curator를 활용하여 대규모 데이터셋 처리를 위한 <span class="text-white">Clean Architecture 기반의 모듈형 파이프라인</span>을 구축, 데이터 전처리 효율성 증대
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Tokenizer Optimization</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+    Llama/Qwen 등 영미권 모델의 한국어 처리 효율 저하 문제를 해결하기 위해 <span class="text-white">한국어 특화 Tokenizer 연구 및 적용</span>, 토큰 효율성 개선
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Training Methodologies</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+<span class="text-white">SFT, DPO, PPO</span> 등 최신 학습 방법론을 적용하여 모델의 지시 이행 능력(Instruction Following) 및 한국어 답변 품질 향상
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Quantitative Evaluation</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+<span class="text-white">gsm8k, ifeval_ko</span> 등 객관적인 벤치마크 데이터셋을 활용하여 모델 성능을 정량적으로 평가하고 개선 방향 도출
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Accent -->
+<div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+</div>
+</body>
+</html>
