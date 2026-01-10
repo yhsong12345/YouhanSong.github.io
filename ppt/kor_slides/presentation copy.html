@@ -219,10 +219,18 @@
     
     /* Print Styles */
     @media print {
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+        
         body {
             margin: 0;
             padding: 0;
             background: #0f172a;
+            width: 1280px;
+            height: auto;
+            overflow: visible;
         }
         
         .nav-controls,
@@ -231,32 +239,42 @@
         }
         
         .presentation-wrapper {
-            width: 100%;
-            height: auto;
+            width: 1280px !important;
+            height: auto !important;
+            margin: 0;
+            padding: 0;
+            overflow: visible;
+            display: block !important;
+            position: static !important;
+            align-items: stretch !important;
+            justify-content: flex-start !important;
         }
         
         .slide-wrapper {
-            width: 1280px;
-            height: 720px;
+            width: 1280px !important;
+            height: 720px !important;
+            max-width: 1280px !important;
+            max-height: 720px !important;
             display: block !important;
-            page-break-after: always;
-            page-break-inside: avoid;
-            margin: 0;
-            padding: 0;
+            page-break-after: always !important;
+            page-break-inside: avoid !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            position: relative !important;
         }
         
         .slide-wrapper:last-child {
-            page-break-after: auto;
+            page-break-after: auto !important;
         }
         
         .slide-wrapper iframe {
-            width: 1280px;
-            height: 720px;
-        }
-        
-        @page {
-            size: 1280px 720px;
-            margin: 0;
+            width: 1280px !important;
+            height: 720px !important;
+            max-width: 1280px !important;
+            max-height: 720px !important;
+            border: none !important;
+            overflow: hidden !important;
         }
         
         * {
@@ -304,7 +322,7 @@
             <i class="fa-solid fa-chevron-left"></i> Previous
         </button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">14</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
         </div>
         <button class="nav-btn" onclick="nextSlide()" id="nextBtn">
             Next <i class="fa-solid fa-chevron-right"></i>
@@ -322,7 +340,7 @@
 </div>
 
 <script>
-    const totalSlides = 14;
+    const totalSlides = 15;
     let currentSlideIndex = 0;
     const slideFiles = [
         'slide01.html',
@@ -338,7 +356,8 @@
         'slide11.html',
         'slide12.html',
         'slide13.html',
-        'slide14.html'
+        'slide14.html',
+        'slide15.html'
     ];
     
     const slideTitles = [
@@ -354,6 +373,7 @@
         'Gumi Metaverse - Safety Detection',
         'AVA Project - Autonomous Driving',
         'Robotic Arm Object Relocator',
+        'Nvidia Jetson',
         'Key Achievements Summary',
         'Thank You'
     ];
@@ -375,6 +395,7 @@
                 setTimeout(() => {
                     fixProjectNames(iframe);
                     initializeCharts(iframe);
+                    injectPrintStyles(iframe);
                 }, 500);
                 
                 // Also check when slide becomes active
@@ -383,6 +404,7 @@
                         setTimeout(() => {
                             fixProjectNames(iframe);
                             initializeCharts(iframe);
+                            injectPrintStyles(iframe);
                         }, 300);
                     }
                 });
@@ -489,6 +511,68 @@
         }
     }
     
+    // Inject print styles into iframe for video handling
+    function injectPrintStyles(iframe) {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) return;
+            
+            // Check if print styles already exist
+            if (iframeDoc.getElementById('pdf-print-styles')) return;
+            
+            const printStyle = iframeDoc.createElement('style');
+            printStyle.id = 'pdf-print-styles';
+            printStyle.textContent = `
+                @media print {
+                    @page {
+                        size: 1280px 720px;
+                        margin: 0;
+                    }
+                    body, html {
+                        width: 1280px !important;
+                        height: 720px !important;
+                        max-width: 1280px !important;
+                        max-height: 720px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        overflow: hidden !important;
+                    }
+                    .slide-container {
+                        width: 1280px !important;
+                        height: 720px !important;
+                        max-width: 1280px !important;
+                        max-height: 720px !important;
+                        overflow: hidden !important;
+                    }
+                    /* Hide video iframes */
+                    iframe[src*="drive.google.com"],
+                    iframe[src*="youtube.com"],
+                    iframe[src*="youtu.be"] {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                    /* Show video thumbnails */
+                    .video-print-placeholder {
+                        display: flex !important;
+                    }
+                    .video-print-placeholder img {
+                        width: 100% !important;
+                        height: 100% !important;
+                        object-fit: cover !important;
+                        display: block !important;
+                    }
+                    /* Ensure no overflow */
+                    * {
+                        box-sizing: border-box;
+                    }
+                }
+            `;
+            iframeDoc.head.appendChild(printStyle);
+        } catch (e) {
+            console.log('Could not inject print styles:', e);
+        }
+    }
+    
     // Initialize slide selector
     function initSlideSelector() {
         const selector = document.getElementById('slideSelector');
@@ -524,6 +608,7 @@
             setTimeout(() => {
                 fixProjectNames(iframe);
                 initializeCharts(iframe);
+                injectPrintStyles(iframe);
             }, 300);
         }
     }
@@ -622,18 +707,23 @@
         document.querySelector('.nav-controls').style.display = 'none';
         document.querySelector('.pdf-controls').style.display = 'none';
         
-        // Show only selected slides
+        // Process each selected slide
         document.querySelectorAll('.slide-wrapper').forEach((slide, index) => {
             if (slideIndices.includes(index)) {
                 slide.style.display = 'block';
+                slide.style.position = 'relative';
                 slide.style.pageBreakAfter = 'always';
+                slide.classList.remove('active'); // Remove active class to prevent conflicts
                 
-                // Ensure iframe content is ready
+                // Ensure iframe content is ready and handle videos
                 const iframe = slide.querySelector('iframe');
                 if (iframe) {
                     try {
                         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                         if (iframeDoc) {
+                            // Inject print styles
+                            injectPrintStyles(iframe);
+                            
                             // Ensure charts are visible
                             const charts = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]');
                             charts.forEach(chart => {
@@ -645,6 +735,140 @@
                             if (iframe.contentWindow.echarts) {
                                 iframe.contentWindow.dispatchEvent(new Event('resize'));
                             }
+                            
+                            // Handle video iframes - hide them and show thumbnails
+                            const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"], iframe[src*="youtu.be"]');
+                            videoIframes.forEach(videoIframe => {
+                                // Extract video ID and generate thumbnail URL
+                                const videoSrc = videoIframe.getAttribute('src') || '';
+                                let thumbnailUrl = '';
+                                
+                                // Google Drive video
+                                if (videoSrc.includes('drive.google.com')) {
+                                    const match = videoSrc.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+                                    if (match && match[1]) {
+                                        const fileId = match[1];
+                                        thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1280-h720`;
+                                    }
+                                }
+                                // YouTube video
+                                else if (videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be')) {
+                                    let videoId = '';
+                                    if (videoSrc.includes('youtube.com/embed/')) {
+                                        videoId = videoSrc.split('youtube.com/embed/')[1].split('?')[0];
+                                    } else if (videoSrc.includes('youtu.be/')) {
+                                        videoId = videoSrc.split('youtu.be/')[1].split('?')[0];
+                                    } else if (videoSrc.includes('youtube.com/watch?v=')) {
+                                        videoId = videoSrc.split('youtube.com/watch?v=')[1].split('&')[0];
+                                    }
+                                    if (videoId) {
+                                        thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                                    }
+                                }
+                                
+                                // Hide the video iframe
+                                videoIframe.style.display = 'none';
+                                
+                                // Find or create thumbnail placeholder
+                                let placeholder = videoIframe.nextElementSibling;
+                                const isExistingPlaceholder = placeholder && placeholder.classList.contains('video-print-placeholder');
+                                
+                                if (!isExistingPlaceholder) {
+                                    placeholder = iframeDoc.createElement('div');
+                                    placeholder.className = 'video-print-placeholder';
+                                    videoIframe.parentNode.insertBefore(placeholder, videoIframe.nextSibling);
+                                }
+                                
+                                // Set up placeholder with thumbnail
+                                placeholder.style.cssText = `
+                                    display: flex !important;
+                                    align-items: center;
+                                    justify-content: center;
+                                    width: 100%;
+                                    height: 100%;
+                                    min-height: 90px;
+                                    background: rgba(15, 23, 42, 0.5);
+                                    border-radius: 8px;
+                                    overflow: hidden;
+                                    position: relative;
+                                `;
+                                
+                                if (thumbnailUrl) {
+                                    // Create thumbnail image
+                                    const thumbnailImg = iframeDoc.createElement('img');
+                                    thumbnailImg.src = thumbnailUrl;
+                                    thumbnailImg.style.cssText = `
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        display: block;
+                                    `;
+                                    thumbnailImg.onerror = function() {
+                                        // Fallback if thumbnail fails to load
+                                        this.style.display = 'none';
+                                        placeholder.innerHTML = `
+                                            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94a3b8;">
+                                                <i class="fa-solid fa-video" style="font-size: 24px; color: #22d3ee;"></i>
+                                                <span>Video Preview</span>
+                                            </div>
+                                        `;
+                                    };
+                                    placeholder.innerHTML = '';
+                                    placeholder.appendChild(thumbnailImg);
+                                    
+                                    // Add play icon overlay
+                                    const playOverlay = iframeDoc.createElement('div');
+                                    playOverlay.style.cssText = `
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        width: 60px;
+                                        height: 60px;
+                                        background: rgba(34, 211, 238, 0.8);
+                                        border-radius: 50%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        color: white;
+                                        font-size: 24px;
+                                        pointer-events: none;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                                    `;
+                                    playOverlay.innerHTML = '<i class="fa-solid fa-play"></i>';
+                                    placeholder.appendChild(playOverlay);
+                                } else {
+                                    // Fallback if we can't extract video ID
+                                    placeholder.innerHTML = `
+                                        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94a3b8;">
+                                            <i class="fa-solid fa-video" style="font-size: 24px; color: #22d3ee;"></i>
+                                            <span>Video Preview</span>
+                                        </div>
+                                    `;
+                                }
+                            });
+                            
+                            // Ensure slide container dimensions are correct
+                            const slideContainer = iframeDoc.querySelector('.slide-container');
+                            if (slideContainer) {
+                                slideContainer.style.width = '1280px';
+                                slideContainer.style.height = '720px';
+                                slideContainer.style.maxWidth = '1280px';
+                                slideContainer.style.maxHeight = '720px';
+                                slideContainer.style.overflow = 'hidden';
+                            }
+                            
+                            // Ensure body/html dimensions
+                            iframeDoc.body.style.width = '1280px';
+                            iframeDoc.body.style.height = '720px';
+                            iframeDoc.body.style.maxWidth = '1280px';
+                            iframeDoc.body.style.maxHeight = '720px';
+                            iframeDoc.body.style.overflow = 'hidden';
+                            iframeDoc.documentElement.style.width = '1280px';
+                            iframeDoc.documentElement.style.height = '720px';
+                            iframeDoc.documentElement.style.maxWidth = '1280px';
+                            iframeDoc.documentElement.style.maxHeight = '720px';
+                            iframeDoc.documentElement.style.overflow = 'hidden';
                         }
                     } catch (e) {
                         console.log('Could not access iframe for export:', e);
@@ -655,35 +879,71 @@
             }
         });
         
+        // Change presentation wrapper layout for printing
+        const presentationWrapper = document.querySelector('.presentation-wrapper');
+        const originalWrapperStyle = presentationWrapper.style.cssText;
+        presentationWrapper.style.cssText = `
+            display: block !important;
+            width: 1280px !important;
+            height: auto !important;
+            position: static !important;
+            align-items: stretch !important;
+            justify-content: flex-start !important;
+        `;
+        
         // Wait for iframes to fully load and charts to render
         setTimeout(() => {
             // Add print-specific styles
             const printStyle = document.createElement('style');
+            printStyle.id = 'pdf-export-styles';
             printStyle.textContent = `
                 @media print {
                     @page {
                         size: 1280px 720px;
                         margin: 0;
                     }
-                    body {
-                        margin: 0;
-                        padding: 0;
-                        background: #0f172a;
+                    html, body {
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        width: 1280px !important;
+                        height: auto !important;
+                        overflow: visible !important;
+                        background: #0f172a !important;
+                    }
+                    .presentation-wrapper {
+                        display: block !important;
+                        width: 1280px !important;
+                        height: auto !important;
+                        position: static !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        overflow: visible !important;
+                        align-items: stretch !important;
+                        justify-content: flex-start !important;
                     }
                     .slide-wrapper {
                         width: 1280px !important;
                         height: 720px !important;
-                        page-break-after: always;
-                        page-break-inside: avoid;
-                        margin: 0;
-                        padding: 0;
+                        max-width: 1280px !important;
+                        max-height: 720px !important;
+                        display: block !important;
+                        page-break-after: always !important;
+                        page-break-inside: avoid !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        overflow: hidden !important;
+                        position: relative !important;
                     }
                     .slide-wrapper:last-child {
-                        page-break-after: auto;
+                        page-break-after: auto !important;
                     }
                     .slide-wrapper iframe {
                         width: 1280px !important;
                         height: 720px !important;
+                        max-width: 1280px !important;
+                        max-height: 720px !important;
+                        border: none !important;
+                        overflow: hidden !important;
                     }
                     * {
                         -webkit-print-color-adjust: exact !important;
@@ -694,6 +954,22 @@
                         max-width: 100% !important;
                         height: auto !important;
                     }
+                    /* Hide video iframes in print */
+                    iframe[src*="drive.google.com"],
+                    iframe[src*="youtube.com"],
+                    iframe[src*="youtu.be"] {
+                        display: none !important;
+                    }
+                    /* Show video thumbnails */
+                    .video-print-placeholder {
+                        display: flex !important;
+                    }
+                    .video-print-placeholder img {
+                        width: 100% !important;
+                        height: 100% !important;
+                        object-fit: cover !important;
+                        display: block !important;
+                    }
                 }
             `;
             document.head.appendChild(printStyle);
@@ -703,15 +979,56 @@
             
             // Restore controls after print dialog closes
             setTimeout(() => {
-                document.head.removeChild(printStyle);
+                const printStyleEl = document.getElementById('pdf-export-styles');
+                if (printStyleEl) {
+                    document.head.removeChild(printStyleEl);
+                }
+                
+                // Restore presentation wrapper style
+                presentationWrapper.style.cssText = originalWrapperStyle;
+                
+                // Restore all slides to their original state
+                document.querySelectorAll('.slide-wrapper').forEach((slide, index) => {
+                    slide.style.display = '';
+                    slide.style.pageBreakAfter = '';
+                    if (index === currentSlideIndex) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+                
                 document.querySelector('.nav-controls').style.display = 'flex';
                 const pdfControls = document.querySelector('.pdf-controls');
                 if (pdfControls && pdfControls.classList.contains('visible')) {
                     pdfControls.style.display = 'block';
                 }
+                
+                // Restore video iframes
+                document.querySelectorAll('.slide-wrapper').forEach((slide) => {
+                    const iframe = slide.querySelector('iframe');
+                    if (iframe) {
+                        try {
+                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                            if (iframeDoc) {
+                                const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"], iframe[src*="youtu.be"]');
+                                videoIframes.forEach(videoIframe => {
+                                    videoIframe.style.display = '';
+                                });
+                                const placeholders = iframeDoc.querySelectorAll('.video-print-placeholder');
+                                placeholders.forEach(placeholder => {
+                                    placeholder.style.display = 'none';
+                                });
+                            }
+                        } catch (e) {
+                            console.log('Could not restore videos:', e);
+                        }
+                    }
+                });
+                
                 showSlide(currentSlideIndex);
             }, 1000);
-        }, 1000);
+        }, 1500);
     }
     
     // Toggle PDF controls

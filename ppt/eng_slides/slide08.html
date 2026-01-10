@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Metrics: SEEU ID</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Print styles for PDF export */
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #0f172a;
+            }
+            .slide-container {
+                width: 1280px;
+                height: 720px;
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                overflow: visible;
+            }
+            .slide-container:last-child {
+                page-break-after: auto;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            /* Ensure charts and canvas elements render in PDF */
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            /* Prevent unwanted page breaks inside content */
+            .glass-panel, .metric-card, .stat-card, .skill-card {
+                page-break-inside: avoid;
+            }
+        }
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/2ade8d0d9147df5250666843cb12f339.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        /* Glass Cards */
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card {
+            background-color: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-tag {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #bae6fd;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 45px;
+        }
+
+        .demo-image-container {
+            background-color: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .demo-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .highlight-value {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: #22d3ee;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 8px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Custom Progress Bar */
+        .progress-bg {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(148, 163, 184, 0.2);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-overlay"></div>
+<div class="absolute -left-20 -bottom-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute right-0 top-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Header -->
+<div class="relative z-10 px-10 pt-6 mb-3 flex justify-between items-start">
+<div>
+<div class="flex items-center space-x-3 text-cyan-400 mb-1.5">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-xs font-bold uppercase tracking-wider bg-cyan-500/10">Project 04</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Identity Verification System</span>
+</div>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">SEEU ID</h1>
+<div class="flex items-center space-x-4">
+<p class="text-base text-gray-300 font-light">ID Card Detection &amp; OCR Solution for Banking</p>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">Indochina Bank</span>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">TriNam</span>
+</div>
+</div>
+<div class="text-right">
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
+<p class="text-sm font-medium text-white">2024.05 - 2024.11</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 px-8 pb-4 gap-3">
+<!-- Left Column: Project Info & Description -->
+<div class="w-1/3 flex flex-col gap-3">
+<!-- Description Card -->
+<div class="glass-panel flex-1 flex flex-col" style="padding: 6px;">
+<h3 class="text-lg font-bold text-white mb-3 flex items-center">
+<i class="fa-solid fa-circle-info text-cyan-400 mr-2"></i>
+                    Project Overview
+                </h3>
+<p class="text-sm text-gray-300 leading-relaxed mb-4">
+                    A high-performance ID card detection and OCR system for non-face-to-face identity verification in the financial sector. Successfully deployed to field systems through model lightweighting and optimization using ONNX/OpenVINO while ensuring ID recognition rates in various environments.
+                </p>
+<div class="mb-4">
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Key Responsibilities</h4>
+<ul class="space-y-1.5 text-sm text-gray-300">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">ID card region and text (OCR) detection model research and enhancement</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">ONNX, OpenVINO based model conversion and inference speed optimization</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">Issue resolution for various field variables such as lighting and angles</span>
+</li>
+</ul>
+</div>
+<div class="mt-auto">
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Tech Stack &amp; Env</h4>
+<div class="flex flex-wrap gap-1">
+<span class="tech-tag"><i class="fa-brands fa-python mr-1 text-blue-400"></i> Python</span>
+<span class="tech-tag"><i class="fa-solid fa-fire mr-1 text-orange-400"></i> PyTorch</span>
+<span class="tech-tag"><i class="fa-solid fa-bolt mr-1 text-yellow-400"></i> ONNX</span>
+<span class="tech-tag"><i class="fa-solid fa-microchip mr-1 text-blue-400"></i> OpenVINO</span>
+<span class="tech-tag"><i class="fa-solid fa-server mr-1 text-green-400"></i> A100 GPU</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Demonstration and Performance Metrics -->
+<div class="w-2/3 flex flex-col">
+<!-- Demonstration Image Section -->
+<div class="mb-2 flex flex-col">
+<h3 class="text-sm font-bold text-white mb-1.5 pl-1 font-['Montserrat']">Demonstration</h3>
+<div class="grid grid-cols-2 gap-2">
+<div class="demo-image-container" style="height: 220px;">
+<img src="../../images/seeuid/seeuid_3.png" alt="Demonstration Image 1" />
+</div>
+<div class="demo-image-container" style="height: 220px;">
+<img src="../../images/seeuid/seeuid_4.png" alt="Demonstration Image 2" />
+</div>
+</div>
+</div>
+<!-- Performance Metrics -->
+<h3 class="text-sm font-bold text-white mb-1.5 pl-1 font-['Montserrat']">Performance Metrics (Accuracy)</h3>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-3 gap-1.5 h-auto">
+<!-- Metric 1: ID Card Detection v1 -->
+<div class="metric-card">
+<div class="chart-container" id="chartID1"></div>
+<div class="text-center mt-[-10px] mb-0">
+<p class="highlight-value text-xl">98.47<span class="text-xs font-medium text-gray-500">%</span></p>
+<p class="stat-label text-xs">ID Card Detection<br/><span class="text-[8px] opacity-70">(Model Type A)</span></p>
+</div>
+</div>
+<!-- Metric 2: ID Card Detection v2 -->
+<div class="metric-card">
+<div class="chart-container" id="chartID2"></div>
+<div class="text-center mt-[-10px] mb-0">
+<p class="highlight-value text-xl">98.82<span class="text-xs font-medium text-gray-500">%</span></p>
+<p class="stat-label text-xs">ID Card Detection<br/><span class="text-[8px] opacity-70">(Model Type B)</span></p>
+</div>
+</div>
+<!-- Metric 3: Text Detection -->
+<div class="metric-card">
+<div class="chart-container" id="chartText"></div>
+<div class="text-center mt-[-10px] mb-0">
+<p class="highlight-value text-xl">97.89<span class="text-xs font-medium text-gray-500">%</span></p>
+<p class="stat-label text-xs">Text Detection<br/><span class="text-[8px] opacity-70">(OCR Area)</span></p>
+</div>
+</div>
+<!-- Metric 4: Comparison Bar -->
+<div class="metric-card col-span-2 flex-row items-center justify-between px-3 py-1.5">
+<div class="flex-1 pr-3">
+<div class="flex items-center mb-0.5">
+<i class="fa-solid fa-id-card text-cyan-400 mr-1.5 text-xs"></i>
+<h4 class="text-white font-bold text-xs">Best Detection</h4>
+</div>
+<p class="text-xs text-gray-400 mb-1">ID Card Object Localization</p>
+<div class="flex items-center justify-between mb-0.5">
+<span class="text-xs text-gray-300">Accuracy</span>
+<span class="text-xs font-bold text-cyan-300">98.82%</span>
+</div>
+<div class="progress-bg" style="height: 4px;">
+<div class="progress-fill" style="width: 98.82%;"></div>
+</div>
+</div>
+<div class="w-px h-10 bg-slate-700 mx-2"></div>
+<div class="flex-1 pl-3">
+<div class="flex items-center mb-0.5">
+<i class="fa-solid fa-font text-cyan-400 mr-1.5 text-xs"></i>
+<h4 class="text-white font-bold text-xs">Text Localization</h4>
+</div>
+<p class="text-xs text-gray-400 mb-1">Character Region Finding</p>
+<div class="flex items-center justify-between mb-0.5">
+<span class="text-xs text-gray-300">Accuracy</span>
+<span class="text-xs font-bold text-cyan-300">97.89%</span>
+</div>
+<div class="progress-bg" style="height: 4px;">
+<div class="progress-fill" style="width: 97.89%;"></div>
+</div>
+</div>
+</div>
+<!-- Metric 5: System Integration -->
+<div class="metric-card bg-gradient-to-br from-slate-800 to-blue-900/40 border-blue-500/30 py-1.5">
+<div class="absolute top-0 right-0 p-1 opacity-10 text-3xl text-white">
+<i class="fa-solid fa-network-wired"></i>
+</div>
+<h4 class="text-white font-bold text-xs mb-0.5 uppercase tracking-wider text-center z-10">System Integration</h4>
+<p class="text-xs text-blue-200 mb-1 text-center z-10">End-to-End Performance</p>
+<div class="relative z-10 flex flex-col items-center">
+<span class="text-xl font-black text-white font-['Montserrat'] drop-shadow-lg">96.2%</span>
+<div class="mt-0.5 px-2 py-0.5 bg-blue-500/20 rounded-full border border-blue-400/30">
+<p class="text-[8px] text-blue-300 font-bold uppercase">System Accuracy</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const createGauge = (domId, value, color) => {
+            const chart = echarts.init(document.getElementById(domId));
+            const option = {
+                series: [{
+                    type: 'gauge',
+                    startAngle: 90,
+                    endAngle: -270,
+                    pointer: { show: false },
+                    progress: {
+                        show: true,
+                        overlap: false,
+                        roundCap: true,
+                        clip: false,
+                        itemStyle: {
+                            color: color
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 8,
+                            color: [[1, 'rgba(148, 163, 184, 0.1)']]
+                        }
+                    },
+                    splitLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { show: false },
+                    data: [{ value: value }],
+                    detail: { show: false }
+                }]
+            };
+            chart.setOption(option);
+            return chart;
+        };
+
+        const chart1 = createGauge('chartID1', 98.47, '#22d3ee');
+        const chart2 = createGauge('chartID2', 98.82, '#38bdf8');
+        const chart3 = createGauge('chartText', 97.89, '#60a5fa');
+
+        window.addEventListener('resize', () => {
+            chart1.resize();
+            chart2.resize();
+            chart3.resize();
+        });
+    });
+</script>
+</body>
+</html>

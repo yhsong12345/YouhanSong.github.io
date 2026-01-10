@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -70,7 +70,7 @@
             color: #e2e8f0;
         }
         .tech-badge i { margin-right: 4px; }
-        
+
         /* Process Flow Styles */
         .process-step {
             position: relative;
@@ -94,7 +94,7 @@
         }
 
         .highlight-text { color: #38bdf8; font-weight: 700; }
-        
+
         /* Diagram Container */
         .diagram-box {
             background: rgba(30, 41, 59, 0.4);
@@ -103,14 +103,14 @@
             padding: 12px;
             text-align: center;
         }
-        
+
         /* Print Styles for Chrome PDF Export */
         @media print {
             @page {
                 size: 1280px 720px;
                 margin: 0;
             }
-            
+
             body {
                 margin: 0;
                 padding: 0;
@@ -119,7 +119,7 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            
+
             .slide-container {
                 width: 1280px;
                 height: 720px;
@@ -133,13 +133,13 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            
+
             /* Ensure backgrounds print */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+
             /* Ensure images print */
             img {
                 max-width: 100%;
@@ -161,7 +161,7 @@
 <span class="px-2 py-0.5 border border-green-500 rounded text-[10px] font-bold uppercase tracking-wider bg-green-500/10">Project 09</span>
 <span class="text-xs text-gray-400 uppercase tracking-widest">Autonomous Mobile Robot</span>
 </div>
-<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">Nvidia Jetson AMR 개발</h1>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">Nvidia Jetson AMR Development</h1>
 <p class="text-base text-gray-300 font-light">Autonomous Navigation with ROS &amp; SLAM on Jetson Platform</p>
 </div>
 <div class="text-right">
@@ -170,7 +170,7 @@
 <p class="text-sm font-medium text-white">2025.06</p>
 </div>
 <div class="mt-2 text-xs text-gray-400 text-right">
-<i class="fa-solid fa-building-columns mr-1"></i>한국인공지능·소프트웨어 산업 협회
+<i class="fa-solid fa-building-columns mr-1"></i>Korea AI & Software Industry Association
             </div>
 </div>
 </div>
@@ -185,7 +185,7 @@
                     Project Goal
                 </h3>
 <p class="text-sm text-gray-300 leading-relaxed mb-3">
-                    Nvidia Jetson 임베디드 보드를 활용하여 <span class="highlight-text text-green-400">자율주행 모바일 로봇(AMR)</span>을 구축하고, ROS 기반의 SLAM 및 Navigation 기술 구현
+                    Building an <span class="highlight-text text-green-400">Autonomous Mobile Robot (AMR)</span> using Nvidia Jetson embedded board, implementing ROS-based SLAM and Navigation technologies
                 </p>
 <h4 class="text-[11px] font-bold text-gray-400 uppercase mb-2">Tech Stack</h4>
 <div class="flex flex-wrap gap-1 mb-3">
@@ -202,19 +202,19 @@
 <div class="flex flex-col gap-2">
 <div class="flex items-start gap-2">
 <i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300">ROS <span class="text-white">Topic Pub/Sub</span> 모델 이해 및 노드 간 통신 구현</p>
+<p class="text-[11px] text-gray-300">Understanding ROS <span class="text-white">Topic Pub/Sub</span> model and implementing inter-node communication</p>
 </div>
 <div class="flex items-start gap-2">
 <i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300"><span class="text-white">Rviz</span>로 Odom, IMU, Lidar, Camera 센서 데이터 시각화</p>
+<p class="text-[11px] text-gray-300">Visualizing Odom, IMU, Lidar, Camera sensor data with <span class="text-white">Rviz</span></p>
 </div>
 <div class="flex items-start gap-2">
 <i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300">Lidar 기반 <span class="text-white">SLAM</span> 알고리즘으로 2D/3D 지도 생성</p>
+<p class="text-[11px] text-gray-300">Generating 2D/3D maps with Lidar-based <span class="text-white">SLAM</span> algorithms</p>
 </div>
 <div class="flex items-start gap-2">
 <i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300"><span class="text-white">Send Goal</span> 명령으로 장애물 회피 자율주행 구현</p>
+<p class="text-[11px] text-gray-300">Implementing obstacle avoidance autonomous driving with <span class="text-white">Send Goal</span> commands</p>
 </div>
 </div>
 </div>

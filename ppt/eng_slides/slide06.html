@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         /* Print styles for PDF export */
         @media print {
             @page {
@@ -78,7 +78,7 @@
             opacity: 0.05;
             z-index: 0;
         }
-        
+
         /* Glass Cards */
         .glass-panel {
             background-color: rgba(30, 41, 59, 0.6);
@@ -87,7 +87,7 @@
             border-radius: 16px;
             transition: all 0.3s ease;
         }
-        
+
         .metric-card {
             background-color: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(148, 163, 184, 0.1);
@@ -100,7 +100,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .tech-tag {
             background-color: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(148, 163, 184, 0.3);
@@ -114,12 +114,12 @@
             margin-right: 4px;
             margin-bottom: 4px;
         }
-        
+
         .chart-container {
             width: 100%;
             height: 45px;
         }
-        
+
         .highlight-value {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
@@ -134,7 +134,7 @@
             margin-top: 2px;
             text-align: center;
         }
-        
+
         /* Custom Progress Bar */
         .progress-bg {
             width: 100%;
@@ -151,7 +151,7 @@
             width: 0;
             transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         /* Demo Image Container */
         .demo-image-container {
             background-color: rgba(15, 23, 42, 0.7);
@@ -165,7 +165,7 @@
             overflow: hidden;
             height: 100%;
         }
-        
+
         .demo-image-container img {
             max-width: 100%;
             max-height: 100%;
@@ -177,12 +177,12 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .demo-image-container img:not([src]),
         .demo-image-container img[src=""] {
             display: none;
         }
-        
+
         .demo-image-placeholder {
             position: absolute;
             top: 0;
@@ -199,17 +199,17 @@
             background-color: rgba(15, 23, 42, 0.3);
             z-index: 1;
         }
-        
+
         .demo-image-container.has-image .demo-image-placeholder {
             display: none;
         }
-        
+
         .demo-image-placeholder i {
             font-size: 1.5rem;
             margin-bottom: 4px;
             opacity: 0.5;
         }
-        
+
         .demo-image-placeholder span {
             font-size: 10px;
             text-align: center;
@@ -226,20 +226,20 @@
 <div class="relative z-10 px-10 pt-6 mb-2 flex justify-between items-start">
 <div>
 <div class="flex items-center space-x-2 text-cyan-400 mb-1.5">
-<span class="px-1.5 py-0.5 border border-cyan-500 rounded text-[9px] font-bold uppercase tracking-wider bg-cyan-500/10">Project 02</span>
-<span class="text-[10px] text-gray-400 uppercase tracking-widest">Surveillance System</span>
+<span class="px-1.5 py-0.5 border border-cyan-500 rounded text-xs font-bold uppercase tracking-wider bg-cyan-500/10">Project 02</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Surveillance System</span>
 </div>
 <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-0.5">SEEU Track</h1>
 <div class="flex items-center space-x-3">
-<p class="text-sm text-gray-300 font-light">Vehicle &amp; Person Detection &amp; Recognition System</p>
-<div class="h-3 w-px bg-gray-600"></div>
-<span class="text-xs text-cyan-300 font-medium bg-cyan-900/30 px-2 py-0.5 rounded-full border border-cyan-500/30">베트남 경찰국</span>
-<span class="text-xs text-cyan-300 font-medium bg-cyan-900/30 px-2 py-0.5 rounded-full border border-cyan-500/30">TriNam</span>
+<p class="text-base text-gray-300 font-light">Vehicle &amp; Person Detection &amp; Recognition System</p>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">Vietnam National Police</span>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">TriNam</span>
 </div>
 </div>
 <div class="text-right">
-<div class="inline-flex items-center space-x-1.5 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">
-<i class="fa-regular fa-calendar text-cyan-400 text-xs"></i>
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
 <p class="text-sm font-medium text-white">2024.11 - 2025.05</p>
 </div>
 </div>
@@ -255,22 +255,22 @@
                     Project Overview
                 </h3>
 <p class="text-sm text-gray-300 leading-relaxed mb-4">
-                    베트남 경찰국을 위한 지능형 CCTV 관제 시스템 고도화 프로젝트입니다. 도로 위 자동차와 보행자를 실시간으로 탐지하고, 차량 번호판 인식(LPR) 및 속성(차종, 브랜드, 색상 등)을 분석하여 치안 및 교통 관제 효율을 극대화하였습니다.
+                    An intelligent CCTV control system enhancement project for the Vietnam National Police. Real-time detection of vehicles and pedestrians on roads, license plate recognition (LPR), and attribute analysis (vehicle type, brand, color, etc.) to maximize security and traffic control efficiency.
                 </p>
 <div class="mb-4">
 <h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Key Responsibilities</h4>
 <ul class="space-y-2 text-sm text-gray-300">
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">데이터 수집 가이드라인 작성 및 라벨링 프로세스 구축</span>
+<span class="leading-snug">Data collection guideline creation and labeling process establishment</span>
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">탐지(Detection) 및 인식(Recognition) 모델 구조 변경 및 학습 최적화</span>
+<span class="leading-snug">Detection and Recognition model architecture modification and training optimization</span>
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">Hyper-parameter 튜닝을 통한 모델 성능 극대화</span>
+<span class="leading-snug">Model performance maximization through hyper-parameter tuning</span>
 </li>
 </ul>
 </div>
@@ -298,14 +298,14 @@ Demonstration
 <img src="../../images/seeutrack/seeutrack_3.png" alt="Demo Image 1" />
 <div class="demo-image-placeholder">
 <i class="fa-solid fa-image"></i>
-<span class="text-xs">Demo Image 1<br/><span class="text-[9px] text-gray-500">Add image URL</span></span>
+<span class="text-xs">Demo Image 1<br/><span class="text-xs text-gray-500">Add image URL</span></span>
 </div>
 </div>
 <div class="demo-image-container">
 <img src="../../images/seeutrack/seeutrack_4.png" alt="Demo Image 2" />
 <div class="demo-image-placeholder">
 <i class="fa-solid fa-image"></i>
-<span class="text-xs">Demo Image 2<br/><span class="text-[9px] text-gray-500">Add image URL</span></span>
+<span class="text-xs">Demo Image 2<br/><span class="text-xs text-gray-500">Add image URL</span></span>
 </div>
 </div>
 </div>
@@ -318,7 +318,7 @@ Demonstration
 <div class="metric-card">
 <div class="chart-container" id="chartDetectionTrack"></div>
 <div class="text-center mt-[-8px] mb-0.5">
-<p class="highlight-value text-base">97.48<span class="text-[9px] font-medium text-gray-500">%</span></p>
+<p class="highlight-value text-base">97.48<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label text-[8px]">Object Detection<br/><span class="text-[7px] opacity-70">(Car / Person)</span></p>
 </div>
 </div>
@@ -326,7 +326,7 @@ Demonstration
 <div class="metric-card">
 <div class="chart-container" id="chartLPD"></div>
 <div class="text-center mt-[-8px] mb-0.5">
-<p class="highlight-value text-base">98.41<span class="text-[9px] font-medium text-gray-500">%</span></p>
+<p class="highlight-value text-base">98.41<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label text-[8px]">License Plate<br/><span class="text-[7px] opacity-70">Detection</span></p>
 </div>
 </div>
@@ -334,7 +334,7 @@ Demonstration
 <div class="metric-card">
 <div class="chart-container" id="chartLPR"></div>
 <div class="text-center mt-[-8px] mb-0.5">
-<p class="highlight-value text-base">97.84<span class="text-[9px] font-medium text-gray-500">%</span></p>
+<p class="highlight-value text-base">97.84<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label text-[8px]">License Plate<br/><span class="text-[7px] opacity-70">Recognition (OCR)</span></p>
 </div>
 </div>
@@ -342,13 +342,13 @@ Demonstration
 <div class="metric-card col-span-2 flex-row items-center justify-between px-2.5">
 <div class="flex-1 pr-2.5">
 <div class="flex items-center mb-0.5">
-<i class="fa-solid fa-car text-cyan-400 mr-1 text-[9px]"></i>
-<h4 class="text-white font-bold text-[9px]">Vehicle Attributes</h4>
+<i class="fa-solid fa-car text-cyan-400 mr-1 text-xs"></i>
+<h4 class="text-white font-bold text-xs">Vehicle Attributes</h4>
 </div>
 <p class="text-[8px] text-gray-400 mb-1">Model, Brand, Color Classification</p>
 <div class="flex items-center justify-between mb-0.5">
-<span class="text-[9px] text-gray-300">Accuracy</span>
-<span class="text-[10px] font-bold text-cyan-300">80.10%</span>
+<span class="text-xs text-gray-300">Accuracy</span>
+<span class="text-xs font-bold text-cyan-300">80.10%</span>
 </div>
 <div class="progress-bg">
 <div class="progress-fill" style="width: 80.1%;"></div>
@@ -357,13 +357,13 @@ Demonstration
 <div class="w-px h-8 bg-slate-700 mx-1.5"></div>
 <div class="flex-1 pl-2.5">
 <div class="flex items-center mb-0.5">
-<i class="fa-solid fa-person text-cyan-400 mr-1 text-[9px]"></i>
-<h4 class="text-white font-bold text-[9px]">Person Attributes</h4>
+<i class="fa-solid fa-person text-cyan-400 mr-1 text-xs"></i>
+<h4 class="text-white font-bold text-xs">Person Attributes</h4>
 </div>
 <p class="text-[8px] text-gray-400 mb-1">Gender, Age, Clothing Analysis</p>
 <div class="flex items-center justify-between mb-0.5">
-<span class="text-[9px] text-gray-300">Accuracy</span>
-<span class="text-[10px] font-bold text-cyan-300">82.34%</span>
+<span class="text-xs text-gray-300">Accuracy</span>
+<span class="text-xs font-bold text-cyan-300">82.34%</span>
 </div>
 <div class="progress-bg">
 <div class="progress-fill" style="width: 82.34%;"></div>
@@ -375,7 +375,7 @@ Demonstration
 <div class="absolute top-0 right-0 p-1.5 opacity-10 text-3xl text-white">
 <i class="fa-solid fa-server"></i>
 </div>
-<h4 class="text-white font-bold text-[9px] mb-0.5 uppercase tracking-wider text-center z-10">Total Integration</h4>
+<h4 class="text-white font-bold text-xs mb-0.5 uppercase tracking-wider text-center z-10">Total Integration</h4>
 <p class="text-[8px] text-blue-200 mb-1 text-center z-10">End-to-End System Performance</p>
 <div class="relative z-10 flex flex-col items-center">
 <span class="text-lg font-black text-white font-['Montserrat'] drop-shadow-lg">87.5%</span>
@@ -439,25 +439,25 @@ Demonstration
         document.querySelectorAll('.demo-image-container img').forEach(img => {
             const container = img.closest('.demo-image-container');
             const placeholder = container.querySelector('.demo-image-placeholder');
-            
+
             // Check if image has a valid src
             if (img.src && img.src.trim() !== '' && img.src !== window.location.href) {
                 // Image has a source, try to load it
                 img.style.display = 'block';
-                
+
                 img.onload = function() {
                     // Image loaded successfully, hide placeholder
                     container.classList.add('has-image');
                     if (placeholder) placeholder.style.display = 'none';
                 };
-                
+
                 img.onerror = function() {
                     // Image failed to load, show placeholder
                     this.style.display = 'none';
                     container.classList.remove('has-image');
                     if (placeholder) placeholder.style.display = 'flex';
                 };
-                
+
                 // Trigger load check
                 if (img.complete) {
                     if (img.naturalWidth > 0) {

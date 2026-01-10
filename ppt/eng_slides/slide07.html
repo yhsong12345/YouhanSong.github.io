@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         /* Print styles for PDF export */
         @media print {
             @page {
@@ -78,7 +78,7 @@
             opacity: 0.05;
             z-index: 0;
         }
-        
+
         /* Glass Cards */
         .glass-panel {
             background-color: rgba(30, 41, 59, 0.6);
@@ -87,7 +87,7 @@
             border-radius: 16px;
             transition: all 0.3s ease;
         }
-        
+
         .metric-card {
             background-color: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(148, 163, 184, 0.1);
@@ -100,7 +100,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .tech-tag {
             background-color: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(148, 163, 184, 0.3);
@@ -114,18 +114,18 @@
             margin-right: 6px;
             margin-bottom: 6px;
         }
-        
+
         .chart-container {
             width: 100%;
             height: 90px;
         }
-        
+
         .process-image-container {
             display: flex;
             gap: 10px;
             width: 100%;
         }
-        
+
         .process-image {
             flex: 1;
             background-color: rgba(15, 23, 42, 0.7);
@@ -138,7 +138,7 @@
             justify-content: flex-start;
             height: 220px;
         }
-        
+
         .process-image > img {
             width: 100%;
             height: 184px;
@@ -151,7 +151,7 @@
             flex-shrink: 0;
             box-sizing: border-box;
         }
-        
+
         .process-image-label {
             padding: 6px 4px;
             text-align: center;
@@ -163,7 +163,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .highlight-value {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
@@ -178,7 +178,7 @@
             margin-top: 2px;
             text-align: center;
         }
-        
+
         /* Custom Progress Bar for Process Step */
         .step-container {
             display: flex;
@@ -232,19 +232,19 @@
 <div class="relative z-10 px-8 pt-4 mb-3 flex justify-between items-start">
 <div>
 <div class="flex items-center space-x-3 text-cyan-400 mb-1.5">
-<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10">Project 03</span>
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-xs font-bold uppercase tracking-wider bg-cyan-500/10">Project 03</span>
 <span class="text-xs text-gray-400 uppercase tracking-widest">Biometric Security</span>
 </div>
 <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-0.5">Face Recognition System</h1>
 <div class="flex items-center space-x-3">
 <p class="text-base text-gray-300 font-light">High-Performance Face Detection &amp; Identification</p>
-<div class="h-3 w-px bg-gray-600"></div>
-<span class="text-xs text-cyan-300 font-medium bg-cyan-900/30 px-2 py-0.5 rounded-full border border-cyan-500/30">사내 R&amp;D</span>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">Internal R&amp;D</span>
 </div>
 </div>
 <div class="text-right">
-<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">
-<i class="fa-regular fa-calendar text-cyan-400 text-xs"></i>
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
 <p class="text-sm font-medium text-white">2024.12 - 2025.02</p>
 </div>
 </div>
@@ -260,22 +260,22 @@
                     Project Overview
                 </h3>
 <p class="text-sm text-gray-300 leading-relaxed mb-4">
-                    고성능 얼굴 인식 시스템을 구축하기 위한 사내 R&amp;D 프로젝트입니다. 최신 얼굴 탐지 및 인지 모델을 조사 및 선정하고, 모델 구조 변경과 학습 최적화를 통해 엔드투엔드(End-to-End) 시스템의 정확도를 극대화하였습니다.
+                    An internal R&D project to build a high-performance face recognition system. Researched and selected state-of-the-art face detection and recognition models, maximized end-to-end system accuracy through model architecture modifications and training optimization.
                 </p>
 <div class="mb-4">
 <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Key Responsibilities</h4>
 <ul class="space-y-2 text-sm text-gray-300">
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">얼굴 탐지/인지 모델 서치 및 최적 모델 선정</span>
+<span class="leading-snug">Face detection/recognition model research and optimal model selection</span>
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">모델 구조 변경 및 Custom Dataset 학습</span>
+<span class="leading-snug">Model architecture modification and custom dataset training</span>
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">시스템 통합 및 추론 파이프라인 최적화</span>
+<span class="leading-snug">System integration and inference pipeline optimization</span>
 </li>
 </ul>
 </div>
@@ -323,7 +323,7 @@
 <div class="chart-container" id="chartDetectionFace"></div>
 <div class="text-center mt-2 mb-1">
 <p class="highlight-value text-xl">98.41<span class="text-xs font-medium text-gray-500">%</span></p>
-<p class="stat-label text-xs">Face Detection<br/><span class="text-[9px] opacity-70">Accuracy</span></p>
+<p class="stat-label text-xs">Face Detection<br/><span class="text-xs opacity-70">Accuracy</span></p>
 </div>
 </div>
 <!-- Metric 2: Face Recognition -->
@@ -331,7 +331,7 @@
 <div class="chart-container" id="chartRecognition"></div>
 <div class="text-center mt-2 mb-1">
 <p class="highlight-value text-xl">98.54<span class="text-xs font-medium text-gray-500">%</span></p>
-<p class="stat-label text-xs">Face Recognition<br/><span class="text-[9px] opacity-70">Accuracy</span></p>
+<p class="stat-label text-xs">Face Recognition<br/><span class="text-xs opacity-70">Accuracy</span></p>
 </div>
 </div>
 </div>
@@ -348,7 +348,7 @@
 <div class="flex flex-col items-end">
 <span class="text-2xl font-black text-white font-['Montserrat'] drop-shadow-lg leading-none">97.89<span class="text-xl text-gray-400">%</span></span>
 <div class="mt-1 px-2 py-0.5 bg-blue-500/20 rounded-full border border-blue-400/30">
-<p class="text-[9px] text-blue-300 font-bold uppercase">Total Accuracy</p>
+<p class="text-xs text-blue-300 font-bold uppercase">Total Accuracy</p>
 </div>
 </div>
 </div>

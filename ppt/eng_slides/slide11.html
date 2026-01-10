@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Case Study: AVA Project</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Print styles for PDF export */
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #0f172a;
+                width: 1280px;
+                height: 720px;
+                overflow: hidden;
+            }
+            .slide-container {
+                width: 1280px !important;
+                height: 720px !important;
+                max-height: 720px !important;
+                page-break-after: auto !important;
+                page-break-inside: avoid !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: relative !important;
+                overflow: hidden !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            /* Ensure charts and canvas elements render in PDF */
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            /* Prevent unwanted page breaks inside content */
+            .glass-panel, .metric-card, .stat-card, .skill-card {
+                page-break-inside: avoid !important;
+            }
+        }
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/2ade8d0d9147df5250666843cb12f339.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+        }
+        .glass-panel-dark {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Tech Badges */
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+        }
+        .tech-badge i { margin-right: 4px; }
+
+        /* Process Flow Styles */
+        .process-step {
+            position: relative;
+            padding: 16px;
+            border-left: 2px solid rgba(34, 211, 238, 0.3);
+            margin-left: 10px;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            border: 2px solid #22d3ee;
+        }
+
+        .highlight-text { color: #38bdf8; font-weight: 700; }
+
+        .arrow-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(148, 163, 184, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-overlay"></div>
+<div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+<!-- Header -->
+<div class="relative z-10 px-8 pt-5 mb-2 flex justify-between items-start">
+<div>
+<div class="flex items-center space-x-3 text-cyan-400 mb-1.5">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-xs font-bold uppercase tracking-wider bg-cyan-500/10">Project 07</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Autonomous Driving</span>
+</div>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">AVA Project (Texas A&amp;M)</h1>
+<div class="flex items-center space-x-3">
+<p class="text-base text-gray-300 font-light">Traffic Sign &amp; Signal Detection</p>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">Texas D.O.T</span>
+</div>
+</div>
+<div class="text-right">
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
+<p class="text-sm font-medium text-white">2022.05 - 2023.08</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 px-5 pb-3 gap-3">
+<!-- Left Panel: Project Overview & Specs -->
+<div class="w-[28%] flex flex-col gap-1.5">
+<!-- Overview Card -->
+<div class="glass-panel p-2 flex-1" style="max-height: 100%;">
+<h3 class="text-lg font-bold text-white mb-2 flex items-center">
+<i class="fa-solid fa-crosshairs text-cyan-400 mr-2"></i>
+                        Project Goal
+                    </h3>
+<p class="text-sm text-gray-300 leading-relaxed mb-2">
+    Autonomous driving in non-urban US. Vehicle software following US traffic systems.
+</p>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-1.5">Responsibilities</h4>
+<ul class="space-y-1 text-sm text-gray-300">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
+<span class="leading-snug">Multi-sensor data collection</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
+<span class="leading-snug">Object detection model dev</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
+<span class="leading-snug">ROS real-time inference</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
+<span class="leading-snug">Field testing</span>
+</li>
+</ul>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-1.5 mt-2">Achievements</h4>
+<ul class="text-sm text-gray-300 leading-snug mb-2 list-disc list-inside space-y-0.5">
+<li>Texas road dataset</li>
+<li>Robust detection model</li>
+<li>ROS integration</li>
+<li>End-to-end delivery</li>
+</ul>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-1">Tech</h4>
+<div class="flex flex-wrap gap-1 mb-0">
+<span class="tech-badge text-xs py-0.5 px-2"><i class="fa-brands fa-python text-blue-400"></i> Python</span>
+<span class="tech-badge text-xs py-0.5 px-2"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</span>
+<span class="tech-badge text-xs py-0.5 px-2"><i class="fa-solid fa-robot text-purple-400"></i> ROS</span>
+<span class="tech-badge text-xs py-0.5 px-2"><i class="fa-solid fa-microchip text-green-400"></i> Autoware</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Technical Details & Process -->
+<div class="w-[72%] flex flex-col gap-1.5">
+<!-- Architecture Diagram Section -->
+<div class="glass-panel-dark p-1.5">
+<h3 class="text-sm font-bold text-white mb-2 font-['Montserrat']">R&amp;D Pipeline</h3>
+<div class="flex items-stretch justify-between gap-1 text-xs">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-cyan-900/20 border border-cyan-500/30 rounded-t-lg p-1 text-center text-cyan-300 font-bold text-xs">
+                                Data Collection
+                            </div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-1.5 flex-1">
+<p class="font-bold text-white mb-1 text-xs"><i class="fa-solid fa-car-side mr-1"></i> Real-world</p>
+<ul class="list-disc list-inside text-gray-400 space-y-0.5 text-xs">
+<li>Texas road driving</li>
+<li>Campus collection</li>
+<li>Labeling setup</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xs"></i>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-blue-900/20 border border-blue-500/30 rounded-t-lg p-1 text-center text-blue-300 font-bold text-xs">
+                                Training
+                            </div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-1.5 flex-1">
+<p class="font-bold text-white mb-1 text-xs"><i class="fa-solid fa-network-wired mr-1"></i> Detection</p>
+<ul class="list-disc list-inside text-gray-400 space-y-0.5 text-xs">
+<li>YOLO optimization</li>
+<li>Traffic sign/light</li>
+<li>Accuracy tuning</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xs"></i>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-purple-900/20 border border-purple-500/30 rounded-t-lg p-1 text-center text-purple-300 font-bold text-xs">
+                                Integration
+                            </div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-1.5 flex-1">
+<p class="font-bold text-white mb-1 text-xs"><i class="fa-solid fa-rocket mr-1"></i> ROS Deploy</p>
+<ul class="list-disc list-inside text-gray-400 space-y-0.5 text-xs">
+<li>Real-time inference</li>
+<li>Node communication</li>
+<li>AV integration</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Demonstration Section -->
+<div class="glass-panel p-1.5 flex-1 flex flex-col">
+<h3 class="text-sm font-bold text-white mb-2">Demo</h3>
+<div class="grid grid-cols-2 gap-1.5 flex-1">
+<!-- Image 1 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center" style="height: 170px;">
+<img src="../../images/ava/ava_img_3.jpg" alt="Demo" class="max-w-full object-contain rounded" style="max-height: 170px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="flex items-center justify-center h-full w-full" style="display: none;">
+<span class="text-sm text-gray-500">Image</span>
+</div>
+</div>
+<!-- Video 1 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 170px;">
+<iframe src="https://drive.google.com/file/d/1zbqhoitxoYKCDdrSCQzKWvWvAeaH2MW7/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
+<div class="flex items-center justify-center h-full w-full" id="video-placeholder">
+<span class="text-sm text-gray-500"><i class="fa-solid fa-video mr-1"></i>Video</span>
+</div>
+</div>
+<!-- Video 2 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 170px;">
+<iframe src="https://drive.google.com/file/d/1Dl4JxfECjaxBiobQfI5q4q5P7BtO_Tki/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
+<div class="flex items-center justify-center h-full w-full" id="video-placeholder">
+<span class="text-sm text-gray-500"><i class="fa-solid fa-video mr-1"></i>Video</span>
+</div>
+</div>
+<!-- Video 3 -->
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 170px;">
+<iframe src="https://drive.google.com/file/d/1ifeu-waA8TNrYYe8D2kDoMEj82qUVqUC/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
+<div class="flex items-center justify-center h-full w-full" id="video-placeholder">
+<span class="text-sm text-gray-500"><i class="fa-solid fa-video mr-1"></i>Video</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Accent -->
+<div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
+</div>
+</body>
+</html>

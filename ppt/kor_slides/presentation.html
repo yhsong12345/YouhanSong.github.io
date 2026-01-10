@@ -322,7 +322,7 @@
             <i class="fa-solid fa-chevron-left"></i> Previous
         </button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">14</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
         </div>
         <button class="nav-btn" onclick="nextSlide()" id="nextBtn">
             Next <i class="fa-solid fa-chevron-right"></i>
@@ -340,7 +340,7 @@
 </div>
 
 <script>
-    const totalSlides = 14;
+    const totalSlides = 15;
     let currentSlideIndex = 0;
     const slideFiles = [
         'slide01.html',
@@ -356,7 +356,8 @@
         'slide11.html',
         'slide12.html',
         'slide13.html',
-        'slide14.html'
+        'slide14.html',
+        'slide15.html'
     ];
     
     const slideTitles = [
@@ -372,6 +373,7 @@
         'Gumi Metaverse - Safety Detection',
         'AVA Project - Autonomous Driving',
         'Robotic Arm Object Relocator',
+        'Nvidia Jetson',
         'Key Achievements Summary',
         'Thank You'
     ];
@@ -418,13 +420,13 @@
         updateNavigation();
     }
     
-    // Fix project names alignment
+    // Fix project names alignment and date positioning
     function fixProjectNames(iframe) {
         try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             if (!iframeDoc) return;
-            
-            // Inject CSS to fix project name alignment
+
+            // Inject CSS to fix project name alignment and date positioning
             const style = iframeDoc.createElement('style');
             style.textContent = `
                 /* Fix project headers - ensure left alignment */
@@ -434,7 +436,7 @@
                     text-align: left !important;
                     justify-content: flex-start !important;
                 }
-                
+
                 /* Fix h1 project titles */
                 h1.font-\\['Montserrat'\\],
                 h1.text-3xl,
@@ -442,18 +444,35 @@
                 h1.text-2xl {
                     text-align: left !important;
                 }
-                
+
                 /* Fix header containers */
                 .flex.justify-between.items-start > div:first-child {
                     text-align: left !important;
                     align-items: flex-start !important;
                 }
-                
+
                 /* Ensure project name sections are left-aligned */
                 .relative.z-10.px-8 .flex.items-center.space-x-3,
                 .relative.z-10.px-10 .flex.items-center.space-x-3,
                 .relative.z-10.px-12 .flex.items-center.space-x-3 {
                     justify-content: flex-start !important;
+                }
+
+                /* Fix date positioning - ensure it stays in top right */
+                .flex.justify-between.items-start > div.text-right,
+                .flex.justify-between.items-start > div:last-child {
+                    position: absolute !important;
+                    top: 20px !important;
+                    right: 48px !important;
+                    text-align: right !important;
+                    z-index: 20 !important;
+                }
+
+                /* Ensure header container is relative for absolute positioning */
+                .relative.z-10.px-8.flex.justify-between.items-start,
+                .relative.z-10.px-10.flex.justify-between.items-start,
+                .relative.z-10.px-12.flex.justify-between.items-start {
+                    position: relative !important;
                 }
             `;
             iframeDoc.head.appendChild(style);
@@ -462,8 +481,8 @@
             const headers = iframeDoc.querySelectorAll('h1');
             headers.forEach(header => {
                 const text = header.textContent || '';
-                if (text.includes('LLM') || text.includes('SEEU') || text.includes('Face') || 
-                    text.includes('AVA') || text.includes('Robotic') || text.includes('Tanzania') || 
+                if (text.includes('LLM') || text.includes('SEEU') || text.includes('Face') ||
+                    text.includes('AVA') || text.includes('Robotic') || text.includes('Tanzania') ||
                     text.includes('Gumi') || text.includes('Project') || text.includes('한국어') ||
                     text.includes('ID') || text.includes('Track')) {
                     header.style.textAlign = 'left';
@@ -471,6 +490,23 @@
                     if (parent) {
                         parent.style.justifyContent = 'flex-start';
                     }
+                }
+            });
+
+            // Fix date positioning directly
+            const headerContainers = iframeDoc.querySelectorAll('.flex.justify-between.items-start');
+            headerContainers.forEach(container => {
+                // Make container relative if not already
+                container.style.position = 'relative';
+
+                // Find the date element (usually the last child or has text-right class)
+                const dateElement = container.querySelector('.text-right') || container.lastElementChild;
+                if (dateElement && dateElement !== container.firstElementChild) {
+                    dateElement.style.position = 'absolute';
+                    dateElement.style.top = '0';
+                    dateElement.style.right = '0';
+                    dateElement.style.textAlign = 'right';
+                    dateElement.style.zIndex = '20';
                 }
             });
         } catch (e) {

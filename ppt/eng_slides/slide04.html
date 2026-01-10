@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light"><head>
+<html lang="en" data-theme="light"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Core Competencies &amp; Skills</title>
@@ -24,7 +24,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         /* Print styles for PDF export */
         @media print {
             @page {
@@ -112,19 +112,19 @@
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
         }
         .header-icon-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 12px;
-            font-size: 18px;
+            font-size: 16px;
         }
         /* Theme Colors for Cards */
         .theme-blue .header-icon-box { background-color: rgba(59, 130, 246, 0.2); color: #60a5fa; }
@@ -135,11 +135,11 @@
         .tech-badge {
             display: inline-flex;
             align-items: center;
-            padding: 6px 12px;
+            padding: 5px 10px;
             margin-right: 8px;
             margin-bottom: 8px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             background-color: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(148, 163, 184, 0.2);
@@ -161,7 +161,7 @@
             background-color: rgba(34, 211, 238, 0.1);
             color: #22d3ee;
         }
-        
+
         .chart-container {
             width: 100%;
             height: 100%;
@@ -182,21 +182,21 @@
 <div class="absolute -left-20 top-40 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
 <div class="absolute right-0 bottom-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
 <!-- Header -->
-<div class="relative z-10 px-8 pt-6 mb-4 flex justify-between items-end">
+<div class="relative z-10 px-8 pt-5 mb-2 flex justify-between items-end">
 <div>
-<div class="flex items-center space-x-3 text-cyan-400 mb-2">
-<i class="fa-solid fa-layer-group text-lg"></i>
-<p class="font-bold tracking-widest text-sm uppercase">Core Competencies</p>
+<div class="flex items-center space-x-3 text-cyan-400 mb-1">
+<i class="fa-solid fa-layer-group text-base"></i>
+<p class="font-bold tracking-widest text-xs uppercase">Core Competencies</p>
 </div>
-<h1 class="text-4xl font-black text-white font-['Montserrat']">Technical Skills &amp; Expertise</h1>
+<h1 class="text-3xl font-black text-white font-['Montserrat']">Technical Skills &amp; Expertise</h1>
 </div>
 </div>
 <!-- Main Content Area -->
-<div class="relative z-10 flex flex-1 px-8 pb-5 gap-5">
+<div class="relative z-10 flex flex-1 px-8 pb-4 gap-4">
 <!-- Left Column: Expertise Radar & Summary -->
 <div class="w-1/3 flex flex-col">
 <!-- Radar Chart Card -->
-<div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-4 mb-4 flex-1 relative flex flex-col">
+<div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-4 mb-3 flex-1 relative flex flex-col">
 <h3 class="text-lg font-bold text-white mb-2 font-['Montserrat']">Expertise Fields</h3>
 <div class="chart-container" id="expertiseChart"></div>
 <!-- Absolute positioned stats for visual balance if needed -->
@@ -207,23 +207,22 @@
 </div>
 <!-- Key Strengths -->
 <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-4">
-<h3 class="text-lg font-bold text-white mb-4 font-['Montserrat']">Key Strengths</h3>
-<div class="highlight-item">
+<h3 class="text-lg font-bold text-white mb-3 font-['Montserrat']">Key Strengths</h3>
+<div class="highlight-item" style="margin-bottom: 10px;">
 <p class="text-sm font-bold text-cyan-300 mb-1">End-to-End Pipeline</p>
-<p class="text-xs text-gray-300">데이터 전처리부터 모델 학습, 추론 최적화까지 전주기 개발 역량</p>
+<p class="text-xs text-gray-300 leading-relaxed">Full-cycle development from preprocessing to model training and inference optimization</p>
 </div>
-<div class="highlight-item" style="border-left-color: #818cf8;">
+<div class="highlight-item" style="border-left-color: #818cf8; margin-bottom: 10px;">
 <p class="text-sm font-bold text-indigo-300 mb-1">On-Device AI & AMR</p>
-<p class="text-xs text-gray-300">로컬 서버 등 자원 제약 환경에서의 모델 경량화 및 배포</p>
-<p class="text-xs text-gray-300">Jetson 기반 ROS 자율주행 및 SLAM/Navigation 시스템 구현</p>
+<p class="text-xs text-gray-300 leading-relaxed">Model lightweighting in resource-constrained environments. Jetson-based ROS autonomous driving and SLAM/Navigation</p>
 </div>
-<div class="highlight-item" style="border-left-color: #2dd4bf;">
+<div class="highlight-item" style="border-left-color: #2dd4bf; margin-bottom: 10px;">
 <p class="text-sm font-bold text-teal-300 mb-1">Problem Solving</p>
-<p class="text-xs text-gray-300">현장 이슈(CCTV 화질, 조명 등)에 대응하는 강인한 모델 설계</p>
+<p class="text-xs text-gray-300 leading-relaxed">Robust model design addressing field issues (CCTV quality, lighting, etc.)</p>
 </div>
 <div class="highlight-item" style="border-left-color: #f472b6; margin-bottom: 0;">
 <p class="text-sm font-bold text-pink-300 mb-1">Robust Engineering</p>
-<p class="text-xs text-gray-300">C++ 로봇 제어 및 다양한 환경(CCTV, 제조현장)의 비전 문제 해결</p>
+<p class="text-xs text-gray-300 leading-relaxed">C++ robot control and solving vision problems in various environments</p>
 </div>
 </div>
 </div>
@@ -236,7 +235,7 @@
 <div class="header-icon-box">
 <i class="fa-solid fa-code"></i>
 </div>
-<h3 class="text-xl font-bold text-white">Languages</h3>
+<h3 class="text-lg font-bold text-white">Languages</h3>
 </div>
 <div class="flex flex-wrap content-start">
 <div class="tech-badge badge-highlight"><i class="fa-brands fa-python text-blue-400"></i> Python</div>
@@ -244,8 +243,8 @@
 <!-- <div class="tech-badge"><i class="fa-solid fa-database"></i> SQL</div> -->
 <div class="tech-badge"><i class="fa-solid fa-terminal text-green-400"></i> Bash/Shell</div>
 </div>
-<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
-                        Python 기반의 AI 리서치 및 프로토타이핑에 능숙하며, C++를 활용한 시스템 통합 및 로봇 제어 코드 작성 가능
+<p class="mt-auto text-sm text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+                        Proficient in Python-based AI research and prototyping, capable of system integration and robot control code in C++
                     </p>
 </div>
 <!-- Card 2: AI Frameworks -->
@@ -255,7 +254,7 @@
 <div class="header-icon-box">
 <i class="fa-solid fa-microchip"></i>
 </div>
-<h3 class="text-xl font-bold text-white">AI Frameworks</h3>
+<h3 class="text-lg font-bold text-white">AI Frameworks</h3>
 </div>
 <div class="flex flex-wrap content-start">
 <div class="tech-badge badge-highlight"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</div>
@@ -265,8 +264,8 @@
 <div class="tech-badge"><i class="fa-solid fa-bolt text-purple-400"></i> OpenVINO</div>
 <div class="tech-badge"><i class="fa-solid fa-chart-simple text-orange-400"></i> Scikit-learn</div>
 </div>
-<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
-                        PyTorch를 주력으로 사용하며, ONNX/OpenVINO를 활용한 모델 변환 및 추론 가속화 경험 보유
+<p class="mt-auto text-sm text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+                        Primary use of PyTorch with experience in model conversion and inference acceleration using ONNX/OpenVINO
                     </p>
 </div>
 <!-- Card 3: MLOps & Infra -->
@@ -276,7 +275,7 @@
 <div class="header-icon-box">
 <i class="fa-solid fa-server"></i>
 </div>
-<h3 class="text-xl font-bold text-white">MLOps &amp; Infra</h3>
+<h3 class="text-lg font-bold text-white">MLOps &amp; Infra</h3>
 </div>
 <div class="flex flex-wrap content-start">
 <div class="tech-badge badge-highlight"><i class="fa-brands fa-docker text-blue-500"></i> Docker</div>
@@ -285,8 +284,8 @@
 <div class="tech-badge"><i class="fa-solid fa-network-wired text-green-400"></i> Slurm</div>
 <div class="tech-badge"><i class="fa-brands fa-git-alt text-orange-500"></i> Git/GitHub</div>
 </div>
-<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
-    H100/A100 GPU 클러스터 환경에서의 학습 파이프라인 구축 및 Docker 컨테이너 기반 배포 환경 구성
+<p class="mt-auto text-sm text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+    Building training pipelines on H100/A100 GPU clusters and configuring Docker container-based deployment environments
 </p>
 </div>
 <!-- Card 4: Robotics & Tools -->
@@ -296,7 +295,7 @@
 <div class="header-icon-box">
 <i class="fa-solid fa-robot"></i>
 </div>
-<h3 class="text-xl font-bold text-white">Robotics &amp; Tools</h3>
+<h3 class="text-lg font-bold text-white">Robotics &amp; Tools</h3>
 </div>
 <div class="flex flex-wrap content-start">
 <div class="tech-badge badge-highlight"><i class="fa-solid fa-robot text-teal-400"></i> ROS / ROS2</div>
@@ -308,8 +307,8 @@
 <div class="tech-badge"><i class="fa-solid fa-route text-purple-400"></i> Navigation</div>
 <div class="tech-badge"><i class="fa-solid fa-map-location-dot text-yellow-400"></i> SLAM</div>
 </div>
-<p class="mt-auto text-xs text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
-                        ROS 기반의 자율주행/로봇 시스템 제어 및 시뮬레이션 환경 구축 경험, 하드웨어 제어 이해도 보유
+<p class="mt-auto text-sm text-gray-400 leading-relaxed pt-3 border-t border-slate-700/50">
+                        Experience in ROS-based autonomous driving/robot system control and simulation environment setup with hardware control understanding
                     </p>
 </div>
 </div>
@@ -348,7 +347,7 @@
                     splitLine: {
                         lineStyle: {
                             color: [
-                                'rgba(148, 163, 184, 0.1)', 
+                                'rgba(148, 163, 184, 0.1)',
                                 'rgba(148, 163, 184, 0.2)',
                                 'rgba(148, 163, 184, 0.2)',
                                 'rgba(148, 163, 184, 0.2)'
@@ -394,12 +393,12 @@
             };
 
             myChart.setOption(option);
-            
+
             // Ensure chart fits container on initial load
             setTimeout(function() {
                 myChart.resize();
             }, 100);
-            
+
             // Resize chart on window resize
             window.addEventListener('resize', function() {
                 myChart.resize();
