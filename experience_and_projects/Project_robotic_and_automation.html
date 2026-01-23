@@ -72,7 +72,7 @@
 										<li><a href="../extra_activity/CUBOX_Futsal_club.html">CUBOX Futsal Club</a></li>
 										<li><a href="../extra_activity/AKOZ.html">AKOZ</a></li>
 										<li><a href="../extra_activity/Memorial_Union.html">Memorial Union</a></li>
-										<li><a href="../extra_activity/isu_basketball.html">Korean Baskeball Club at ISU</a></li>
+										<li><a href="../extra_activity/isu_basketball.html">Korean Basketball Club at ISU</a></li>
 									</ul>
 								</li>
 								
@@ -97,14 +97,14 @@
 								Consolidated/Affiliated Institution: UC Davis, UIUC / Texas A&M University
 							</p>
 							<p>
-								The project is to bring the safety benefits of Autonomous driving to all Americans by enabling
-								Automated driving systems(ADS) in rural environments. The goal is to develop a systematic and
-								scalable approach to safe integration of automated vehicles into nation's transportation system.
+								The project aims to bring the safety benefits of autonomous driving to all Americans by enabling
+								Automated Driving Systems (ADS) in rural environments. The goal is to develop a systematic and
+								scalable approach to the safe integration of automated vehicles into the nation's transportation system.
 							</p>
 							<p>
-								Among the various field of autonomous system, the perception is one of the most significant
-								field. For perception, sensors including camera, lidar, and radar are used to detect 
-								the objects around the vehicle and transfer the Information to take an action.
+								Among the various fields of autonomous systems, perception is one of the most significant.
+								For perception, sensors including cameras, LiDAR, and radar are used to detect
+								objects around the vehicle and transfer the information to enable decision-making.
 							</p>
 							<p>Project Website: <a href="https://avadataportal.web.illinois.edu/index.html">AVA: Autonomous Vehicle for All</a></p>
 						</article>
@@ -125,10 +125,10 @@
 								<h3>1. Data Collection & Annotation</h3>
 							</header>
 							<p>
-								To develop models for autonomous vehicle, the data is collected and labeled. 
-								We collect a data by driving the vehicle around college and selected route. The collected
-								data includes image, video, point cloud, IMU and GPS data, and etc and recorded in rosbag.
-								The data is labeled for 2D obejct detection, segmentation, and road & lane detection.
+								To develop models for autonomous vehicles, data was collected and labeled.
+								We collected data by driving the vehicle around the college campus and along selected routes. The collected
+								data includes images, videos, point clouds, IMU and GPS data, all recorded in ROS bags.
+								The data was labeled for 2D object detection, segmentation, and road/lane detection.
 							</p>
 						</article>
 
@@ -140,10 +140,10 @@
 								<h3>2. Edit and Create Vector Map</h3>
 							</header>
 							<p>
-								From the rosbag, we extract the point cloud data and create the vector map by cleaning, filtering
-								and vectorizing the raw data. Through this work, multiple vector maps are created and with these
-								maps, we integrate to make them in single vector map. Finally, we validate and refine the vector 
-								map by comparing the shape of route to fianl work.
+								From the ROS bags, we extracted point cloud data and created vector maps by cleaning, filtering,
+								and vectorizing the raw data. Through this work, multiple vector maps were created and then
+								integrated into a single unified vector map. Finally, we validated and refined the vector
+								map by comparing the route shapes to the final output.
 							</p>
 						</article>
 
@@ -155,14 +155,12 @@
 								<h3>3. Research & Develop of model</h3>
 							</header>
 							<p>
-								After the data is completely collected and annotated, we use them to
-								develop the model. However, they are required to be adjusted 
-								based on the quality of dataset, usage of model, and etc.
-								For research & development, we try many different methods
-								including modifying architecture of the model or structure of 
-								the module of the model, hyper-parameter, scheme of training,
-								modifiying loss function, fine-tuning with pre-trained model
-								and so on.
+								After the data was completely collected and annotated, we used it to
+								develop the models. The models were adjusted based on dataset quality,
+								intended usage, and other factors. For research and development, we experimented with
+								many different methods, including modifying model architecture, adjusting module structures,
+								tuning hyperparameters, changing training schemes, modifying loss functions,
+								and fine-tuning with pre-trained models.
 							</p>
 						</article>
 
@@ -171,11 +169,11 @@
 						<iframe src="https://drive.google.com/file/d/1zbqhoitxoYKCDdrSCQzKWvWvAeaH2MW7/preview" width="500" height="300" allow="autoplay"></iframe>
 						<article class="col-6">
 							<header>
-								<h3>4. Implement Algorithm in Simlation</h3>
+								<h3>4. Implement Algorithm in Simulation</h3>
 							</header>
 							<p>
-								By implementing models in environment from recorded rosbag, we validate models and algorithms
-								are working properly before loading to the vehicle and testing in real time and real world.
+								By implementing models in a simulated environment using recorded ROS bags, we validated that models and algorithms
+								worked properly before loading them onto the vehicle and testing in real-time and real-world conditions.
 							</p>
 						</article>
 
@@ -187,10 +185,10 @@
 								<h3>5. Test Algorithms in the field (in Real Time & Real World)</h3>
 							</header>
 							<p>
-								Once models and algorithms are verified in simulation, we load them in actual vehicle.
-								And we integrate them in launch file to run simultaneously. While testing in real time and real world,
-								if any defects or weaknesses are observed, we collect the data by recording them in rosbag.
-								After several reviews and compensation, we repeat step 3 and 4 repeatedly.
+								Once models and algorithms were verified in simulation, we loaded them onto the actual vehicle
+								and integrated them in launch files to run simultaneously. While testing in real-time and real-world conditions,
+								if any defects or weaknesses were observed, we collected the data by recording them in ROS bags.
+								After reviewing and making corrections, we repeated steps 3 and 4 iteratively until satisfactory performance was achieved.
 							</p>
 						</article>
 

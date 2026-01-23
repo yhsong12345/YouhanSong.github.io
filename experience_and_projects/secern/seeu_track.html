@@ -72,7 +72,7 @@
 										<li><a href="../../extra_activity/CUBOX_Futsal_club.html">CUBOX Futsal Club</a></li>
 										<li><a href="../../extra_activity/AKOZ.html">AKOZ</a></li>
 										<li><a href="../../extra_activity/Memorial_Union.html">Memorial Union</a></li>
-										<li><a href="../../extra_activity/isu_basketball.html">Korean Baskeball Club at ISU</a></li>
+										<li><a href="../../extra_activity/isu_basketball.html">Korean Basketball Club at ISU</a></li>
 									</ul>
 								</li>
 								
@@ -96,14 +96,13 @@
 							<p>
 								Consolidated/Affiliated Institution: SECERN AI
 							</p>
-							<p> In this porject, We develop AI model for AI CCTV system which is called
-								SeeU track. For this project, the system is mainly focus on the re-identification 
-								task for vehicle and person. For Vehicle re-identification,
-								we employed object detection model for detecting vehicle and its license plate, classification model
-								to recognize the vehicle's brand, model, and color, and text detection and text
-								recognition model (OCR) to read the license plate. Besides, for person re-identification, we applied
-								object detection model to detect person and person attribute recognition model to
-								recognize the person's attribute in terms of gender, age, type and color of cloth, etc.
+							<p> In this project, we developed AI models for an AI CCTV system called
+								SeeU Track. The system mainly focuses on re-identification tasks for vehicles and persons.
+								For vehicle re-identification, we employed an object detection model for detecting vehicles and their license plates,
+								a classification model to recognize the vehicle's brand, model, and color, and text detection and text
+								recognition models (OCR) to read the license plate. For person re-identification, we applied
+								an object detection model to detect persons and a person attribute recognition model to
+								recognize the person's attributes in terms of gender, age, type and color of clothing, etc.
 							</p>
 							<p>
 								We accomplished 87.52% accuracy for the integrated system.
@@ -114,9 +113,9 @@
 							<header>
 								<h3>1. Person, Vehicle, License plate detection with Object Detection Model </h3>
 							</header>
-							<p>We exploit Object Detection model to detect person, vehicle, and its license plate to detect
-								the target accurately. To select the most decent model in the desired environment, 
-								we searched and tested the open source model, and decide to use YOLOv11 model.
+							<p>We utilized an object detection model to accurately detect persons, vehicles, and license plates.
+								To select the most suitable model for the desired environment,
+								we searched and tested various open source models, and decided to use the YOLOv11 model.
 							</p>
 							<p>
 								We achieved 97.48% for detecting person and vehicle and
@@ -128,9 +127,9 @@
 							<header>
 								<h3>2. Vehicle recognition with Object Classification Model </h3>
 							</header>
-							<p>We use Object Classification model to extract the MMC (maker, model, color) Information
-								of the vehicle. For this task, many open source models are tested and YOLOv11 model
-								is chosen since it has a higher accuracy than others.
+							<p>We used an object classification model to extract the MMC (maker, model, color) information
+								of vehicles. For this task, many open source models were tested, and the YOLOv11 model
+								was chosen since it achieved higher accuracy than others.
 							</p>
 							<p>
 								We achieved 80.1% accuracy in the test dataset.
@@ -142,8 +141,8 @@
 								<h3>3. License Plate Recognition</h3>
 							</header>
 							<p>
-								OCR model is used for this task. OCR model is consist of text detection and recognition.
-								We tested and evaluated models and dbnet and svtr models are chosen. 
+								An OCR model was used for this task. The OCR model consists of text detection and recognition.
+								We tested and evaluated various models, and DBNet for text detection and SVTR for text recognition were chosen.
 							</p>
 							<p>
 								We achieved 97.84% for the accuracy.
@@ -155,12 +154,12 @@
 								<h3>4. Person Attribute Recognition</h3>
 							</header>
 							<p>
-								Person Attribute Recongition is the task to extract the information of the
-								person including gender, age, type and color of cloth, accessory, etc. To develop
-								the model, we tried different architectures to extract the feature information such as
-								Resnet, vision transformers (ex. swin transformer), and etc. After many tests, we
-								decide to employ vision language model (VLM) for extraction and transformer layers
-								for classification task.
+								Person Attribute Recognition is the task of extracting information about a person,
+								including gender, age, type and color of clothing, accessories, etc. To develop
+								the model, we experimented with different architectures for feature extraction such as
+								ResNet, Vision Transformers (e.g., Swin Transformer), and others. After extensive testing, we
+								decided to employ a Vision Language Model (VLM) for feature extraction and transformer layers
+								for the classification task.
 							</p>
 							<p>
 								We achieved 82.34% for the accuracy in the test dataset.

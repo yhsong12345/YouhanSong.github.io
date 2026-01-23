@@ -72,7 +72,7 @@
 										<li><a href="../../extra_activity/CUBOX_Futsal_club.html">CUBOX Futsal Club</a></li>
 										<li><a href="../../extra_activity/AKOZ.html">AKOZ</a></li>
 										<li><a href="../../extra_activity/Memorial_Union.html">Memorial Union</a></li>
-										<li><a href="../../extra_activity/isu_basketball.html">Korean Baskeball Club at ISU</a></li>
+										<li><a href="../../extra_activity/isu_basketball.html">Korean Basketball Club at ISU</a></li>
 									</ul>
 								</li>
 								
@@ -88,7 +88,7 @@
 						<img src="../../images/face_recognition_image.png" alt="" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>Face Recognition System (November 2024 ~ Feburary 2025)</h3>
+								<h3>Face Recognition System (November 2024 ~ February 2025)</h3>
 							</header>
 							<p>
 								sponsor: SECERN AI
@@ -96,12 +96,12 @@
 							<p>
 								Consolidated/Affiliated Institution: SECERN AI
 							</p>
-							<p>In this project, we develop AI model to detect and recognize the face for
-								ID verification purpose. The system is composed with face and its landmark detection 
-								model and face recognition model. 
+							<p>In this project, we developed AI models to detect and recognize faces for
+								ID verification purposes. The system is composed of a face and landmark detection
+								model and a face recognition model.
 							</p>
 							<p>
-								The integrated system is recorded 97.89% for the accuracy.
+								The integrated system achieved 97.89% accuracy.
 							</p>
 						</article>
 						<img src="../../images/face/face_1.png" alt="" width="550" height="350" />
@@ -109,10 +109,10 @@
 							<header>
 								<h3>1. Face and its landmark detection with Pose Estimation Model</h3>
 							</header>
-							<p>We exploit Object Detection and Pose Estimation model to detect face and
-								its landamrk including eye, nose, and mouth for the purpose of higher accuracy.
-								Among many models, we decide to employ pose estimation model from YOLOv11 since
-								it runs with face detection and pose estimation simultaneously.
+							<p>We utilized object detection and pose estimation models to detect faces and
+								their landmarks, including eyes, nose, and mouth, to achieve higher accuracy.
+								Among many models, we decided to employ the pose estimation model from YOLOv11 since
+								it performs face detection and pose estimation simultaneously.
 							</p>
 							<p>
 								We achieved 98.41% of accuracy for this task.
@@ -123,8 +123,9 @@
 							<header>
 								<h3>2. Face Alignment</h3>
 							</header>
-							<p>To increase and ease of face recognition, we applied image alignment for face image from
-								face detection model.
+							<p>To improve the accuracy and ease of face recognition, we applied image alignment to face images
+								obtained from the face detection model. This preprocessing step normalizes face orientation
+								and position for more consistent recognition results.
 							</p>
 						</article>
 						<img src="../../images/face/face_3.png" alt="" width="550" height="350" />
@@ -132,10 +133,10 @@
 							<header>
 								<h3>3. Face Recognition</h3>
 							</header>
-							<p>We developed and tested many different feature extraction model for backbone and 
-								classification layer for the head of the architecture. Moreover, we employed
-								different loss function. Finally, we build the model with LResnet for backbone,
-								linear layer for head, and subcenter arcface for loss function.
+							<p>We developed and tested many different feature extraction models for the backbone and
+								classification layers for the head of the architecture. Moreover, we experimented with
+								different loss functions. Finally, we built the model with LResNet for the backbone,
+								a linear layer for the head, and SubCenter ArcFace for the loss function.
 							</p>
 							<p>
 								We achieved 98.54% for the accuracy.
