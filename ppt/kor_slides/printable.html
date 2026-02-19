@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI & Robotics Portfolio - Print Version</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: #1e293b;
+    }
+
+    /* Controls Panel */
+    .controls {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
+        background: rgba(15, 23, 42, 0.98);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        max-height: 90vh;
+        overflow-y: auto;
+        width: 300px;
+    }
+
+    .controls h3 {
+        color: #22d3ee;
+        font-size: 14px;
+        margin-bottom: 12px;
+        font-weight: 700;
+    }
+
+    .controls button {
+        display: block;
+        width: 100%;
+        padding: 10px 16px;
+        margin-bottom: 8px;
+        background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .controls button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(6, 182, 212, 0.4);
+    }
+
+    .controls button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .controls button.secondary {
+        background: rgba(100, 116, 139, 0.5);
+    }
+
+    .slide-selector {
+        margin: 16px 0;
+        padding: 12px;
+        background: rgba(30, 41, 59, 0.8);
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .slide-selector h4 {
+        color: #e2e8f0;
+        font-size: 12px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .slide-selector .select-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .slide-selector .select-actions button {
+        padding: 4px 8px;
+        font-size: 10px;
+        margin: 0;
+        width: auto;
+        background: rgba(100, 116, 139, 0.5);
+    }
+
+    .slide-list {
+        max-height: 350px;
+        overflow-y: auto;
+    }
+
+    .slide-item {
+        display: flex;
+        align-items: center;
+        padding: 6px 8px;
+        margin-bottom: 4px;
+        background: rgba(15, 23, 42, 0.5);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .slide-item:hover {
+        background: rgba(34, 211, 238, 0.1);
+    }
+
+    .slide-item input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        accent-color: #22d3ee;
+    }
+
+    .slide-item label {
+        color: #cbd5e1;
+        font-size: 11px;
+        cursor: pointer;
+        flex: 1;
+    }
+
+    .slide-item .slide-number {
+        color: #64748b;
+        font-size: 10px;
+        margin-right: 8px;
+        min-width: 20px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: rgba(148, 163, 184, 0.2);
+        border-radius: 3px;
+        margin-top: 12px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .progress-bar.active {
+        display: block;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #06b6d4, #3b82f6);
+        border-radius: 3px;
+        transition: width 0.3s;
+        width: 0%;
+    }
+
+    .progress-text {
+        color: #94a3b8;
+        font-size: 11px;
+        margin-top: 8px;
+        text-align: center;
+        display: none;
+    }
+
+    .progress-text.active {
+        display: block;
+    }
+
+    /* Slide Wrapper - uses iframe like presentation.html */
+    .slide-wrapper {
+        width: 1280px;
+        height: 720px;
+        margin: 0 auto 30px auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .slide-wrapper.selected {
+        box-shadow: 0 0 0 3px #22d3ee, 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-wrapper.excluded {
+        opacity: 0.4;
+    }
+
+    .slide-wrapper iframe {
+        width: 1280px;
+        height: 720px;
+        border: none;
+        background: #0f172a;
+    }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.95);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .loading-overlay .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(34, 211, 238, 0.2);
+        border-top-color: #22d3ee;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    .loading-overlay p {
+        color: white;
+        margin-top: 16px;
+        font-size: 14px;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Print styles - hide controls */
+    @media print {
+        .controls, .loading-overlay {
+            display: none !important;
+        }
+        body {
+            background: white !important;
+            padding: 0 !important;
+        }
+        .slide-wrapper {
+            page-break-after: always;
+            margin: 0;
+            box-shadow: none;
+            border-radius: 0;
+        }
+        .slide-wrapper:last-child {
+            page-break-after: auto;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Loading slides...</p>
+    </div>
+
+    <!-- Controls Panel -->
+    <div class="controls">
+        <h3><i class="fa-solid fa-file-pdf" style="margin-right: 8px;"></i>Export to PDF</h3>
+
+        <!-- Slide Selector -->
+        <div class="slide-selector">
+            <h4>
+                Select Slides
+                <div class="select-actions">
+                    <button onclick="selectAllSlides()">All</button>
+                    <button onclick="selectNoSlides()">None</button>
+                </div>
+            </h4>
+            <div class="slide-list" id="slideList">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <button onclick="exportToPDF()" id="exportBtn">
+            <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Export Selected to PDF
+        </button>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">Processing...</div>
+
+        <button onclick="window.location.href='presentation.html'" class="secondary">
+            <i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i>Back to Presentation
+        </button>
+    </div>
+
+    <!-- Slides Container -->
+    <div id="slidesContainer"></div>
+
+    <script>
+        // Slide configuration (same order as presentation.html)
+        const slides = [
+            { file: 'slide01.html', title: 'Title - AI & Robotics Researcher' },
+            { file: 'slide02.html', title: 'Researcher Profile' },
+            { file: 'slide03.html', title: 'Education & Career Timeline' },
+            { file: 'slide04.html', title: 'Core Competencies & Skills' },
+            { file: 'slide14.html', title: 'Universal VLA Model' },
+            { file: 'slide18.html', title: 'Smart Control System' },
+            { file: 'slide15.html', title: 'EASIS: Embodiment-Agnostic Swarm Intelligence System' },
+            { file: 'slide05.html', title: 'Korean LLM Development' },
+            { file: 'slide06.html', title: 'SEEU Track - Vehicle Detection' },
+            { file: 'slide07.html', title: 'Face Recognition System' },
+            { file: 'slide08.html', title: 'SEEU ID - ID Card OCR' },
+            { file: 'slide09.html', title: 'Tanzania Smart Gate' },
+            { file: 'slide10.html', title: 'Gumi Metaverse - Safety Detection' },
+            { file: 'slide11.html', title: 'AVA Project - Autonomous Driving' },
+            { file: 'slide12.html', title: 'Robotic Arm Object Relocator' },
+            { file: 'slide13.html', title: 'Nvidia Jetson AMR' },
+            { file: 'slide16.html', title: 'Key Achievements Summary' },
+            { file: 'slide17.html', title: 'Thank You' },
+        ];
+
+        // Track selected slides (all selected by default)
+        let selectedSlides = new Set(slides.map((_, i) => i));
+        let loadedIframes = 0;
+
+        const container = document.getElementById('slidesContainer');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingText = document.getElementById('loadingText');
+
+        // Build slide selector UI
+        function buildSlideSelector() {
+            const slideList = document.getElementById('slideList');
+            slideList.innerHTML = slides.map((slide, index) => `
+                <div class="slide-item" onclick="toggleSlideFromItem(${index}, event)">
+                    <input type="checkbox" id="slide-check-${index}"
+                           ${selectedSlides.has(index) ? 'checked' : ''}
+                           onchange="toggleSlide(${index})">
+                    <span class="slide-number">${index + 1}</span>
+                    <label for="slide-check-${index}">${slide.title}</label>
+                </div>
+            `).join('');
+        }
+
+        function toggleSlideFromItem(index, event) {
+            if (event.target.tagName !== 'INPUT') {
+                toggleSlide(index);
+                document.getElementById(`slide-check-${index}`).checked = selectedSlides.has(index);
+            }
+        }
+
+        function toggleSlide(index) {
+            if (selectedSlides.has(index)) {
+                selectedSlides.delete(index);
+            } else {
+                selectedSlides.add(index);
+            }
+            updateSlideVisuals();
+        }
+
+        function selectAllSlides() {
+            selectedSlides = new Set(slides.map((_, i) => i));
+            updateSlideVisuals();
+            buildSlideSelector();
+        }
+
+        function selectNoSlides() {
+            selectedSlides.clear();
+            updateSlideVisuals();
+            buildSlideSelector();
+        }
+
+        function updateSlideVisuals() {
+            document.querySelectorAll('.slide-wrapper').forEach((wrapper, index) => {
+                if (selectedSlides.has(index)) {
+                    wrapper.classList.add('selected');
+                    wrapper.classList.remove('excluded');
+                } else {
+                    wrapper.classList.remove('selected');
+                    wrapper.classList.add('excluded');
+                }
+            });
+        }
+
+        // Load all slides using iframes (same as presentation.html)
+        function loadSlides() {
+            slides.forEach((slide, index) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'slide-wrapper selected';
+                wrapper.id = `slide-wrapper-${index}`;
+                wrapper.dataset.index = index;
+
+                const iframe = document.createElement('iframe');
+                iframe.id = `slide-iframe-${index}`;
+                iframe.src = slide.file;
+                iframe.onload = function() {
+                    loadedIframes++;
+                    loadingText.textContent = `Loading slide ${loadedIframes}/${slides.length}: ${slides[loadedIframes - 1]?.title || ''}`;
+
+                    // When all iframes are loaded
+                    if (loadedIframes === slides.length) {
+                        // Wait for charts to initialize
+                        setTimeout(() => {
+                            loadingOverlay.style.display = 'none';
+                        }, 1500);
+                    }
+                };
+
+                wrapper.appendChild(iframe);
+                container.appendChild(wrapper);
+            });
+
+            // Build slide selector
+            buildSlideSelector();
+        }
+
+        // Export selected slides to PDF using html2canvas
+        async function exportToPDF() {
+            const selectedIndices = Array.from(selectedSlides).sort((a, b) => a - b);
+
+            if (selectedIndices.length === 0) {
+                alert('Please select at least one slide to export.');
+                return;
+            }
+
+            const exportBtn = document.getElementById('exportBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            exportBtn.disabled = true;
+            progressBar.classList.add('active');
+            progressText.classList.add('active');
+
+            try {
+                const { jsPDF } = window.jspdf;
+
+                // Create PDF with slide dimensions (1280x720 = 16:9 aspect ratio)
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'px',
+                    format: [1280, 720],
+                    hotfixes: ['px_scaling']
+                });
+
+                let isFirstPage = true;
+
+                for (let i = 0; i < selectedIndices.length; i++) {
+                    const slideIndex = selectedIndices[i];
+                    const iframe = document.getElementById(`slide-iframe-${slideIndex}`);
+
+                    if (!iframe) continue;
+
+                    progressText.textContent = `Rendering slide ${i + 1}/${selectedIndices.length}: ${slides[slideIndex].title}`;
+                    progressFill.style.width = `${((i + 0.5) / selectedIndices.length) * 100}%`;
+
+                    try {
+                        // Access iframe content
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        const slideContainer = iframeDoc.querySelector('.slide-container');
+
+                        if (!slideContainer) {
+                            console.log(`No slide container found for slide ${slideIndex}`);
+                            continue;
+                        }
+
+                        // Scroll iframe into view to ensure it's rendered
+                        iframe.scrollIntoView({ behavior: 'instant' });
+                        await new Promise(resolve => setTimeout(resolve, 300));
+
+                        // Capture slide using html2canvas
+                        const canvas = await html2canvas(slideContainer, {
+                            width: 1280,
+                            height: 720,
+                            scale: 2,
+                            useCORS: true,
+                            allowTaint: true,
+                            backgroundColor: '#0f172a',
+                            logging: false,
+                            foreignObjectRendering: false,
+                            onclone: (clonedDoc, element) => {
+                                // Ensure dimensions are correct
+                                element.style.width = '1280px';
+                                element.style.height = '720px';
+                                element.style.overflow = 'hidden';
+                            }
+                        });
+
+                        // Add new page if not first
+                        if (!isFirstPage) {
+                            pdf.addPage([1280, 720], 'landscape');
+                        }
+                        isFirstPage = false;
+
+                        // Add image to PDF
+                        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                        pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720);
+
+                        progressFill.style.width = `${((i + 1) / selectedIndices.length) * 100}%`;
+
+                    } catch (slideError) {
+                        console.error(`Error capturing slide ${slideIndex}:`, slideError);
+                        // Continue with next slide
+                    }
+                }
+
+                progressText.textContent = 'Saving PDF...';
+
+                // Generate filename with date
+                const date = new Date().toISOString().slice(0, 10);
+                const filename = `AI_Robotics_Portfolio_${date}.pdf`;
+
+                pdf.save(filename);
+
+                progressText.textContent = 'PDF exported successfully!';
+                setTimeout(() => {
+                    progressBar.classList.remove('active');
+                    progressText.classList.remove('active');
+                    progressFill.style.width = '0%';
+                }, 2000);
+
+            } catch (error) {
+                console.error('PDF export error:', error);
+                progressText.textContent = `Error: ${error.message}`;
+                setTimeout(() => {
+                    progressBar.classList.remove('active');
+                    progressText.classList.remove('active');
+                }, 3000);
+            }
+
+            exportBtn.disabled = false;
+        }
+
+        // Start loading slides
+        loadSlides();
+    </script>
+</body>
+</html>

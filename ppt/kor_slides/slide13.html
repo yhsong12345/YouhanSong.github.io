@@ -145,6 +145,21 @@
                 max-width: 100%;
                 height: auto;
             }
+            /* Show video fallbacks in print */
+            iframe[src*="drive.google.com"],
+            iframe[src*="youtube.com"] {
+                display: none !important;
+            }
+            .video-fallback {
+                display: flex !important;
+            }
+            /* Show image fallbacks for Google Drive images */
+            img[src*="drive.google.com"] {
+                display: none !important;
+            }
+            .image-fallback {
+                display: flex !important;
+            }
         }
     </style>
 </head>
@@ -264,31 +279,51 @@
 </div>
 <div class="grid grid-cols-2 gap-2 flex-1">
 <!-- Image 1 -->
-<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center" style="height: 160px; max-height: 160px;">
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 160px; max-height: 160px;">
 <img src="https://drive.google.com/thumbnail?id=13orGeoC-YX8cUZhi8XeSz76deQl0NlAc&sz=w1000" alt="SLAM Map" class="max-w-full object-contain rounded" style="max-height: 160px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-<div class="flex items-center justify-center h-full w-full" style="display: none;">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-image mr-1"></i>SLAM Map</span>
+<div class="image-fallback flex-col items-center justify-center h-full w-full" style="display: none;">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.5" style="margin-bottom: 6px;">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <polyline points="21 15 16 10 5 21"></polyline>
+    </svg>
+    <span class="text-sm text-cyan-300 font-medium">SLAM Map</span>
 </div>
 </div>
 <!-- Image 2 -->
-<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center" style="height: 160px; max-height: 160px;">
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 160px; max-height: 160px;">
 <img src="https://drive.google.com/thumbnail?id=1y-wK9w1IayjQzJ5_dALQe_yx_LL6wu7M&sz=w1000" alt="Navigation" class="max-w-full object-contain rounded" style="max-height: 160px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-<div class="flex items-center justify-center h-full w-full" style="display: none;">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-image mr-1"></i>Navigation</span>
+<div class="image-fallback flex-col items-center justify-center h-full w-full" style="display: none;">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.5" style="margin-bottom: 6px;">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <polyline points="21 15 16 10 5 21"></polyline>
+    </svg>
+    <span class="text-sm text-cyan-300 font-medium">Navigation</span>
 </div>
 </div>
 <!-- Video 1 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="min-height: 90px;">
 <iframe src="https://drive.google.com/file/d/16MCmhV-fnnxL9WlwrX2AGVBUYSi9rPxN/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
-<div class="flex items-center justify-center h-full w-full" id="video-placeholder-1">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-video mr-1"></i>SLAM Demo</span>
+<div class="video-fallback flex-col items-center justify-center h-full w-full" id="video-placeholder-1">
+    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(34, 211, 238, 0.2); border: 2px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </div>
+    <span class="text-xs text-cyan-300 font-medium">SLAM Demo</span>
 </div>
 </div>
 <!-- Video 2 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="min-height: 90px;">
 <iframe src="https://drive.google.com/file/d/1afuaezyw_J9pd1waAsnu8N1vU_mPgVQ9/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
-<div class="flex items-center justify-center h-full w-full" id="video-placeholder-2">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-video mr-1"></i>Nav Demo</span>
+<div class="video-fallback flex-col items-center justify-center h-full w-full" id="video-placeholder-2">
+    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(34, 211, 238, 0.2); border: 2px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </div>
+    <span class="text-xs text-cyan-300 font-medium">Nav Demo</span>
 </div>
 </div>
 </div>

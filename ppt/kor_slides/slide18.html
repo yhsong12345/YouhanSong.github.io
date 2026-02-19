@@ -78,6 +78,46 @@
         .chart-container {
             width: 100%;
             height: 110px;
+            position: relative;
+        }
+
+        /* SVG Gauge for PDF fallback */
+        .svg-gauge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        @media print {
+            .svg-gauge {
+                display: block !important;
+            }
+            canvas {
+                display: none !important;
+            }
+            /* Scale down KPI section for print */
+            .chart-container {
+                height: 70px !important;
+            }
+            .metric-card {
+                padding: 8px !important;
+            }
+            .highlight-value.text-xl {
+                font-size: 16px !important;
+            }
+            .highlight-value.text-2xl,
+            .highlight-value.text-3xl {
+                font-size: 20px !important;
+            }
+            .stat-label {
+                font-size: 9px !important;
+            }
+            .grid.grid-cols-4 {
+                gap: 8px !important;
+            }
         }
         
         .highlight-value {
@@ -127,11 +167,11 @@
 <span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Latest Project</span>
 <span class="text-xs text-gray-400 uppercase tracking-widest">AI-Powered Video Surveillance &amp; Analytics</span>
 </div>
-<h1 class="text-4xl font-black text-white font-['Montserrat'] mb-1">Smart Monitoring System</h1>
+<h1 class="text-4xl font-black text-white font-['Montserrat'] mb-1">스마트 관제 시스템</h1>
 <div class="flex items-center space-x-4">
 <p class="text-lg text-gray-300 font-light">Advanced AI CCTV Control System for Public Safety</p>
 <div class="h-4 w-px bg-gray-600"></div>
-<span class="text-sm text-cyan-300 font-medium px-3 py-1 rounded-full border border-cyan-500/30" style="background-color: rgba(22, 78, 99, 0.3);">(주)시선에이아이 AI 1팀</span>
+<!-- <span class="text-sm text-cyan-300 font-medium px-3 py-1 rounded-full border border-cyan-500/30" style="background-color: rgba(22, 78, 99, 0.3);">(주)시선에이아이 AI 1팀</span> -->
 </div>
 </div>
 <div class="text-right">
@@ -196,21 +236,42 @@
 <div class="grid grid-cols-4 gap-3 h-full">
 <!-- Row 1: Core Detection Metrics (Pie Charts) -->
 <div class="metric-card col-span-1">
-<div class="chart-container" id="chartVehicle"></div>
+<div class="chart-container" id="chartVehicle">
+<!-- SVG fallback for PDF -->
+<svg class="svg-gauge" viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
+<circle cx="50" cy="50" r="40" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"
+    stroke-dasharray="243" stroke-dashoffset="8" transform="rotate(-90 50 50)"/>
+</svg>
+</div>
 <div class="text-center mt-[-15px]">
 <p class="highlight-value text-xl">96.8<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label">Vehicle<br/>Detection</p>
 </div>
 </div>
 <div class="metric-card col-span-1">
-<div class="chart-container" id="chartPerson"></div>
+<div class="chart-container" id="chartPerson">
+<!-- SVG fallback for PDF -->
+<svg class="svg-gauge" viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
+<circle cx="50" cy="50" r="40" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"
+    stroke-dasharray="244" stroke-dashoffset="7" transform="rotate(-90 50 50)"/>
+</svg>
+</div>
 <div class="text-center mt-[-15px]">
 <p class="highlight-value text-xl">97.2<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label">Person<br/>Detection</p>
 </div>
 </div>
 <div class="metric-card col-span-1">
-<div class="chart-container" id="chartLPD"></div>
+<div class="chart-container" id="chartLPD">
+<!-- SVG fallback for PDF -->
+<svg class="svg-gauge" viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
+<circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"
+    stroke-dasharray="245" stroke-dashoffset="6" transform="rotate(-90 50 50)"/>
+</svg>
+</div>
 <div class="text-center mt-[-15px]">
 <p class="highlight-value text-xl">97.5<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label">License Plate<br/>Detection</p>

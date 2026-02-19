@@ -65,6 +65,21 @@
             .glass-panel, .metric-card, .stat-card, .skill-card {
                 page-break-inside: avoid !important;
             }
+            /* Show video fallbacks in print */
+            iframe[src*="drive.google.com"],
+            iframe[src*="youtube.com"] {
+                display: none !important;
+            }
+            .video-fallback {
+                display: flex !important;
+            }
+            /* Show image fallbacks for Google Drive images */
+            img[src*="drive.google.com"] {
+                display: none !important;
+            }
+            .image-fallback {
+                display: flex !important;
+            }
         }
         .bg-overlay {
             position: absolute;
@@ -287,22 +302,37 @@
 <!-- Video 1 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="min-height: 90px;">
 <iframe src="https://drive.google.com/file/d/1zbqhoitxoYKCDdrSCQzKWvWvAeaH2MW7/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
-<div class="flex items-center justify-center h-full w-full" id="video-placeholder">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-video mr-1"></i>Video</span>
+<div class="video-fallback flex-col items-center justify-center h-full w-full" id="video-placeholder">
+    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(34, 211, 238, 0.2); border: 2px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </div>
+    <span class="text-xs text-cyan-300 font-medium">Demo Video</span>
 </div>
 </div>
 <!-- Video 2 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="min-height: 90px;">
 <iframe src="https://drive.google.com/file/d/1Dl4JxfECjaxBiobQfI5q4q5P7BtO_Tki/preview"  class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
-<div class="flex items-center justify-center h-full w-full" id="video-placeholder">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-video mr-1"></i>Video 1</span>
+<div class="video-fallback flex-col items-center justify-center h-full w-full" id="video-placeholder">
+    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(34, 211, 238, 0.2); border: 2px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </div>
+    <span class="text-xs text-cyan-300 font-medium">Detection Demo</span>
 </div>
 </div>
 <!-- Video 3 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="min-height: 90px;">
 <iframe src="https://drive.google.com/file/d/1ifeu-waA8TNrYYe8D2kDoMEj82qUVqUC/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: none;"></iframe>
-<div class="flex items-center justify-center h-full w-full" id="video-placeholder">
-<span class="text-xs text-gray-500"><i class="fa-solid fa-video mr-1"></i>Video 2</span>
+<div class="video-fallback flex-col items-center justify-center h-full w-full" id="video-placeholder">
+    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(34, 211, 238, 0.2); border: 2px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </div>
+    <span class="text-xs text-cyan-300 font-medium">Road Test</span>
 </div>
 </div>
 </div>

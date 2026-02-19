@@ -8,6 +8,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
     body {
         margin: 0;
@@ -322,7 +324,7 @@
             <i class="fa-solid fa-chevron-left"></i> Previous
         </button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">17</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">18</span>
         </div>
         <button class="nav-btn" onclick="nextSlide()" id="nextBtn">
             Next <i class="fa-solid fa-chevron-right"></i>
@@ -330,8 +332,8 @@
         <button class="nav-btn" onclick="toggleFullscreen()">
             <i class="fa-solid fa-expand"></i> Fullscreen
         </button>
-        <button class="nav-btn" onclick="togglePDFControls()" id="pdfToggleBtn">
-            <i class="fa-solid fa-file-pdf"></i> PDF Export
+        <button class="nav-btn" onclick="window.open('printable.html', '_blank')" title="Open print-friendly version (Ctrl+P)">
+            <i class="fa-solid fa-print"></i> Print PDF
         </button>
     </div>
     
@@ -361,6 +363,7 @@
         { file: 'slide15.html', title: 'EASIS: Embodiment-Agnostic Swarm Intelligence System' },
 
         // Work Projects (Recent to Old)
+        { file: 'slide18.html', title: 'Smart Control System' },
         { file: 'slide05.html', title: 'Korean LLM Development' },
         { file: 'slide06.html', title: 'SEEU Track - Vehicle Detection' },
         { file: 'slide07.html', title: 'Face Recognition System' },
@@ -523,13 +526,13 @@
         try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             if (!iframeDoc) return;
-
+            
             // Wait for ECharts to be available and ensure charts are visible
             const checkCharts = setInterval(() => {
                 if (iframe.contentWindow.echarts && iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]').length > 0) {
                     // Trigger resize to ensure charts render
                     iframe.contentWindow.dispatchEvent(new Event('resize'));
-
+                    
                     // Get all chart containers and ensure they're visible
                     const chartContainers = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]');
                     chartContainers.forEach(container => {
@@ -537,96 +540,250 @@
                         container.style.opacity = '1';
                         container.style.display = 'block';
                     });
-
+                    
                     clearInterval(checkCharts);
                 }
             }, 200);
-
+            
             // Stop checking after 5 seconds
             setTimeout(() => clearInterval(checkCharts), 5000);
         } catch (e) {
             console.log('Could not initialize charts:', e);
         }
     }
-
-    // Convert ECharts canvas to static images for PDF export
+    
+    // Convert ECharts to static images for PDF export
     function convertChartsToImages(iframe) {
         try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             const iframeWin = iframe.contentWindow;
-            if (!iframeDoc || !iframeWin || !iframeWin.echarts) return;
+            if (!iframeDoc || !iframeWin) return;
 
-            // Find all chart containers
-            const chartContainers = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]');
-            chartContainers.forEach(container => {
-                // Get the ECharts instance
-                const chartInstance = iframeWin.echarts.getInstanceByDom(container);
-                if (chartInstance) {
-                    // Get the chart as a data URL (PNG image)
-                    const dataURL = chartInstance.getDataURL({
-                        type: 'png',
-                        pixelRatio: 2,
-                        backgroundColor: 'transparent'
-                    });
+            // Show SVG gauge fallbacks if they exist
+            const svgGauges = iframeDoc.querySelectorAll('.svg-gauge');
+            svgGauges.forEach(svg => {
+                svg.style.display = 'block';
+            });
 
-                    // Create an image element
-                    const img = iframeDoc.createElement('img');
-                    img.src = dataURL;
-                    img.className = 'chart-export-image';
-                    img.style.cssText = `
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        z-index: 10;
-                    `;
+            // Find all canvas elements (ECharts renders to canvas)
+            const canvases = iframeDoc.querySelectorAll('canvas');
+            canvases.forEach(canvas => {
+                // Check if already converted
+                if (canvas.getAttribute('data-converted') === 'true') return;
 
-                    // Store original canvas for restoration
-                    const canvas = container.querySelector('canvas');
-                    if (canvas) {
-                        canvas.setAttribute('data-original-display', canvas.style.display || '');
+                try {
+                    // Get canvas dimensions
+                    const rect = canvas.getBoundingClientRect();
+                    const width = rect.width || canvas.width;
+                    const height = rect.height || canvas.height;
+
+                    if (width > 0 && height > 0) {
+                        // Convert canvas to data URL
+                        const dataUrl = canvas.toDataURL('image/png', 1.0);
+
+                        // Create an image element
+                        const img = iframeDoc.createElement('img');
+                        img.src = dataUrl;
+                        img.className = 'chart-print-image';
+                        img.style.cssText = `
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: ${width}px;
+                            height: ${height}px;
+                            display: block;
+                            z-index: 1000;
+                        `;
+
+                        // Make parent relative if needed
+                        const parent = canvas.parentElement;
+                        if (parent) {
+                            const parentStyle = iframeWin.getComputedStyle(parent);
+                            if (parentStyle.position === 'static') {
+                                parent.style.position = 'relative';
+                            }
+                            parent.appendChild(img);
+                        }
+
+                        // Hide the canvas
                         canvas.style.display = 'none';
+                        canvas.setAttribute('data-converted', 'true');
                     }
-
-                    // Add the image to the container
-                    container.style.position = 'relative';
-                    container.appendChild(img);
+                } catch (canvasErr) {
+                    console.log('Could not convert canvas:', canvasErr);
+                    // If canvas conversion fails, hide it and rely on SVG fallback
+                    canvas.style.display = 'none';
                 }
             });
+
+            // Also try ECharts getDataURL method if echarts is available
+            if (iframeWin.echarts) {
+                const chartContainers = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"], .chart-container');
+                chartContainers.forEach(container => {
+                    if (container.getAttribute('data-echarts-converted') === 'true') return;
+
+                    const chartInstance = iframeWin.echarts.getInstanceByDom(container);
+                    if (chartInstance) {
+                        try {
+                            const dataUrl = chartInstance.getDataURL({
+                                type: 'png',
+                                pixelRatio: 2,
+                                backgroundColor: 'transparent'
+                            });
+
+                            const img = iframeDoc.createElement('img');
+                            img.src = dataUrl;
+                            img.className = 'echarts-print-image';
+                            img.style.cssText = `
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                display: block;
+                                object-fit: contain;
+                                z-index: 1001;
+                            `;
+
+                            container.style.position = 'relative';
+                            container.appendChild(img);
+                            container.setAttribute('data-echarts-converted', 'true');
+
+                            // Hide the canvas inside
+                            const canvas = container.querySelector('canvas');
+                            if (canvas) {
+                                canvas.style.display = 'none';
+                            }
+                        } catch (chartErr) {
+                            console.log('Could not convert ECharts:', chartErr);
+                        }
+                    }
+                });
+            }
         } catch (e) {
             console.log('Could not convert charts to images:', e);
         }
     }
 
-    // Restore ECharts canvas after PDF export
+    // Restore charts from images after PDF export
     function restoreChartsFromImages(iframe) {
         try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             if (!iframeDoc) return;
 
-            // Remove export images and restore canvas
-            const exportImages = iframeDoc.querySelectorAll('.chart-export-image');
-            exportImages.forEach(img => {
-                img.remove();
+            // Hide SVG gauge fallbacks
+            const svgGauges = iframeDoc.querySelectorAll('.svg-gauge');
+            svgGauges.forEach(svg => {
+                svg.style.display = 'none';
             });
 
-            // Restore canvas visibility
-            const chartContainers = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]');
+            // Restore canvases
+            const convertedCanvases = iframeDoc.querySelectorAll('canvas[data-converted="true"]');
+            convertedCanvases.forEach(canvas => {
+                canvas.style.display = '';
+                canvas.style.visibility = '';
+                canvas.removeAttribute('data-converted');
+            });
+
+            // Remove canvas print images
+            const canvasImages = iframeDoc.querySelectorAll('.chart-print-image');
+            canvasImages.forEach(img => img.remove());
+
+            // Restore ECharts containers
+            const chartContainers = iframeDoc.querySelectorAll('[data-echarts-converted="true"]');
             chartContainers.forEach(container => {
+                const img = container.querySelector('.echarts-print-image');
+                if (img) img.remove();
+
                 const canvas = container.querySelector('canvas');
                 if (canvas) {
-                    const originalDisplay = canvas.getAttribute('data-original-display');
-                    canvas.style.display = originalDisplay || '';
-                    canvas.removeAttribute('data-original-display');
+                    canvas.style.display = '';
+                    canvas.style.visibility = '';
                 }
+
+                container.removeAttribute('data-echarts-converted');
             });
         } catch (e) {
             console.log('Could not restore charts:', e);
         }
     }
-    
+
+    // Create video placeholder for PDF export
+    function createVideoPlaceholders(iframe) {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) return;
+
+            const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"], iframe[src*="youtu.be"]');
+            videoIframes.forEach(videoIframe => {
+                if (videoIframe.getAttribute('data-placeholder-created') === 'true') return;
+
+                const parent = videoIframe.parentElement;
+                if (!parent) return;
+
+                // Get parent dimensions
+                const parentRect = parent.getBoundingClientRect();
+                const width = parentRect.width || 300;
+                const height = parentRect.height || 200;
+
+                // Create a styled placeholder div
+                const placeholder = iframeDoc.createElement('div');
+                placeholder.className = 'video-print-placeholder';
+                placeholder.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: ${width}px;
+                    height: ${height}px;
+                    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+                    border: 2px solid rgba(34, 211, 238, 0.5);
+                    border-radius: 12px;
+                    color: #94a3b8;
+                    position: relative;
+                `;
+
+                placeholder.innerHTML = `
+                    <div style="width: 70px; height: 70px; background: rgba(34, 211, 238, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; border: 2px solid rgba(34, 211, 238, 0.5);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </div>
+                    <span style="font-size: 14px; font-weight: 600; color: #e2e8f0;">Video Content</span>
+                    <span style="font-size: 11px; color: #64748b; margin-top: 4px;">Available in browser</span>
+                `;
+
+                // Hide video iframe, show placeholder
+                videoIframe.style.display = 'none';
+                videoIframe.setAttribute('data-placeholder-created', 'true');
+                parent.appendChild(placeholder);
+            });
+        } catch (e) {
+            console.log('Could not create video placeholders:', e);
+        }
+    }
+
+    // Remove video placeholders after PDF export
+    function removeVideoPlaceholders(iframe) {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) return;
+
+            // Restore video iframes
+            const videoIframes = iframeDoc.querySelectorAll('iframe[data-placeholder-created="true"]');
+            videoIframes.forEach(videoIframe => {
+                videoIframe.style.display = '';
+                videoIframe.removeAttribute('data-placeholder-created');
+            });
+
+            // Remove placeholders
+            const placeholders = iframeDoc.querySelectorAll('.video-print-placeholder');
+            placeholders.forEach(p => p.remove());
+        } catch (e) {
+            console.log('Could not remove video placeholders:', e);
+        }
+    }
+
     // Inject print styles into iframe for video handling
     function injectPrintStyles(iframe) {
         try {
@@ -677,26 +834,9 @@
                         object-fit: cover !important;
                         display: block !important;
                     }
-                    /* Show chart export images */
-                    .chart-export-image {
-                        display: block !important;
-                        visibility: visible !important;
-                        opacity: 1 !important;
-                    }
-                    /* Hide canvas when exporting to PDF */
-                    canvas[data-original-display] {
-                        display: none !important;
-                    }
-                    /* Ensure images render properly */
-                    img {
-                        -webkit-print-color-adjust: exact !important;
-                        print-color-adjust: exact !important;
-                    }
                     /* Ensure no overflow */
                     * {
                         box-sizing: border-box;
-                        -webkit-print-color-adjust: exact !important;
-                        print-color-adjust: exact !important;
                     }
                 }
             `;
@@ -707,6 +847,45 @@
     }
     
     // Initialize slide selector
+    // Handle Google Drive images - create fallback placeholders
+    function handleGoogleDriveImages(iframe) {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) return;
+
+            // Find all Google Drive images
+            const gdImages = iframeDoc.querySelectorAll('img[src*="drive.google.com"]');
+            gdImages.forEach(img => {
+                if (img.getAttribute('data-handled') === 'true') return;
+
+                // Mark as handled
+                img.setAttribute('data-handled', 'true');
+
+                // Store original styling
+                const parent = img.parentElement;
+                const parentRect = parent ? parent.getBoundingClientRect() : null;
+
+                // Ensure proper sizing
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = parentRect ? `${parentRect.height}px` : '200px';
+                img.style.objectFit = 'contain';
+                img.style.display = 'block';
+
+                // Add error handler for print
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    // Show fallback if exists
+                    const fallback = this.nextElementSibling;
+                    if (fallback) {
+                        fallback.style.display = 'flex';
+                    }
+                };
+            });
+        } catch (e) {
+            console.log('Could not handle Google Drive images:', e);
+        }
+    }
+
     function initSlideSelector() {
         const selector = document.getElementById('slideSelector');
         slideTitles.forEach((title, index) => {
@@ -830,49 +1009,231 @@
         exportSlides(all);
     }
     
-    function exportSlides(slideIndices) {
+    async function exportSlides(slideIndices) {
         if (slideIndices.length === 0) {
             alert('Please select at least one slide to export.');
             return;
         }
 
-        // Simple approach: just open slides directly and let user print
-        alert('PDF Export: A new window will open with selected slides. Use your browser\'s Print function (Ctrl+P) and select "Save as PDF" as the destination.');
+        // Show loading indicator
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'pdf-loading';
+        loadingOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        `;
+        loadingOverlay.innerHTML = `
+            <div style="color: #22d3ee; font-size: 24px; margin-bottom: 20px;">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+            </div>
+            <div style="color: white; font-size: 18px; font-weight: 600;">Preparing PDF...</div>
+            <div id="pdf-progress" style="color: #94a3b8; font-size: 14px; margin-top: 10px;">Processing slides...</div>
+        `;
+        document.body.appendChild(loadingOverlay);
 
-        // Build URLs for selected slides
-        const selectedFiles = slideIndices.map(index => slideFiles[index]);
+        const updateProgress = (text) => {
+            const progressEl = document.getElementById('pdf-progress');
+            if (progressEl) progressEl.textContent = text;
+        };
 
-        // Open a simple page that loads slides
-        const printWindow = window.open('', '_blank');
-        if (!printWindow) {
-            alert('Popup blocked! Please allow popups for this site.');
-            return;
+        try {
+            // Prepare all slides for printing
+            for (let i = 0; i < slideIndices.length; i++) {
+                const slideIndex = slideIndices[i];
+                updateProgress(`Preparing slide ${i + 1} of ${slideIndices.length}...`);
+
+                const slideWrapper = document.getElementById(`slide-${slideIndex + 1}`);
+                const iframe = slideWrapper?.querySelector('iframe');
+
+                if (!iframe) continue;
+
+                try {
+                    // Prepare slide for print
+                    await prepareSlideForPrint(iframe);
+                } catch (slideErr) {
+                    console.log(`Error preparing slide ${slideIndex + 1}:`, slideErr);
+                }
+            }
+
+            // Wait a moment for all changes to render
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            // Hide non-selected slides
+            const allSlides = document.querySelectorAll('.slide-wrapper');
+            allSlides.forEach((slide, index) => {
+                if (!slideIndices.includes(index)) {
+                    slide.setAttribute('data-hidden-for-print', 'true');
+                    slide.style.display = 'none';
+                } else {
+                    slide.style.display = 'block';
+                    slide.classList.add('active');
+                }
+            });
+
+            // Remove loading overlay before print
+            const overlay = document.getElementById('pdf-loading');
+            if (overlay) overlay.remove();
+
+            // Use browser print dialog
+            updateProgress('Opening print dialog...');
+
+            // Show instructions
+            alert('PDF Export Instructions:\n\n1. In the print dialog, select "Save as PDF" as the destination\n2. Set paper size to "Custom" with 1280x720 px (or use Landscape A4)\n3. Enable "Background graphics" option\n4. Click Save\n\nClick OK to continue.');
+
+            // Trigger print
+            window.print();
+
+            // Restore slides after printing
+            setTimeout(() => {
+                allSlides.forEach((slide, index) => {
+                    if (slide.getAttribute('data-hidden-for-print') === 'true') {
+                        slide.removeAttribute('data-hidden-for-print');
+                        if (index === currentSlideIndex) {
+                            slide.style.display = 'block';
+                            slide.classList.add('active');
+                        } else {
+                            slide.style.display = 'none';
+                            slide.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Restore slides from print mode
+                slideIndices.forEach(slideIndex => {
+                    const slideWrapper = document.getElementById(`slide-${slideIndex + 1}`);
+                    const iframe = slideWrapper?.querySelector('iframe');
+                    if (iframe) {
+                        restoreSlideFromPrint(iframe);
+                    }
+                });
+            }, 1000);
+
+        } catch (err) {
+            console.error('PDF export error:', err);
+            alert('Error preparing PDF. Please try using browser print (Ctrl+P) directly.');
+
+            // Remove loading overlay
+            const overlay = document.getElementById('pdf-loading');
+            if (overlay) overlay.remove();
         }
-
-        let html = '<!DOCTYPE html><html><head>';
-        html += '<meta charset="utf-8">';
-        html += '<title>PDF Export - Selected Slides</title>';
-        html += '<style>';
-        html += '@page { size: 1280px 720px; margin: 0; }';
-        html += '* { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }';
-        html += 'body { margin: 0; padding: 0; background: #0f172a; }';
-        html += '.slide-frame { width: 1280px; height: 720px; border: none; display: block; page-break-after: always; }';
-        html += '.slide-frame:last-child { page-break-after: auto; }';
-        html += '.print-hint { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: #22d3ee; color: #0f172a; padding: 10px 20px; border-radius: 8px; font-family: sans-serif; font-weight: bold; z-index: 9999; }';
-        html += '@media print { .print-hint { display: none; } }';
-        html += '</style></head><body>';
-        html += '<div class="print-hint">Press Ctrl+P (or Cmd+P on Mac) to print/save as PDF</div>';
-
-        selectedFiles.forEach((file, i) => {
-            html += '<iframe class="slide-frame" src="' + file + '"></iframe>';
-        });
-
-        html += '</body></html>';
-
-        printWindow.document.write(html);
-        printWindow.document.close();
     }
-    
+
+    // Prepare slide for print - convert dynamic elements to static
+    async function prepareSlideForPrint(iframe) {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const iframeWin = iframe.contentWindow;
+            if (!iframeDoc || !iframeWin) return;
+
+            // Show SVG gauge fallbacks
+            const svgGauges = iframeDoc.querySelectorAll('.svg-gauge');
+            svgGauges.forEach(svg => {
+                svg.style.display = 'block';
+            });
+
+            // Hide canvas elements (ECharts)
+            const canvases = iframeDoc.querySelectorAll('canvas');
+            canvases.forEach(canvas => {
+                canvas.style.display = 'none';
+            });
+
+            // Handle video iframes - show fallback placeholders
+            const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"]');
+            videoIframes.forEach(videoIframe => {
+                videoIframe.style.display = 'none';
+
+                // Show existing fallback if present
+                const parent = videoIframe.parentElement;
+                if (parent) {
+                    const fallback = parent.querySelector('.video-fallback');
+                    if (fallback) {
+                        fallback.style.display = 'flex';
+                    }
+                }
+            });
+
+            // Handle Google Drive images - show fallback
+            const gdImages = iframeDoc.querySelectorAll('img[src*="drive.google.com"]');
+            gdImages.forEach(img => {
+                img.style.display = 'none';
+
+                // Show existing fallback if present
+                const parent = img.parentElement;
+                if (parent) {
+                    const fallback = parent.querySelector('.image-fallback');
+                    if (fallback) {
+                        fallback.style.display = 'flex';
+                    }
+                }
+            });
+
+        } catch (e) {
+            console.log('Error preparing slide for print:', e);
+        }
+    }
+
+    // Restore slide after print
+    function restoreSlideFromPrint(iframe) {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) return;
+
+            // Hide SVG gauge fallbacks
+            const svgGauges = iframeDoc.querySelectorAll('.svg-gauge');
+            svgGauges.forEach(svg => {
+                svg.style.display = 'none';
+            });
+
+            // Show canvas elements
+            const canvases = iframeDoc.querySelectorAll('canvas');
+            canvases.forEach(canvas => {
+                canvas.style.display = '';
+            });
+
+            // Restore video iframes
+            const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"]');
+            videoIframes.forEach(videoIframe => {
+                videoIframe.style.display = '';
+
+                // Hide fallback
+                const parent = videoIframe.parentElement;
+                if (parent) {
+                    const fallback = parent.querySelector('.video-fallback');
+                    if (fallback) {
+                        fallback.style.display = 'none';
+                    }
+                }
+            });
+
+            // Restore Google Drive images
+            const gdImages = iframeDoc.querySelectorAll('img[src*="drive.google.com"]');
+            gdImages.forEach(img => {
+                img.style.display = '';
+
+                // Hide fallback
+                const parent = img.parentElement;
+                if (parent) {
+                    const fallback = parent.querySelector('.image-fallback');
+                    if (fallback) {
+                        fallback.style.display = 'none';
+                    }
+                }
+            });
+
+        } catch (e) {
+            console.log('Error restoring slide from print:', e);
+        }
+    }
+
     // Toggle PDF controls
     function togglePDFControls() {
         const pdfControls = document.getElementById('pdfControls');
