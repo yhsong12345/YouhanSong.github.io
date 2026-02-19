@@ -840,174 +840,64 @@
         document.querySelector('.nav-controls').style.display = 'none';
         document.querySelector('.pdf-controls').style.display = 'none';
 
-        // Process each selected slide
+        // Process each selected slide - extract iframe content and embed directly
         document.querySelectorAll('.slide-wrapper').forEach((slide, index) => {
             if (slideIndices.includes(index)) {
                 slide.style.display = 'block';
                 slide.style.position = 'relative';
                 slide.style.pageBreakAfter = 'always';
-                slide.classList.remove('active'); // Remove active class to prevent conflicts
+                slide.classList.remove('active');
 
-                // Ensure iframe content is ready and handle videos
                 const iframe = slide.querySelector('iframe');
                 if (iframe) {
                     try {
                         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                         if (iframeDoc) {
-                            // Inject print styles
-                            injectPrintStyles(iframe);
-
-                            // Convert ECharts canvas to images for PDF export
+                            // Convert ECharts to images BEFORE extracting content
                             convertChartsToImages(iframe);
 
-                            // Ensure charts are visible
-                            const charts = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]');
-                            charts.forEach(chart => {
-                                chart.style.visibility = 'visible';
-                                chart.style.opacity = '1';
-                            });
+                            // Wait a bit for chart images to render
+                            setTimeout(() => {}, 100);
 
-                            // Trigger chart resize
-                            if (iframe.contentWindow.echarts) {
-                                iframe.contentWindow.dispatchEvent(new Event('resize'));
+                            // Extract the slide content from iframe
+                            const slideContent = iframeDoc.querySelector('.slide-container');
+                            if (slideContent) {
+                                // Clone the content
+                                const clonedContent = slideContent.cloneNode(true);
+
+                                // Create a container for extracted content
+                                let extractedDiv = slide.querySelector('.extracted-content');
+                                if (!extractedDiv) {
+                                    extractedDiv = document.createElement('div');
+                                    extractedDiv.className = 'extracted-content';
+                                    extractedDiv.style.cssText = `
+                                        width: 1280px;
+                                        height: 720px;
+                                        position: relative;
+                                        overflow: hidden;
+                                        background-color: #0f172a;
+                                    `;
+                                    slide.appendChild(extractedDiv);
+                                }
+
+                                // Copy all styles from iframe
+                                const iframeStyles = iframeDoc.querySelectorAll('style, link[rel="stylesheet"]');
+                                iframeStyles.forEach(style => {
+                                    if (style.tagName === 'STYLE') {
+                                        const newStyle = document.createElement('style');
+                                        newStyle.textContent = style.textContent;
+                                        extractedDiv.appendChild(newStyle);
+                                    }
+                                });
+
+                                extractedDiv.appendChild(clonedContent);
+
+                                // Hide the iframe
+                                iframe.style.display = 'none';
                             }
-                            
-                            // Handle video iframes - hide them and show thumbnails
-                            const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"], iframe[src*="youtu.be"]');
-                            videoIframes.forEach(videoIframe => {
-                                // Extract video ID and generate thumbnail URL
-                                const videoSrc = videoIframe.getAttribute('src') || '';
-                                let thumbnailUrl = '';
-                                
-                                // Google Drive video
-                                if (videoSrc.includes('drive.google.com')) {
-                                    const match = videoSrc.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-                                    if (match && match[1]) {
-                                        const fileId = match[1];
-                                        thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1280-h720`;
-                                    }
-                                }
-                                // YouTube video
-                                else if (videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be')) {
-                                    let videoId = '';
-                                    if (videoSrc.includes('youtube.com/embed/')) {
-                                        videoId = videoSrc.split('youtube.com/embed/')[1].split('?')[0];
-                                    } else if (videoSrc.includes('youtu.be/')) {
-                                        videoId = videoSrc.split('youtu.be/')[1].split('?')[0];
-                                    } else if (videoSrc.includes('youtube.com/watch?v=')) {
-                                        videoId = videoSrc.split('youtube.com/watch?v=')[1].split('&')[0];
-                                    }
-                                    if (videoId) {
-                                        thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-                                    }
-                                }
-                                
-                                // Hide the video iframe
-                                videoIframe.style.display = 'none';
-                                
-                                // Find or create thumbnail placeholder
-                                let placeholder = videoIframe.nextElementSibling;
-                                const isExistingPlaceholder = placeholder && placeholder.classList.contains('video-print-placeholder');
-                                
-                                if (!isExistingPlaceholder) {
-                                    placeholder = iframeDoc.createElement('div');
-                                    placeholder.className = 'video-print-placeholder';
-                                    videoIframe.parentNode.insertBefore(placeholder, videoIframe.nextSibling);
-                                }
-                                
-                                // Set up placeholder with thumbnail
-                                placeholder.style.cssText = `
-                                    display: flex !important;
-                                    align-items: center;
-                                    justify-content: center;
-                                    width: 100%;
-                                    height: 100%;
-                                    min-height: 90px;
-                                    background: rgba(15, 23, 42, 0.5);
-                                    border-radius: 8px;
-                                    overflow: hidden;
-                                    position: relative;
-                                `;
-                                
-                                if (thumbnailUrl) {
-                                    // Create thumbnail image
-                                    const thumbnailImg = iframeDoc.createElement('img');
-                                    thumbnailImg.src = thumbnailUrl;
-                                    thumbnailImg.style.cssText = `
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                        display: block;
-                                    `;
-                                    thumbnailImg.onerror = function() {
-                                        // Fallback if thumbnail fails to load
-                                        this.style.display = 'none';
-                                        placeholder.innerHTML = `
-                                            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94a3b8;">
-                                                <i class="fa-solid fa-video" style="font-size: 24px; color: #22d3ee;"></i>
-                                                <span>Video Preview</span>
-                                            </div>
-                                        `;
-                                    };
-                                    placeholder.innerHTML = '';
-                                    placeholder.appendChild(thumbnailImg);
-                                    
-                                    // Add play icon overlay
-                                    const playOverlay = iframeDoc.createElement('div');
-                                    playOverlay.style.cssText = `
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 50%;
-                                        transform: translate(-50%, -50%);
-                                        width: 60px;
-                                        height: 60px;
-                                        background: rgba(34, 211, 238, 0.8);
-                                        border-radius: 50%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        color: white;
-                                        font-size: 24px;
-                                        pointer-events: none;
-                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                                    `;
-                                    playOverlay.innerHTML = '<i class="fa-solid fa-play"></i>';
-                                    placeholder.appendChild(playOverlay);
-                                } else {
-                                    // Fallback if we can't extract video ID
-                                    placeholder.innerHTML = `
-                                        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94a3b8;">
-                                            <i class="fa-solid fa-video" style="font-size: 24px; color: #22d3ee;"></i>
-                                            <span>Video Preview</span>
-                                        </div>
-                                    `;
-                                }
-                            });
-                            
-                            // Ensure slide container dimensions are correct
-                            const slideContainer = iframeDoc.querySelector('.slide-container');
-                            if (slideContainer) {
-                                slideContainer.style.width = '1280px';
-                                slideContainer.style.height = '720px';
-                                slideContainer.style.maxWidth = '1280px';
-                                slideContainer.style.maxHeight = '720px';
-                                slideContainer.style.overflow = 'hidden';
-                            }
-                            
-                            // Ensure body/html dimensions
-                            iframeDoc.body.style.width = '1280px';
-                            iframeDoc.body.style.height = '720px';
-                            iframeDoc.body.style.maxWidth = '1280px';
-                            iframeDoc.body.style.maxHeight = '720px';
-                            iframeDoc.body.style.overflow = 'hidden';
-                            iframeDoc.documentElement.style.width = '1280px';
-                            iframeDoc.documentElement.style.height = '720px';
-                            iframeDoc.documentElement.style.maxWidth = '1280px';
-                            iframeDoc.documentElement.style.maxHeight = '720px';
-                            iframeDoc.documentElement.style.overflow = 'hidden';
                         }
                     } catch (e) {
-                        console.log('Could not access iframe for export:', e);
+                        console.log('Could not extract iframe content:', e);
                     }
                 }
             } else {
@@ -1117,6 +1007,19 @@
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;
                     }
+                    /* Hide iframes and show extracted content */
+                    .slide-wrapper iframe {
+                        display: none !important;
+                    }
+                    .extracted-content {
+                        display: block !important;
+                        width: 1280px !important;
+                        height: 720px !important;
+                    }
+                    .extracted-content .slide-container {
+                        width: 1280px !important;
+                        height: 720px !important;
+                    }
                 }
             `;
             document.head.appendChild(printStyle);
@@ -1143,39 +1046,25 @@
                     } else {
                         slide.classList.remove('active');
                     }
+
+                    // Remove extracted content and restore iframe
+                    const extractedContent = slide.querySelector('.extracted-content');
+                    if (extractedContent) {
+                        extractedContent.remove();
+                    }
+                    const iframe = slide.querySelector('iframe');
+                    if (iframe) {
+                        iframe.style.display = '';
+                        // Restore charts in iframe
+                        restoreChartsFromImages(iframe);
+                    }
                 });
-                
+
                 document.querySelector('.nav-controls').style.display = 'flex';
                 const pdfControls = document.querySelector('.pdf-controls');
                 if (pdfControls && pdfControls.classList.contains('visible')) {
                     pdfControls.style.display = 'block';
                 }
-                
-                // Restore video iframes and charts
-                document.querySelectorAll('.slide-wrapper').forEach((slide) => {
-                    const iframe = slide.querySelector('iframe');
-                    if (iframe) {
-                        try {
-                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                            if (iframeDoc) {
-                                // Restore video iframes
-                                const videoIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"], iframe[src*="youtube.com"], iframe[src*="youtu.be"]');
-                                videoIframes.forEach(videoIframe => {
-                                    videoIframe.style.display = '';
-                                });
-                                const placeholders = iframeDoc.querySelectorAll('.video-print-placeholder');
-                                placeholders.forEach(placeholder => {
-                                    placeholder.style.display = 'none';
-                                });
-
-                                // Restore ECharts from images
-                                restoreChartsFromImages(iframe);
-                            }
-                        } catch (e) {
-                            console.log('Could not restore videos/charts:', e);
-                        }
-                    }
-                });
                 
                 showSlide(currentSlideIndex);
             }, 1000);
