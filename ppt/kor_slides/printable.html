@@ -406,10 +406,11 @@
 
                     // When all iframes are loaded
                     if (loadedIframes === slides.length) {
-                        // Wait for charts to initialize
+                        // Wait longer for charts to fully initialize (ECharts needs time)
+                        loadingText.textContent = 'Initializing charts...';
                         setTimeout(() => {
                             loadingOverlay.style.display = 'none';
-                        }, 1500);
+                        }, 3000);
                     }
                 };
 
@@ -419,6 +420,267 @@
 
             // Build slide selector
             buildSlideSelector();
+        }
+
+        // Convert all canvas elements (charts) to images within iframe
+        async function convertChartsToImages(iframeDoc) {
+            const canvases = iframeDoc.querySelectorAll('canvas');
+            const convertedCanvases = [];
+
+            for (const canvas of canvases) {
+                try {
+                    // Skip if canvas is empty or has no content
+                    if (canvas.width === 0 || canvas.height === 0) continue;
+
+                    // Get canvas data URL
+                    const dataUrl = canvas.toDataURL('image/png');
+
+                    // Get computed styles and position
+                    const rect = canvas.getBoundingClientRect();
+                    const parentRect = canvas.parentElement.getBoundingClientRect();
+
+                    // Create an image element
+                    const img = iframeDoc.createElement('img');
+                    img.src = dataUrl;
+                    img.className = 'chart-export-image';
+                    img.style.width = canvas.offsetWidth + 'px';
+                    img.style.height = canvas.offsetHeight + 'px';
+                    img.style.display = 'block';
+
+                    // Store reference for cleanup
+                    convertedCanvases.push({ canvas, img });
+
+                    // Replace canvas with image in the DOM
+                    canvas.parentNode.insertBefore(img, canvas);
+                    canvas.setAttribute('data-export-hidden', 'true');
+                    canvas.style.visibility = 'hidden';
+                    canvas.style.position = 'absolute';
+                } catch (e) {
+                    console.warn('Could not convert canvas:', e);
+                }
+            }
+
+            return convertedCanvases;
+        }
+
+        // Restore canvases after export
+        function restoreCanvases(iframeDoc) {
+            // Remove temporary images
+            const tempImages = iframeDoc.querySelectorAll('.chart-export-image');
+            tempImages.forEach(img => img.remove());
+
+            // Restore hidden canvases
+            const hiddenCanvases = iframeDoc.querySelectorAll('canvas[data-export-hidden]');
+            hiddenCanvases.forEach(canvas => {
+                canvas.style.visibility = '';
+                canvas.style.position = '';
+                canvas.removeAttribute('data-export-hidden');
+            });
+        }
+
+        // Preload and convert external images to base64
+        async function convertExternalImages(iframeDoc) {
+            const images = iframeDoc.querySelectorAll('img');
+            const bgElements = iframeDoc.querySelectorAll('[style*="background-image"]');
+
+            // Convert img elements
+            for (const img of images) {
+                if (img.src && img.src.startsWith('http') && !img.src.startsWith(window.location.origin)) {
+                    try {
+                        const response = await fetch(img.src, { mode: 'cors' });
+                        const blob = await response.blob();
+                        const dataUrl = await new Promise((resolve) => {
+                            const reader = new FileReader();
+                            reader.onloadend = () => resolve(reader.result);
+                            reader.readAsDataURL(blob);
+                        });
+                        img.src = dataUrl;
+                    } catch (e) {
+                        console.warn('Could not convert image:', img.src, e);
+                    }
+                }
+            }
+        }
+
+        // Extract Google Drive file ID from various URL formats
+        function extractDriveFileId(url) {
+            // Format: /file/d/FILE_ID/preview or /file/d/FILE_ID/view
+            const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+            return match ? match[1] : null;
+        }
+
+        // Handle Google Drive iframes - replace with thumbnail images
+        async function handleVideoIframes(iframeDoc) {
+            // Find all Google Drive iframes
+            const driveIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"]');
+
+            for (const iframe of driveIframes) {
+                // Hide the iframe completely
+                iframe.style.display = 'none';
+                iframe.style.visibility = 'hidden';
+                iframe.style.position = 'absolute';
+                iframe.style.pointerEvents = 'none';
+
+                // Get parent container dimensions
+                const parent = iframe.parentElement;
+                const parentHeight = parent?.offsetHeight || 200;
+                const parentWidth = parent?.offsetWidth || 300;
+
+                // Extract file ID to create thumbnail URL
+                const fileId = extractDriveFileId(iframe.src);
+
+                // Check if there's already a fallback
+                const existingFallback = iframe.nextElementSibling;
+                if (existingFallback && (existingFallback.classList.contains('video-fallback') ||
+                    existingFallback.classList.contains('video-export-placeholder') ||
+                    existingFallback.id?.includes('video-placeholder'))) {
+                    // Hide existing fallback, we'll create a thumbnail instead
+                    existingFallback.style.display = 'none';
+                }
+
+                // Create thumbnail placeholder with Google Drive thumbnail
+                const placeholder = iframeDoc.createElement('div');
+                placeholder.className = 'video-export-placeholder';
+                placeholder.style.cssText = `
+                    display: flex !important;
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    min-height: ${parentHeight}px;
+                    background: #0f172a;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-sizing: border-box;
+                `;
+
+                if (fileId) {
+                    // Try multiple approaches to get the thumbnail
+                    const thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+
+                    // Try to fetch via CORS proxy or direct fetch
+                    let thumbnailDataUrl = null;
+
+                    // Method 1: Try direct fetch (works if running on same origin or CORS allowed)
+                    try {
+                        const response = await fetch(thumbnailUrl, {
+                            mode: 'cors',
+                            credentials: 'omit'
+                        });
+                        if (response.ok) {
+                            const blob = await response.blob();
+                            thumbnailDataUrl = await new Promise((resolve) => {
+                                const reader = new FileReader();
+                                reader.onloadend = () => resolve(reader.result);
+                                reader.readAsDataURL(blob);
+                            });
+                        }
+                    } catch (e) {
+                        console.log('Direct fetch failed, trying proxy...', e);
+                    }
+
+                    // Method 2: Try CORS proxies if direct fetch failed
+                    const corsProxies = [
+                        `https://api.allorigins.win/raw?url=${encodeURIComponent(thumbnailUrl)}`,
+                        `https://corsproxy.io/?${encodeURIComponent(thumbnailUrl)}`,
+                        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(thumbnailUrl)}`
+                    ];
+
+                    for (const proxyUrl of corsProxies) {
+                        if (thumbnailDataUrl) break;
+                        try {
+                            const response = await fetch(proxyUrl);
+                            if (response.ok) {
+                                const blob = await response.blob();
+                                // Check if it's actually an image
+                                if (blob.type.startsWith('image/')) {
+                                    thumbnailDataUrl = await new Promise((resolve) => {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => resolve(reader.result);
+                                        reader.readAsDataURL(blob);
+                                    });
+                                }
+                            }
+                        } catch (e) {
+                            console.log('Proxy fetch failed:', proxyUrl, e);
+                        }
+                    }
+
+                    if (thumbnailDataUrl) {
+                        // Successfully got thumbnail as base64
+                        placeholder.innerHTML = `
+                            <img src="${thumbnailDataUrl}"
+                                 style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; pointer-events: none;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        `;
+                    } else {
+                        // Fallback to styled placeholder
+                        placeholder.innerHTML = `
+                            <div style="display: flex; position: absolute; top: 0; left: 0; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 1));">
+                                <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(34, 211, 238, 0.15); border: 3px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#22d3ee">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </div>
+                                <div style="font-weight: 600; color: #e2e8f0; font-size: 14px;">Demo Video</div>
+                                <div style="color: #64748b; font-size: 11px; margin-top: 4px;">View in presentation</div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    // Fallback if we can't extract file ID
+                    placeholder.innerHTML = `
+                        <div style="display: flex; position: absolute; top: 0; left: 0; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(34, 211, 238, 0.2); border: 2px solid rgba(34, 211, 238, 0.5); display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#22d3ee">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                            <div style="font-weight: 600; color: #e2e8f0;">Video</div>
+                        </div>
+                    `;
+                }
+
+                iframe.parentNode.insertBefore(placeholder, iframe);
+            }
+
+            // Wait for thumbnail images to load
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Also handle Google Drive thumbnail images that might fail
+            const driveImages = iframeDoc.querySelectorAll('img[src*="drive.google.com"]');
+            driveImages.forEach(img => {
+                // Check if image failed to load
+                if (!img.complete || img.naturalWidth === 0) {
+                    img.style.display = 'none';
+                    const fallback = img.nextElementSibling;
+                    if (fallback) {
+                        fallback.style.display = 'flex';
+                    }
+                }
+            });
+        }
+
+        // Restore video iframes after export
+        function restoreVideoIframes(iframeDoc) {
+            // Restore Google Drive iframes
+            const driveIframes = iframeDoc.querySelectorAll('iframe[src*="drive.google.com"]');
+            driveIframes.forEach(iframe => {
+                iframe.style.display = '';
+            });
+
+            // Hide fallbacks
+            const fallbacks = iframeDoc.querySelectorAll('.video-fallback, [id*="video-placeholder"]');
+            fallbacks.forEach(fb => {
+                fb.style.display = 'none';
+            });
+
+            // Remove created placeholders
+            const placeholders = iframeDoc.querySelectorAll('.video-export-placeholder');
+            placeholders.forEach(p => p.remove());
         }
 
         // Export selected slides to PDF using html2canvas
@@ -458,8 +720,8 @@
 
                     if (!iframe) continue;
 
-                    progressText.textContent = `Rendering slide ${i + 1}/${selectedIndices.length}: ${slides[slideIndex].title}`;
-                    progressFill.style.width = `${((i + 0.5) / selectedIndices.length) * 100}%`;
+                    progressText.textContent = `Preparing slide ${i + 1}/${selectedIndices.length}: ${slides[slideIndex].title}`;
+                    progressFill.style.width = `${((i + 0.3) / selectedIndices.length) * 100}%`;
 
                     try {
                         // Access iframe content
@@ -473,9 +735,23 @@
 
                         // Scroll iframe into view to ensure it's rendered
                         iframe.scrollIntoView({ behavior: 'instant' });
+                        await new Promise(resolve => setTimeout(resolve, 200));
+
+                        // Convert charts (canvas elements) to images BEFORE html2canvas
+                        progressText.textContent = `Converting charts in slide ${i + 1}/${selectedIndices.length}...`;
+                        await convertChartsToImages(iframeDoc);
+
+                        // Handle video iframes - replace with thumbnails
+                        progressText.textContent = `Loading video thumbnails for slide ${i + 1}/${selectedIndices.length}...`;
+                        await handleVideoIframes(iframeDoc);
+
+                        // Wait for thumbnails and chart images to render
                         await new Promise(resolve => setTimeout(resolve, 300));
 
-                        // Capture slide using html2canvas
+                        progressText.textContent = `Rendering slide ${i + 1}/${selectedIndices.length}: ${slides[slideIndex].title}`;
+                        progressFill.style.width = `${((i + 0.6) / selectedIndices.length) * 100}%`;
+
+                        // Capture slide using html2canvas with improved settings
                         const canvas = await html2canvas(slideContainer, {
                             width: 1280,
                             height: 720,
@@ -485,11 +761,79 @@
                             backgroundColor: '#0f172a',
                             logging: false,
                             foreignObjectRendering: false,
+                            imageTimeout: 15000,
+                            removeContainer: true,
                             onclone: (clonedDoc, element) => {
                                 // Ensure dimensions are correct
                                 element.style.width = '1280px';
                                 element.style.height = '720px';
                                 element.style.overflow = 'hidden';
+                                element.style.transform = 'none';
+
+                                // FIX: Handle gradient text (text-transparent bg-clip-text)
+                                // html2canvas cannot render this, so convert to solid color
+                                const gradientTexts = element.querySelectorAll('.text-transparent, [class*="bg-clip-text"]');
+                                gradientTexts.forEach(el => {
+                                    // Remove the transparent text and background-clip
+                                    el.style.color = '#22d3ee'; // Use cyan color instead
+                                    el.style.backgroundClip = 'unset';
+                                    el.style.webkitBackgroundClip = 'unset';
+                                    el.style.backgroundImage = 'none';
+                                    el.classList.remove('text-transparent');
+                                });
+
+                                // Handle background images that use external URLs
+                                const bgOverlay = element.querySelector('.bg-overlay');
+                                if (bgOverlay) {
+                                    // Remove problematic external background images
+                                    bgOverlay.style.backgroundImage = 'none';
+                                    bgOverlay.style.backgroundColor = 'rgba(15, 23, 42, 0.3)';
+                                }
+                                const bgPattern = element.querySelector('.bg-pattern');
+                                if (bgPattern) {
+                                    bgPattern.style.backgroundImage = 'none';
+                                    bgPattern.style.backgroundColor = 'rgba(15, 23, 42, 0.15)';
+                                }
+
+                                // Handle Google Drive iframes in cloned doc - they can't be captured
+                                const driveIframes = element.querySelectorAll('iframe[src*="drive.google.com"]');
+                                driveIframes.forEach(iframe => {
+                                    // Hide iframe completely
+                                    iframe.style.display = 'none';
+                                    iframe.style.visibility = 'hidden';
+
+                                    // Make sure fallback is visible
+                                    const fallback = iframe.nextElementSibling;
+                                    if (fallback && (fallback.classList.contains('video-fallback') ||
+                                        fallback.classList.contains('video-export-placeholder') ||
+                                        fallback.id?.includes('video-placeholder'))) {
+                                        fallback.style.display = 'flex';
+                                        fallback.style.visibility = 'visible';
+                                    }
+                                });
+
+                                // Also find ALL video-fallback elements and make them visible
+                                const allFallbacks = element.querySelectorAll('.video-fallback, [id*="video-placeholder"]');
+                                allFallbacks.forEach(fb => {
+                                    // Check if parent has a Google Drive iframe
+                                    const parentDiv = fb.parentElement;
+                                    const hasGDriveIframe = parentDiv?.querySelector('iframe[src*="drive.google.com"]');
+                                    if (hasGDriveIframe) {
+                                        fb.style.display = 'flex';
+                                        fb.style.visibility = 'visible';
+                                    }
+                                });
+
+                                // Handle Google Drive images that may fail CORS
+                                const driveImages = element.querySelectorAll('img[src*="drive.google.com"]');
+                                driveImages.forEach(img => {
+                                    // Show fallback for Google Drive images
+                                    const fallback = img.nextElementSibling;
+                                    if (fallback) {
+                                        img.style.display = 'none';
+                                        fallback.style.display = 'flex';
+                                    }
+                                });
                             }
                         });
 
@@ -504,6 +848,10 @@
                         pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720);
 
                         progressFill.style.width = `${((i + 1) / selectedIndices.length) * 100}%`;
+
+                        // Restore canvases and video iframes for preview
+                        restoreCanvases(iframeDoc);
+                        restoreVideoIframes(iframeDoc);
 
                     } catch (slideError) {
                         console.error(`Error capturing slide ${slideIndex}:`, slideError);

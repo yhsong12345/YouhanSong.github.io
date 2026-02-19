@@ -155,6 +155,13 @@
             .print-button {
                 display: none;
             }
+            /* Hide iframes and show fallback */
+            iframe {
+                display: none !important;
+            }
+            .video-fallback {
+                display: block !important;
+            }
         }
         
         /* Print Button */
@@ -259,8 +266,11 @@
 <img src="../../images/gumi/gumi_3.jpg" alt="Demo Image" class="demo-media rounded-lg"/>
 </div>
 <!-- Video -->
-<div class="glass-panel p-1.5 overflow-hidden rounded-lg flex items-center justify-center">
-<iframe src="https://drive.google.com/file/d/1hlmGAmSYDIjCiRtzGCk8RZMCVrSTRINi/preview" class="demo-media rounded-lg border-0" allow="autoplay" allowfullscreen></iframe>
+<div class="glass-panel p-1.5 overflow-hidden rounded-lg flex items-center justify-center" style="position: relative; height: 200px;">
+<iframe src="https://drive.google.com/file/d/1hlmGAmSYDIjCiRtzGCk8RZMCVrSTRINi/preview" class="w-full h-full rounded-lg border-0" allow="autoplay" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe>
+<div class="video-fallback" style="display: none; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border-radius: 0.5rem; overflow: hidden;">
+    <img src="https://drive.google.com/thumbnail?id=1hlmGAmSYDIjCiRtzGCk8RZMCVrSTRINi&sz=w1000" alt="Demo Video" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
+</div>
 </div>
 </div>
 </div>
