@@ -836,239 +836,130 @@
             return;
         }
 
-        // Hide controls
-        document.querySelector('.nav-controls').style.display = 'none';
-        document.querySelector('.pdf-controls').style.display = 'none';
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank', 'width=1280,height=720');
 
-        // Process each selected slide - extract iframe content and embed directly
-        document.querySelectorAll('.slide-wrapper').forEach((slide, index) => {
-            if (slideIndices.includes(index)) {
-                slide.style.display = 'block';
-                slide.style.position = 'relative';
-                slide.style.pageBreakAfter = 'always';
-                slide.classList.remove('active');
+        // Build HTML content for print window
+        let htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>PDF Export</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0f172a;
+        }
+        .slide-page {
+            width: 1280px;
+            height: 720px;
+            page-break-after: always;
+            page-break-inside: avoid;
+            overflow: hidden;
+            position: relative;
+        }
+        .slide-page:last-child {
+            page-break-after: auto;
+        }
+        .slide-page iframe {
+            width: 1280px;
+            height: 720px;
+            border: none;
+        }
+        @media print {
+            body { background: #0f172a; }
+            .slide-page {
+                width: 1280px !important;
+                height: 720px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+`;
 
-                const iframe = slide.querySelector('iframe');
-                if (iframe) {
-                    try {
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                        if (iframeDoc) {
-                            // Convert ECharts to images BEFORE extracting content
-                            convertChartsToImages(iframe);
+        // Add each selected slide
+        slideIndices.forEach((index, i) => {
+            const slideFile = slideFiles[index];
+            htmlContent += `
+    <div class="slide-page">
+        <iframe src="${slideFile}" id="slide-frame-${i}"></iframe>
+    </div>
+`;
+        });
 
-                            // Wait a bit for chart images to render
-                            setTimeout(() => {}, 100);
+        htmlContent += `
+    <script>
+        // Wait for all iframes to load before printing
+        let loadedCount = 0;
+        const totalFrames = ${slideIndices.length};
 
-                            // Extract the slide content from iframe
-                            const slideContent = iframeDoc.querySelector('.slide-container');
-                            if (slideContent) {
-                                // Clone the content
-                                const clonedContent = slideContent.cloneNode(true);
-
-                                // Create a container for extracted content
-                                let extractedDiv = slide.querySelector('.extracted-content');
-                                if (!extractedDiv) {
-                                    extractedDiv = document.createElement('div');
-                                    extractedDiv.className = 'extracted-content';
-                                    extractedDiv.style.cssText = `
-                                        width: 1280px;
-                                        height: 720px;
-                                        position: relative;
-                                        overflow: hidden;
-                                        background-color: #0f172a;
-                                    `;
-                                    slide.appendChild(extractedDiv);
-                                }
-
-                                // Copy all styles from iframe
-                                const iframeStyles = iframeDoc.querySelectorAll('style, link[rel="stylesheet"]');
-                                iframeStyles.forEach(style => {
-                                    if (style.tagName === 'STYLE') {
-                                        const newStyle = document.createElement('style');
-                                        newStyle.textContent = style.textContent;
-                                        extractedDiv.appendChild(newStyle);
+        function checkAllLoaded() {
+            loadedCount++;
+            if (loadedCount >= totalFrames) {
+                // Wait additional time for charts to render
+                setTimeout(() => {
+                    // Convert charts to images in each iframe
+                    document.querySelectorAll('iframe').forEach(iframe => {
+                        try {
+                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                            const iframeWin = iframe.contentWindow;
+                            if (iframeDoc && iframeWin && iframeWin.echarts) {
+                                const chartContainers = iframeDoc.querySelectorAll('[id*="chart"], [id*="Chart"]');
+                                chartContainers.forEach(container => {
+                                    const chartInstance = iframeWin.echarts.getInstanceByDom(container);
+                                    if (chartInstance) {
+                                        const dataURL = chartInstance.getDataURL({
+                                            type: 'png',
+                                            pixelRatio: 2,
+                                            backgroundColor: 'transparent'
+                                        });
+                                        const img = iframeDoc.createElement('img');
+                                        img.src = dataURL;
+                                        img.style.cssText = 'width:100%;height:100%;object-fit:contain;position:absolute;top:0;left:0;z-index:10;';
+                                        container.style.position = 'relative';
+                                        const canvas = container.querySelector('canvas');
+                                        if (canvas) canvas.style.display = 'none';
+                                        container.appendChild(img);
                                     }
                                 });
-
-                                extractedDiv.appendChild(clonedContent);
-
-                                // Hide the iframe
-                                iframe.style.display = 'none';
                             }
-                        }
-                    } catch (e) {
-                        console.log('Could not extract iframe content:', e);
-                    }
-                }
-            } else {
-                slide.style.display = 'none';
+                        } catch(e) { console.log('Chart conversion error:', e); }
+                    });
+
+                    // Print after chart conversion
+                    setTimeout(() => {
+                        window.print();
+                    }, 500);
+                }, 1500);
             }
+        }
+
+        document.querySelectorAll('iframe').forEach(iframe => {
+            iframe.onload = checkAllLoaded;
         });
-        
-        // Change presentation wrapper layout for printing
-        const presentationWrapper = document.querySelector('.presentation-wrapper');
-        const originalWrapperStyle = presentationWrapper.style.cssText;
-        presentationWrapper.style.cssText = `
-            display: block !important;
-            width: 1280px !important;
-            height: auto !important;
-            position: static !important;
-            align-items: stretch !important;
-            justify-content: flex-start !important;
-        `;
-        
-        // Wait for iframes to fully load and charts to render
-        setTimeout(() => {
-            // Add print-specific styles
-            const printStyle = document.createElement('style');
-            printStyle.id = 'pdf-export-styles';
-            printStyle.textContent = `
-                @media print {
-                    @page {
-                        size: 1280px 720px;
-                        margin: 0;
-                    }
-                    html, body {
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        width: 1280px !important;
-                        height: auto !important;
-                        overflow: visible !important;
-                        background: #0f172a !important;
-                    }
-                    .presentation-wrapper {
-                        display: block !important;
-                        width: 1280px !important;
-                        height: auto !important;
-                        position: static !important;
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        overflow: visible !important;
-                        align-items: stretch !important;
-                        justify-content: flex-start !important;
-                    }
-                    .slide-wrapper {
-                        width: 1280px !important;
-                        height: 720px !important;
-                        max-width: 1280px !important;
-                        max-height: 720px !important;
-                        display: block !important;
-                        page-break-after: always !important;
-                        page-break-inside: avoid !important;
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        overflow: hidden !important;
-                        position: relative !important;
-                    }
-                    .slide-wrapper:last-child {
-                        page-break-after: auto !important;
-                    }
-                    .slide-wrapper iframe {
-                        width: 1280px !important;
-                        height: 720px !important;
-                        max-width: 1280px !important;
-                        max-height: 720px !important;
-                        border: none !important;
-                        overflow: hidden !important;
-                    }
-                    * {
-                        -webkit-print-color-adjust: exact !important;
-                        print-color-adjust: exact !important;
-                        color-adjust: exact !important;
-                    }
-                    canvas {
-                        max-width: 100% !important;
-                        height: auto !important;
-                    }
-                    /* Hide video iframes in print */
-                    iframe[src*="drive.google.com"],
-                    iframe[src*="youtube.com"],
-                    iframe[src*="youtu.be"] {
-                        display: none !important;
-                    }
-                    /* Show video thumbnails */
-                    .video-print-placeholder {
-                        display: flex !important;
-                    }
-                    .video-print-placeholder img {
-                        width: 100% !important;
-                        height: 100% !important;
-                        object-fit: cover !important;
-                        display: block !important;
-                    }
-                    /* Show chart export images */
-                    .chart-export-image {
-                        display: block !important;
-                        visibility: visible !important;
-                        opacity: 1 !important;
-                    }
-                    /* Ensure images render in PDF */
-                    img {
-                        -webkit-print-color-adjust: exact !important;
-                        print-color-adjust: exact !important;
-                    }
-                    /* Hide iframes and show extracted content */
-                    .slide-wrapper iframe {
-                        display: none !important;
-                    }
-                    .extracted-content {
-                        display: block !important;
-                        width: 1280px !important;
-                        height: 720px !important;
-                    }
-                    .extracted-content .slide-container {
-                        width: 1280px !important;
-                        height: 720px !important;
-                    }
-                }
-            `;
-            document.head.appendChild(printStyle);
+    </script>
+</body>
+</html>
+`;
 
-            // Trigger print
-            window.print();
-            
-            // Restore controls after print dialog closes
-            setTimeout(() => {
-                const printStyleEl = document.getElementById('pdf-export-styles');
-                if (printStyleEl) {
-                    document.head.removeChild(printStyleEl);
-                }
-                
-                // Restore presentation wrapper style
-                presentationWrapper.style.cssText = originalWrapperStyle;
-                
-                // Restore all slides to their original state
-                document.querySelectorAll('.slide-wrapper').forEach((slide, index) => {
-                    slide.style.display = '';
-                    slide.style.pageBreakAfter = '';
-                    if (index === currentSlideIndex) {
-                        slide.classList.add('active');
-                    } else {
-                        slide.classList.remove('active');
-                    }
-
-                    // Remove extracted content and restore iframe
-                    const extractedContent = slide.querySelector('.extracted-content');
-                    if (extractedContent) {
-                        extractedContent.remove();
-                    }
-                    const iframe = slide.querySelector('iframe');
-                    if (iframe) {
-                        iframe.style.display = '';
-                        // Restore charts in iframe
-                        restoreChartsFromImages(iframe);
-                    }
-                });
-
-                document.querySelector('.nav-controls').style.display = 'flex';
-                const pdfControls = document.querySelector('.pdf-controls');
-                if (pdfControls && pdfControls.classList.contains('visible')) {
-                    pdfControls.style.display = 'block';
-                }
-                
-                showSlide(currentSlideIndex);
-            }, 1000);
-        }, 1500);
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
     }
     
     // Toggle PDF controls
