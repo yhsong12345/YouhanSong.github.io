@@ -208,22 +208,21 @@
 <!-- Key Strengths -->
 <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-4">
 <h3 class="text-lg font-bold text-white mb-4 font-['Montserrat']">Key Strengths</h3>
-<div class="highlight-item">
-<p class="text-sm font-bold text-cyan-300 mb-1">End-to-End Pipeline</p>
-<p class="text-xs text-gray-300">데이터 전처리부터 모델 학습, 추론 최적화까지 전주기 개발 역량</p>
+<div class="highlight-item" style="border-left-color: #10b981;">
+<p class="text-sm font-bold text-green-300 mb-1">Computer Vision</p>
+<p class="text-xs text-gray-300">Face Recognition, OCR, Detection 등 95%+ 정확도 달성</p>
 </div>
-<div class="highlight-item" style="border-left-color: #818cf8;">
-<p class="text-sm font-bold text-indigo-300 mb-1">On-Device AI & AMR</p>
-<p class="text-xs text-gray-300">로컬 서버 등 자원 제약 환경에서의 모델 경량화 및 배포</p>
-<p class="text-xs text-gray-300">Jetson 기반 ROS 자율주행 및 SLAM/Navigation 시스템 구현</p>
+<div class="highlight-item" style="border-left-color: #3b82f6;">
+<p class="text-sm font-bold text-blue-300 mb-1">LLM Development</p>
+<p class="text-xs text-gray-300">한국어 LLM 개발 및 Instruction Tuning 연구</p>
 </div>
-<div class="highlight-item" style="border-left-color: #2dd4bf;">
-<p class="text-sm font-bold text-teal-300 mb-1">Problem Solving</p>
-<p class="text-xs text-gray-300">현장 이슈(CCTV 화질, 조명 등)에 대응하는 강인한 모델 설계</p>
+<div class="highlight-item" style="border-left-color: #14b8a6;">
+<p class="text-sm font-bold text-teal-300 mb-1">Robotics & AMR</p>
+<p class="text-xs text-gray-300">ROS/SLAM 자율주행 및 Jetson 임베디드 배포</p>
 </div>
-<div class="highlight-item" style="border-left-color: #f472b6; margin-bottom: 0;">
-<p class="text-sm font-bold text-pink-300 mb-1">Robust Engineering</p>
-<p class="text-xs text-gray-300">C++ 로봇 제어 및 다양한 환경(CCTV, 제조현장)의 비전 문제 해결</p>
+<div class="highlight-item" style="border-left-color: #22d3ee; margin-bottom: 0;">
+<p class="text-sm font-bold text-cyan-300 mb-1">VLA & MARL</p>
+<p class="text-xs text-gray-300">Embodied AI 및 Multi-Agent 협업 시스템 연구</p>
 </div>
 </div>
 </div>
@@ -330,11 +329,11 @@
                 radar: {
                     indicator: [
                         { name: 'Computer\nVision', max: 100 },
-                        { name: 'LLM\n(NLP)', max: 100 },
-                        { name: 'Auto\nDriving', max: 100 },
-                        { name: 'Robotics', max: 100 },
-                        { name: 'MLOps', max: 100 },
-                        { name: 'Data\nEng.', max: 100 }
+                        { name: 'LLM /\nVLM', max: 100 },
+                        { name: 'Robotics /\nAMR', max: 100 },
+                        { name: 'Autonomous\nDriving', max: 100 },
+                        { name: 'VLA /\nMARL', max: 100 },
+                        { name: 'MLOps', max: 100 }
                     ],
                     shape: 'circle',
                     splitNumber: 4,
@@ -370,7 +369,7 @@
                         type: 'radar',
                         data: [
                             {
-                                value: [95, 85, 90, 80, 75, 85],
+                                value: [95, 88, 85, 90, 85, 80],
                                 name: 'Skill Level',
                                 areaStyle: {
                                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="ko">
+
+<html lang="ko">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Key Achievements Summary</title>
+<title>Project Case Study: VLA Model</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
         body {
             margin: 0;
@@ -37,259 +37,233 @@
             opacity: 0.05;
             z-index: 0;
         }
-
-        /* Glassmorphism Cards */
         .glass-panel {
             background-color: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .stat-card {
-            background-color: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(148, 163, 184, 0.1);
             border-radius: 16px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-panel-dark {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+        }
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+        }
+        .tech-badge i { margin-right: 4px; }
+        .process-step {
             position: relative;
-            overflow: hidden;
+            padding: 12px 16px;
+            border-left: 2px solid rgba(34, 211, 238, 0.3);
+            margin-left: 10px;
         }
-        .stat-card:hover {
-            border-color: rgba(34, 211, 238, 0.5);
-            transform: translateY(-2px);
-            background-color: rgba(30, 41, 59, 0.8);
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 18px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            border: 2px solid #22d3ee;
         }
-
-        /* Typography */
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-
-        /* Accents */
-        .accent-icon-bg {
+        .highlight-text { color: #38bdf8; font-weight: 700; }
+        .arrow-right {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            font-size: 28px;
-        }
-
-        .glow-text {
-            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
-        }
-
-        /* Radar Chart Container */
-        .chart-container {
-            width: 100%;
-            height: 320px;
-        }
-
-        /* Decorative Elements */
-        .corner-accent {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.4;
-            pointer-events: none;
+            color: rgba(148, 163, 184, 0.5);
         }
     </style>
 </head>
 <body>
 <div class="slide-container">
-<!-- Background Elements -->
+<!-- Background -->
 <div class="bg-overlay"></div>
-<div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-<div class="absolute -left-20 bottom-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-purple-900/20 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+
 <!-- Header -->
-<div class="relative z-10 px-12 pt-10 mb-6">
-<div class="flex items-center space-x-3 text-cyan-400 mb-2">
-<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10">Summary</span>
-<span class="text-xs text-gray-400 uppercase tracking-widest">Performance &amp; Impact</span>
-</div>
-<h1 class="text-4xl font-black text-white font-montserrat tracking-tight">Key Achievements</h1>
-<p class="text-lg text-gray-400 mt-2 font-light">9 Major Projects Delivered Across LLM, CV, and Robotics</p>
-</div>
-<!-- Main Content Grid -->
-<div class="relative z-10 flex-1 px-12 pb-10 grid grid-cols-12 gap-8">
-<!-- Left Column: Radar Chart & Competency Summary -->
-<div class="col-span-4 flex flex-col gap-6">
-<div class="glass-panel p-6 flex-1 flex flex-col items-center justify-center relative overflow-hidden">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
-<h3 class="text-lg font-bold text-white mb-2 font-montserrat w-full text-center">Research Capability</h3>
-<p class="text-xs text-gray-400 mb-4 text-center">Core Technical Strengths Analysis</p>
-<div class="chart-container" id="radarChart"></div>
-<!-- Bottom Tags -->
-<div class="w-full flex flex-wrap justify-center gap-2 mt-4">
-<span class="px-3 py-1 rounded-full bg-slate-800 text-cyan-300 text-xs font-bold border border-cyan-500/20">Full-Stack AI</span>
-<span class="px-3 py-1 rounded-full bg-slate-800 text-blue-300 text-xs font-bold border border-blue-500/20">Problem Solver</span>
-</div>
-</div>
-</div>
-<!-- Right Column: 4 Key Metrics Cards -->
-<div class="col-span-8 grid grid-cols-2 gap-5">
-<!-- Card 1: Projects -->
-<div class="stat-card p-6 flex flex-col justify-between group">
-<div class="corner-accent bg-blue-500 -top-4 -right-4"></div>
-<div class="flex justify-between items-start">
-<div class="accent-icon-bg bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300">
-<i class="fa-solid fa-list-check"></i>
-</div>
-<span class="text-5xl font-black text-white font-montserrat glow-text">9</span>
-</div>
+<div class="relative z-10 px-8 pt-5 mb-4 flex justify-between items-start">
 <div>
-<h3 class="text-xl font-bold text-white mb-1">Projects Delivered</h3>
-<p class="text-sm text-gray-400 leading-snug">
-                            LLM, CV, Robotics, AMR 등 다양한 도메인에서 9개의 연구 및 개발 프로젝트 완수
-                        </p>
+<div class="flex items-center space-x-3 text-cyan-400 mb-2">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10">Personal Project</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Vision-Language-Action Model</span>
 </div>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">Universal VLA Model for Heterogeneous Embodiments</h1>
+<div class="flex items-center space-x-4">
+<p class="text-lg text-gray-300 font-light">휴머노이드, 자율주행 차량, 드론을 위한 통합 VLA 프레임워크</p>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-purple-300 font-medium bg-purple-900/30 px-3 py-1 rounded-full border border-purple-500/30">Embodied AI</span>
 </div>
-<!-- Card 2: Accuracy -->
-<div class="stat-card p-6 flex flex-col justify-between group">
-<div class="corner-accent bg-green-500 -top-4 -right-4"></div>
-<div class="flex justify-between items-start">
-<div class="accent-icon-bg bg-green-500/10 text-green-400 border border-green-500/20 group-hover:bg-green-500/20 group-hover:scale-110 transition-all duration-300">
-<i class="fa-solid fa-crosshairs"></i>
 </div>
 <div class="text-right">
-<span class="text-5xl font-black text-white font-montserrat glow-text">95</span>
-<span class="text-2xl font-bold text-green-400">%+</span>
-</div>
-</div>
-<div>
-<h3 class="text-xl font-bold text-white mb-1">High Accuracy</h3>
-<p class="text-sm text-gray-400 leading-snug">
-                            얼굴인식, OCR, 객체 탐지 모델 등 주요 프로젝트 평균 정확도 95% 이상 달성
-                        </p>
-</div>
-</div>
-<!-- Card 3: Global Experience -->
-<div class="stat-card p-6 flex flex-col justify-between group">
-<div class="corner-accent bg-purple-500 -top-4 -right-4"></div>
-<div class="flex justify-between items-start">
-<div class="accent-icon-bg bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300">
-<i class="fa-solid fa-earth-americas"></i>
-</div>
-<div class="flex flex-col items-end">
-<span class="text-4xl font-black text-white font-montserrat glow-text">4</span>
-<span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Countries</span>
-</div>
-</div>
-<div>
-<h3 class="text-xl font-bold text-white mb-1">Global Scale</h3>
-<p class="text-sm text-gray-400 leading-snug">
-                            미국(AVA), 베트남(SEEU Track), 탄자니아(Smart Gate) 등 글로벌 프로젝트 경험
-                        </p>
-</div>
-</div>
-<!-- Card 4: Tech Convergence -->
-<div class="stat-card p-6 flex flex-col justify-between group">
-<div class="corner-accent bg-amber-500 -top-4 -right-4"></div>
-<div class="flex justify-between items-start">
-<div class="accent-icon-bg bg-amber-500/10 text-amber-400 border border-amber-500/20 group-hover:bg-amber-500/20 group-hover:scale-110 transition-all duration-300">
-<i class="fa-solid fa-brain"></i>
-</div>
-<div class="flex flex-col items-end">
-<span class="text-sm px-2 py-1 rounded bg-amber-500/20 text-amber-300 font-bold mb-1">LLM</span>
-<span class="text-sm px-2 py-1 rounded bg-amber-500/20 text-amber-300 font-bold">Robotics</span>
-</div>
-</div>
-<div>
-<h3 class="text-xl font-bold text-white mb-1">Tech Convergence</h3>
-<p class="text-sm text-gray-400 leading-snug">
-                            LLM의 추론 능력과 CV/Robotics의 실행 능력을 결합한 융합형 AI 연구 역량
-                        </p>
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
+<p class="text-sm font-medium text-white">2026.01 - Present</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var chartDom = document.getElementById('radarChart');
-            var myChart = echarts.init(chartDom);
-            var option;
 
-            option = {
-                color: ['#22d3ee'],
-                radar: {
-                    indicator: [
-                        { name: 'Computer Vision', max: 100 },
-                        { name: 'LLM / NLP', max: 100 },
-                        { name: 'Robotics\n& AMR', max: 100 },
-                        { name: 'Optimization', max: 100 },
-                        { name: 'MLOps', max: 100 },
-                        { name: 'Data Pipeline', max: 100 }
-                    ],
-                    radius: '60%',
-                    center: ['50%', '50%'],
-                    shape: 'circle',
-                    splitNumber: 4,
-                    axisName: {
-                        color: '#94a3b8',
-                        fontSize: 10,
-                        fontWeight: 'bold',
-                        fontFamily: 'Montserrat'
-                    },
-                    nameGap: 8,
-                    splitLine: {
-                        lineStyle: {
-                            color: [
-                                'rgba(148, 163, 184, 0.1)',
-                                'rgba(148, 163, 184, 0.2)',
-                                'rgba(148, 163, 184, 0.2)',
-                                'rgba(148, 163, 184, 0.2)'
-                            ].reverse()
-                        }
-                    },
-                    splitArea: {
-                        show: false
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: 'rgba(148, 163, 184, 0.2)'
-                        }
-                    }
-                },
-                series: [
-                    {
-                        name: 'Capability',
-                        type: 'radar',
-                        data: [
-                            {
-                                value: [98, 90, 88, 92, 85, 95],
-                                name: 'Skill Level',
-                                areaStyle: {
-                                    color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
-                                        { offset: 0, color: 'rgba(34, 211, 238, 0.1)' },
-                                        { offset: 1, color: 'rgba(34, 211, 238, 0.6)' }
-                                    ])
-                                },
-                                lineStyle: {
-                                    width: 2,
-                                    color: '#22d3ee'
-                                },
-                                itemStyle: {
-                                    color: '#fff',
-                                    borderColor: '#22d3ee',
-                                    borderWidth: 2
-                                }
-                            }
-                        ]
-                    }
-                ]
-            };
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 px-6 pb-4 gap-4">
+<!-- Left Panel: Project Overview & Specs -->
+<div class="w-1/3 flex flex-col gap-4">
+<!-- Overview Card -->
+<div class="glass-panel p-4 flex-1">
+<h3 class="text-lg font-bold text-white mb-3 flex items-center">
+<i class="fa-solid fa-crosshairs text-cyan-400 mr-2"></i>
+Project Goal
+</h3>
+<p class="text-sm text-gray-300 leading-relaxed mb-4">
+VLM(Vision-Language Model) 기반 <span class="highlight-text">VLA(Vision-Language-Action)</span> 모델 개발. 단일 모델로 휴머노이드, 드론, 자율주행 차량 등 <span class="highlight-text">다양한 로봇 플랫폼</span>을 통합 제어하는 Embodied AI 시스템 구현
+</p>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Key Responsibilities</h4>
+<ul class="space-y-2 text-sm text-gray-300 mb-4">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">VLM 아키텍처 설계 (SigLIP/CLIP + Qwen2/LLaMA)</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">Action Head 설계 (Diffusion, ACT, Flow Matching)</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">7-Stage 학습 파이프라인 구축 (BC → Offline/Online RL)</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">World Model (RSSM) 기반 Imagination Planning</span>
+</li>
+</ul>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Tech Stack</h4>
+<div class="flex flex-wrap gap-1 mb-4">
+<span class="tech-badge"><i class="fa-brands fa-python text-blue-400"></i> Python</span>
+<span class="tech-badge"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</span>
+<span class="tech-badge"><i class="fa-solid fa-brain text-pink-400"></i> Qwen2/LLaMA</span>
+<span class="tech-badge"><i class="fa-solid fa-eye text-cyan-400"></i> SigLIP/CLIP</span>
+</div>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Environment</h4>
+<div class="flex flex-wrap gap-1">
+<span class="tech-badge"><i class="fa-solid fa-server text-green-400"></i> H100 GPU</span>
+<span class="tech-badge"><i class="fa-solid fa-cube text-green-400"></i> Isaac Sim</span>
+<span class="tech-badge"><i class="fa-solid fa-car text-red-400"></i> CARLA</span>
+<span class="tech-badge"><i class="fa-solid fa-plane text-sky-400"></i> AirSim</span>
+</div>
+</div>
+</div>
 
-            myChart.setOption(option);
+<!-- Right Panel: Technical Details & Process -->
+<div class="w-2/3 flex flex-col gap-4">
+<!-- Architecture Diagram Section -->
+<div class="glass-panel-dark p-4">
+<h3 class="text-lg font-bold text-white mb-3 font-['Montserrat']">VLA Training Pipeline</h3>
+<div class="flex items-stretch justify-between gap-2 text-xs">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-cyan-900/20 border border-cyan-500/30 rounded-t-lg p-2 text-center text-cyan-300 font-bold">
+VLM Training
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-eye mr-1"></i> Vision-Language</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1 text-[11px]">
+<li>SigLIP/CLIP Vision Encoder</li>
+<li>MLP/Perceiver Projector</li>
+<li>Qwen2 LLM (LoRA)</li>
+<li>Instruction Tuning</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xl"></i>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-purple-900/20 border border-purple-500/30 rounded-t-lg p-2 text-center text-purple-300 font-bold">
+VLA Fine-tuning
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-robot mr-1"></i> Action Head</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1 text-[11px]">
+<li>Diffusion (DiT) - 휴머노이드</li>
+<li>ACT (Chunking) - 드론/AV</li>
+<li>Flow Matching - 빠른 샘플링</li>
+<li>Behavior Cloning</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xl"></i>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-green-900/20 border border-green-500/30 rounded-t-lg p-2 text-center text-green-300 font-bold">
+RL & World Model
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-brain mr-1"></i> Optimization</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1 text-[11px]">
+<li>Offline RL (IQL/CQL)</li>
+<li>Online RL (PPO/SAC)</li>
+<li>RSSM World Model</li>
+<li>Dreamer Actor-Critic</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 
-            // Resize handler
-            window.addEventListener('resize', function() {
-                myChart.resize();
-            });
-        });
-    </script>
+<!-- Key Achievements -->
+<div class="glass-panel p-4 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-white mb-3">Key Achievements & Technical Innovations</h3>
+<div class="grid grid-cols-2 gap-4 h-full">
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">VLM Architecture (~2B Params)</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+SigLIP(1152-dim) + Qwen2-1.5B 조합으로 <span class="text-white">Vision-Language 정렬</span>. MLP/Perceiver Projector를 통한 효율적 토큰 압축
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Multi-Sensor Fusion (6 Methods)</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+LiDAR, IMU, GPS, Proprioception 등 <span class="text-white">Cross-Attention 융합</span>. BEV Projection 및 다양한 센서 모달리티 지원
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Platform-Specific Action Heads</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+휴머노이드(<span class="text-white">Diffusion 100 steps</span>), 드론/AV(<span class="text-white">ACT 16-step chunking</span>), 빠른 샘플링(<span class="text-white">Flow Matching 50 ODE</span>)
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Embodiment Adapter (3 Platforms)</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+단일 VLA 모델로 <span class="text-white">휴머노이드/드론/자율주행 차량</span> 통합 제어. Zero-shot Transfer 및 플랫폼별 Action Space 최적화
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bottom Accent -->
+<div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
+</div>
 </body>
 </html>

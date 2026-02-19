@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thank You</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/2ade8d0d9147df5250666843cb12f339.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-card {
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 16px 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .contact-card:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+            background-color: rgba(30, 41, 59, 0.8);
+            transform: translateX(5px);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        
+        .glow-effect {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: rgba(34, 211, 238, 0.08);
+            filter: blur(80px);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-overlay"></div>
+<div class="glow-effect" style="top: -200px; left: -100px;"></div>
+<div class="glow-effect" style="bottom: -200px; right: -100px; background-color: rgba(59, 130, 246, 0.08);"></div>
+<!-- Decorative Circles -->
+<div class="absolute top-20 right-20 w-32 h-32 border border-cyan-500/10 rounded-full"></div>
+<div class="absolute bottom-20 left-20 w-48 h-48 border border-blue-500/10 rounded-full"></div>
+<!-- Main Content Wrapper -->
+<div class="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-8">
+<!-- Top Icon -->
+<div class="mb-6 p-4 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-4xl animate-bounce" style="animation-duration: 3s;">
+<i class="fa-solid fa-handshake"></i>
+</div>
+<!-- Titles -->
+<div class="text-center mb-8">
+<h1 class="text-3xl font-black text-white font-montserrat mb-2 tracking-tight">THANK YOU</h1>
+<p class="text-lg text-gray-300 font-light">
+                    AI Research Engineer, <span class="text-cyan-400 font-bold">송유한</span>입니다.
+                </p>
+<div class="mt-4 w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+<p class="mt-4 text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm">
+                    LLM부터 Robotics까지, End-to-End AI 솔루션으로 실질적 가치를 창출하겠습니다.<br/>
+                </p>
+</div>
+<!-- Contact Information Panel -->
+<div class="glass-panel p-4 w-full max-w-3xl">
+<div class="grid grid-cols-2 gap-4">
+<!-- Email Card -->
+<div class="contact-card">
+<div class="icon-box bg-blue-500/10 text-blue-400 border border-blue-500/20">
+<i class="fa-solid fa-envelope"></i>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Email Address</p>
+<p class="text-base text-white font-montserrat font-bold">yhsong12345@naver.com</p>
+</div>
+</div>
+<!-- Phone Card -->
+<div class="contact-card">
+<div class="icon-box bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+<i class="fa-solid fa-phone"></i>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Mobile Number</p>
+<p class="text-base text-white font-montserrat font-bold">010-2703-1924</p>
+</div>
+</div>
+</div>
+<!-- Social Links -->
+<div class="grid grid-cols-3 gap-4 mt-4">
+<!-- LinkedIn Card -->
+<div class="contact-card">
+<div class="icon-box bg-blue-600/10 text-blue-400 border border-blue-600/20">
+<i class="fa-brands fa-linkedin"></i>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">LinkedIn</p>
+<a href="https://www.linkedin.com/in/youhan-song-893771243/" class="text-base text-white font-montserrat font-bold hover:text-cyan-400 transition-colors">LinkedIn</a>
+</div>
+</div>
+<!-- GitHub Card -->
+<div class="contact-card">
+<div class="icon-box bg-slate-600/10 text-slate-300 border border-slate-600/20">
+<i class="fa-brands fa-github"></i>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">GitHub</p>
+<a href="https://github.com/yhsong12345" class="text-base text-white font-montserrat font-bold hover:text-cyan-400 transition-colors">GitHub</a>
+</div>
+</div>
+<!-- Website Card -->
+<div class="contact-card">
+<div class="icon-box bg-purple-500/10 text-purple-400 border border-purple-500/20">
+<i class="fa-solid fa-globe"></i>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Website</p>
+<a href="https://yhsong12345.github.io/YouhanSong.github.io/" class="text-base text-white font-montserrat font-bold hover:text-cyan-400 transition-colors">Portfolio</a>
+</div>
+</div>
+</div>
+<!-- Footer / Additional Links Placeholder -->
+<div class="mt-8 pt-6 border-t border-slate-700/50 flex justify-center space-x-8">
+<div class="flex items-center text-gray-400 hover:text-white transition-colors cursor-pointer">
+<i class="fa-solid fa-location-dot mr-2 text-slate-500"></i>
+<span class="text-sm">Seoul, Republic of Korea</span>
+</div>
+<div class="flex items-center text-gray-400 hover:text-white transition-colors cursor-pointer">
+<i class="fa-solid fa-user-graduate mr-2 text-slate-500"></i>
+<span class="text-sm">AI &amp; Robotics Researcher</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Logo/Copyright -->
+<div class="absolute bottom-6 text-center w-full">
+<p class="text-slate-600 text-xs font-montserrat uppercase tracking-widest">
+                © 2025 Youhan Song. All Rights Reserved.
+            </p>
+</div>
+</div>
+</body>
+</html>

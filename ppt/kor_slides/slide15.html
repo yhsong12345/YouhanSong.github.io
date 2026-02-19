@@ -4,10 +4,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Thank You</title>
+<title>Project Case Study: EASIS</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
         body {
             margin: 0;
@@ -24,10 +24,7 @@
             color: white;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
-        
         .bg-overlay {
             position: absolute;
             top: 0;
@@ -40,161 +37,233 @@
             opacity: 0.05;
             z-index: 0;
         }
-
-        /* Glassmorphism Cards */
         .glass-panel {
-            background-color: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(16px);
+            background-color: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 24px;
-            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .contact-card {
-            background-color: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(148, 163, 184, 0.1);
             border-radius: 16px;
-            padding: 16px 20px;
-            transition: all 0.3s ease;
-            display: flex;
+        }
+        .glass-panel-dark {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+        }
+        .tech-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 20px;
-            width: 100%;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
         }
-        
-        .contact-card:hover {
-            border-color: rgba(34, 211, 238, 0.4);
-            background-color: rgba(30, 41, 59, 0.8);
-            transform: translateX(5px);
+        .tech-badge i { margin-right: 4px; }
+        .process-step {
+            position: relative;
+            padding: 12px 16px;
+            border-left: 2px solid rgba(34, 211, 238, 0.3);
+            margin-left: 10px;
         }
-
-        .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 18px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            border: 2px solid #22d3ee;
+        }
+        .highlight-text { color: #38bdf8; font-weight: 700; }
+        .arrow-right {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        
-        .glow-effect {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background-color: rgba(34, 211, 238, 0.08);
-            filter: blur(80px);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
+            color: rgba(148, 163, 184, 0.5);
         }
     </style>
 </head>
 <body>
 <div class="slide-container">
-<!-- Background Elements -->
+<!-- Background -->
 <div class="bg-overlay"></div>
-<div class="glow-effect" style="top: -200px; left: -100px;"></div>
-<div class="glow-effect" style="bottom: -200px; right: -100px; background-color: rgba(59, 130, 246, 0.08);"></div>
-<!-- Decorative Circles -->
-<div class="absolute top-20 right-20 w-32 h-32 border border-cyan-500/10 rounded-full"></div>
-<div class="absolute bottom-20 left-20 w-48 h-48 border border-blue-500/10 rounded-full"></div>
-<!-- Main Content Wrapper -->
-<div class="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-8">
-<!-- Top Icon -->
-<div class="mb-6 p-4 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-4xl animate-bounce" style="animation-duration: 3s;">
-<i class="fa-solid fa-handshake"></i>
-</div>
-<!-- Titles -->
-<div class="text-center mb-8">
-<h1 class="text-3xl font-black text-white font-montserrat mb-2 tracking-tight">THANK YOU</h1>
-<p class="text-lg text-gray-300 font-light">
-                    준비된 AI 리서처, <span class="text-cyan-400 font-bold">송유한</span>입니다.
-                </p>
-<div class="mt-4 w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
-<p class="mt-4 text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm">
-                    데이터와 모델을 통해 실질적인 가치를 창출하고, 끊임없이 성장하며 조직에 기여하겠습니다.<br/>
-                </p>
-</div>
-<!-- Contact Information Panel -->
-<div class="glass-panel p-4 w-full max-w-3xl">
-<div class="grid grid-cols-2 gap-4">
-<!-- Email Card -->
-<div class="contact-card">
-<div class="icon-box bg-blue-500/10 text-blue-400 border border-blue-500/20">
-<i class="fa-solid fa-envelope"></i>
-</div>
+<div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-cyan-900/20 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+
+<!-- Header -->
+<div class="relative z-10 px-8 pt-5 mb-4 flex justify-between items-start">
 <div>
-<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Email Address</p>
-<p class="text-base text-white font-montserrat font-bold">yhsong12345@naver.com</p>
+<div class="flex items-center space-x-3 text-cyan-400 mb-2">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10">Personal Project</span>
+<span class="text-xs text-gray-400 uppercase tracking-widest">Multi-Agent Reinforcement Learning</span>
+</div>
+<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">EASIS: Embodiment-Agnostic Swarm Intelligence System</h1>
+<div class="flex items-center space-x-4">
+<p class="text-lg text-gray-300 font-light">CTDE 기반 이기종 로봇 군집 협업 최적화 프레임워크</p>
+<div class="h-4 w-px bg-gray-600"></div>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">MARL / Swarm</span>
 </div>
 </div>
-<!-- Phone Card -->
-<div class="contact-card">
-<div class="icon-box bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-<i class="fa-solid fa-phone"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Mobile Number</p>
-<p class="text-base text-white font-montserrat font-bold">010-2703-1924</p>
-</div>
-</div>
-</div>
-<!-- Social Links -->
-<div class="grid grid-cols-3 gap-4 mt-4">
-<!-- LinkedIn Card -->
-<div class="contact-card">
-<div class="icon-box bg-blue-600/10 text-blue-400 border border-blue-600/20">
-<i class="fa-brands fa-linkedin"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">LinkedIn</p>
-<a href="https://www.linkedin.com/in/youhan-song-893771243/" class="text-base text-white font-montserrat font-bold hover:text-cyan-400 transition-colors">LinkedIn</a>
-</div>
-</div>
-<!-- GitHub Card -->
-<div class="contact-card">
-<div class="icon-box bg-slate-600/10 text-slate-300 border border-slate-600/20">
-<i class="fa-brands fa-github"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">GitHub</p>
-<a href="https://github.com/yhsong12345" class="text-base text-white font-montserrat font-bold hover:text-cyan-400 transition-colors">GitHub</a>
-</div>
-</div>
-<!-- Website Card -->
-<div class="contact-card">
-<div class="icon-box bg-purple-500/10 text-purple-400 border border-purple-500/20">
-<i class="fa-solid fa-globe"></i>
-</div>
-<div>
-<p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Website</p>
-<a href="https://yhsong12345.github.io/YouhanSong.github.io/" class="text-base text-white font-montserrat font-bold hover:text-cyan-400 transition-colors">Portfolio</a>
+<div class="text-right">
+<div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-regular fa-calendar text-cyan-400"></i>
+<p class="text-sm font-medium text-white">2026.01 - Present</p>
 </div>
 </div>
 </div>
-<!-- Footer / Additional Links Placeholder -->
-<div class="mt-8 pt-6 border-t border-slate-700/50 flex justify-center space-x-8">
-<div class="flex items-center text-gray-400 hover:text-white transition-colors cursor-pointer">
-<i class="fa-solid fa-location-dot mr-2 text-slate-500"></i>
-<span class="text-sm">Seoul, Republic of Korea</span>
+
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 px-6 pb-4 gap-4">
+<!-- Left Panel: Project Overview & Specs -->
+<div class="w-1/3 flex flex-col gap-4">
+<!-- Overview Card -->
+<div class="glass-panel p-4 flex-1">
+<h3 class="text-lg font-bold text-white mb-3 flex items-center">
+<i class="fa-solid fa-crosshairs text-cyan-400 mr-2"></i>
+Project Goal
+</h3>
+<p class="text-sm text-gray-300 leading-relaxed mb-4">
+이기종 <span class="highlight-text">로봇 군집(Swarm)</span> 협업 최적화를 위한 <span class="highlight-text">CTDE 기반 MARL 프레임워크</span> 개발. 추상화된 State/Action Space와 Graph Attention 기반 통신으로 확장 가능한 분산 제어 시스템 구현
+</p>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Key Responsibilities</h4>
+<ul class="space-y-2 text-sm text-gray-300 mb-4">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">CTDE (Centralized Training, Decentralized Execution) 아키텍처 설계</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">MARL 알고리즘 구현 (MAPPO, QMIX, MADDPG)</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">Graph Attention 기반 에이전트 통신 프로토콜</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">Embodiment-Agnostic 추상화 레이어 및 VLA 연동</span>
+</li>
+</ul>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Tech Stack</h4>
+<div class="flex flex-wrap gap-1 mb-4">
+<span class="tech-badge"><i class="fa-brands fa-python text-blue-400"></i> Python</span>
+<span class="tech-badge"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</span>
+<span class="tech-badge"><i class="fa-solid fa-network-wired text-purple-400"></i> MAPPO</span>
+<span class="tech-badge"><i class="fa-solid fa-diagram-project text-cyan-400"></i> QMIX</span>
 </div>
-<div class="flex items-center text-gray-400 hover:text-white transition-colors cursor-pointer">
-<i class="fa-solid fa-user-graduate mr-2 text-slate-500"></i>
-<span class="text-sm">AI &amp; Robotics Researcher</span>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-3">Technical Specs</h4>
+<div class="flex flex-wrap gap-1">
+<span class="tech-badge"><i class="fa-solid fa-eye text-green-400"></i> Obs: 257D</span>
+<span class="tech-badge"><i class="fa-solid fa-hand text-blue-400"></i> Act: 38D</span>
+<span class="tech-badge"><i class="fa-solid fa-message text-cyan-400"></i> Msg: 32D</span>
+<span class="tech-badge"><i class="fa-solid fa-users text-amber-400"></i> 20+ Agents</span>
+</div>
+</div>
+</div>
+
+<!-- Right Panel: Technical Details & Process -->
+<div class="w-2/3 flex flex-col gap-4">
+<!-- Architecture Diagram Section -->
+<div class="glass-panel-dark p-4">
+<h3 class="text-lg font-bold text-white mb-3 font-['Montserrat']">CTDE Architecture Pipeline</h3>
+<div class="flex items-stretch justify-between gap-2 text-xs">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-cyan-900/20 border border-cyan-500/30 rounded-t-lg p-2 text-center text-cyan-300 font-bold">
+Centralized Training
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-brain mr-1"></i> Global Critic</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1 text-[11px]">
+<li>Global State 접근</li>
+<li>Centralized Value V(s)</li>
+<li>PPO/QMIX Gradient</li>
+<li>Advantage Estimation</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xl"></i>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-blue-900/20 border border-blue-500/30 rounded-t-lg p-2 text-center text-blue-300 font-bold">
+Communication
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-tower-broadcast mr-1"></i> GAT Protocol</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1 text-[11px]">
+<li>Graph Attention (4 heads)</li>
+<li>CommNet / TarMAC</li>
+<li>32D Neural Messages</li>
+<li>동적 토폴로지 적응</li>
+</ul>
+</div>
+</div>
+<!-- Arrow -->
+<div class="arrow-right">
+<i class="fa-solid fa-chevron-right text-xl"></i>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col">
+<div class="bg-green-900/20 border border-green-500/30 rounded-t-lg p-2 text-center text-green-300 font-bold">
+Decentralized Execution
+</div>
+<div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-3 flex-1">
+<p class="font-bold text-white mb-2"><i class="fa-solid fa-robot mr-1"></i> Local Actor</p>
+<ul class="list-disc list-inside text-gray-400 space-y-1 text-[11px]">
+<li>Local Observation Only</li>
+<li>π(a|o) Decentralized</li>
+<li>Abstract Action (38D)</li>
+<li>VLA Adapter 연동</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<!-- Bottom Logo/Copyright -->
-<div class="absolute bottom-6 text-center w-full">
-<p class="text-slate-600 text-xs font-montserrat uppercase tracking-widest">
-                © 2025 Youhan Song. All Rights Reserved.
-            </p>
+
+<!-- Key Achievements -->
+<div class="glass-panel p-4 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-white mb-3">Key Achievements & Technical Innovations</h3>
+<div class="grid grid-cols-2 gap-4 h-full">
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">CTDE Paradigm</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+<span class="text-white">Centralized Training</span>으로 Global State 활용한 효율적 학습, <span class="text-white">Decentralized Execution</span>으로 독립적 배포 및 확장성 확보
+</p>
 </div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Multi-Algorithm Support</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+<span class="text-white">MAPPO</span> (ε=0.2, λ=0.95), <span class="text-white">QMIX</span> (Value Decomposition), <span class="text-white">MADDPG</span> (τ=0.01) 등 다양한 MARL 알고리즘 지원
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">GAT Communication Protocol</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+<span class="text-white">Graph Attention Networks</span> 기반 동적 이웃 선택 및 메시지 전달. CommNet/TarMAC 통합으로 <span class="text-white">2-round 통신</span> 최적화
+</p>
+</div>
+<div class="process-step">
+<p class="text-sm font-bold text-cyan-300 mb-1">Embodiment-Agnostic Design</p>
+<p class="text-xs text-gray-300 leading-relaxed">
+추상화된 State/Action으로 <span class="text-white">Humanoid/Drone/Vehicle</span> 통합 제어. VLA Adapter를 통한 이기종 로봇 군집 협업 지원
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bottom Accent -->
+<div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
 </div>
 </body>
 </html>

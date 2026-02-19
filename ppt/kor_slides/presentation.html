@@ -322,7 +322,7 @@
             <i class="fa-solid fa-chevron-left"></i> Previous
         </button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">17</span>
         </div>
         <button class="nav-btn" onclick="nextSlide()" id="nextBtn">
             Next <i class="fa-solid fa-chevron-right"></i>
@@ -340,43 +340,47 @@
 </div>
 
 <script>
-    const totalSlides = 15;
+    // ============================================================
+    // SLIDE ORDER CONFIGURATION
+    // To add a new project slide:
+    //   1. Create your new HTML file (e.g., 'proj_new_project.html')
+    //   2. Add an entry to the 'slides' array below at the desired position
+    //   3. The order in this array determines the presentation order
+    // ============================================================
+
+    const slides = [
+        // === INTRO SECTION ===
+        { file: 'slide01.html', title: 'Title - AI & Robotics Researcher' },
+        { file: 'slide02.html', title: 'Researcher Profile' },
+        { file: 'slide03.html', title: 'Education & Career Timeline' },
+        { file: 'slide04.html', title: 'Core Competencies & Skills' },
+
+        // === PROJECT SECTION (ORDER: LATEST FIRST) ===
+        // Personal Projects (Latest)
+        { file: 'slide14.html', title: 'Universal VLA Model' },
+        { file: 'slide15.html', title: 'EASIS: Embodiment-Agnostic Swarm Intelligence System' },
+
+        // Work Projects (Recent to Old)
+        { file: 'slide05.html', title: 'Korean LLM Development' },
+        { file: 'slide06.html', title: 'SEEU Track - Vehicle Detection' },
+        { file: 'slide07.html', title: 'Face Recognition System' },
+        { file: 'slide08.html', title: 'SEEU ID - ID Card OCR' },
+        { file: 'slide09.html', title: 'Tanzania Smart Gate' },
+        { file: 'slide10.html', title: 'Gumi Metaverse - Safety Detection' },
+        { file: 'slide11.html', title: 'AVA Project - Autonomous Driving' },
+        { file: 'slide12.html', title: 'Robotic Arm Object Relocator' },
+        { file: 'slide13.html', title: 'Nvidia Jetson AMR' },
+
+        // === CLOSING SECTION ===
+        { file: 'slide16.html', title: 'Key Achievements Summary' },
+        { file: 'slide17.html', title: 'Thank You' },
+    ];
+
+    // Auto-generate arrays from slides config
+    const slideFiles = slides.map(s => s.file);
+    const slideTitles = slides.map(s => s.title);
+    const totalSlides = slides.length;
     let currentSlideIndex = 0;
-    const slideFiles = [
-        'slide01.html',
-        'slide02.html',
-        'slide03.html',
-        'slide04.html',
-        'slide05.html',
-        'slide06.html',
-        'slide07.html',
-        'slide08.html',
-        'slide09.html',
-        'slide10.html',
-        'slide11.html',
-        'slide12.html',
-        'slide13.html',
-        'slide14.html',
-        'slide15.html'
-    ];
-    
-    const slideTitles = [
-        'Title - AI & Robotics Researcher',
-        'Researcher Profile',
-        'Education & Career Timeline',
-        'Core Competencies & Skills',
-        'Korean LLM Development',
-        'SEEU Track - Vehicle Detection',
-        'Face Recognition System',
-        'SEEU ID - ID Card OCR',
-        'Tanzania Smart Gate',
-        'Gumi Metaverse - Safety Detection',
-        'AVA Project - Autonomous Driving',
-        'Robotic Arm Object Relocator',
-        'Nvidia Jetson',
-        'Key Achievements Summary',
-        'Thank You'
-    ];
     
     // Initialize slides
     function initSlides() {
