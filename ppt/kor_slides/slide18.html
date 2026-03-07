@@ -241,11 +241,11 @@
 <svg class="svg-gauge" viewBox="0 0 100 100">
 <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
 <circle cx="50" cy="50" r="40" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"
-    stroke-dasharray="243" stroke-dashoffset="8" transform="rotate(-90 50 50)"/>
+    stroke-dasharray="240" stroke-dashoffset="11" transform="rotate(-90 50 50)"/>
 </svg>
 </div>
-<div class="text-center mt-[-15px]">
-<p class="highlight-value text-xl">96.8<span class="text-xs font-medium text-gray-500">%</span></p>
+<div class="text-center mt-1">
+<p class="highlight-value text-xl">95.8<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label">Vehicle<br/>Detection</p>
 </div>
 </div>
@@ -255,12 +255,12 @@
 <svg class="svg-gauge" viewBox="0 0 100 100">
 <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
 <circle cx="50" cy="50" r="40" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"
-    stroke-dasharray="244" stroke-dashoffset="7" transform="rotate(-90 50 50)"/>
+    stroke-dasharray="239" stroke-dashoffset="12" transform="rotate(-90 50 50)"/>
 </svg>
 </div>
-<div class="text-center mt-[-15px]">
-<p class="highlight-value text-xl">97.2<span class="text-xs font-medium text-gray-500">%</span></p>
-<p class="stat-label">Person<br/>Detection</p>
+<div class="text-center mt-1">
+<p class="highlight-value text-xl">95.2<span class="text-xs font-medium text-gray-500">%</span></p>
+<p class="stat-label">Motorcycle<br/>Detection</p>
 </div>
 </div>
 <div class="metric-card col-span-1">
@@ -269,11 +269,11 @@
 <svg class="svg-gauge" viewBox="0 0 100 100">
 <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
 <circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"
-    stroke-dasharray="245" stroke-dashoffset="6" transform="rotate(-90 50 50)"/>
+    stroke-dasharray="237" stroke-dashoffset="14" transform="rotate(-90 50 50)"/>
 </svg>
 </div>
-<div class="text-center mt-[-15px]">
-<p class="highlight-value text-xl">97.5<span class="text-xs font-medium text-gray-500">%</span></p>
+<div class="text-center mt-1">
+<p class="highlight-value text-xl">94.5<span class="text-xs font-medium text-gray-500">%</span></p>
 <p class="stat-label">License Plate<br/>Detection</p>
 </div>
 </div>
@@ -305,10 +305,10 @@
 <i class="fa-solid fa-shirt text-purple-400 mr-2 text-xs"></i>
 <span class="text-xs text-white font-bold">VLM Attribute Recog.</span>
 </div>
-<span class="text-xs font-bold text-purple-300">85.3%</span>
+<span class="text-xs font-bold text-purple-300">개발중</span>
 </div>
 <div class="progress-bg">
-<div class="progress-fill" style="width: 85.3%; background-color: #a855f7;"></div>
+<div class="progress-fill" style="width: 0%; background-color: #a855f7;"></div>
 </div>
 </div>
 </div>
@@ -387,9 +387,9 @@
                 return chart;
             };
 
-            const chart1 = createGauge('chartVehicle', 96.8, '#22d3ee');
-            const chart2 = createGauge('chartPerson', 97.2, '#38bdf8');
-            const chart3 = createGauge('chartLPD', 97.5, '#60a5fa');
+            const chart1 = createGauge('chartVehicle', 95.8, '#22d3ee');
+            const chart2 = createGauge('chartPerson', 95.2, '#38bdf8');
+            const chart3 = createGauge('chartLPD', 94.5, '#60a5fa');
 
             window.addEventListener('resize', () => {
                 chart1.resize();
