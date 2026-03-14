@@ -119,34 +119,12 @@
         margin-bottom: 4px;
         background: rgba(15, 23, 42, 0.5);
         border-radius: 6px;
-        cursor: grab;
-        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-        user-select: none;
+        cursor: pointer;
+        transition: background 0.2s;
     }
 
     .slide-item:hover {
         background: rgba(34, 211, 238, 0.1);
-    }
-
-    .slide-item.dragging {
-        opacity: 0.5;
-        background: rgba(34, 211, 238, 0.2);
-    }
-
-    .slide-item.drag-over {
-        border-top: 2px solid #22d3ee;
-        margin-top: -2px;
-    }
-
-    .slide-item .drag-handle {
-        color: #64748b;
-        margin-right: 8px;
-        cursor: grab;
-        font-size: 10px;
-    }
-
-    .slide-item .drag-handle:hover {
-        color: #22d3ee;
     }
 
     .slide-item input[type="checkbox"] {
@@ -168,31 +146,6 @@
         font-size: 10px;
         margin-right: 8px;
         min-width: 20px;
-    }
-
-    .order-controls {
-        display: flex;
-        gap: 4px;
-        margin-left: 8px;
-    }
-
-    .order-controls button {
-        width: 20px;
-        height: 20px;
-        padding: 0;
-        margin: 0;
-        font-size: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(100, 116, 139, 0.3);
-        border: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .order-controls button:hover {
-        background: rgba(34, 211, 238, 0.3);
-        transform: none;
-        box-shadow: none;
     }
 
     .progress-bar {
@@ -323,14 +276,12 @@
         <!-- Slide Selector -->
         <div class="slide-selector">
             <h4>
-                Select & Reorder Slides
+                Select Slides
                 <div class="select-actions">
                     <button onclick="selectAllSlides()">All</button>
                     <button onclick="selectNoSlides()">None</button>
-                    <button onclick="resetOrder()">Reset</button>
                 </div>
             </h4>
-            <p style="font-size: 9px; color: #64748b; margin-bottom: 8px;">Drag to reorder or use arrows</p>
             <div class="slide-list" id="slideList">
                 <!-- Populated by JavaScript -->
             </div>
@@ -378,125 +329,24 @@
 
         // Track selected slides (all selected by default)
         let selectedSlides = new Set(slides.map((_, i) => i));
-        // Track slide order for export (array of original indices)
-        let slideOrder = slides.map((_, i) => i);
-        // Store original order for reset
-        const originalOrder = slides.map((_, i) => i);
         let loadedIframes = 0;
 
         const container = document.getElementById('slidesContainer');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const loadingText = document.getElementById('loadingText');
 
-        // Build slide selector UI with drag and drop
+        // Build slide selector UI
         function buildSlideSelector() {
             const slideList = document.getElementById('slideList');
-            slideList.innerHTML = slideOrder.map((originalIndex, orderIndex) => `
-                <div class="slide-item"
-                     draggable="true"
-                     data-order-index="${orderIndex}"
-                     data-original-index="${originalIndex}"
-                     ondragstart="handleDragStart(event)"
-                     ondragover="handleDragOver(event)"
-                     ondrop="handleDrop(event)"
-                     ondragend="handleDragEnd(event)"
-                     ondragleave="handleDragLeave(event)">
-                    <span class="drag-handle"><i class="fa-solid fa-grip-vertical"></i></span>
-                    <input type="checkbox" id="slide-check-${originalIndex}"
-                           ${selectedSlides.has(originalIndex) ? 'checked' : ''}
-                           onchange="toggleSlide(${originalIndex})"
-                           onclick="event.stopPropagation()">
-                    <span class="slide-number">${orderIndex + 1}</span>
-                    <label for="slide-check-${originalIndex}" onclick="event.stopPropagation()">${slides[originalIndex].title}</label>
-                    <div class="order-controls">
-                        <button onclick="moveSlideUp(${orderIndex}); event.stopPropagation();" ${orderIndex === 0 ? 'disabled' : ''}>
-                            <i class="fa-solid fa-chevron-up"></i>
-                        </button>
-                        <button onclick="moveSlideDown(${orderIndex}); event.stopPropagation();" ${orderIndex === slideOrder.length - 1 ? 'disabled' : ''}>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </div>
+            slideList.innerHTML = slides.map((slide, index) => `
+                <div class="slide-item" onclick="toggleSlideFromItem(${index}, event)">
+                    <input type="checkbox" id="slide-check-${index}"
+                           ${selectedSlides.has(index) ? 'checked' : ''}
+                           onchange="toggleSlide(${index})">
+                    <span class="slide-number">${index + 1}</span>
+                    <label for="slide-check-${index}">${slide.title}</label>
                 </div>
             `).join('');
-        }
-
-        // Drag and drop handlers
-        let draggedItem = null;
-
-        function handleDragStart(e) {
-            draggedItem = e.target.closest('.slide-item');
-            draggedItem.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', draggedItem.dataset.orderIndex);
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            const target = e.target.closest('.slide-item');
-            if (target && target !== draggedItem) {
-                target.classList.add('drag-over');
-            }
-        }
-
-        function handleDragLeave(e) {
-            const target = e.target.closest('.slide-item');
-            if (target) {
-                target.classList.remove('drag-over');
-            }
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            const target = e.target.closest('.slide-item');
-            if (target) {
-                target.classList.remove('drag-over');
-            }
-
-            if (!target || target === draggedItem) return;
-
-            const fromIndex = parseInt(draggedItem.dataset.orderIndex);
-            const toIndex = parseInt(target.dataset.orderIndex);
-
-            // Reorder the slideOrder array
-            const [movedItem] = slideOrder.splice(fromIndex, 1);
-            slideOrder.splice(toIndex, 0, movedItem);
-
-            // Rebuild UI
-            buildSlideSelector();
-            updateSlideVisuals();
-        }
-
-        function handleDragEnd(e) {
-            if (draggedItem) {
-                draggedItem.classList.remove('dragging');
-            }
-            document.querySelectorAll('.slide-item').forEach(item => {
-                item.classList.remove('drag-over');
-            });
-            draggedItem = null;
-        }
-
-        // Move slide up/down with buttons
-        function moveSlideUp(orderIndex) {
-            if (orderIndex <= 0) return;
-            [slideOrder[orderIndex], slideOrder[orderIndex - 1]] = [slideOrder[orderIndex - 1], slideOrder[orderIndex]];
-            buildSlideSelector();
-            updateSlideVisuals();
-        }
-
-        function moveSlideDown(orderIndex) {
-            if (orderIndex >= slideOrder.length - 1) return;
-            [slideOrder[orderIndex], slideOrder[orderIndex + 1]] = [slideOrder[orderIndex + 1], slideOrder[orderIndex]];
-            buildSlideSelector();
-            updateSlideVisuals();
-        }
-
-        // Reset to original order
-        function resetOrder() {
-            slideOrder = [...originalOrder];
-            buildSlideSelector();
-            updateSlideVisuals();
         }
 
         function toggleSlideFromItem(index, event) {
@@ -835,8 +685,7 @@
 
         // Export selected slides to PDF using html2canvas
         async function exportToPDF() {
-            // Get selected slides in the user-defined order
-            const selectedIndices = slideOrder.filter(idx => selectedSlides.has(idx));
+            const selectedIndices = Array.from(selectedSlides).sort((a, b) => a - b);
 
             if (selectedIndices.length === 0) {
                 alert('Please select at least one slide to export.');
