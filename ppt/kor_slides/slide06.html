@@ -226,29 +226,50 @@ VLM 기반 수도 라벨링 및 속성 인식 모델 개발
 
 <!-- Challenge 1 -->
 <div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
-<div class="flex items-center justify-between mb-1">
+<div class="flex items-center justify-between mb-1.5">
 <span class="text-[10px] font-bold text-cyan-300 uppercase">Local Data</span>
 <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">Solved</span>
 </div>
-<p class="text-[10px] text-gray-300 leading-snug"><span class="text-red-400 font-medium">C:</span> 현지 환경/차량 종류 상이 <span class="text-green-400 font-medium">S:</span> 현지 데이터 수집 + 라벨링 인력 고용</p>
+<div class="flex items-start gap-1.5 mb-1">
+<i class="fa-solid fa-triangle-exclamation text-red-400 text-[8px] mt-0.5"></i>
+<p class="text-[10px] text-gray-300 leading-snug">현지 환경/차량 종류 상이</p>
+</div>
+<div class="flex items-start gap-1.5">
+<i class="fa-solid fa-check-circle text-green-400 text-[8px] mt-0.5"></i>
+<p class="text-[10px] text-gray-300 leading-snug">현지 데이터 수집 + 라벨링 인력 고용</p>
+</div>
 </div>
 
 <!-- Challenge 2 -->
 <div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
-<div class="flex items-center justify-between mb-1">
+<div class="flex items-center justify-between mb-1.5">
 <span class="text-[10px] font-bold text-purple-300 uppercase">Model Selection</span>
 <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">YOLOv11</span>
 </div>
-<p class="text-[10px] text-gray-300 leading-snug"><span class="text-red-400 font-medium">C:</span> 속도+정확도 균형 필요 <span class="text-green-400 font-medium">S:</span> 공개 모델 비교 실험 후 YOLOv11 선정</p>
+<div class="flex items-start gap-1.5 mb-1">
+<i class="fa-solid fa-triangle-exclamation text-red-400 text-[8px] mt-0.5"></i>
+<p class="text-[10px] text-gray-300 leading-snug">속도+정확도 균형 필요</p>
+</div>
+<div class="flex items-start gap-1.5">
+<i class="fa-solid fa-check-circle text-green-400 text-[8px] mt-0.5"></i>
+<p class="text-[10px] text-gray-300 leading-snug">공개 모델 비교 실험 후 YOLOv11 선정</p>
+</div>
 </div>
 
 <!-- Challenge 3 -->
 <div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
-<div class="flex items-center justify-between mb-1">
+<div class="flex items-center justify-between mb-1.5">
 <span class="text-[10px] font-bold text-orange-300 uppercase">Person Attributes</span>
 <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">VLM</span>
 </div>
-<p class="text-[10px] text-gray-300 leading-snug"><span class="text-red-400 font-medium">C:</span> 사람 속성 라벨 부족 <span class="text-green-400 font-medium">S:</span> VLM 수도 라벨링 후 검수</p>
+<div class="flex items-start gap-1.5 mb-1">
+<i class="fa-solid fa-triangle-exclamation text-red-400 text-[8px] mt-0.5"></i>
+<p class="text-[10px] text-gray-300 leading-snug">사람 속성 라벨 부족</p>
+</div>
+<div class="flex items-start gap-1.5">
+<i class="fa-solid fa-check-circle text-green-400 text-[8px] mt-0.5"></i>
+<p class="text-[10px] text-gray-300 leading-snug">VLM 수도 라벨링 후 검수</p>
+</div>
 </div>
 
 <div class="mt-auto">
