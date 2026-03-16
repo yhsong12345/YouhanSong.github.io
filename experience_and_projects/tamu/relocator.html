@@ -46,7 +46,10 @@
 											</ul>
 										</li>
 										<li>
-											<a href="../../experience_and_projects/Project_robotic_and_automation.html">Robotics and Automation Lab</a>
+											<a href="../../experience_and_projects/Project_robotic_and_automation.html">Robotics and Automation Lab &hellip;</a>
+											<ul>
+												<li><a href="../../experience_and_projects/tamu/traffic_sign_detection.html">Traffic Sign Detection (Thesis)</a></li>
+											</ul>
 										</li>
 										<li>
 											<a href="../../experience_and_projects/Project_tamu.html">TAMU (Master's Degree) &hellip;</a>
@@ -85,57 +88,278 @@
 			<div class="wrapper style1">
 
 				<div class="container">
+					<!-- Project Overview -->
 					<div class="row">
 						<iframe src="https://drive.google.com/file/d/1kh9k0e8rUeIrYBdtAQ4_BsqrqFhs6Ocg/preview" width="360" height="480" allow="autoplay"></iframe>
 						<article class="col-6">
 							<header>
 								<h3>Robotic Arm Object Relocator (September 2022 ~ December 2022)</h3>
 							</header>
-							<p> Automated machinery is widely used in the manufacturing industry to simplify the amount of 
-								labor needed and improve precision. A robot arm that can move an item from one location to 
-								another was designed to contribute to the area of automation, more specifically, for items 
+							<p>
+								Automated machinery is widely used in the manufacturing industry to simplify the amount of
+								labor needed and improve precision. Examples include packaging items, putting caps on
+								bottles, and assembling cars. A robot arm that can move an item from one location to
+								another was designed to contribute to the area of automation, more specifically, for items
 								needing to be moved from one conveyor belt to another.
 							</p>
 							<p>
-								The robot arm will move any item to a pre-specified location by calculating the distance to 
-								the item and using a digital feedback controller to minimize tracking errors and provide 
+								The robot arm moves any item to a pre-specified location by calculating the distance to
+								the item and using a digital feedback controller to minimize tracking errors and provide
 								smooth controls.
 							</p>
 						</article>
-						<br>
+					</div>
+
+					<hr>
+
+					<!-- System Design -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>System Design & Workflow</h3>
+							</header>
+							<!-- [IMAGE PLACEHOLDER: System Workflow Diagram - showing radar sensor detection, angle calculation, object transport, and return cycle] -->
+							<p>
+								A radar sensor checks for an object within the robot workspace and finds the angle to get
+								within a pre-specified distance to the object using proportional control. Once the robot has
+								reached the object, it transports it to another location and starts the process again.
+							</p>
+						</article>
+					</div>
+
+					<hr>
+
+					<!-- Robot Arm Design -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Robot Arm Design</h3>
+							</header>
+							<!-- [IMAGE PLACEHOLDER: Side-by-side comparison of preliminary 3D model vs final design] -->
+							<p>
+								Five servos control the movement of the robot while a sixth servo controls the claw
+								mechanism. An ultrasonic sensor is mounted at the end effector for detecting objects and
+								use in the feedback control.
+							</p>
+							<p>
+								An important component of the final design is the base configuration. A servo could not be
+								directly mounted to the base due to its shaft diameter and the fact that all the weight from the system
+								would resolve onto the shaft, so a bearing was added at the base to resolve this issue.
+							</p>
+							<!-- [IMAGE PLACEHOLDER: Exploded base view showing bearing assembly] -->
+						</article>
+					</div>
+
+					<br>
+
+					<!-- Hardware Images -->
+					<div class="row">
 						<img src="../../images/robotic_arm_object_relocator_1.jpg" alt="" width="400" height="400" />
 						<img src="../../images/robotic_arm_object_relocator_3.jpg" alt="" width="400" height="400" />
 						<img src="../../images/robotic_arm_object_relocator_5.jpg" alt="" width="400" height="400" />
 						<img src="../../images/robotic_arm_object_relocator_2.jpg" alt="" width="400" height="600" />
 						<img src="../../images/robotic_arm_object_relocator_4.jpg" alt="" width="700" height="700" />
-
-						<!-- <article class="col-6">
-							<img src="../../images/mechanics_of_robotics_2.png" alt="" width="280" height="300" />
-							<img src="../../images/mechanics_of_robotics_3.png" alt="" width="280" height="300" />
-							<p></p>
-							<img src="../../images/mechanics_of_robotics_4.png" alt="" width="280" height="300" />
-							<img src="../../images/mechanics_of_robotics_5.png" alt="" width="280" height="300" />
-							<header>
-								<h5>Comparison of actual and desired angular velocity of robot arm based on time (left: actual, right: desired)</h5>
-							</header>
-						</article>
-						<article class="col-6">
-							<img src="../../images/mechanics_of_robotics_2.png" alt="" width="280" height="280" />
-							<img src="../../images/mechanics_of_robotics_3.png" alt="" width="280" height="280" />
-							<header>
-								<h5>Calculation of payload masses and observe that each mass are converges to about 0.06 and 6 respectively
-									</h5>
-							</header>
-							<img src="../../images/mechanics_of_robotics_4.png" alt="" width="280" height="280" />
-							<img src="../../images/mechanics_of_robotics_5.png" alt="" width="280" height="280" />
-							<header>
-								<h5>Graphs shows the parameters converges and its error are reduced and finally converges to about 99.94 and 94 respectively
-									</h5>
-							</header>
-						</article> -->
 					</div>
-				</div>
 
+					<hr>
+
+					<!-- Hardware Components -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Hardware Components</h3>
+							</header>
+							<ul>
+								<li><strong>Microcontroller:</strong> Arduino Mega</li>
+								<li><strong>Motor Shield:</strong> Adafruit 16-Channel 12-bit PWM/Servo Shield (I2C interface)</li>
+								<li><strong>Actuators:</strong> 6x High Torque Servos (5 for arm movement, 1 for claw)</li>
+								<li><strong>Sensor:</strong> Ultrasonic sensor mounted at end effector</li>
+								<li><strong>Mechanical:</strong> 3D printed components, bearing (r24-2rs 1-1/2"x 2-5/8"x 9/16"), mechanical gripper</li>
+							</ul>
+						</article>
+					</div>
+
+					<hr>
+
+					<!-- Budget -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Bill of Materials</h3>
+							</header>
+							<table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+								<thead>
+									<tr style="background-color: #f2f2f2;">
+										<th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Item</th>
+										<th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Qty</th>
+										<th style="border: 1px solid #ddd; padding: 12px; text-align: right;">Cost</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">Mechanical Robot Arm Gripper</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">1</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$32.99</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">High Torque Servo Pack (6 pcs)</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">1</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$27.99</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">Ultrasonic Sensor</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">1</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$3.95</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">Bearing (r24-2rs)</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">1</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$16.09</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">Adafruit PWM/Servo Shield</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">1</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$19.83</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">Bolts, Nuts, Screws (various)</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">-</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$20.60</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px;">3D Printed Parts</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">7</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$52.00</td>
+									</tr>
+									<tr style="background-color: #f9f9f9; font-weight: bold;">
+										<td style="border: 1px solid #ddd; padding: 10px;" colspan="2">Total Cost</td>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: right;">$173.60</td>
+									</tr>
+								</tbody>
+							</table>
+						</article>
+					</div>
+
+					<hr>
+
+					<!-- Feedback Control -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Feedback Control</h3>
+							</header>
+							<!-- [IMAGE PLACEHOLDER: Side view of arm with labeled lengths (l_arm, l_end_arm, d_sensor)] -->
+							<p>
+								To ensure the system could find the angle needed to reach the object with zero steady-state
+								error, a proportional controller was implemented. The ultrasonic sensor on the end effector
+								was used to find the desired arm angle to keep the object within 2 inches.
+							</p>
+							<p>
+								The distance to the object is calculated using:
+							</p>
+							<p style="text-align: center; font-family: 'Times New Roman', serif; font-size: 1.1em;">
+								<em>d<sub>obj</sub> = l<sub>arm</sub> + l<sub>end_arm</sub> + d<sub>sensor</sub></em>
+								&nbsp;&nbsp; where &nbsp;&nbsp;
+								<em>l<sub>arm</sub> = L sin(θ)</em>
+							</p>
+							<p>
+								A discretized proportional controller was used:
+							</p>
+							<p style="text-align: center; font-family: 'Times New Roman', serif; font-size: 1.1em;">
+								<em>u[k] = u[k-1] + k<sub>p</sub>e[k] - k<sub>p</sub>e[k-1]</em>
+								&nbsp;&nbsp; where &nbsp;&nbsp;
+								<em>e[k] = d<sub>ref</sub> - d<sub>act</sub></em>
+							</p>
+							<p>
+								The gain <em>k<sub>p</sub> = 2</em> was chosen through trial and error to minimize oscillation.
+							</p>
+						</article>
+					</div>
+
+					<hr>
+
+					<!-- Experimental Results -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Experimental Results</h3>
+							</header>
+							<p>
+								Initial testing showed the servomotor angles were nonlinear, and a correction term was added
+								within the code to account for this. Each of the servomotors controlling the arm was tuned to
+								smooth the control since the motion was harsh initially.
+							</p>
+							<h4>Proportional Gain (k<sub>p</sub>) Comparison</h4>
+							<table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+								<thead>
+									<tr style="background-color: #f2f2f2;">
+										<th style="border: 1px solid #ddd; padding: 12px; text-align: center;">k<sub>p</sub> Value</th>
+										<th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Observation</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">0.5</td>
+										<td style="border: 1px solid #ddd; padding: 10px;">High oscillation around reference point</td>
+									</tr>
+									<tr>
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center;">1.0</td>
+										<td style="border: 1px solid #ddd; padding: 10px;">Moderate oscillation</td>
+									</tr>
+									<tr style="background-color: #e8f5e9;">
+										<td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">2.0</td>
+										<td style="border: 1px solid #ddd; padding: 10px; font-weight: bold;">Optimal - No oscillation around setpoint</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>
+								After preliminary tuning and testing, the robot arm successfully grabbed the object, moved it
+								to a pre-defined location, and returned home.
+							</p>
+						</article>
+					</div>
+
+					<hr>
+
+					<!-- Discussion & Future Work -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Discussion & Future Work</h3>
+							</header>
+							<p>Once the final design was assembled, several potential improvements were identified:</p>
+							<ul>
+								<li><strong>Servo Synchronization:</strong> Synchronizing each pair of servomotors proved difficult.
+								Fewer servomotors can achieve the same goal (only one servomotor on the main arm and end effector),
+								which would also reduce overall cost.</li>
+								<li><strong>Workspace Limitation:</strong> The robot arm workspace was limited due to the weight of
+								the claw mechanism. A lighter claw would result in further extension of the robot arm.</li>
+								<li><strong>Enhanced Control:</strong> The servomotors chosen contained internal speed control for
+								high precision tracking, which limited feedback control options. Using servomotors with position
+								feedback would enable robotic manipulator calculations, adaptive control, and feedforward control.</li>
+							</ul>
+						</article>
+					</div>
+
+					<hr>
+
+					<!-- Conclusion -->
+					<div class="row">
+						<article class="col-12">
+							<header>
+								<h3>Conclusion</h3>
+							</header>
+							<p>
+								The proportional controller successfully calculated the necessary angle for the claw to get
+								within 2 inches of the object. Oscillations from proportional gain were eliminated through
+								trial and error. Smoothing of the robot arms was tuned using time delays to eliminate harsh
+								movements. Overall, the robot arm design and controller successfully detected an object and
+								transported it to another location with little error, satisfying the system requirements.
+							</p>
+						</article>
+					</div>
+
+				</div>
 
 			</div>
 

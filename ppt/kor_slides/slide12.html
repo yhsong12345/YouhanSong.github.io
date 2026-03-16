@@ -185,29 +185,36 @@
                     Project Goal
                 </h3>
 <p class="text-sm text-gray-300 leading-relaxed mb-2">
-                    <span class="highlight-text">3D Printing 기반 로봇 팔 설계/제작</span> 및 Inverse Kinematics 기반 센서 융합 자동 제어 시스템 구현. 컨베이어 벨트 간 물체 자동 이송 자동화 달성.
+                    <span class="highlight-text">3D Printing 기반 로봇 팔 설계/제작</span> 및 피드백 제어 시스템 구현. 레이더 센서로 물체 감지 후 컨베이어 벨트 간 자동 이송.
                 </p>
-<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5">Key Responsibilities</h4>
-<ul class="space-y-2 text-sm text-gray-300">
+<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5">System Workflow</h4>
+<ul class="space-y-1.5 text-sm text-gray-300">
 <li class="flex items-start">
-<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">Inverse Kinematics 계산 및 제어 알고리즘 구현</span>
+<i class="fa-solid fa-1 text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">레이더 센서가 작업 공간 내 물체 감지</span>
 </li>
 <li class="flex items-start">
-<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">센서 통합 및 자동화 시스템 개발</span>
+<i class="fa-solid fa-2 text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">비례 제어로 물체까지의 각도 계산</span>
 </li>
 <li class="flex items-start">
-<i class="fa-solid fa-check text-cyan-500 mt-1 mr-2 text-xs"></i>
-<span class="leading-snug">Arduino 기반 임베디드 시스템 통합</span>
+<i class="fa-solid fa-3 text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">물체를 집어 지정 위치로 이송</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-4 text-cyan-500 mt-1 mr-2 text-xs"></i>
+<span class="leading-snug">홈 위치로 복귀 후 반복</span>
 </li>
 </ul>
-<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5">Key Achievements</h4>
-<ul class="text-sm text-gray-300 leading-relaxed mb-2 list-disc list-inside space-y-0.5">
-<li>Servo 모터와 Gripper의 정확한 위치 제어를 위해 <span class="text-white">기구학(Kinematics) 계산</span>을 수행하고 이를 C언어 코드로 구현하여 정밀 제어 달성</li>
-<li>거리 센서를 활용하여 물체가 감지 범위 내로 들어오면 자동으로 집어서 이송하고 복귀하는 <span class="text-white">자동화 루틴(Automation Routine)</span> 구현</li>
-<li>Arduino 보드에 제어 알고리즘을 탑재하여 센서 데이터 처리와 모터 제어를 실시간으로 연동하는 <span class="text-white">임베디드 시스템 통합</span> 성공</li>
+<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5 mt-2">Hardware</h4>
+<ul class="text-xs text-gray-300 leading-relaxed mb-2 space-y-0.5">
+<li>• <span class="text-white">Arduino Mega</span> + Adafruit PWM Shield</li>
+<li>• <span class="text-white">6x 서보모터</span> (5개 팔, 1개 그리퍼)</li>
+<li>• <span class="text-white">초음파 센서</span> (End Effector 장착)</li>
+<li>• <span class="text-white">베어링</span> (베이스 하중 분산)</li>
 </ul>
+<h4 class="text-sm font-bold text-gray-400 uppercase mb-1.5">Budget</h4>
+<p class="text-lg font-bold text-cyan-400 mb-2">$173.60 <span class="text-xs text-gray-400 font-normal">총 비용</span></p>
 <h4 class="text-sm font-bold text-gray-400 uppercase mb-2">Tech Stack</h4>
 <div class="flex flex-wrap gap-1 mb-0">
 <span class="tech-badge"><i class="fa-solid fa-microchip text-blue-400"></i> Arduino</span>
@@ -219,56 +226,72 @@
 </div>
 <!-- Right Panel: Technical Details & Process -->
 <div class="w-2/3 flex flex-col gap-3">
-<!-- Architecture Diagram Section (Modified with Image) -->
+<!-- Feedback Control Section -->
 <div class="glass-panel-dark p-3">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-base font-bold text-white font-['Montserrat']">System &amp; Hardware Design</h3>
-<span class="text-xs text-cyan-400 border border-cyan-500/30 px-2 py-1 rounded bg-cyan-900/20">Hardware Implementation</span>
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-base font-bold text-white font-['Montserrat']">Feedback Control System</h3>
+<span class="text-xs text-cyan-400 border border-cyan-500/30 px-2 py-1 rounded bg-cyan-900/20">Proportional Control</span>
 </div>
-<!-- Steps Section (Grid Layout) -->
-<div class="grid grid-cols-3 gap-3">
-<!-- Step 1 -->
-<div class="bg-slate-800/60 p-3 rounded-lg border border-cyan-500/30 hover:border-cyan-500/60 hover:bg-slate-800/80 transition-all">
-<div class="flex items-center gap-2 mb-2">
-<div class="w-8 h-8 rounded-lg bg-cyan-900/60 flex items-center justify-center text-cyan-400 font-bold text-sm shrink-0 border border-cyan-500/30">
-<i class="fa-solid fa-cube text-xs"></i>
+<div class="grid grid-cols-2 gap-3">
+<!-- Control Equations -->
+<div class="bg-slate-800/60 p-3 rounded-lg border border-cyan-500/30">
+<p class="text-xs font-bold text-cyan-200 mb-2">Distance Calculation</p>
+<p class="text-[11px] text-gray-300 font-mono bg-slate-900/50 p-2 rounded">d<sub>obj</sub> = l<sub>arm</sub> + l<sub>end</sub> + d<sub>sensor</sub></p>
+<p class="text-[10px] text-gray-400 mt-1">where l<sub>arm</sub> = L sin(θ)</p>
+<p class="text-xs font-bold text-cyan-200 mb-2 mt-3">P-Controller</p>
+<p class="text-[11px] text-gray-300 font-mono bg-slate-900/50 p-2 rounded">u[k] = u[k-1] + k<sub>p</sub>(e[k] - e[k-1])</p>
+<p class="text-[10px] text-gray-400 mt-1">e[k] = d<sub>ref</sub> - d<sub>act</sub>, k<sub>p</sub> = 2</p>
 </div>
-<div class="flex-1">
-<p class="text-xs font-bold text-cyan-200">3D Design &amp; Printing</p>
+<!-- kp Comparison Table -->
+<div class="bg-slate-800/60 p-3 rounded-lg border border-blue-500/30">
+<p class="text-xs font-bold text-blue-200 mb-2">k<sub>p</sub> Value Tuning Results</p>
+<table class="w-full text-[10px]">
+<thead>
+<tr class="text-gray-400 border-b border-slate-600">
+<th class="py-1 text-left">k<sub>p</sub></th>
+<th class="py-1 text-left">Result</th>
+</tr>
+</thead>
+<tbody class="text-gray-300">
+<tr class="border-b border-slate-700">
+<td class="py-1">0.5</td>
+<td class="py-1 text-red-400">High oscillation</td>
+</tr>
+<tr class="border-b border-slate-700">
+<td class="py-1">1.0</td>
+<td class="py-1 text-yellow-400">Moderate oscillation</td>
+</tr>
+<tr class="bg-green-900/30">
+<td class="py-1 font-bold text-green-400">2.0</td>
+<td class="py-1 text-green-400">Optimal (No oscillation)</td>
+</tr>
+</tbody>
+</table>
+<p class="text-[10px] text-gray-400 mt-2">목표: 물체와 2인치 거리 유지</p>
 </div>
 </div>
-<p class="text-[10px] text-gray-400 leading-relaxed">Solidworks Modeling / Custom Parts Manufacturing</p>
 </div>
-<!-- Step 2 -->
-<div class="bg-slate-800/60 p-3 rounded-lg border border-blue-500/30 hover:border-blue-500/60 hover:bg-slate-800/80 transition-all">
-<div class="flex items-center gap-2 mb-2">
-<div class="w-8 h-8 rounded-lg bg-blue-900/60 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0 border border-blue-500/30">
-<i class="fa-solid fa-code text-xs"></i>
+<!-- Bottom Row: Results & Images -->
+<div class="flex gap-3 flex-1">
+<!-- Results & Conclusion -->
+<div class="glass-panel p-2.5 flex flex-col" style="width: 25%; flex-shrink: 0;">
+<h3 class="text-sm font-bold text-white mb-2">Results</h3>
+<div class="text-[10px] text-gray-300 space-y-1.5">
+<p><i class="fa-solid fa-check text-green-400 mr-1"></i> 물체 감지 → 이송 성공</p>
+<p><i class="fa-solid fa-check text-green-400 mr-1"></i> 비선형성 보정</p>
+<p><i class="fa-solid fa-check text-green-400 mr-1"></i> 부드러운 움직임</p>
 </div>
-<div class="flex-1">
-<p class="text-xs font-bold text-blue-200">Kinematics &amp; Control</p>
-</div>
-</div>
-<p class="text-[10px] text-gray-400 leading-relaxed">Inverse Kinematics Calculation / C Programming</p>
-</div>
-<!-- Step 3 -->
-<div class="bg-slate-800/60 p-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 hover:bg-slate-800/80 transition-all">
-<div class="flex items-center gap-2 mb-2">
-<div class="w-8 h-8 rounded-lg bg-purple-900/60 flex items-center justify-center text-purple-400 font-bold text-sm shrink-0 border border-purple-500/30">
-<i class="fa-solid fa-robot text-xs"></i>
-</div>
-<div class="flex-1">
-<p class="text-xs font-bold text-purple-200">Sensor Integration</p>
-</div>
-</div>
-<p class="text-[10px] text-gray-400 leading-relaxed">Object Detection / Automated Relocation System</p>
-</div>
+<h4 class="text-xs font-bold text-gray-400 mt-2 mb-1">Future Work</h4>
+<div class="text-[10px] text-gray-400 space-y-1">
+<p>• 서보 6→3개 감소</p>
+<p>• 경량 그리퍼 적용</p>
+<p>• 적응 제어 도입</p>
 </div>
 </div>
 <!-- Image Section -->
-<div class="glass-panel p-2.5 flex-1 flex flex-col">
+<div class="glass-panel p-2.5 flex-1 flex flex-col" style="width: 75%;">
 <h3 class="text-sm font-bold text-white mb-2">Project Images</h3>
-<div class="grid grid-cols-4 gap-2.5 h-full">
+<div class="grid grid-cols-4 gap-2 h-full">
 <!-- Image 1 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center h-full">
 <img src="../../images/robotic_arm_object_relocator_2.jpg" alt="Project Image 1" class="max-w-full max-h-full object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -292,9 +315,10 @@
 </div>
 <!-- Image 4 -->
 <div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center h-full">
-<img src="../../images/robotic_arm_object_relocator.jpg" alt="Project Image 2" class="max-w-full max-h-full object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<img src="../../images/robotic_arm_object_relocator.jpg" alt="Project Image 4" class="max-w-full max-h-full object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="flex items-center justify-center h-full w-full" style="display: none;">
 <span class="text-xs text-gray-500">Image 4</span>
+</div>
 </div>
 </div>
 </div>

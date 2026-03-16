@@ -1,0 +1,822 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+	<head>
+		<title>Real-Time Traffic Sign & Signal Detection System</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+		<style>
+			.tech-stack {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin: 20px 0;
+			}
+			.tech-badge {
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				padding: 8px 16px;
+				border-radius: 20px;
+				font-size: 0.9em;
+				font-weight: 500;
+			}
+			.metrics-table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 20px 0;
+			}
+			.metrics-table th, .metrics-table td {
+				border: 1px solid #ddd;
+				padding: 12px;
+				text-align: center;
+			}
+			.metrics-table th {
+				background-color: #4a5568;
+				color: white;
+			}
+			.metrics-table tr:nth-child(even) {
+				background-color: #f8f9fa;
+			}
+			.highlight-value {
+				color: #48bb78;
+				font-weight: bold;
+				font-size: 1.1em;
+			}
+			.section-box {
+				background: #f7fafc;
+				border-left: 4px solid #667eea;
+				padding: 20px;
+				margin: 20px 0;
+				border-radius: 0 8px 8px 0;
+			}
+			.problem-solution {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+				margin: 20px 0;
+			}
+			.problem-box {
+				background: #fff5f5;
+				border-left: 4px solid #fc8181;
+				padding: 15px;
+				border-radius: 0 8px 8px 0;
+			}
+			.solution-box {
+				background: #f0fff4;
+				border-left: 4px solid #48bb78;
+				padding: 15px;
+				border-radius: 0 8px 8px 0;
+			}
+			@media (max-width: 768px) {
+				.problem-solution {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="right-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="#" id="logo">Real-Time Traffic Sign & Signal Detection</a></h1>
+							</header>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="../../index.html">Home</a></li>
+								<li><a href="../../About_me.html">About Me</a></li>
+								<li>
+									<a href="../../Experience_and_Projects.html">Experience & Projects</a>
+									<ul>
+										<li>
+											<a href="../../experience_and_projects/Project_cubox.html">SECERN AI (formerly CUBOX) &hellip;</a>
+											<ul>
+												<li><a href="../../experience_and_projects/secern/smart_control_system.html">Smart Control System</a></li>
+												<li><a href="../../experience_and_projects/secern/ko_llm.html">LLM</a></li>
+												<li><a href="../../experience_and_projects/secern/seeu_track.html">Seeu Track</a></li>
+												<li><a href="../../experience_and_projects/secern/face_recognition.html">Face Recognition System</a></li>
+												<li><a href="../../experience_and_projects/secern/seeu_id.html">Seeu ID</a></li>
+												<li><a href="../../experience_and_projects/secern/gumi.html">Gumi MetaVerse</a></li>
+												<li><a href="../../experience_and_projects/secern/Tanzania.html">Tanzania SmartGate</a></li>
+											</ul>
+										</li>
+										<li>
+											<a href="../../experience_and_projects/Project_robotic_and_automation.html">Robotics and Automation Lab &hellip;</a>
+											<ul>
+												<li><a href="../../experience_and_projects/tamu/traffic_sign_detection.html">Traffic Sign Detection (Thesis)</a></li>
+											</ul>
+										</li>
+										<li>
+											<a href="../../experience_and_projects/Project_tamu.html">TAMU (Master's Degree) &hellip;</a>
+											<ul>
+												<li><a href="../../experience_and_projects/tamu/relocator.html">Robotic Arm Relocator</a></li>
+												<li><a href="../../experience_and_projects/tamu/orange.html">Orange Harvesting Robot</a></li>
+												<li><a href="../../experience_and_projects/tamu/deep_learning.html">Projects in Deep Learning Course</a></li>
+												<li><a href="../../experience_and_projects/tamu/machine_learning.html">Projects in Machine Learning Course</a></li>
+												<li><a href="../../experience_and_projects/tamu/optimization.html">Power Plant Scheduling</a></li>
+												<li><a href="../../experience_and_projects/tamu/robot_manipulator.html">Projects in Mechanics of Robot Manipulators Course</a></li>
+											</ul>
+										</li>
+										<li>
+											<a href="../../experience_and_projects/Project_isu.html">ISU (Bachelor's Degree)</a>
+										</li>
+									</ul>
+								</li>
+
+								<li>
+									<a href="../../Extra_activity.html">Other Experience</a>
+									<ul>
+										<li><a href="../../extra_activity/kosa.html">KOSA</a></li>
+										<li><a href="../../extra_activity/CUBOX_Futsal_club.html">CUBOX Futsal Club</a></li>
+										<li><a href="../../extra_activity/AKOZ.html">AKOZ</a></li>
+										<li><a href="../../extra_activity/Memorial_Union.html">Memorial Union</a></li>
+										<li><a href="../../extra_activity/isu_basketball.html">Korean Basketball Club at ISU</a></li>
+									</ul>
+								</li>
+
+							</ul>
+						</nav>
+				</div>
+
+			<!-- Main -->
+			<div class="wrapper style1">
+				<div class="container">
+
+					<!-- Project Overview -->
+					<section>
+						<header>
+							<h2>Project Overview</h2>
+						</header>
+						<p>
+							This Master's thesis project developed an enhanced YOLOv7-based real-time traffic sign and signal detection system
+							optimized for high-speed driving scenarios (65+ mph) and challenging environmental conditions. The research addresses
+							critical challenges in autonomous vehicle perception systems where accurate detection of distant and small traffic
+							elements is essential for safety-critical decision making.
+						</p>
+						<p>
+							The main objective was to propose an improved YOLOv7 model that achieves better performance than the original
+							while trained with <strong>random-quality and limited datasets</strong>. Unlike existing models trained on MS COCO
+							that lack traffic sign/light detection capabilities, this work specifically targets real-world autonomous driving
+							requirements where the perception system must reliably detect and classify traffic elements for proper
+							longitudinal/lateral control decisions.
+						</p>
+
+						<div class="section-box">
+							<h4>Key Achievement</h4>
+							<p>
+								Achieved <span class="highlight-value">+1.1% improvement in mAP@0.5</span> (92.3% → 93.4%) over the original
+								YOLOv7 model through strategic modification of the activation function from SiLU to ELU, significantly
+								enhancing detection accuracy for distant objects and resolving multi-class confusion scenarios.
+							</p>
+						</div>
+
+						<div class="problem-solution">
+							<div class="problem-box">
+								<h4>Research Motivation</h4>
+								<ul style="margin-bottom: 0;">
+									<li>Existing CV models (YOLO series) trained on MS COCO lack traffic sign/light detection</li>
+									<li>High-speed driving causes camera resolution degradation and motion blur</li>
+									<li>Similar features between traffic signs lead to misclassification</li>
+									<li>Limited high-quality datasets available for traffic sign detection</li>
+								</ul>
+							</div>
+							<div class="solution-box">
+								<h4>Research Contributions</h4>
+								<ul style="margin-bottom: 0;">
+									<li>Modified YOLOv7 architecture with ELU activation for improved gradient flow</li>
+									<li>Constructed comprehensive dataset of 29,978 annotated images (14 classes)</li>
+									<li>Implemented ROS-based real-time testing pipeline for validation</li>
+									<li>Demonstrated superior performance in distant object detection scenarios</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<hr>
+
+					<!-- Tech Stack -->
+					<section>
+						<header>
+							<h2>Technology Stack</h2>
+						</header>
+						<div class="tech-stack">
+							<span class="tech-badge">YOLOv7</span>
+							<span class="tech-badge">PyTorch</span>
+							<span class="tech-badge">CNN</span>
+							<span class="tech-badge">Ubuntu 20.04 LTS</span>
+							<span class="tech-badge">ROS 1 (Melodic)</span>
+							<span class="tech-badge">Python</span>
+							<span class="tech-badge">LabelImg</span>
+							<span class="tech-badge">Roboflow</span>
+							<span class="tech-badge">Rosbag</span>
+						</div>
+
+						<h4>Hardware Environment</h4>
+						<table class="metrics-table">
+							<thead>
+								<tr>
+									<th>Purpose</th>
+									<th>Hardware</th>
+									<th>Memory Usage</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><strong>Training</strong></td>
+									<td>2x NVIDIA GeForce RTX 3090 Ti (48GB total)</td>
+									<td>20.9-23.1 GB</td>
+								</tr>
+								<tr>
+									<td><strong>Testing</strong></td>
+									<td>1x NVIDIA GeForce RTX 2080 Ti (11GB)</td>
+									<td>~1.35 GB</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<h4>Training Configuration</h4>
+						<ul>
+							<li><strong>Epochs:</strong> 300</li>
+							<li><strong>Batch Size:</strong> 32</li>
+							<li><strong>Image Size:</strong> 640 × 640 pixels</li>
+							<li><strong>Learning Rate:</strong> 0.01</li>
+							<li><strong>Training Time:</strong> ~26 hours</li>
+						</ul>
+					</section>
+
+					<hr>
+
+					<!-- Core Features -->
+					<section>
+						<header>
+							<h2>Core Features & Dataset</h2>
+						</header>
+
+						<h4>Classification Categories (14 Classes)</h4>
+						<table class="metrics-table">
+							<thead>
+								<tr>
+									<th>Class</th>
+									<th>Number of Images</th>
+									<th>Class</th>
+									<th>Number of Images</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Speed Limit 30 mph</td>
+									<td>540</td>
+									<td>Speed Limit 55 mph</td>
+									<td>2,131</td>
+								</tr>
+								<tr>
+									<td>Speed Limit 35 mph</td>
+									<td>1,636</td>
+									<td>Speed Limit 60 mph</td>
+									<td>1,675</td>
+								</tr>
+								<tr>
+									<td>Speed Limit 40 mph</td>
+									<td>1,741</td>
+									<td>Speed Limit 65 mph</td>
+									<td>1,834</td>
+								</tr>
+								<tr>
+									<td>Speed Limit 45 mph</td>
+									<td>1,724</td>
+									<td>Speed Limit 70 mph</td>
+									<td>1,838</td>
+								</tr>
+								<tr>
+									<td>Speed Limit 50 mph</td>
+									<td>1,789</td>
+									<td>Speed Limit 75 mph</td>
+									<td>1,739</td>
+								</tr>
+								<tr>
+									<td>Stop Sign</td>
+									<td>2,194</td>
+									<td>Traffic Light (Green)</td>
+									<td>6,901</td>
+								</tr>
+								<tr>
+									<td>Traffic Light (Yellow)</td>
+									<td>1,371</td>
+									<td>Traffic Light (Red)</td>
+									<td>4,892</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div class="section-box">
+							<h4>Dataset Statistics</h4>
+							<p>
+								Constructed a comprehensive dataset of <strong>29,978 annotated images</strong>
+								following US traffic sign standards. The dataset was carefully curated to include
+								various lighting conditions, distances, and occlusion scenarios to ensure robust
+								model generalization.
+							</p>
+							<ul>
+								<li><strong>Training Set:</strong> 25,481 images (85%)</li>
+								<li><strong>Validation Set:</strong> 4,477 images (15%)</li>
+								<li><strong>Test Set:</strong> 20 images (randomly selected for real-time evaluation)</li>
+							</ul>
+							<p>
+								Data sources include raw images collected from city and highway driving in Texas,
+								images from Roboflow, and stop sign images extracted from MS COCO dataset.
+								All images were annotated using LabelImg tool.
+							</p>
+						</div>
+
+						<!-- IMAGE PLACEHOLDER: Dataset sample images showing different classes -->
+						<div style="background: #edf2f7; border: 2px dashed #a0aec0; border-radius: 8px; padding: 30px; text-align: center; margin: 20px 0;">
+							<p style="color: #718096; margin: 0;">
+								<strong>📷 Suggested Image:</strong> Dataset sample images showing examples of each class
+								<br><small>(Speed limit signs, stop sign, traffic lights in various conditions)</small>
+							</p>
+						</div>
+					</section>
+
+					<hr>
+
+					<!-- Problem Solving -->
+					<section>
+						<header>
+							<h2>Technical Problem Solving</h2>
+						</header>
+
+						<h3>YOLOv7 Architecture Overview</h3>
+						<p>
+							YOLOv7 was selected after comparing multiple real-time object detectors based on speed and accuracy.
+							As a one-stage detector, it provides the optimal balance for real-time autonomous driving applications.
+							The architecture consists of three main components:
+						</p>
+						<ul>
+							<li><strong>Backbone:</strong> Feature extraction using Conv blocks, MaxPooling, and ELAN (Efficient Layer Aggregation Network)</li>
+							<li><strong>Neck:</strong> Feature aggregation using PAFPN structure with SPPCSPC and ELAN-H modules</li>
+							<li><strong>Head:</strong> Detection output producing class probabilities, confidence scores, and bounding boxes</li>
+						</ul>
+
+						<!-- IMAGE PLACEHOLDER: YOLOv7 Architecture Diagram -->
+						<div style="background: #edf2f7; border: 2px dashed #a0aec0; border-radius: 8px; padding: 30px; text-align: center; margin: 20px 0;">
+							<p style="color: #718096; margin: 0;">
+								<strong>📷 Suggested Image:</strong> YOLOv7 Architecture Diagram (Figure 5.2 or 5.6 from thesis)
+								<br><small>(Showing Backbone → Neck → Head pipeline with modified activation functions)</small>
+							</p>
+						</div>
+
+						<h3>Activation Function Optimization: SiLU to ELU</h3>
+
+						<div class="problem-solution">
+							<div class="problem-box">
+								<h4>Problem with SiLU</h4>
+								<p>
+									The original SiLU (Sigmoid Linear Unit) activation function in YOLOv7
+									exhibits outputs approaching zero for negative input values, creating
+									potential for <strong>vanishing gradient problems</strong> during
+									backpropagation. Similar to ReLU's "dying" problem, when x approaches
+									negative infinity, the output approaches 0.
+								</p>
+								<pre style="background: #fed7d7; color: #742a2a; padding: 10px; border-radius: 6px; font-size: 0.9em;">
+SiLU(x) = x × σ(x) = x × (1 / (1 + e^(-x)))
+When x → -∞, output → 0 (gradient vanishes)</pre>
+							</div>
+							<div class="solution-box">
+								<h4>Solution with ELU</h4>
+								<p>
+									Implemented <strong>ELU (Exponential Linear Unit)</strong> activation function,
+									which produces negative outputs and pushes mean activations closer to zero.
+									This reduces bias shift and speeds up learning by moving gradients closer
+									to the unit natural gradient.
+								</p>
+								<pre style="background: #c6f6d5; color: #22543d; padding: 10px; border-radius: 6px; font-size: 0.9em;">
+ELU(x) = x,              if x > 0
+ELU(x) = α(e^x - 1),     if x ≤ 0  (α = 1.0)
+Preserves gradient flow for negative inputs</pre>
+							</div>
+						</div>
+
+						<!-- IMAGE PLACEHOLDER: Activation Function Comparison Graphs -->
+						<div style="background: #edf2f7; border: 2px dashed #a0aec0; border-radius: 8px; padding: 30px; text-align: center; margin: 20px 0;">
+							<p style="color: #718096; margin: 0;">
+								<strong>📷 Suggested Image:</strong> SiLU vs ELU Activation Function Graphs (Figure 5.4 & 5.5 from thesis)
+								<br><small>(Side-by-side comparison showing function curves and their derivatives)</small>
+							</p>
+						</div>
+
+						<h4>Key Benefits of ELU</h4>
+						<ul>
+							<li><strong>Negative Outputs:</strong> Unlike ReLU/SiLU, ELU produces negative values, allowing the mean to be pushed closer to zero</li>
+							<li><strong>Reduced Bias Shift:</strong> Zero-centered activations speed up training convergence</li>
+							<li><strong>Gradient Preservation:</strong> Maintains gradient flow through deep networks, crucial for detecting small distant objects</li>
+							<li><strong>Architecture-wide Impact:</strong> Modified all CBS (Conv-BatchNorm-SiLU) blocks throughout Backbone, Neck, and Head</li>
+						</ul>
+					</section>
+
+					<hr>
+
+					<!-- Results -->
+					<section>
+						<header>
+							<h2>Performance Results</h2>
+						</header>
+
+						<h3>Overall Performance Comparison</h3>
+						<table class="metrics-table">
+							<thead>
+								<tr>
+									<th>Metric</th>
+									<th>Original YOLOv7 (SiLU)</th>
+									<th>Modified YOLOv7 (ELU)</th>
+									<th>Improvement</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>mAP@0.5</td>
+									<td>92.3%</td>
+									<td class="highlight-value">93.4%</td>
+									<td><span class="highlight-value">+1.1%</span></td>
+								</tr>
+								<tr>
+									<td>Precision</td>
+									<td>96.1%</td>
+									<td class="highlight-value">95.5%</td>
+									<td>-0.6%</td>
+								</tr>
+								<tr>
+									<td>Recall</td>
+									<td>96.0%</td>
+									<td class="highlight-value">97.0%</td>
+									<td><span class="highlight-value">+1.0%</span></td>
+								</tr>
+								<tr>
+									<td>F1-Score</td>
+									<td>89.0%</td>
+									<td class="highlight-value">90.0%</td>
+									<td><span class="highlight-value">+1.0%</span></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<!-- IMAGE PLACEHOLDER: Training Curves -->
+						<div style="background: #edf2f7; border: 2px dashed #a0aec0; border-radius: 8px; padding: 30px; text-align: center; margin: 20px 0;">
+							<p style="color: #718096; margin: 0;">
+								<strong>📷 Suggested Image:</strong> Training Loss & Precision-Recall Curves (Figure 9.3 & 9.4 from thesis)
+								<br><small>(Comparison of loss convergence and PR curves between Original and Modified models)</small>
+							</p>
+						</div>
+
+						<h3>Per-Class Performance (Modified Model)</h3>
+						<table class="metrics-table">
+							<thead>
+								<tr>
+									<th>Class</th>
+									<th>Precision</th>
+									<th>Recall</th>
+									<th>F1-Score</th>
+									<th>mAP@0.5</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Speed Limit 30 mph</td>
+									<td>92.6%</td>
+									<td>95.3%</td>
+									<td>93.9%</td>
+									<td class="highlight-value">97.9%</td>
+								</tr>
+								<tr>
+									<td>Speed Limit 50 mph</td>
+									<td>98.1%</td>
+									<td>96.2%</td>
+									<td>97.1%</td>
+									<td class="highlight-value">99.3%</td>
+								</tr>
+								<tr>
+									<td>Speed Limit 75 mph</td>
+									<td>98.3%</td>
+									<td>97.6%</td>
+									<td>98.0%</td>
+									<td class="highlight-value">99.3%</td>
+								</tr>
+								<tr>
+									<td>Stop Sign</td>
+									<td>80.5%</td>
+									<td>84.2%</td>
+									<td>82.3%</td>
+									<td>84.4%</td>
+								</tr>
+								<tr>
+									<td>Traffic Light (Green)</td>
+									<td>93.7%</td>
+									<td>84.8%</td>
+									<td>89.0%</td>
+									<td>91.7%</td>
+								</tr>
+								<tr>
+									<td>Traffic Light (Red)</td>
+									<td>89.1%</td>
+									<td>72.4%</td>
+									<td>79.9%</td>
+									<td>85.4%</td>
+								</tr>
+								<tr style="background-color: #fff3cd;">
+									<td>Traffic Light (Yellow)</td>
+									<td>89.1%</td>
+									<td>49.1%</td>
+									<td>63.3%</td>
+									<td>58.5%*</td>
+								</tr>
+							</tbody>
+						</table>
+						<p style="font-size: 0.9em; color: #718096;">
+							*Yellow light shows lower performance due to limited dataset size and shape variations (vertical/horizontal light configurations).
+						</p>
+
+						<!-- IMAGE PLACEHOLDER: Confusion Matrix -->
+						<div style="background: #edf2f7; border: 2px dashed #a0aec0; border-radius: 8px; padding: 30px; text-align: center; margin: 20px 0;">
+							<p style="color: #718096; margin: 0;">
+								<strong>📷 Suggested Image:</strong> Confusion Matrix (Figure B.1 from thesis)
+								<br><small>(Shows per-class classification accuracy and confusion patterns)</small>
+							</p>
+						</div>
+
+						<h3>Qualitative Improvements in Real-Time Testing</h3>
+						<div class="problem-solution">
+							<div class="solution-box">
+								<h4>Distant Object Detection</h4>
+								<p>
+									At 40+ mph, the modified model successfully detected traffic lights at distances
+									where the original model completely failed to identify them.
+								</p>
+							</div>
+							<div class="solution-box">
+								<h4>Misclassification Resolution</h4>
+								<p>
+									The original model incorrectly classified "Do Not Enter" signs as stop signs.
+									The modified model correctly avoided this false positive.
+								</p>
+							</div>
+						</div>
+						<div class="problem-solution">
+							<div class="solution-box">
+								<h4>High-Speed Performance</h4>
+								<p>
+									Demonstrated stable detection at 75 mph highway speeds, maintaining
+									consistent confidence scores throughout the drive.
+								</p>
+							</div>
+							<div class="solution-box">
+								<h4>Stopped Vehicle Detection</h4>
+								<p>
+									At intersections (0 mph), modified model correctly detected red lights
+									while original model failed to recognize them.
+								</p>
+							</div>
+						</div>
+
+						<!-- IMAGE PLACEHOLDER: Real-time Detection Comparison -->
+						<div style="background: #edf2f7; border: 2px dashed #a0aec0; border-radius: 8px; padding: 30px; text-align: center; margin: 20px 0;">
+							<p style="color: #718096; margin: 0;">
+								<strong>📷 Suggested Image:</strong> Real-Time Detection Comparison (Figure 9.8, 9.9, 9.11 from thesis)
+								<br><small>(Side-by-side: Original (left) vs Modified (right) showing distant traffic light detection)</small>
+							</p>
+						</div>
+					</section>
+
+					<hr>
+
+					<!-- ROS Integration -->
+					<section>
+						<header>
+							<h2>ROS Integration & Real-Time Testing</h2>
+						</header>
+						<p>
+							Beyond model training, this project implemented a complete real-time testing pipeline
+							using <strong>Robot Operating System (ROS 1 Melodic)</strong> on Ubuntu 18.04 LTS:
+						</p>
+
+						<div class="section-box">
+							<h4>System Architecture</h4>
+							<p>
+								The testing system uses ROS's publisher-subscriber architecture:
+							</p>
+							<ul style="margin-bottom: 0;">
+								<li><strong>Publisher:</strong> Camera images from recorded rosbag files (not used for training to prevent overfitting)</li>
+								<li><strong>Subscriber:</strong> Python node that loads the trained model weights and performs inference</li>
+								<li><strong>Output:</strong> Real-time bounding box visualization with confidence scores and class labels</li>
+							</ul>
+						</div>
+
+						<h4>Testing Methodology</h4>
+						<ul>
+							<li><strong>Independent Test Data:</strong> Rosbag recordings were specifically NOT used for training
+								to ensure unbiased evaluation of real-world performance</li>
+							<li><strong>Speed Variation Testing:</strong> Evaluated at multiple speeds (0, 10, 35, 40, 75 mph)
+								to assess performance across driving conditions</li>
+							<li><strong>Environmental Diversity:</strong> Tested in city streets, highways, intersections,
+								and varying lighting conditions</li>
+							<li><strong>Camera Configuration:</strong> Running at up to 30 Hz depending on brightness and other factors</li>
+						</ul>
+
+						<h4>Key Findings from Real-Time Testing</h4>
+						<table class="metrics-table">
+							<thead>
+								<tr>
+									<th>Scenario</th>
+									<th>Original Model</th>
+									<th>Modified Model</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Distant traffic light (40 mph)</td>
+									<td style="color: #e53e3e;">Not detected</td>
+									<td class="highlight-value">Detected successfully</td>
+								</tr>
+								<tr>
+									<td>"Do Not Enter" sign</td>
+									<td style="color: #e53e3e;">Misclassified as Stop</td>
+									<td class="highlight-value">Correctly ignored</td>
+								</tr>
+								<tr>
+									<td>Red light at intersection (0 mph)</td>
+									<td style="color: #e53e3e;">Failed to detect</td>
+									<td class="highlight-value">Detected</td>
+								</tr>
+								<tr>
+									<td>Highway speed (75 mph)</td>
+									<td>Partial detection</td>
+									<td class="highlight-value">Stable detection</td>
+								</tr>
+								<tr>
+									<td>Strong sunlight conditions</td>
+									<td style="color: #e53e3e;">Red→Yellow misclassification</td>
+									<td style="color: #e53e3e;">Red→Yellow misclassification*</td>
+								</tr>
+							</tbody>
+						</table>
+						<p style="font-size: 0.9em; color: #718096;">
+							*Both models showed sensitivity to direct sunlight, indicating need for HDR data augmentation in future work.
+						</p>
+					</section>
+
+					<hr>
+
+					<!-- Limitations & Lessons -->
+					<section>
+						<header>
+							<h2>Limitations & Lessons Learned</h2>
+						</header>
+
+						<div class="problem-solution">
+							<div class="problem-box">
+								<h4>Environmental Sensitivity</h4>
+								<p>
+									Under strong direct sunlight conditions, both models occasionally misclassified red
+									traffic lights as yellow. This finding underscores the importance of comprehensive
+									<strong>data augmentation strategies</strong> including HDR simulation, varied lighting
+									conditions, and color jittering in training pipelines.
+								</p>
+							</div>
+							<div class="problem-box">
+								<h4>Trade-off in Shadow Regions</h4>
+								<p>
+									The ELU activation function modification, while improving overall metrics, showed
+									slight performance degradation in specific shadow regions (e.g., under tree canopies).
+									The original model performed better in these specific conditions, revealing an
+									interesting trade-off for future research.
+								</p>
+							</div>
+						</div>
+
+						<div class="problem-solution">
+							<div class="problem-box">
+								<h4>Yellow Light Performance</h4>
+								<p>
+									Yellow traffic light detection showed only 58.5% mAP, significantly lower than other classes.
+									Root causes identified: (1) Limited dataset size compared to red/green lights,
+									(2) Shape variations (vertical vs horizontal light configurations),
+									(3) Color similarity to some light housings.
+								</p>
+							</div>
+							<div class="problem-box">
+								<h4>Dataset Quality Uncertainty</h4>
+								<p>
+									The uncertainty of how much data is required to achieve optimal performance remains.
+									Resolution variations across the dataset (some blurred, some noisy, some clear)
+									affected training consistency. High-speed driving further degrades camera resolution.
+								</p>
+							</div>
+						</div>
+
+						<h4>Key Takeaways</h4>
+						<ul>
+							<li><strong>Activation Function Impact:</strong> Selection significantly affects detection performance in edge cases;
+								no single function is optimal for all scenarios</li>
+							<li><strong>Real-world vs Benchmark Gap:</strong> Models performing well on test sets may fail in real-world
+								scenarios not represented in training data</li>
+							<li><strong>Data Quality > Quantity:</strong> Diverse, high-quality annotations matter more than sheer volume</li>
+							<li><strong>Domain-specific Augmentation:</strong> Traffic-specific augmentations (lighting, weather, motion blur)
+								are crucial for robust perception</li>
+							<li><strong>End-to-end Testing:</strong> ROS integration for real-time validation is essential before deployment</li>
+						</ul>
+					</section>
+
+					<hr>
+
+					<!-- Conclusion -->
+					<section>
+						<header>
+							<h2>Conclusion</h2>
+						</header>
+						<div class="section-box">
+							<p>
+								This research demonstrated that <strong>strategic modification of the activation function
+								from SiLU to ELU</strong> in YOLOv7 can improve traffic sign and light detection performance,
+								particularly for distant objects and in challenging real-world driving scenarios.
+							</p>
+							<p>
+								The modified model achieved <span class="highlight-value">93.4% mAP@0.5</span> compared to
+								92.3% for the original, with notable improvements in recall (+1.0%) and F1-score (+1.0%).
+								Real-time testing via ROS confirmed superior performance in detecting traffic lights at
+								distances where the original model failed, and resolved misclassification issues between
+								similar-looking traffic signs.
+							</p>
+							<p style="margin-bottom: 0;">
+								<strong>We conclude that the modified model has better performance than the original model
+								for real-time autonomous driving applications.</strong>
+							</p>
+						</div>
+
+						<h4>Future Work</h4>
+						<ul>
+							<li>Implement adaptive activation functions that can switch between SiLU/ELU based on input characteristics</li>
+							<li>Expand dataset with weather-specific augmentations (rain, fog, snow)</li>
+							<li>Investigate attention mechanisms for improved small object detection</li>
+							<li>Deploy on edge devices (Jetson) for embedded autonomous vehicle applications</li>
+						</ul>
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<section>
+									<h2>Contact Information</h2>
+									<dl class="alt">
+										<dt>Address</dt>
+										<dd>12, Teheran-ro 22-gil &bull; Gangnam-gu &bull; Seoul 06236 &bull; Republic of Korea</dd>
+										<dt>Email</dt>
+										<dd><a href="mailto:youhans1997@gmail.com">youhans1997@gmail.com</a></dd>
+									</dl>
+									<ul class="icons">
+										<li><a href="https://github.com/yhsong12345" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+										<li><a href="https://www.linkedin.com/in/youhan-song-893771243/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+									</ul>
+								</section>
+
+							<!-- Copyright -->
+								<div class="copyright">
+									<ul class="menu">
+										<li>&copy; Youhan Song. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/jquery.dropotron.min.js"></script>
+			<script src="../../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../../assets/js/browser.min.js"></script>
+			<script src="../../assets/js/breakpoints.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<script src="../../assets/js/main.js"></script>
+
+	</body>
+</html>
