@@ -116,11 +116,11 @@
 <div class="relative z-10 px-10 pt-5 pb-2 flex justify-between items-start">
     <div>
         <div class="flex items-center space-x-3 text-cyan-400 mb-1">
-            <span class="px-2 py-0.5 border border-cyan-500 rounded text-[9px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Master's Thesis</span>
-            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Texas A&M University</span>
+            <span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Master's Thesis</span>
+            <span class="text-[11px] text-gray-400 uppercase tracking-widest">Texas A&M University</span>
         </div>
-        <h1 class="text-2xl font-black text-white font-['Montserrat'] mb-0.5 leading-tight">Robust Real-Time Traffic Sign and Light Detection</h1>
-        <p class="text-base text-cyan-300 font-medium">with Improved YOLOv7</p>
+        <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-0.5 leading-tight">Robust Real-Time Traffic Sign and Light Detection</h1>
+        <p class="text-lg text-cyan-300 font-medium">with Improved YOLOv7</p>
     </div>
     <div class="text-right">
         <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-slate-700" style="background-color: rgba(30, 41, 59, 0.8);">
@@ -137,11 +137,11 @@
     <div class="w-[48%] flex flex-col gap-3">
         <!-- Research Background -->
         <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
-                <i class="fa-solid fa-microscope text-cyan-400 mr-2 text-[11px]"></i>
+            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+                <i class="fa-solid fa-microscope text-cyan-400 mr-2 text-xs"></i>
                 연구 배경
             </h3>
-            <p class="text-[11px] text-gray-300 leading-relaxed">
+            <p class="text-xs text-gray-300 leading-relaxed">
                 자율주행 차량의 안전한 주행을 위해서는 <span class="text-cyan-300 font-medium">교통 표지판과 신호등의 실시간 인식</span>이 필수적입니다.
                 그러나 고속 주행 환경에서는 카메라 해상도 저하, 날씨 조건, 원거리 객체 등의 문제로 인해 기존 모델의 정확도가 떨어집니다.
             </p>
@@ -149,92 +149,83 @@
 
         <!-- Problem Identification -->
         <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
-                <i class="fa-solid fa-triangle-exclamation text-red-400 mr-2 text-[11px]"></i>
+            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+                <i class="fa-solid fa-triangle-exclamation text-red-400 mr-2 text-xs"></i>
                 문제 정의
             </h3>
             <div class="grid grid-cols-2 gap-2">
                 <div class="problem-card p-2 flex items-start gap-2">
-                    <i class="fa-solid fa-tachometer-alt text-red-400 text-[11px] mt-0.5"></i>
+                    <i class="fa-solid fa-tachometer-alt text-red-400 text-xs mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-red-200 font-semibold">고속 주행 환경</p>
-                        <p class="text-[10px] text-gray-400">65+ mph에서 해상도 저하</p>
+                        <p class="text-xs text-red-200 font-semibold">고속 주행 환경</p>
+                        <p class="text-[11px] text-gray-400">65+ mph에서 해상도 저하</p>
                     </div>
                 </div>
                 <div class="problem-card p-2 flex items-start gap-2">
-                    <i class="fa-solid fa-database text-red-400 text-[11px] mt-0.5"></i>
+                    <i class="fa-solid fa-database text-red-400 text-xs mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-red-200 font-semibold">제한된 데이터셋</p>
-                        <p class="text-[10px] text-gray-400">고품질 데이터셋 부족</p>
+                        <p class="text-xs text-red-200 font-semibold">제한된 데이터셋</p>
+                        <p class="text-[11px] text-gray-400">고품질 데이터셋 부족</p>
                     </div>
                 </div>
                 <div class="problem-card p-2 flex items-start gap-2">
-                    <i class="fa-solid fa-shuffle text-red-400 text-[11px] mt-0.5"></i>
+                    <i class="fa-solid fa-shuffle text-red-400 text-xs mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-red-200 font-semibold">클래스 간 혼동</p>
-                        <p class="text-[10px] text-gray-400">유사 형태 표지판 오분류</p>
+                        <p class="text-xs text-red-200 font-semibold">클래스 간 혼동</p>
+                        <p class="text-[11px] text-gray-400">유사 형태 표지판 오분류</p>
                     </div>
                 </div>
                 <div class="problem-card p-2 flex items-start gap-2">
-                    <i class="fa-solid fa-sun text-red-400 text-[11px] mt-0.5"></i>
+                    <i class="fa-solid fa-sun text-red-400 text-xs mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-red-200 font-semibold">환경 변수</p>
-                        <p class="text-[10px] text-gray-400">직사광선, 그림자 영향</p>
+                        <p class="text-xs text-red-200 font-semibold">환경 변수</p>
+                        <p class="text-[11px] text-gray-400">직사광선, 그림자 영향</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Dataset Overview -->
-        <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
-                <i class="fa-solid fa-images text-purple-400 mr-2 text-[11px]"></i>
+        <div class="glass-panel p-2">
+            <h3 class="text-xs font-bold text-white mb-1 flex items-center">
+                <i class="fa-solid fa-images text-purple-400 mr-1.5 text-[10px]"></i>
                 데이터셋 구성
             </h3>
-            <div class="grid grid-cols-2 gap-2 mb-2">
-                <div class="bg-slate-800/50 rounded-lg p-2 text-center">
-                    <p class="text-xl font-bold text-purple-300 font-['Montserrat']">29,978</p>
-                    <p class="text-[10px] text-gray-400">Total Images</p>
+            <div class="flex gap-2 mb-1">
+                <div class="bg-slate-800/50 rounded-lg px-2 py-1 text-center flex-1">
+                    <p class="text-base font-bold text-purple-300 font-['Montserrat']">29,978</p>
+                    <p class="text-[9px] text-gray-400">Images</p>
                 </div>
-                <div class="bg-slate-800/50 rounded-lg p-2 text-center">
-                    <p class="text-xl font-bold text-purple-300 font-['Montserrat']">14</p>
-                    <p class="text-[10px] text-gray-400">Classes</p>
+                <div class="bg-slate-800/50 rounded-lg px-2 py-1 text-center flex-1">
+                    <p class="text-base font-bold text-purple-300 font-['Montserrat']">14</p>
+                    <p class="text-[9px] text-gray-400">Classes</p>
                 </div>
             </div>
-            <div class="space-y-1">
-                <div class="flex justify-between items-center text-[10px]">
-                    <span class="text-gray-400"><i class="fa-solid fa-gauge-high text-blue-400 mr-1"></i>Speed Limit</span>
-                    <span class="text-gray-300">30-75 mph (10 types)</span>
-                </div>
-                <div class="flex justify-between items-center text-[10px]">
-                    <span class="text-gray-400"><i class="fa-solid fa-traffic-light text-green-400 mr-1"></i>Traffic Lights</span>
-                    <span class="text-gray-300">Red, Yellow, Green</span>
-                </div>
-                <div class="flex justify-between items-center text-[10px]">
-                    <span class="text-gray-400"><i class="fa-solid fa-hand text-red-400 mr-1"></i>Stop Sign</span>
-                    <span class="text-gray-300">US Standard</span>
-                </div>
+            <div class="flex gap-3 text-[9px]">
+                <span class="text-gray-400"><i class="fa-solid fa-gauge-high text-blue-400 mr-1"></i>Speed Limit (10)</span>
+                <span class="text-gray-400"><i class="fa-solid fa-traffic-light text-green-400 mr-1"></i>Traffic Lights (3)</span>
+                <span class="text-gray-400"><i class="fa-solid fa-hand text-red-400 mr-1"></i>Stop Sign</span>
             </div>
         </div>
 
         <!-- Research Objective -->
         <div class="highlight-box p-3">
-            <h3 class="text-xs font-bold text-cyan-300 mb-2 flex items-center">
-                <i class="fa-solid fa-bullseye text-cyan-400 mr-2 text-[11px]"></i>
+            <h3 class="text-sm font-bold text-cyan-300 mb-2 flex items-center">
+                <i class="fa-solid fa-bullseye text-cyan-400 mr-2 text-xs"></i>
                 연구 목표
             </h3>
             <div class="space-y-1.5">
                 <div class="flex items-start gap-2">
-                    <span class="w-4 h-4 rounded-full bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-300 font-bold shrink-0">1</span>
-                    <p class="text-[11px] text-gray-200">제한된 데이터셋으로도 높은 정확도를 달성하는 <span class="text-cyan-300 font-medium">개선된 YOLOv7</span> 모델 제안</p>
+                    <span class="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center text-[11px] text-cyan-300 font-bold shrink-0">1</span>
+                    <p class="text-xs text-gray-200">제한된 데이터셋으로도 높은 정확도를 달성하는 <span class="text-cyan-300 font-medium">개선된 YOLOv7</span> 모델 제안</p>
                 </div>
                 <div class="flex items-start gap-2">
-                    <span class="w-4 h-4 rounded-full bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-300 font-bold shrink-0">2</span>
-                    <p class="text-[11px] text-gray-200">활성화 함수 최적화를 통한 <span class="text-cyan-300 font-medium">Vanishing Gradient 문제 해결</span></p>
+                    <span class="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center text-[11px] text-cyan-300 font-bold shrink-0">2</span>
+                    <p class="text-xs text-gray-200">활성화 함수 최적화를 통한 <span class="text-cyan-300 font-medium">Vanishing Gradient 문제 해결</span></p>
                 </div>
                 <div class="flex items-start gap-2">
-                    <span class="w-4 h-4 rounded-full bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-300 font-bold shrink-0">3</span>
-                    <p class="text-[11px] text-gray-200">고속 주행 환경에서의 <span class="text-cyan-300 font-medium">실시간 검출 성능</span> 검증 (ROS)</p>
+                    <span class="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center text-[11px] text-cyan-300 font-bold shrink-0">3</span>
+                    <p class="text-xs text-gray-200">고속 주행 환경에서의 <span class="text-cyan-300 font-medium">실시간 검출 성능</span> 검증 (ROS)</p>
                 </div>
             </div>
         </div>
@@ -255,7 +246,7 @@
             <div class="h-[200px] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(6, 182, 212, 0.4);">
                 <img src="../../images/ava/modi7.PNG" class="w-full h-full object-cover" alt="Improved Model Detection Result"/>
             </div>
-            <div class="mt-1.5 px-2 py-1 text-[11px] font-bold text-cyan-300 flex items-center">
+            <div class="mt-1.5 px-2 py-1 text-xs font-bold text-cyan-300 flex items-center">
                 <i class="fa-solid fa-arrow-up mr-1.5"></i>개선된 모델 (Improved YOLOv7)
             </div>
         </div>
@@ -265,7 +256,7 @@
             <div class="h-[200px] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(239, 68, 68, 0.4);">
                 <img src="../../images/ava/ori7.PNG" class="w-full h-full object-cover" alt="Original Model Detection Result"/>
             </div>
-            <div class="mt-1.5 px-2 py-1 text-[11px] font-bold text-red-300 flex items-center">
+            <div class="mt-1.5 px-2 py-1 text-xs font-bold text-red-300 flex items-center">
                 <i class="fa-solid fa-arrow-down mr-1.5"></i>원래 모델 (Original YOLOv7)
             </div>
         </div>

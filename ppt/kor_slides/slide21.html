@@ -121,11 +121,11 @@
 <div class="relative z-10 px-10 pt-5 pb-2 flex justify-between items-start">
     <div>
         <div class="flex items-center space-x-3 text-cyan-400 mb-1">
-            <span class="px-2 py-0.5 border border-cyan-500 rounded text-[9px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Results & Conclusion</span>
-            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Performance Evaluation</span>
+            <span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Results & Conclusion</span>
+            <span class="text-[11px] text-gray-400 uppercase tracking-widest">Performance Evaluation</span>
         </div>
-        <h1 class="text-2xl font-black text-white font-['Montserrat'] mb-0.5">실험 결과 및 결론</h1>
-        <p class="text-sm text-gray-300 font-light">Real-Time Detection Performance & Lessons Learned</p>
+        <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-0.5">실험 결과 및 결론</h1>
+        <p class="text-base text-gray-300 font-light">Real-Time Detection Performance & Lessons Learned</p>
     </div>
     <div class="text-right">
         <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-green-700" style="background-color: rgba(34, 197, 94, 0.1);">
@@ -136,17 +136,17 @@
 </div>
 
 <!-- Main Content -->
-<div class="relative z-10 flex flex-1 px-10 pb-4 gap-5">
+<div class="relative z-10 flex flex-1 px-10 pb-2 gap-4">
     <!-- Left Column -->
-    <div class="w-[55%] flex flex-col gap-2.5">
+    <div class="w-[55%] flex flex-col gap-2">
         <!-- Performance Comparison Table -->
-        <div class="glass-panel p-4">
-            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+        <div class="glass-panel p-3">
+            <h3 class="text-base font-bold text-white mb-2 flex items-center">
                 <i class="fa-solid fa-table text-cyan-400 mr-2"></i>
                 성능 비교
             </h3>
             <div class="overflow-hidden rounded-lg border border-slate-700/50">
-                <table class="w-full text-[11px]">
+                <table class="w-full text-xs">
                     <thead>
                         <tr class="bg-slate-800/80">
                             <th class="px-3 py-2 text-left text-gray-300 font-semibold">Model</th>
@@ -179,71 +179,71 @@
         <!-- Key Metrics -->
         <div class="grid grid-cols-4 gap-2">
             <div class="metric-card p-3 text-center border-green-500/30" style="background-color: rgba(20, 83, 45, 0.15);">
-                <i class="fa-solid fa-arrow-trend-up text-green-400 text-xl mb-1"></i>
-                <p class="highlight-value text-xl text-green-300">+1.1%</p>
-                <p class="text-[11px] text-green-200">mAP@0.5</p>
+                <i class="fa-solid fa-arrow-trend-up text-green-400 text-2xl mb-1"></i>
+                <p class="highlight-value text-2xl text-green-300">+1.1%</p>
+                <p class="text-xs text-green-200">mAP@0.5</p>
             </div>
             <div class="metric-card p-3 text-center border-cyan-500/30">
-                <i class="fa-solid fa-bullseye text-cyan-400 text-xl mb-1"></i>
-                <p class="highlight-value text-xl text-cyan-300">95.5%</p>
-                <p class="text-[11px] text-cyan-200">Precision</p>
+                <i class="fa-solid fa-bullseye text-cyan-400 text-2xl mb-1"></i>
+                <p class="highlight-value text-2xl text-cyan-300">95.5%</p>
+                <p class="text-xs text-cyan-200">Precision</p>
             </div>
             <div class="metric-card p-3 text-center border-purple-500/30">
-                <i class="fa-solid fa-crosshairs text-purple-400 text-xl mb-1"></i>
-                <p class="highlight-value text-xl text-purple-300">97.0%</p>
-                <p class="text-[11px] text-purple-200">Recall</p>
+                <i class="fa-solid fa-crosshairs text-purple-400 text-2xl mb-1"></i>
+                <p class="highlight-value text-2xl text-purple-300">97.0%</p>
+                <p class="text-xs text-purple-200">Recall</p>
             </div>
             <div class="metric-card p-3 text-center border-blue-500/30">
-                <i class="fa-solid fa-robot text-blue-400 text-xl mb-1"></i>
-                <p class="highlight-value text-xl text-blue-300">ROS</p>
-                <p class="text-[11px] text-blue-200">Real-time</p>
+                <i class="fa-solid fa-robot text-blue-400 text-2xl mb-1"></i>
+                <p class="highlight-value text-2xl text-blue-300">ROS</p>
+                <p class="text-xs text-blue-200">Real-time</p>
             </div>
         </div>
 
         <!-- Real-Time Test Results -->
-        <div class="glass-panel p-4">
-            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+        <div class="glass-panel p-3">
+            <h3 class="text-base font-bold text-white mb-2 flex items-center">
                 <i class="fa-solid fa-video text-purple-400 mr-2"></i>
                 Real-Time 테스트 결과 (ROS rosbag)
             </h3>
             <div class="space-y-2">
                 <div class="flex items-center gap-2 p-2 rounded bg-green-900/20 border border-green-500/20">
-                    <i class="fa-solid fa-check-circle text-green-400 text-[11px]"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-green-300 font-medium">원거리 신호등 탐지:</span> Original 미탐지 → Modified 탐지 성공 (40+ mph)</p>
+                    <i class="fa-solid fa-check-circle text-green-400 text-xs"></i>
+                    <p class="text-xs text-gray-300"><span class="text-green-300 font-medium">원거리 신호등 탐지:</span> Original 미탐지 → Modified 탐지 성공 (40+ mph)</p>
                 </div>
                 <div class="flex items-center gap-2 p-2 rounded bg-green-900/20 border border-green-500/20">
-                    <i class="fa-solid fa-check-circle text-green-400 text-[11px]"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-green-300 font-medium">오분류 해결:</span> "Do Not Enter" → Stop Sign 오분류 문제 해결</p>
+                    <i class="fa-solid fa-check-circle text-green-400 text-xs"></i>
+                    <p class="text-xs text-gray-300"><span class="text-green-300 font-medium">오분류 해결:</span> "Do Not Enter" → Stop Sign 오분류 문제 해결</p>
                 </div>
                 <div class="flex items-center gap-2 p-2 rounded bg-green-900/20 border border-green-500/20">
-                    <i class="fa-solid fa-check-circle text-green-400 text-[11px]"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-green-300 font-medium">고속 주행:</span> 75 mph에서도 안정적인 검출 성능 유지</p>
+                    <i class="fa-solid fa-check-circle text-green-400 text-xs"></i>
+                    <p class="text-xs text-gray-300"><span class="text-green-300 font-medium">고속 주행:</span> 75 mph에서도 안정적인 검출 성능 유지</p>
                 </div>
             </div>
         </div>
 
         <!-- Lessons Learned -->
-        <div class="lesson-card p-4">
-            <h3 class="text-sm font-bold text-yellow-300 mb-2 flex items-center">
+        <div class="lesson-card p-3">
+            <h3 class="text-base font-bold text-yellow-300 mb-2 flex items-center">
                 <i class="fa-solid fa-lightbulb text-yellow-400 mr-2"></i>
                 Lessons Learned & Limitations
             </h3>
             <div class="grid grid-cols-2 gap-2">
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-sun text-yellow-400 text-[12px] mt-0.5"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-yellow-200 font-medium">직사광선:</span> 빨간불→노란불 오인식</p>
+                    <i class="fa-solid fa-sun text-yellow-400 text-sm mt-0.5"></i>
+                    <p class="text-xs text-gray-300"><span class="text-yellow-200 font-medium">직사광선:</span> 빨간불→노란불 오인식</p>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-tree text-orange-400 text-[12px] mt-0.5"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-orange-200 font-medium">그림자:</span> 나무 그림자에서 성능 저하</p>
+                    <i class="fa-solid fa-tree text-orange-400 text-sm mt-0.5"></i>
+                    <p class="text-xs text-gray-300"><span class="text-orange-200 font-medium">그림자:</span> 나무 그림자에서 성능 저하</p>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-traffic-light text-amber-400 text-[12px] mt-0.5"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-amber-200 font-medium">Yellow Light:</span> 58.5% mAP</p>
+                    <i class="fa-solid fa-traffic-light text-amber-400 text-sm mt-0.5"></i>
+                    <p class="text-xs text-gray-300"><span class="text-amber-200 font-medium">Yellow Light:</span> 58.5% mAP</p>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-expand text-blue-400 text-[12px] mt-0.5"></i>
-                    <p class="text-[11px] text-gray-300"><span class="text-blue-200 font-medium">Trade-off:</span> 환경별 성능 차이</p>
+                    <i class="fa-solid fa-expand text-blue-400 text-sm mt-0.5"></i>
+                    <p class="text-xs text-gray-300"><span class="text-blue-200 font-medium">Trade-off:</span> 환경별 성능 차이</p>
                 </div>
             </div>
         </div>
@@ -253,26 +253,26 @@
     <div class="w-[45%] flex flex-col gap-2">
         <!-- Model Comparison Images - Vertical Layout -->
         <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
+            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
                 <i class="fa-solid fa-car-side text-purple-400 mr-2"></i>
                 Real-Time Detection 비교
             </h3>
             <div class="flex flex-col gap-1.5">
                 <!-- Modified Model -->
                 <div class="flex flex-col">
-                    <div class="h-[170px] rounded-lg overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(34, 197, 94, 0.4);">
+                    <div class="h-[155px] rounded-lg overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(34, 197, 94, 0.4);">
                         <img src="../../images/ava/modi16-1.PNG" class="w-full h-full object-contain" alt="Modified Model Detection"/>
                     </div>
-                    <div class="mt-1 px-1 text-[11px] font-bold text-green-300 flex items-center">
+                    <div class="mt-1 px-1 text-xs font-bold text-green-300 flex items-center">
                         <i class="fa-solid fa-arrow-up mr-1 text-green-400"></i>Modified (ELU)
                     </div>
                 </div>
                 <!-- Original Model -->
                 <div class="flex flex-col">
-                    <div class="h-[170px] rounded-lg overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(239, 68, 68, 0.4);">
+                    <div class="h-[155px] rounded-lg overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(239, 68, 68, 0.4);">
                         <img src="../../images/ava/ori16-1.PNG" class="w-full h-full object-contain" alt="Original Model Detection"/>
                     </div>
-                    <div class="mt-1 px-1 text-[11px] font-bold text-red-300 flex items-center">
+                    <div class="mt-1 px-1 text-xs font-bold text-red-300 flex items-center">
                         <i class="fa-solid fa-arrow-up mr-1 text-red-400"></i>Original (SiLU)
                     </div>
                 </div>
@@ -281,11 +281,11 @@
 
         <!-- Conclusion -->
         <div class="conclusion-box p-2.5">
-            <h3 class="text-xs font-bold text-cyan-300 mb-1 flex items-center">
+            <h3 class="text-sm font-bold text-cyan-300 mb-1 flex items-center">
                 <i class="fa-solid fa-flag-checkered text-cyan-400 mr-2"></i>
                 결론
             </h3>
-            <p class="text-[11px] text-gray-200 leading-relaxed">
+            <p class="text-xs text-gray-200 leading-relaxed">
                 <span class="text-cyan-300 font-medium">SiLU→ELU</span>로 <span class="text-green-300 font-medium">mAP 1.1% 향상</span>.
                 <span class="text-purple-300 font-medium">원거리 객체</span> 및 <span class="text-purple-300 font-medium">클래스 혼동</span> 문제 개선.
             </p>
@@ -293,11 +293,11 @@
 
         <!-- Future Work -->
         <div class="glass-panel p-2.5">
-            <h3 class="text-[11px] font-bold text-gray-400 mb-1 uppercase tracking-wider flex items-center">
+            <h3 class="text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider flex items-center">
                 <i class="fa-solid fa-road text-gray-500 mr-1.5"></i>
                 Future Work
             </h3>
-            <div class="flex gap-3 text-[11px]">
+            <div class="flex gap-3 text-xs">
                 <span class="text-gray-300"><i class="fa-solid fa-cloud-sun text-yellow-500 mr-1"></i>날씨 증강</span>
                 <span class="text-gray-300"><i class="fa-solid fa-traffic-light text-amber-500 mr-1"></i>Yellow Light</span>
                 <span class="text-gray-300"><i class="fa-solid fa-microchip text-green-500 mr-1"></i>Edge 최적화</span>
@@ -307,7 +307,7 @@
 </div>
 
 <!-- Footer -->
-<div class="relative z-10 px-10 pb-4">
+<div class="relative z-10 px-10 pb-2">
     <div class="flex justify-between items-center text-[9px] text-gray-500">
         <span>Master's Thesis | Texas A&M University | Mechanical Engineering</span>
         <span class="text-cyan-400 font-medium">3 / 3</span>

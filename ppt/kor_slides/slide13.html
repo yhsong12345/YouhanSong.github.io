@@ -59,9 +59,9 @@
         .tech-badge {
             display: inline-flex;
             align-items: center;
-            padding: 4px 10px;
+            padding: 5px 11px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             margin-right: 6px;
             margin-bottom: 6px;
@@ -69,8 +69,8 @@
             border: 1px solid rgba(148, 163, 184, 0.2);
             color: #e2e8f0;
         }
-        .tech-badge i { margin-right: 4px; }
-        
+        .tech-badge i { margin-right: 5px; font-size: 11px; }
+
         /* Process Flow Styles */
         .process-step {
             position: relative;
@@ -94,7 +94,7 @@
         }
 
         .highlight-text { color: #38bdf8; font-weight: 700; }
-        
+
         /* Diagram Container */
         .diagram-box {
             background: rgba(30, 41, 59, 0.4);
@@ -103,14 +103,14 @@
             padding: 12px;
             text-align: center;
         }
-        
+
         /* Print Styles for Chrome PDF Export */
         @media print {
             @page {
                 size: 1280px 720px;
                 margin: 0;
             }
-            
+
             body {
                 margin: 0;
                 padding: 0;
@@ -119,7 +119,7 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            
+
             .slide-container {
                 width: 1280px;
                 height: 720px;
@@ -133,13 +133,13 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            
+
             /* Ensure backgrounds print */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+
             /* Ensure images print */
             img {
                 max-width: 100%;
@@ -166,7 +166,7 @@
 <div class="relative z-10 px-12 pt-6 mb-4 flex justify-between items-start">
 <div>
 <div class="flex items-center space-x-3 text-green-400 mb-2">
-<span class="px-2 py-0.5 border border-green-500 rounded text-[10px] font-bold uppercase tracking-wider bg-green-500/10">Project 09</span>
+<span class="px-2.5 py-1 border border-green-500 rounded text-xs font-bold uppercase tracking-wider bg-green-500/10">Project 09</span>
 <span class="text-xs text-gray-400 uppercase tracking-widest">Autonomous Mobile Robot</span>
 </div>
 <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">Nvidia Jetson AMR 개발</h1>
@@ -174,7 +174,7 @@
 </div>
 <div class="text-right">
 <div class="inline-flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
-<i class="fa-regular fa-calendar text-green-400"></i>
+<i class="fa-regular fa-calendar text-green-400 text-sm"></i>
 <p class="text-sm font-medium text-white">2025.06</p>
 </div>
 <div class="mt-2 text-xs text-gray-400 text-right">
@@ -187,15 +187,15 @@
 <!-- Left Panel: Project Overview & Specs -->
 <div class="w-[310px] shrink-0 flex flex-col">
 <!-- Overview Card -->
-<div class="glass-panel p-4 flex-1">
+<div class="glass-panel p-5 flex-1">
 <h3 class="text-lg font-bold text-white mb-2 flex items-center">
-<i class="fa-solid fa-robot text-green-400 mr-2"></i>
+<i class="fa-solid fa-robot text-green-400 mr-2 text-base"></i>
                     Project Goal
                 </h3>
 <p class="text-sm text-gray-300 leading-relaxed mb-3">
                     Nvidia Jetson 플랫폼 기반 <span class="highlight-text text-green-400">자율주행 모바일 로봇(AMR)</span> 개발. ROS 환경에서 SLAM 기반 지도 생성 및 자율 경로 계획 기술 구현
                 </p>
-<h4 class="text-[11px] font-bold text-gray-400 uppercase mb-2">Tech Stack</h4>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Tech Stack</h4>
 <div class="flex flex-wrap gap-1 mb-3">
 <span class="tech-badge"><i class="fa-solid fa-microchip text-green-400"></i> Nvidia Jetson</span>
 <span class="tech-badge"><i class="fa-brands fa-linux text-yellow-400"></i> Linux/Ubuntu</span>
@@ -206,23 +206,23 @@
 <span class="tech-badge"><i class="fa-solid fa-camera text-pink-400"></i> Camera</span>
 <span class="tech-badge"><i class="fa-solid fa-map text-purple-400"></i> Rviz / Gazebo</span>
 </div>
-<h4 class="text-[11px] font-bold text-gray-400 uppercase mb-2">Key Learning &amp; Achievements</h4>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Key Learning &amp; Achievements</h4>
 <div class="flex flex-col gap-2">
 <div class="flex items-start gap-2">
-<i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300">ROS <span class="text-white">Topic Pub/Sub</span> 모델 이해 및 노드 간 통신 구현</p>
+<i class="fa-solid fa-check text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">ROS <span class="text-white">Topic Pub/Sub</span> 모델 이해 및 노드 간 통신 구현</p>
 </div>
 <div class="flex items-start gap-2">
-<i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300"><span class="text-white">Rviz</span>로 Odom, IMU, Lidar, Camera 센서 데이터 시각화</p>
+<i class="fa-solid fa-check text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300"><span class="text-white">Rviz</span>로 Odom, IMU, Lidar, Camera 센서 데이터 시각화</p>
 </div>
 <div class="flex items-start gap-2">
-<i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300">Lidar 기반 <span class="text-white">SLAM</span> 알고리즘으로 2D/3D 지도 생성</p>
+<i class="fa-solid fa-check text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">Lidar 기반 <span class="text-white">SLAM</span> 알고리즘으로 2D/3D 지도 생성</p>
 </div>
 <div class="flex items-start gap-2">
-<i class="fa-solid fa-check text-green-400 text-[11px] mt-0.5"></i>
-<p class="text-[11px] text-gray-300"><span class="text-white">Send Goal</span> 명령으로 장애물 회피 자율주행 구현</p>
+<i class="fa-solid fa-check text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300"><span class="text-white">Send Goal</span> 명령으로 장애물 회피 자율주행 구현</p>
 </div>
 </div>
 </div>
@@ -230,50 +230,50 @@
 <!-- Right Panel: Technical Details & Process -->
 <div class="flex-1 flex flex-col gap-4">
 <!-- Architecture Diagram Section -->
-<div class="glass-panel-dark p-4">
+<div class="glass-panel-dark p-5">
 <div class="flex justify-between items-end mb-3">
 <h3 class="text-base font-bold text-white font-['Montserrat']">SLAM &amp; Navigation Workflow</h3>
-<span class="text-[10px] text-green-400 border border-green-500/30 px-2 py-0.5 rounded bg-green-900/20">System Integration</span>
+<span class="text-xs text-green-400 border border-green-500/30 px-2.5 py-1 rounded bg-green-900/20">System Integration</span>
 </div>
 <div class="flex gap-3">
 <!-- Step 1 -->
-<div class="flex-1 flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg border border-slate-700 hover:border-green-500/50 transition-colors">
-<div class="w-8 h-8 rounded bg-green-900/50 flex items-center justify-center text-green-400 font-bold text-[10px] shrink-0">01</div>
+<div class="flex-1 flex items-center gap-2.5 bg-slate-800/50 p-3 rounded-lg border border-slate-700 hover:border-green-500/50 transition-colors">
+<div class="w-9 h-9 rounded bg-green-900/50 flex items-center justify-center text-green-400 font-bold text-xs shrink-0">01</div>
 <div>
-<p class="text-[11px] font-bold text-green-200">Sensor Integration</p>
-<p class="text-[9px] text-gray-400">Lidar, IMU, Odom, Camera Setup</p>
+<p class="text-xs font-bold text-green-200">Sensor Integration</p>
+<p class="text-xs text-gray-400">Lidar, IMU, Odom, Camera Setup</p>
 </div>
 </div>
-<i class="fa-solid fa-arrow-right text-slate-600 self-center text-xs"></i>
+<i class="fa-solid fa-arrow-right text-slate-600 self-center text-sm"></i>
 <!-- Step 2 -->
-<div class="flex-1 flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg border border-slate-700 hover:border-teal-500/50 transition-colors">
-<div class="w-8 h-8 rounded bg-teal-900/50 flex items-center justify-center text-teal-400 font-bold text-[10px] shrink-0">02</div>
+<div class="flex-1 flex items-center gap-2.5 bg-slate-800/50 p-3 rounded-lg border border-slate-700 hover:border-teal-500/50 transition-colors">
+<div class="w-9 h-9 rounded bg-teal-900/50 flex items-center justify-center text-teal-400 font-bold text-xs shrink-0">02</div>
 <div>
-<p class="text-[11px] font-bold text-teal-200">SLAM Mapping</p>
-<p class="text-[9px] text-gray-400">Gmapping/Cartographer</p>
+<p class="text-xs font-bold text-teal-200">SLAM Mapping</p>
+<p class="text-xs text-gray-400">Gmapping/Cartographer</p>
 </div>
 </div>
-<i class="fa-solid fa-arrow-right text-slate-600 self-center text-xs"></i>
+<i class="fa-solid fa-arrow-right text-slate-600 self-center text-sm"></i>
 <!-- Step 3 -->
-<div class="flex-1 flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-colors">
-<div class="w-8 h-8 rounded bg-blue-900/50 flex items-center justify-center text-blue-400 font-bold text-[10px] shrink-0">03</div>
+<div class="flex-1 flex items-center gap-2.5 bg-slate-800/50 p-3 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-colors">
+<div class="w-9 h-9 rounded bg-blue-900/50 flex items-center justify-center text-blue-400 font-bold text-xs shrink-0">03</div>
 <div>
-<p class="text-[11px] font-bold text-blue-200">Navigation</p>
-<p class="text-[9px] text-gray-400">Path Planning &amp; Send Goal</p>
+<p class="text-xs font-bold text-blue-200">Navigation</p>
+<p class="text-xs text-gray-400">Path Planning &amp; Send Goal</p>
 </div>
 </div>
 </div>
 </div>
 <!-- Demo Section -->
-<div class="glass-panel p-4 flex-1 flex flex-col">
+<div class="glass-panel p-5 flex-1 flex flex-col">
 <div class="flex justify-between items-end mb-3">
 <h3 class="text-base font-bold text-white font-['Montserrat']">Project Images & Videos</h3>
-<span class="text-[10px] text-green-400 border border-green-500/30 px-2 py-0.5 rounded bg-green-900/20">Live Demo</span>
+<span class="text-xs text-green-400 border border-green-500/30 px-2.5 py-1 rounded bg-green-900/20">Live Demo</span>
 </div>
 <div class="grid grid-cols-2 gap-2 flex-1">
 <!-- Image 1 -->
-<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 160px; max-height: 160px;">
-<img src="../../images/kosa/nvidia_4.jpg" alt="SLAM Map" class="max-w-full object-contain rounded" style="max-height: 160px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 155px; max-height: 155px;">
+<img src="../../images/kosa/nvidia_4.jpg" alt="SLAM Map" class="max-w-full object-contain rounded" style="max-height: 155px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="image-fallback flex-col items-center justify-center h-full w-full" style="display: none;">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.5" style="margin-bottom: 6px;">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -284,8 +284,8 @@
 </div>
 </div>
 <!-- Image 2 -->
-<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 160px; max-height: 160px;">
-<img src="../../images/kosa/nvidia_5.jpg" alt="Navigation" class="max-w-full object-contain rounded" style="max-height: 160px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 155px; max-height: 155px;">
+<img src="../../images/kosa/nvidia_5.jpg" alt="Navigation" class="max-w-full object-contain rounded" style="max-height: 155px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="image-fallback flex-col items-center justify-center h-full w-full" style="display: none;">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.5" style="margin-bottom: 6px;">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -296,14 +296,14 @@
 </div>
 </div>
 <!-- Video 1 -->
-<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 160px;">
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 155px;">
 <iframe src="https://drive.google.com/file/d/16MCmhV-fnnxL9WlwrX2AGVBUYSi9rPxN/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe>
 <div class="video-fallback" id="video-placeholder-1" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
     <img src="https://drive.google.com/thumbnail?id=16MCmhV-fnnxL9WlwrX2AGVBUYSi9rPxN&sz=w1000" alt="SLAM Demo" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
 </div>
 </div>
 <!-- Video 2 -->
-<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 160px;">
+<div class="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center relative" style="height: 155px;">
 <iframe src="https://drive.google.com/file/d/1afuaezyw_J9pd1waAsnu8N1vU_mPgVQ9/preview" class="w-full h-full border-0 rounded" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe>
 <div class="video-fallback" id="video-placeholder-2" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
     <img src="https://drive.google.com/thumbnail?id=1afuaezyw_J9pd1waAsnu8N1vU_mPgVQ9&sz=w1000" alt="Nav Demo" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">

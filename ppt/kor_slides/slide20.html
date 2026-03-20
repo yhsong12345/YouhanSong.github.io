@@ -117,11 +117,11 @@
 <div class="relative z-10 px-10 pt-5 pb-2 flex justify-between items-start">
     <div>
         <div class="flex items-center space-x-3 text-cyan-400 mb-1">
-            <span class="px-2 py-0.5 border border-cyan-500 rounded text-[9px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Technical Approach</span>
-            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Model Architecture & Optimization</span>
+            <span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Technical Approach</span>
+            <span class="text-[11px] text-gray-400 uppercase tracking-widest">Model Architecture & Optimization</span>
         </div>
-        <h1 class="text-2xl font-black text-white font-['Montserrat'] mb-0.5">YOLOv7 Architecture Modification</h1>
-        <p class="text-sm text-gray-300 font-light">활성화 함수 최적화를 통한 성능 개선</p>
+        <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-0.5">YOLOv7 Architecture Modification</h1>
+        <p class="text-base text-gray-300 font-light">활성화 함수 최적화를 통한 성능 개선</p>
     </div>
     <div class="text-right">
         <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-green-700" style="background-color: rgba(34, 197, 94, 0.1);">
@@ -132,36 +132,36 @@
 </div>
 
 <!-- Main Content -->
-<div class="relative z-10 flex flex-1 px-10 pb-5 gap-5">
+<div class="relative z-10 flex flex-1 px-10 pb-3 gap-4">
     <!-- Left Column: Architecture -->
-    <div class="w-[48%] flex flex-col gap-3">
+    <div class="w-[48%] flex flex-col gap-2">
         <!-- YOLOv7 Structure -->
         <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
-                <i class="fa-solid fa-sitemap text-blue-400 mr-2 text-[11px]"></i>
+            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+                <i class="fa-solid fa-sitemap text-blue-400 mr-2 text-xs"></i>
                 YOLOv7 구조
             </h3>
             <div class="flex gap-2 mb-2">
                 <div class="arch-block p-2 flex-1 text-center">
-                    <p class="text-[11px] font-bold text-blue-300">Backbone</p>
-                    <p class="text-[10px] text-gray-400">Feature Extraction</p>
-                    <p class="text-[10px] text-gray-500 mt-1">Conv + ELAN</p>
+                    <p class="text-xs font-bold text-blue-300">Backbone</p>
+                    <p class="text-[11px] text-gray-400">Feature Extraction</p>
+                    <p class="text-[11px] text-gray-500 mt-1">Conv + ELAN</p>
                 </div>
                 <div class="flex items-center">
-                    <i class="fa-solid fa-arrow-right text-gray-600 text-xs"></i>
+                    <i class="fa-solid fa-arrow-right text-gray-600 text-sm"></i>
                 </div>
                 <div class="arch-block p-2 flex-1 text-center">
-                    <p class="text-[11px] font-bold text-purple-300">Neck</p>
-                    <p class="text-[10px] text-gray-400">Feature Aggregation</p>
-                    <p class="text-[10px] text-gray-500 mt-1">PAFPN + SPPCSPC</p>
+                    <p class="text-xs font-bold text-purple-300">Neck</p>
+                    <p class="text-[11px] text-gray-400">Feature Aggregation</p>
+                    <p class="text-[11px] text-gray-500 mt-1">PAFPN + SPPCSPC</p>
                 </div>
                 <div class="flex items-center">
-                    <i class="fa-solid fa-arrow-right text-gray-600 text-xs"></i>
+                    <i class="fa-solid fa-arrow-right text-gray-600 text-sm"></i>
                 </div>
                 <div class="arch-block p-2 flex-1 text-center">
-                    <p class="text-[11px] font-bold text-cyan-300">Head</p>
-                    <p class="text-[10px] text-gray-400">Detection Output</p>
-                    <p class="text-[10px] text-gray-500 mt-1">Class + BBox</p>
+                    <p class="text-xs font-bold text-cyan-300">Head</p>
+                    <p class="text-[11px] text-gray-400">Detection Output</p>
+                    <p class="text-[11px] text-gray-500 mt-1">Class + BBox</p>
                 </div>
             </div>
             <p class="text-[10px] text-gray-400 leading-relaxed">
@@ -181,84 +181,84 @@
         </div>
 
         <!-- Why YOLOv7 -->
-        <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
-                <i class="fa-solid fa-chart-line text-orange-400 mr-2 text-[11px]"></i>
+        <div class="glass-panel p-2">
+            <h3 class="text-xs font-bold text-white mb-1 flex items-center">
+                <i class="fa-solid fa-chart-line text-orange-400 mr-1.5 text-[10px]"></i>
                 Why YOLOv7?
             </h3>
-            <div class="grid grid-cols-3 gap-2 text-center">
-                <div class="bg-slate-800/50 rounded-lg p-2">
-                    <p class="text-lg font-bold text-orange-300 font-['Montserrat']">Fast</p>
-                    <p class="text-[10px] text-gray-400">Real-time Detection</p>
+            <div class="flex gap-2 text-center">
+                <div class="bg-slate-800/50 rounded-lg px-2 py-1 flex-1">
+                    <p class="text-sm font-bold text-orange-300 font-['Montserrat']">Fast</p>
+                    <p class="text-[9px] text-gray-400">Real-time</p>
                 </div>
-                <div class="bg-slate-800/50 rounded-lg p-2">
-                    <p class="text-lg font-bold text-orange-300 font-['Montserrat']">Accurate</p>
-                    <p class="text-[10px] text-gray-400">High mAP Score</p>
+                <div class="bg-slate-800/50 rounded-lg px-2 py-1 flex-1">
+                    <p class="text-sm font-bold text-orange-300 font-['Montserrat']">Accurate</p>
+                    <p class="text-[9px] text-gray-400">High mAP</p>
                 </div>
-                <div class="bg-slate-800/50 rounded-lg p-2">
-                    <p class="text-lg font-bold text-orange-300 font-['Montserrat']">ELAN</p>
-                    <p class="text-[10px] text-gray-400">Efficient Layers</p>
+                <div class="bg-slate-800/50 rounded-lg px-2 py-1 flex-1">
+                    <p class="text-sm font-bold text-orange-300 font-['Montserrat']">ELAN</p>
+                    <p class="text-[9px] text-gray-400">Efficient</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Right Column: Activation Function Analysis -->
-    <div class="w-[52%] flex flex-col gap-3">
+    <div class="w-[52%] flex flex-col gap-2">
         <!-- Activation Function Comparison -->
         <div class="glass-panel p-3">
-            <h3 class="text-xs font-bold text-white mb-2 flex items-center">
-                <i class="fa-solid fa-wave-square text-yellow-400 mr-2 text-[11px]"></i>
+            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+                <i class="fa-solid fa-wave-square text-yellow-400 mr-2 text-xs"></i>
                 활성화 함수 비교
             </h3>
             <div class="grid grid-cols-2 gap-3">
                 <!-- SiLU -->
                 <div class="activation-card p-2.5">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-bold text-gray-300">SiLU (Original)</span>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded bg-gray-700 text-gray-400">Sigmoid Linear Unit</span>
+                        <span class="text-xs font-bold text-gray-300">SiLU (Original)</span>
+                        <span class="text-[11px] px-1.5 py-0.5 rounded bg-gray-700 text-gray-400">Sigmoid Linear Unit</span>
                     </div>
                     <div class="formula-box p-2 mb-2 text-center">
-                        <p class="text-[11px] text-cyan-300">f(x) = x · σ(x)</p>
-                        <p class="text-[10px] text-gray-500 mt-0.5">σ(x) = 1 / (1 + e<sup>-x</sup>)</p>
+                        <p class="text-xs text-cyan-300">f(x) = x · σ(x)</p>
+                        <p class="text-[11px] text-gray-500 mt-0.5">σ(x) = 1 / (1 + e<sup>-x</sup>)</p>
                     </div>
                     <div class="space-y-1">
                         <div class="flex items-start gap-1.5">
-                            <i class="fa-solid fa-check text-green-500 text-[10px] mt-0.5"></i>
-                            <p class="text-[10px] text-gray-400">ReLU의 Dying 문제 완화</p>
+                            <i class="fa-solid fa-check text-green-500 text-[11px] mt-0.5"></i>
+                            <p class="text-[11px] text-gray-400">ReLU의 Dying 문제 완화</p>
                         </div>
                         <div class="flex items-start gap-1.5">
-                            <i class="fa-solid fa-xmark text-red-500 text-[10px] mt-0.5"></i>
-                            <p class="text-[10px] text-gray-400">x → -∞ 시 output → 0</p>
+                            <i class="fa-solid fa-xmark text-red-500 text-[11px] mt-0.5"></i>
+                            <p class="text-[11px] text-gray-400">x → -∞ 시 output → 0</p>
                         </div>
                         <div class="flex items-start gap-1.5">
-                            <i class="fa-solid fa-xmark text-red-500 text-[10px] mt-0.5"></i>
-                            <p class="text-[10px] text-gray-400">Vanishing Gradient 발생 가능</p>
+                            <i class="fa-solid fa-xmark text-red-500 text-[11px] mt-0.5"></i>
+                            <p class="text-[11px] text-gray-400">Vanishing Gradient 발생 가능</p>
                         </div>
                     </div>
                 </div>
                 <!-- ELU -->
                 <div class="activation-card p-2.5 border-green-500/30" style="background-color: rgba(34, 197, 94, 0.05);">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-bold text-green-300">ELU (Modified)</span>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded bg-green-900/50 text-green-400">Exponential Linear</span>
+                        <span class="text-xs font-bold text-green-300">ELU (Modified)</span>
+                        <span class="text-[11px] px-1.5 py-0.5 rounded bg-green-900/50 text-green-400">Exponential Linear</span>
                     </div>
                     <div class="formula-box p-2 mb-2 text-center border-green-500/20">
-                        <p class="text-[11px] text-green-300">f(x) = x, if x > 0</p>
-                        <p class="text-[11px] text-green-300">f(x) = α(e<sup>x</sup> - 1), if x ≤ 0</p>
+                        <p class="text-xs text-green-300">f(x) = x, if x > 0</p>
+                        <p class="text-xs text-green-300">f(x) = α(e<sup>x</sup> - 1), if x ≤ 0</p>
                     </div>
                     <div class="space-y-1">
                         <div class="flex items-start gap-1.5">
-                            <i class="fa-solid fa-check text-green-500 text-[10px] mt-0.5"></i>
-                            <p class="text-[10px] text-gray-300">음수 출력 → Mean ≈ 0</p>
+                            <i class="fa-solid fa-check text-green-500 text-[11px] mt-0.5"></i>
+                            <p class="text-[11px] text-gray-300">음수 출력 → Mean ≈ 0</p>
                         </div>
                         <div class="flex items-start gap-1.5">
-                            <i class="fa-solid fa-check text-green-500 text-[10px] mt-0.5"></i>
-                            <p class="text-[10px] text-gray-300">Bias 감소 → 학습 가속</p>
+                            <i class="fa-solid fa-check text-green-500 text-[11px] mt-0.5"></i>
+                            <p class="text-[11px] text-gray-300">Bias 감소 → 학습 가속</p>
                         </div>
                         <div class="flex items-start gap-1.5">
-                            <i class="fa-solid fa-check text-green-500 text-[10px] mt-0.5"></i>
-                            <p class="text-[10px] text-gray-300">Gradient 흐름 유지</p>
+                            <i class="fa-solid fa-check text-green-500 text-[11px] mt-0.5"></i>
+                            <p class="text-[11px] text-gray-300">Gradient 흐름 유지</p>
                         </div>
                     </div>
                 </div>
@@ -266,10 +266,10 @@
         </div>
 
         <!-- Graph Image: SiLU vs ELU -->
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-2 gap-2">
             <!-- SiLU Graph -->
             <div class="flex flex-col">
-                <div class="h-[120px] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(148, 163, 184, 0.3);">
+                <div class="h-[100px] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(148, 163, 184, 0.3);">
                     <img src="../../images/ava/SILU.png" class="w-full h-full object-contain" alt="SiLU Activation Function"/>
                 </div>
                 <div class="mt-1.5 px-2 py-1 text-[10px] font-bold text-gray-300 flex items-center">
@@ -278,7 +278,7 @@
             </div>
             <!-- ELU Graph -->
             <div class="flex flex-col">
-                <div class="h-[120px] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(34, 197, 94, 0.4);">
+                <div class="h-[100px] rounded-xl overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(34, 197, 94, 0.4);">
                     <img src="../../images/ava/ELU.png" class="w-full h-full object-contain" alt="ELU Activation Function"/>
                 </div>
                 <div class="mt-1.5 px-2 py-1 text-[10px] font-bold text-green-300 flex items-center">
@@ -289,37 +289,37 @@
 
         <!-- Key Improvements -->
         <div class="improvement-badge p-3">
-            <h3 class="text-xs font-bold text-green-300 mb-2 flex items-center">
-                <i class="fa-solid fa-rocket text-green-400 mr-2 text-[11px]"></i>
+            <h3 class="text-sm font-bold text-green-300 mb-2 flex items-center">
+                <i class="fa-solid fa-rocket text-green-400 mr-2 text-xs"></i>
                 핵심 개선 사항
             </h3>
             <div class="grid grid-cols-2 gap-2">
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-eye text-cyan-400 text-sm mt-0.5"></i>
+                    <i class="fa-solid fa-eye text-cyan-400 text-base mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-white font-medium">원거리 객체 탐지</p>
-                        <p class="text-[10px] text-gray-400">Gradient 보존으로 작은 객체 인식률 향상</p>
+                        <p class="text-xs text-white font-medium">원거리 객체 탐지</p>
+                        <p class="text-[11px] text-gray-400">Gradient 보존으로 작은 객체 인식률 향상</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-bolt text-yellow-400 text-sm mt-0.5"></i>
+                    <i class="fa-solid fa-bolt text-yellow-400 text-base mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-white font-medium">학습 속도</p>
-                        <p class="text-[10px] text-gray-400">Mean ≈ 0으로 수렴 가속화</p>
+                        <p class="text-xs text-white font-medium">학습 속도</p>
+                        <p class="text-[11px] text-gray-400">Mean ≈ 0으로 수렴 가속화</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-crosshairs text-purple-400 text-sm mt-0.5"></i>
+                    <i class="fa-solid fa-crosshairs text-purple-400 text-base mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-white font-medium">분류 정확도</p>
-                        <p class="text-[10px] text-gray-400">클래스 간 혼동 감소</p>
+                        <p class="text-xs text-white font-medium">분류 정확도</p>
+                        <p class="text-[11px] text-gray-400">클래스 간 혼동 감소</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-memory text-blue-400 text-sm mt-0.5"></i>
+                    <i class="fa-solid fa-memory text-blue-400 text-base mt-0.5"></i>
                     <div>
-                        <p class="text-[11px] text-white font-medium">메모리 효율</p>
-                        <p class="text-[10px] text-gray-400">동일 GPU 메모리 사용량</p>
+                        <p class="text-xs text-white font-medium">메모리 효율</p>
+                        <p class="text-[11px] text-gray-400">동일 GPU 메모리 사용량</p>
                     </div>
                 </div>
             </div>
@@ -340,7 +340,7 @@
 </div>
 
 <!-- Footer -->
-<div class="relative z-10 px-10 pb-4">
+<div class="relative z-10 px-10 pb-2">
     <div class="flex justify-between items-center text-[9px] text-gray-500">
         <span>Master's Thesis | Texas A&M University | Mechanical Engineering</span>
         <span class="text-cyan-400 font-medium">2 / 3</span>

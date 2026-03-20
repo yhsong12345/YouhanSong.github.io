@@ -8,7 +8,6 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
         body {
             margin: 0;
@@ -38,7 +37,7 @@
             opacity: 0.15;
             z-index: 0;
         }
-        
+
         /* Glass Cards */
         .glass-panel {
             background-color: rgba(30, 41, 59, 0.7);
@@ -47,110 +46,43 @@
             border-radius: 16px;
             transition: all 0.3s ease;
         }
-        
-        .metric-card {
-            background-color: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
+
         .tech-tag {
             background-color: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(148, 163, 184, 0.4);
             color: #bae6fd;
-            padding: 4px 8px;
+            padding: 5px 10px;
             border-radius: 6px;
             font-size: 10px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            margin-right: 4px;
-            margin-bottom: 4px;
-        }
-        
-        .chart-container {
-            width: 100%;
-            height: 65px;
-            position: relative;
-        }
-
-        /* SVG Gauge for PDF fallback */
-        .svg-gauge {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
 
         @media print {
-            .svg-gauge {
-                display: block !important;
+            @page {
+                size: 1280px 720px;
+                margin: 0;
             }
-            canvas {
-                display: none !important;
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #0f172a;
             }
-            /* Scale down KPI section for print */
-            .chart-container {
-                height: 70px !important;
+            .slide-container {
+                width: 1280px;
+                height: 720px;
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
             }
-            .metric-card {
-                padding: 8px !important;
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            .highlight-value.text-xl {
-                font-size: 16px !important;
-            }
-            .highlight-value.text-2xl,
-            .highlight-value.text-3xl {
-                font-size: 20px !important;
-            }
-            .stat-label {
-                font-size: 9px !important;
-            }
-            .grid.grid-cols-4 {
-                gap: 8px !important;
-            }
-        }
-        
-        .highlight-value {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            color: #22d3ee;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 4px;
-            text-align: center;
-            line-height: 1.2;
-        }
-        
-        /* Custom Progress Bar */
-        .progress-bg {
-            width: 100%;
-            height: 6px;
-            background-color: rgba(148, 163, 184, 0.2);
-            border-radius: 9999px;
-            overflow: hidden;
-            margin-top: 6px;
-        }
-        .progress-fill {
-            height: 100%;
-            border-radius: 9999px;
-            background-color: #06b6d4;
-            width: 0;
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
@@ -161,58 +93,58 @@
 <div class="absolute -left-20 -bottom-20 w-96 h-96 rounded-full blur-3xl pointer-events-none" style="background-color: rgba(37, 99, 235, 0.1);"></div>
 <div class="absolute right-0 top-0 w-80 h-80 rounded-full blur-3xl pointer-events-none" style="background-color: rgba(6, 182, 212, 0.1);"></div>
 <!-- Header -->
-<div class="relative z-10 px-10 pt-5 mb-1 flex justify-between items-start">
+<div class="relative z-10 px-10 pt-3 mb-0 flex justify-between items-start">
 <div>
-<div class="flex items-center space-x-3 text-cyan-400 mb-0.5">
-<span class="px-2 py-0.5 border border-cyan-500 rounded text-[9px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Latest Project</span>
+<div class="flex items-center space-x-3 text-cyan-400 mb-0">
+<span class="px-2 py-0.5 border border-cyan-500 rounded text-[10px] font-bold uppercase tracking-wider" style="background-color: rgba(6, 182, 212, 0.1);">Latest Project</span>
 <span class="text-[10px] text-gray-400 uppercase tracking-widest">AI-Powered Video Surveillance &amp; Analytics</span>
 </div>
-<h1 class="text-3xl font-black text-white font-['Montserrat'] mb-0.5">스마트 관제 시스템</h1>
-<p class="text-sm text-gray-300 font-light">Advanced AI CCTV Control System for Public Safety</p>
+<h1 class="text-2xl font-black text-white font-['Montserrat'] mb-0">스마트 관제 시스템</h1>
+<p class="text-xs text-gray-300 font-light">Advanced AI CCTV Control System for Public Safety</p>
 </div>
 <div class="text-right">
-<div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-slate-700" style="background-color: rgba(30, 41, 59, 0.8);">
-<i class="fa-regular fa-calendar text-cyan-400 text-xs"></i>
-<p class="text-xs font-medium text-white">2025.11 - Present</p>
+<div class="inline-flex items-center space-x-2 px-2 py-1 rounded-lg border border-slate-700" style="background-color: rgba(30, 41, 59, 0.8);">
+<i class="fa-regular fa-calendar text-cyan-400 text-[10px]"></i>
+<p class="text-[10px] font-medium text-white">2025.11 - Present</p>
 </div>
 </div>
 </div>
 <!-- Main Content -->
-<div class="relative z-10 flex flex-1 px-10 pb-5 gap-4">
+<div class="relative z-10 flex flex-1 px-10 pb-2 gap-3">
 <!-- Left Column: Project Info & Tech Stack -->
-<div class="w-1/3 flex flex-col gap-2">
+<div class="w-[45%] flex flex-col gap-2">
 <!-- Project Overview -->
 <div class="glass-panel p-3">
-<h3 class="text-xs font-bold text-white mb-1 flex items-center">
-<i class="fa-solid fa-info-circle text-cyan-400 mr-2 text-[10px]"></i>
+<h3 class="text-sm font-bold text-white mb-2 flex items-center">
+<i class="fa-solid fa-info-circle text-cyan-400 mr-2 text-sm"></i>
                         주요내용
                     </h3>
-<p class="text-[10px] text-gray-300 leading-relaxed">
-공항이나 공공장소 등에서 발생하는 상황을 감시하고, 사람 및 차량을 감지, 속성을 인식하여 관제센터에 실시간으로 정보를 제공하는 AI 기반 관제 시스템을 구축하는 R&D 프로젝트입니다.
+<p class="text-sm text-gray-300 leading-relaxed">
+공항이나 공공장소에서 사람 및 차량을 감지, 속성을 인식하여 관제센터에 실시간 정보를 제공하는 AI 기반 관제 시스템 R&D 프로젝트입니다.
 </p>
 </div>
 
 <!-- 담당업무 -->
 <div class="glass-panel p-3">
-<h3 class="text-xs font-bold text-white mb-1 flex items-center">
-<i class="fa-solid fa-user-gear text-cyan-400 mr-2 text-[10px]"></i>
+<h3 class="text-sm font-bold text-white mb-2 flex items-center">
+<i class="fa-solid fa-user-gear text-cyan-400 mr-2 text-sm"></i>
                         담당업무
                     </h3>
-<ul class="space-y-0.5">
-<li class="text-[10px] text-gray-300 flex items-start">
-<i class="fa-solid fa-check text-cyan-400 mr-1.5 mt-0.5 text-[7px]"></i>
+<ul class="space-y-1.5">
+<li class="text-sm text-gray-300 flex items-start">
+<i class="fa-solid fa-check text-cyan-400 mr-2 mt-0.5 text-xs"></i>
 데이터 전처리 파이프라인 및 라벨링 시스템 구축
 </li>
-<li class="text-[10px] text-gray-300 flex items-start">
-<i class="fa-solid fa-check text-cyan-400 mr-1.5 mt-0.5 text-[7px]"></i>
+<li class="text-sm text-gray-300 flex items-start">
+<i class="fa-solid fa-check text-cyan-400 mr-2 mt-0.5 text-xs"></i>
 Detection/Recognition 모델 개발
 </li>
-<li class="text-[10px] text-gray-300 flex items-start">
-<i class="fa-solid fa-check text-cyan-400 mr-1.5 mt-0.5 text-[7px]"></i>
+<li class="text-sm text-gray-300 flex items-start">
+<i class="fa-solid fa-check text-cyan-400 mr-2 mt-0.5 text-xs"></i>
 VLM 기반 수도 라벨링 및 속성 인식 모델 개발
 </li>
-<li class="text-[10px] text-gray-300 flex items-start">
-<i class="fa-solid fa-check text-cyan-400 mr-1.5 mt-0.5 text-[7px]"></i>
+<li class="text-sm text-gray-300 flex items-start">
+<i class="fa-solid fa-check text-cyan-400 mr-2 mt-0.5 text-xs"></i>
 모델 경량화 및 시스템 통합
 </li>
 </ul>
@@ -221,272 +153,167 @@ VLM 기반 수도 라벨링 및 속성 인식 모델 개발
 <!-- Challenge/Solution Cards -->
 <div class="glass-panel p-3 flex-1 flex flex-col overflow-hidden">
 <h3 class="text-sm font-bold text-white mb-2 flex items-center">
-<i class="fa-solid fa-lightbulb text-yellow-400 mr-2"></i>
+<i class="fa-solid fa-lightbulb text-yellow-400 mr-2 text-sm"></i>
                         Technical Challenges & Solutions
                     </h3>
 
 <!-- Challenge 1: Detection -->
-<div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
-<div class="flex items-center justify-between mb-1.5">
-<span class="text-[10px] font-bold text-cyan-300 uppercase">Vehicle/Person Detection</span>
-<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">+11~13%</span>
+<div class="mb-2 p-2.5 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-bold text-cyan-300 uppercase">Vehicle/Person Detection</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">+11~13%</span>
 </div>
-<div class="flex items-start gap-1.5 mb-1">
-<i class="fa-solid fa-triangle-exclamation text-red-400 text-[8px] mt-0.5"></i>
-<p class="text-[10px] text-gray-300 leading-snug">서비스 환경 미감지</p>
-</div>
-<div class="flex items-start gap-1.5">
-<i class="fa-solid fa-check-circle text-green-400 text-[8px] mt-0.5"></i>
-<p class="text-[10px] text-gray-300 leading-snug">미감지 이미지 수집→라벨링→추가학습</p>
+<div class="flex items-start gap-2">
+<i class="fa-solid fa-triangle-exclamation text-red-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">서비스 환경 미감지</p>
+<i class="fa-solid fa-arrow-right text-gray-500 text-[10px] mt-0.5"></i>
+<i class="fa-solid fa-check-circle text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">미감지 이미지 수집→라벨링→추가학습</p>
 </div>
 </div>
 
 <!-- Challenge 2: Re-ID -->
-<div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
-<div class="flex items-center justify-between mb-1.5">
-<span class="text-[10px] font-bold text-purple-300 uppercase">Person Re-ID</span>
-<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">+12%</span>
+<div class="mb-2 p-2.5 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-bold text-purple-300 uppercase">Person Re-ID</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">+12%</span>
 </div>
-<div class="flex items-start gap-1.5 mb-1">
-<i class="fa-solid fa-triangle-exclamation text-red-400 text-[8px] mt-0.5"></i>
-<p class="text-[10px] text-gray-300 leading-snug">라벨 부족+클래스 불균형</p>
-</div>
-<div class="flex items-start gap-1.5">
-<i class="fa-solid fa-check-circle text-green-400 text-[8px] mt-0.5"></i>
-<p class="text-[10px] text-gray-300 leading-snug">HDBSCAN 비지도학습+Temp Sampler</p>
+<div class="flex items-start gap-2">
+<i class="fa-solid fa-triangle-exclamation text-red-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">라벨 부족+클래스 불균형</p>
+<i class="fa-solid fa-arrow-right text-gray-500 text-[10px] mt-0.5"></i>
+<i class="fa-solid fa-check-circle text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">HDBSCAN+Temp Sampler</p>
 </div>
 </div>
 
 <!-- Challenge 3: Brand/Color -->
-<div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
-<div class="flex items-center justify-between mb-1.5">
-<span class="text-[10px] font-bold text-orange-300 uppercase">Vehicle Brand/Color</span>
-<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">New</span>
+<div class="mb-2 p-2.5 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-bold text-orange-300 uppercase">Vehicle Brand/Color</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">New</span>
 </div>
-<div class="flex items-start gap-1.5 mb-1">
-<i class="fa-solid fa-triangle-exclamation text-red-400 text-[8px] mt-0.5"></i>
-<p class="text-[10px] text-gray-300 leading-snug">데이터 전무+통합학습 성능저하</p>
-</div>
-<div class="flex items-start gap-1.5">
-<i class="fa-solid fa-check-circle text-green-400 text-[8px] mt-0.5"></i>
-<p class="text-[10px] text-gray-300 leading-snug">직접수집→VLM라벨링→분리학습</p>
+<div class="flex items-start gap-2">
+<i class="fa-solid fa-triangle-exclamation text-red-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">데이터 전무+통합학습 성능저하</p>
+<i class="fa-solid fa-arrow-right text-gray-500 text-[10px] mt-0.5"></i>
+<i class="fa-solid fa-check-circle text-green-400 text-xs mt-0.5"></i>
+<p class="text-xs text-gray-300">직접수집→VLM라벨링→분리학습</p>
 </div>
 </div>
 
 <div class="mt-auto">
-<h4 class="text-[9px] font-bold text-gray-500 uppercase mb-1">Tech Stack</h4>
-<div class="flex flex-wrap gap-0.5">
-<span class="tech-tag text-[9px] py-0.5 px-1.5"><i class="fa-brands fa-python mr-1"></i>Python</span>
-<span class="tech-tag text-[9px] py-0.5 px-1.5"><i class="fa-solid fa-fire mr-1 text-orange-400"></i>PyTorch</span>
-<span class="tech-tag text-[9px] py-0.5 px-1.5"><i class="fa-solid fa-microchip mr-1 text-green-400"></i>H100/A100</span>
-<span class="tech-tag text-[9px] py-0.5 px-1.5"><i class="fa-solid fa-rocket mr-1 text-red-400"></i>TensorRT</span>
+<h4 class="text-xs font-bold text-gray-500 uppercase mb-1.5">Tech Stack</h4>
+<div class="flex flex-wrap gap-1.5">
+<span class="tech-tag text-xs py-1 px-2"><i class="fa-brands fa-python mr-1.5"></i>Python</span>
+<span class="tech-tag text-xs py-1 px-2"><i class="fa-solid fa-fire mr-1.5 text-orange-400"></i>PyTorch</span>
+<span class="tech-tag text-xs py-1 px-2"><i class="fa-solid fa-microchip mr-1.5 text-green-400"></i>H100/A100</span>
+<span class="tech-tag text-xs py-1 px-2"><i class="fa-solid fa-rocket mr-1.5 text-red-400"></i>TensorRT</span>
 </div>
 </div>
 </div>
 </div>
-<!-- Right Column: Performance Metrics Grid -->
-<div class="w-2/3 flex flex-col gap-2">
-<div class="flex justify-between items-end mb-0.5 pl-1">
+<!-- Right Column: Performance Metrics -->
+<div class="w-[55%] flex flex-col gap-2">
+<div class="flex justify-between items-center pl-1">
 <h3 class="text-sm font-bold text-white font-['Montserrat']">Key Performance Indicators</h3>
-<span class="text-[9px] text-cyan-400 font-mono"><i class="fa-solid fa-check-circle mr-1"></i>Real-time 30+ FPS Achieved</span>
+<span class="text-xs text-cyan-400 font-mono"><i class="fa-solid fa-check-circle mr-1"></i>Real-time 30+ FPS</span>
 </div>
-<!-- Grid Layout -->
-<div class="grid grid-cols-4 gap-2 h-full">
-<!-- Row 1: Core Detection Metrics (Pie Charts) -->
-<div class="metric-card col-span-1 p-2">
-<div class="chart-container" id="chartVehicle">
-<!-- SVG fallback for PDF -->
-<svg class="svg-gauge" viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
-<circle cx="50" cy="50" r="40" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"
-    stroke-dasharray="240" stroke-dashoffset="11" transform="rotate(-90 50 50)"/>
-</svg>
-</div>
-<div class="text-center">
-<p class="highlight-value text-lg">95.8<span class="text-[10px] font-medium text-gray-500">%</span></p>
-<p class="stat-label text-[9px]">Vehicle Det.</p>
-</div>
-</div>
-<div class="metric-card col-span-1 p-2">
-<div class="chart-container" id="chartPerson">
-<!-- SVG fallback for PDF -->
-<svg class="svg-gauge" viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
-<circle cx="50" cy="50" r="40" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"
-    stroke-dasharray="239" stroke-dashoffset="12" transform="rotate(-90 50 50)"/>
-</svg>
-</div>
-<div class="text-center">
-<p class="highlight-value text-lg">95.2<span class="text-[10px] font-medium text-gray-500">%</span></p>
-<p class="stat-label text-[9px]">Person Det.</p>
-</div>
-</div>
-<div class="metric-card col-span-1 p-2">
-<div class="chart-container" id="chartLPD">
-<!-- SVG fallback for PDF -->
-<svg class="svg-gauge" viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="40" fill="none" stroke="rgba(148, 163, 184, 0.1)" stroke-width="6"/>
-<circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"
-    stroke-dasharray="237" stroke-dashoffset="14" transform="rotate(-90 50 50)"/>
-</svg>
-</div>
-<div class="text-center mt-1">
-<p class="highlight-value text-lg">94.5<span class="text-[10px] font-medium text-gray-500">%</span></p>
-<p class="stat-label text-[9px]">LP Detection</p>
-</div>
-</div>
-<!-- Optimization Metric -->
-<div class="metric-card col-span-1 p-2 border-green-500/30" style="background-color: rgba(20, 83, 45, 0.2);">
-<div class="flex flex-col items-center justify-center h-full">
-<i class="fa-solid fa-gauge-high text-2xl text-green-400 mb-1"></i>
-<p class="highlight-value text-xl text-green-300">7<span class="text-[10px]">%</span> <i class="fa-solid fa-arrow-up text-[8px]"></i></p>
-<p class="stat-label text-[9px] text-green-100">Speed Up</p>
-</div>
-</div>
-<!-- Row 2: Advanced Recognition (Bars) -->
-<div class="metric-card col-span-2 items-start px-3 py-2 justify-center">
-<div class="w-full mb-1.5">
-<div class="flex justify-between items-center mb-0.5">
-<div class="flex items-center">
-<i class="fa-solid fa-user-tag text-cyan-400 mr-1.5 text-[10px]"></i>
-<span class="text-[10px] text-white font-bold">Person Re-ID</span>
-</div>
-<span class="text-[10px] font-bold text-cyan-300">88.7%</span>
-</div>
-<div class="progress-bg" style="height:4px; margin-top:3px;">
-<div class="progress-fill" style="width: 88.7%;"></div>
-</div>
-</div>
-<div class="w-full mb-1.5">
-<div class="flex justify-between items-center mb-0.5">
-<div class="flex items-center">
-<i class="fa-solid fa-shirt text-purple-400 mr-1.5 text-[10px]"></i>
-<span class="text-[10px] text-white font-bold">VLM Attribute Recog.</span>
-</div>
-<span class="text-[10px] font-bold text-purple-300">개발중</span>
-</div>
-<div class="progress-bg" style="height:4px; margin-top:3px;">
-<div class="progress-fill" style="width: 0%; background-color: #a855f7;"></div>
-</div>
-</div>
-<div class="w-full">
-<div class="flex justify-between items-center mb-0.5">
-<div class="flex items-center">
-<i class="fa-solid fa-shield-halved text-yellow-400 mr-1.5 text-[10px]"></i>
-<span class="text-[10px] text-white font-bold">Abnormal Behavior</span>
-</div>
-<span class="text-[10px] font-bold text-yellow-300">개발중</span>
-</div>
-<div class="progress-bg" style="height:4px; margin-top:3px;">
-<div class="progress-fill" style="width: 0%; background-color: #facc15;"></div>
-</div>
-<p class="text-[8px] text-gray-500 mt-0.5">1차 알고리즘 + 2차 VLM Double-Check</p>
-</div>
-</div>
-<!-- Row 2: Pipeline Efficiency (Stats) -->
-<div class="metric-card col-span-2 flex-row gap-3 px-3 py-2 justify-around border-blue-500/30" style="background-color: rgba(30, 58, 138, 0.2);">
-<div class="flex flex-col items-center">
-<p class="text-[9px] text-blue-200 uppercase tracking-wider mb-0.5">Labeling Productivity</p>
-<p class="highlight-value text-2xl text-blue-300">40<span class="text-[10px]">%</span> <i class="fa-solid fa-arrow-up text-[10px]"></i></p>
-</div>
-<div class="w-px h-8 bg-blue-500/30"></div>
-<div class="flex flex-col items-center">
-<p class="text-[9px] text-blue-200 uppercase tracking-wider mb-0.5">Preprocessing Time</p>
-<p class="highlight-value text-2xl text-blue-300">15<span class="text-[10px]">%</span> <i class="fa-solid fa-arrow-down text-[10px]"></i></p>
-</div>
-</div>
-<!-- Row 3: Vehicle Brand/Color & LPR -->
-<div class="metric-card col-span-2 items-start px-3 py-2 justify-center">
-<div class="w-full mb-1.5">
-<div class="flex justify-between items-center mb-0.5">
-<div class="flex items-center">
-<i class="fa-solid fa-car text-orange-400 mr-1.5 text-[10px]"></i>
-<span class="text-[10px] text-white font-bold">Vehicle Brand</span>
-</div>
-<span class="text-[10px] font-bold text-orange-300">87.4%</span>
-</div>
-<div class="progress-bg" style="height:4px; margin-top:3px;">
-<div class="progress-fill" style="width: 87.4%; background-color: #fb923c;"></div>
-</div>
-</div>
-<div class="w-full">
-<div class="flex justify-between items-center mb-0.5">
-<div class="flex items-center">
-<i class="fa-solid fa-palette text-pink-400 mr-1.5 text-[10px]"></i>
-<span class="text-[10px] text-white font-bold">Vehicle Color</span>
-</div>
-<span class="text-[10px] font-bold text-pink-300">85.2%</span>
-</div>
-<div class="progress-bg" style="height:4px; margin-top:3px;">
-<div class="progress-fill" style="width: 85.2%; background-color: #f472b6;"></div>
-</div>
-</div>
-</div>
-<div class="metric-card col-span-2 items-start px-3 py-2 justify-center">
-<div class="w-full">
-<div class="flex justify-between items-center mb-0.5">
-<div class="flex items-center">
-<i class="fa-solid fa-id-card text-emerald-400 mr-1.5 text-[10px]"></i>
-<span class="text-[10px] text-white font-bold">License Plate Recog.</span>
-</div>
-<span class="text-[10px] font-bold text-emerald-300">93.1%</span>
-</div>
-<div class="progress-bg" style="height:4px; margin-top:3px;">
-<div class="progress-fill" style="width: 93.1%; background-color: #34d399;"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const createGauge = (domId, value, color) => {
-                const chart = echarts.init(document.getElementById(domId));
-                const option = {
-                    series: [{
-                        type: 'gauge',
-                        startAngle: 90,
-                        endAngle: -270,
-                        radius: '90%',
-                        pointer: { show: false },
-                        progress: {
-                            show: true,
-                            overlap: false,
-                            roundCap: true,
-                            clip: false,
-                            itemStyle: {
-                                color: color
-                            }
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                width: 6,
-                                color: [[1, 'rgba(148, 163, 184, 0.1)']]
-                            }
-                        },
-                        splitLine: { show: false },
-                        axisTick: { show: false },
-                        axisLabel: { show: false },
-                        data: [{ value: value }],
-                        detail: { show: false }
-                    }]
-                };
-                chart.setOption(option);
-                return chart;
-            };
 
-            const chart1 = createGauge('chartVehicle', 95.8, '#22d3ee');
-            const chart2 = createGauge('chartPerson', 95.2, '#38bdf8');
-            const chart3 = createGauge('chartLPD', 94.5, '#60a5fa');
+<!-- Compact KPI Grid -->
+<div class="glass-panel p-3 flex-1">
+<!-- Detection Metrics Row -->
+<div class="mb-3">
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2 flex items-center">
+<i class="fa-solid fa-crosshairs text-cyan-400 mr-2"></i>Detection Performance
+</h4>
+<div class="grid grid-cols-4 gap-2">
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-cyan-500/20">
+<p class="text-lg font-bold text-cyan-300 font-['Montserrat']">95.8%</p>
+<p class="text-[10px] text-gray-400">Vehicle</p>
+</div>
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-blue-500/20">
+<p class="text-lg font-bold text-blue-300 font-['Montserrat']">95.2%</p>
+<p class="text-[10px] text-gray-400">Person</p>
+</div>
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-purple-500/20">
+<p class="text-lg font-bold text-purple-300 font-['Montserrat']">94.5%</p>
+<p class="text-[10px] text-gray-400">LP Det.</p>
+</div>
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-emerald-500/20">
+<p class="text-lg font-bold text-emerald-300 font-['Montserrat']">93.1%</p>
+<p class="text-[10px] text-gray-400">LP Recog.</p>
+</div>
+</div>
+</div>
 
-            window.addEventListener('resize', () => {
-                chart1.resize();
-                chart2.resize();
-                chart3.resize();
-            });
-        });
-    </script>
+<!-- Recognition Metrics Row -->
+<div class="mb-3">
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2 flex items-center">
+<i class="fa-solid fa-fingerprint text-purple-400 mr-2"></i>Recognition & Attributes
+</h4>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-cyan-500/20">
+<p class="text-lg font-bold text-cyan-300 font-['Montserrat']">88.7%</p>
+<p class="text-[10px] text-gray-400">Person Re-ID</p>
+</div>
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-orange-500/20">
+<p class="text-lg font-bold text-orange-300 font-['Montserrat']">87.4%</p>
+<p class="text-[10px] text-gray-400">Vehicle Brand</p>
+</div>
+<div class="bg-slate-800/60 rounded-lg p-2 text-center border border-pink-500/20">
+<p class="text-lg font-bold text-pink-300 font-['Montserrat']">85.2%</p>
+<p class="text-[10px] text-gray-400">Vehicle Color</p>
+</div>
+</div>
+</div>
+
+<!-- Pipeline & Optimization Row -->
+<div class="mb-3">
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2 flex items-center">
+<i class="fa-solid fa-bolt text-yellow-400 mr-2"></i>Pipeline Optimization
+</h4>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-green-900/30 rounded-lg p-2 text-center border border-green-500/30">
+<p class="text-lg font-bold text-green-300 font-['Montserrat']">+7%</p>
+<p class="text-[10px] text-green-200">Speed Up</p>
+</div>
+<div class="bg-blue-900/30 rounded-lg p-2 text-center border border-blue-500/30">
+<p class="text-lg font-bold text-blue-300 font-['Montserrat']">+40%</p>
+<p class="text-[10px] text-blue-200">Labeling Prod.</p>
+</div>
+<div class="bg-blue-900/30 rounded-lg p-2 text-center border border-blue-500/30">
+<p class="text-lg font-bold text-blue-300 font-['Montserrat']">-15%</p>
+<p class="text-[10px] text-blue-200">Preproc. Time</p>
+</div>
+</div>
+</div>
+
+<!-- In Development Row -->
+<div>
+<h4 class="text-xs font-bold text-gray-400 uppercase mb-2 flex items-center">
+<i class="fa-solid fa-flask text-amber-400 mr-2"></i>In Development
+</h4>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-slate-800/40 rounded-lg p-2 border border-dashed border-purple-500/30 flex items-center gap-2">
+<i class="fa-solid fa-shirt text-purple-400 text-sm"></i>
+<div>
+<p class="text-xs text-white font-medium">VLM Attribute Recognition</p>
+<p class="text-[10px] text-gray-500">의상/소지품 속성 인식</p>
+</div>
+</div>
+<div class="bg-slate-800/40 rounded-lg p-2 border border-dashed border-yellow-500/30 flex items-center gap-2">
+<i class="fa-solid fa-shield-halved text-yellow-400 text-sm"></i>
+<div>
+<p class="text-xs text-white font-medium">Abnormal Behavior</p>
+<p class="text-[10px] text-gray-500">1차 알고리즘 + VLM 검증</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>
