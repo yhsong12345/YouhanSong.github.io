@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!--
 	Helios by HTML5 UP
 	html5up.net | @ajlkn
@@ -78,7 +78,7 @@
 										<li><a href="../../extra_activity/isu_basketball.html">Korean Basketball Club at ISU</a></li>
 									</ul>
 								</li>
-								
+
 							</ul>
 						</nav>
 				</div>
@@ -88,83 +88,183 @@
 
 				<div class="container">
 					<div class="row">
-						<img src="../../images/smart_control_system/" alt="" width="540" height="400" />
+						<!-- Project Overview Image Placeholder -->
+						<img src="../../images/smart_control_system/overview.png" alt="Smart Monitoring System Overview" width="550" height="400" />
 						<article class="col-6">
 							<header>
-								<h3>LLM specialized in Korean (October 2025 ~ Current)</h3>
+								<h3>Smart Monitoring System (November 2025 ~ Present)</h3>
 							</header>
 							<p>
-								sponsor: SECERN AI
+								<strong>Sponsor:</strong> Korean Government R&D Project
 							</p>
 							<p>
-								Consolidated/Affiliated Institution: SECERN AI
+								<strong>Affiliated Institution:</strong> SECERN AI
 							</p>
 							<p>
-								In this project, we studied and developed AI models to detect person and vehicles, and recognize its identity and attributes.
-								For person, we developed to detect the person and recognize his/her attributes (including upperbody, lowerbody, shoe, and etc.)
-								and identify him/her by comparing the input image to image in the gallery.
-								For vehicles, we developed to detect the vehicle and its licens plate to recognize the brand, model, and color of the vehicle and identify the vehicle in the database.
+								This is an R&D project to build an AI-based monitoring system that monitors situations
+								occurring at airports and public places, detects people and vehicles, recognizes their
+								attributes, and provides real-time information to the control center. The system integrates
+								multiple AI models for detection, recognition, and re-identification tasks to enhance
+								public safety and security.
+							</p>
+							<p>
+								<strong>Tech Stack:</strong> Python, PyTorch, H100/A100 GPU, TensorRT
 							</p>
 						</article>
 
-						<img src="../../images/smart_control_system/" alt="" width="540" height="250" />
+						<!-- My Role Section -->
+						<img src="../../images/smart_control_system/role.png" alt="Project Role" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>1. Collection and Curation of the Dataset</h3>
+								<h3>My Responsibilities</h3>
+							</header>
+							<ul>
+								<li>Data preprocessing pipeline and labeling system development</li>
+								<li>Detection/Recognition model development</li>
+								<li>VLM-based pseudo labeling and attribute recognition model development</li>
+								<li>Model optimization (TensorRT) and system integration</li>
+							</ul>
+						</article>
+
+						<!-- Vehicle/Person Detection -->
+						<img src="../../images/smart_control_system/detection.png" alt="Vehicle and Person Detection" width="550" height="350" />
+						<article class="col-6">
+							<header>
+								<h3>1. Vehicle/Person Detection (+11~13% Improvement)</h3>
 							</header>
 							<p>
-								We exploit Nemo Curator provided by Nvidia to cleanse, deduplication, deduplication of 
-								fuzzy data, and quality filtering for Korean corpus.
+								<strong>Challenge:</strong> Low detection rate in service environment due to domain gap
+								between training data and real-world deployment scenarios.
+							</p>
+							<p>
+								<strong>Solution:</strong> Implemented an iterative improvement pipeline - collected
+								undetected images from the service environment, labeled them, and performed additional
+								training to improve model performance.
+							</p>
+							<p>
+								<strong>Results:</strong>
+							</p>
+							<ul>
+								<li>Vehicle Detection: <strong>95.8%</strong> accuracy</li>
+								<li>Person Detection: <strong>95.2%</strong> accuracy</li>
+								<li>License Plate Detection: <strong>94.5%</strong> accuracy</li>
+							</ul>
+						</article>
 
+						<!-- Person Re-ID -->
+						<img src="../../images/smart_control_system/reid.png" alt="Person Re-identification" width="550" height="350" />
+						<article class="col-6">
+							<header>
+								<h3>2. Person Re-Identification (+12% Improvement)</h3>
+							</header>
+							<p>
+								<strong>Challenge:</strong> Insufficient labeled data and severe class imbalance
+								in the person re-identification dataset.
+							</p>
+							<p>
+								<strong>Solution:</strong> Applied HDBSCAN unsupervised clustering algorithm to
+								generate pseudo labels from unlabeled data, and implemented Temperature-based Sampler
+								to address class imbalance during training.
+							</p>
+							<p>
+								<strong>Result:</strong> Achieved <strong>88.7%</strong> accuracy for Person Re-ID.
 							</p>
 						</article>
 
-						<img src="../../images/smart_control_system/" alt="" width="540" height="450" />
+						<!-- Vehicle Brand/Color Recognition -->
+						<img src="../../images/smart_control_system/vehicle_attr.png" alt="Vehicle Attribute Recognition" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>2. </h3>
+								<h3>3. Vehicle Brand/Color Recognition (New Development)</h3>
 							</header>
 							<p>
-								With curated Korean corpus, we used tokenizer of pre-trained Large Language Model(LLM)
-								to get the information of the method that how they tokenize the words in order to
-								expand the tokenizer without any concerns. In this step, we	tokenize the Korean corpus
-							 	and expand the tokenizer by adding additional tokens which are not in the original vocabulary.
-								When expanding tokenizer, we average the weight of embedding if new token is
-								comprised of tokens in the original vocabulary. Otherwise, we randomly initialized the weights
-								of embedding.
+								<strong>Challenge:</strong> No existing dataset available for Korean vehicle brands.
+								Joint training of brand and color recognition caused performance degradation.
 							</p>
 							<p>
-								After expanding the tokenizer, we trained the LLM by freezing transformer layers
-								to align the text for both new tokenizer and LLM.
+								<strong>Solution:</strong> Collected and curated custom dataset for Korean vehicles.
+								Utilized Vision Language Model (VLM) for automated pseudo labeling. Implemented
+								separate training pipelines for brand and color recognition to prevent interference.
+							</p>
+							<p>
+								<strong>Results:</strong>
+							</p>
+							<ul>
+								<li>Vehicle Brand Recognition: <strong>87.4%</strong> accuracy</li>
+								<li>Vehicle Color Recognition: <strong>85.2%</strong> accuracy</li>
+							</ul>
+						</article>
+
+						<!-- License Plate Recognition -->
+						<img src="../../images/smart_control_system/lpr.png" alt="License Plate Recognition" width="550" height="300" />
+						<article class="col-6">
+							<header>
+								<h3>4. License Plate Recognition</h3>
+							</header>
+							<p>
+								Developed an OCR pipeline for Korean license plate recognition, consisting of
+								text detection and text recognition modules.
+							</p>
+							<p>
+								<strong>Result:</strong> Achieved <strong>93.1%</strong> accuracy for License Plate Recognition.
 							</p>
 						</article>
 
-						
-						<img src="../../images/smart_control_system/" alt="" width="540" height="300" />
+						<!-- VLM Attribute Recognition -->
+						<img src="../../images/smart_control_system/vlm.png" alt="VLM Attribute Recognition" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>3. </h3>
+								<h3>5. VLM-based Attribute Recognition (In Development)</h3>
 							</header>
 							<p>
-								To improve better understanding of question, we generate and select the proper prompt
-								with LLM (such as GPT-4o, Gemini, etc.). And we impose chain of thought prompting
-								to make the model answering the question step by step which could possibly
-								make model to answer the question more reasonable.
+								Currently developing a Vision Language Model (VLM) based approach for person
+								attribute recognition. The model recognizes detailed attributes including
+								upper body clothing, lower body clothing, shoes, accessories, and more.
+							</p>
+							<p>
+								<strong>Status:</strong> In development
 							</p>
 						</article>
 
-						<img src="../../images/smart_control_system/" alt="" width="540" height="400" />
+						<!-- Abnormal Behavior Detection -->
+						<img src="../../images/smart_control_system/abnormal.png" alt="Abnormal Behavior Detection" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>4. </h3>
+								<h3>6. Abnormal Behavior Detection (In Development)</h3>
 							</header>
 							<p>
-								With various dataset(corpus), we trained the entire model (tokenizer and LLM)
-								with CPT(Continued Pre-training), SFT(Supervised Fine-Tuning), Direct Preference
-								Optimization(DPO), and Group Preference Optimization(GRPO). In this stage,
-								we tested and explored the best hyper-paramter to train a decent model.
+								Developing a two-stage abnormal behavior detection system that combines
+								rule-based algorithms for initial detection with VLM-based verification
+								for double-checking to reduce false positives.
+							</p>
+							<p>
+								<strong>Status:</strong> In development (1st Algorithm + 2nd VLM Double-Check)
 							</p>
 						</article>
+
+						<!-- Pipeline Efficiency -->
+						<img src="../../images/smart_control_system/pipeline.png" alt="Pipeline Efficiency" width="550" height="300" />
+						<article class="col-6">
+							<header>
+								<h3>7. Pipeline Efficiency Improvements</h3>
+							</header>
+							<p>
+								<strong>Labeling Productivity:</strong> Improved by <strong>40%</strong> through
+								implementation of automated labeling tools and VLM-based pseudo labeling.
+							</p>
+							<p>
+								<strong>Preprocessing Time:</strong> Reduced by <strong>15%</strong> through
+								optimized data preprocessing pipeline.
+							</p>
+							<p>
+								<strong>Model Optimization:</strong> Achieved <strong>7% speed improvement</strong>
+								through TensorRT optimization while maintaining real-time performance (30+ FPS).
+							</p>
+						</article>
+
+						<!-- Demo/Result Images Placeholder -->
+						<img src="../../images/smart_control_system/demo1.png" alt="Demo 1" width="600" height="350" />
+						<img src="../../images/smart_control_system/demo2.png" alt="Demo 2" width="600" height="350" />
 
 					</div>
 				</div>
