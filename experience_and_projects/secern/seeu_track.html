@@ -94,10 +94,10 @@
 								<h3>SeeU Track (November 2024 ~ May 2025)</h3>
 							</header>
 							<p>
-								sponsor: Vietnam Police Department, TriNam
+								Client: Vietnam Police Department, TriNam
 							</p>
 							<p>
-								Consolidated/Affiliated Institution: SECERN AI
+								Consolidated/Affiliated Institution: SECERN AI (AI Team 2)
 							</p>
 							<p> In this project, we developed AI models for an AI CCTV system called
 								SeeU Track. The system mainly focuses on re-identification tasks for vehicles and persons.
@@ -110,6 +110,26 @@
 							<p>
 								We accomplished 87.52% accuracy for the integrated system.
 							</p>
+							<p>
+								<strong>Tech Stack:</strong> PyTorch, OpenVINO, ONNX, Docker, Slurm
+							</p>
+							<p>
+								<strong>My Responsibilities:</strong>
+							</p>
+							<ul>
+								<li>Built the data preprocessing pipeline and labeling system</li>
+								<li>Researched and developed vehicle / person detection and attribute recognition models</li>
+								<li>Model lightweighting (OpenVINO / ONNX) and system integration</li>
+							</ul>
+							<p>
+								<strong>Challenge &amp; Solution:</strong> Local environment and vehicle types differed from
+								the training data, degrading generalization. We directly collected local data and operated a
+								labeling workforce for domain adaptation. Person attribute labels were also insufficient, so we
+								used VLM-based automatic labeling with a review process to secure high-quality data.
+							</p>
+							<p>
+								<strong>Outcome:</strong> Vietnam Police Department PoC system successfully built and delivered.
+							</p>
 						</article>
 						<img src="../../images/object_detection_image.png" alt="" width="550" height="350" />
 						<article class="col-6">
@@ -121,8 +141,9 @@
 								we searched and tested various open source models, and decided to use the YOLOv11 model.
 							</p>
 							<p>
-								We achieved 97.48% for detecting person and vehicle and
-								98.41% for detecting license plate.
+								We achieved <strong>96.8% (+10%)</strong> for detecting vehicles and
+								<strong>97.2% (+7%)</strong> for detecting persons, and
+								<strong>98.41%</strong> for detecting license plates.
 							</p>
 						</article>
 						<img src="../../images/classification_image.png" alt="" width="550" height="350" />
@@ -148,7 +169,7 @@
 								We tested and evaluated various models, and DBNet for text detection and SVTR for text recognition were chosen.
 							</p>
 							<p>
-								We achieved 97.84% for the accuracy.
+								We achieved <strong>97.84% (+13%)</strong> for the accuracy.
 							</p>
 						</article>
 						<img src="../../images/seeutrack/seeutrack_6.png" alt="" width="550" height="350" />
@@ -165,7 +186,7 @@
 								for the classification task.
 							</p>
 							<p>
-								We achieved 82.34% for the accuracy in the test dataset.
+								We achieved <strong>82.34% (+12%)</strong> for the accuracy in the test dataset.
 							</p>
 						</article>
 						<img src="../../images/seeutrack/seeutrack_1.png" alt="" width="600" height="350" />

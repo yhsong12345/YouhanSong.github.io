@@ -92,23 +92,23 @@
 						<img src="../../images/smart_control_system/0.png" alt="Smart Monitoring System Overview" width="550" height="700" />
 						<article class="col-6">
 							<header>
-								<h3>Smart Monitoring System (November 2025 ~ Present)</h3>
+								<h3>Smart Monitoring System (November 2025 ~ September 2026)</h3>
 							</header>
 							<p>
-								<strong>Sponsor:</strong> Korean Government R&D Project
+								<strong>Sponsor:</strong> In-house R&D
 							</p>
 							<p>
-								<strong>Affiliated Institution:</strong> SECERN AI
+								<strong>Affiliated Institution:</strong> SECERN AI (AI Team 1)
 							</p>
 							<p>
-								This is an R&D project to build an AI-based monitoring system that monitors situations
+								This is an in-house R&D project to build an AI-based monitoring system that monitors situations
 								occurring at airports and public places, detects people and vehicles, recognizes their
 								attributes, and provides real-time information to the control center. The system integrates
 								multiple AI models for detection, recognition, and re-identification tasks to enhance
 								public safety and security.
 							</p>
 							<p>
-								<strong>Tech Stack:</strong> Python, PyTorch, H100/A100 GPU, OpenVino, ONNX
+								<strong>Tech Stack:</strong> Huggingface, vLLM, PyTorch, OpenVINO, ONNX, Docker, Slurm, H100/A100 GPU
 							</p>
 							<p>
 								<strong>My Responsibilities:</strong>
@@ -121,11 +121,11 @@
 							</ul>
 						</article>
 
-						<!-- Vehicle/Person Detection -->
-						<img src="../../images/smart_control_system/4.png" alt="Vehicle and Person Detection" width="550" height="350" />
+						<!-- Vehicle/Person Detection & Tracking -->
+						<img src="../../images/smart_control_system/4.png" alt="Vehicle and Person Detection and Tracking" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>1. Vehicle/Person Detection (+11~13% Improvement)</h3>
+								<h3>1. Vehicle/Person Detection & Tracking (+11~13% Improvement)</h3>
 							</header>
 							<p>
 								<strong>Challenge:</strong> Low detection rate in service environment due to domain gap
@@ -134,14 +134,15 @@
 							<p>
 								<strong>Solution:</strong> Implemented an iterative improvement pipeline - collected
 								undetected images from the service environment, labeled them, and performed additional
-								training to improve model performance.
+								training to improve model performance. Vehicle and person detection and tracking run
+								simultaneously, using <strong>BoT-SORT</strong> as the multi-object tracking algorithm.
 							</p>
 							<p>
 								<strong>Results:</strong>
 							</p>
 							<ul>
-								<li>Vehicle Detection: <strong>95.8%</strong> accuracy</li>
-								<li>Person Detection: <strong>95.2%</strong> accuracy</li>
+								<li>Vehicle Detection: <strong>95.8%</strong> accuracy (+13%)</li>
+								<li>Person Detection: <strong>95.2%</strong> accuracy (+11%)</li>
 								<li>License Plate Detection: <strong>94.5%</strong> accuracy</li>
 							</ul>
 						</article>
@@ -162,7 +163,7 @@
 								to address class imbalance during training.
 							</p>
 							<p>
-								<strong>Result:</strong> Achieved <strong>88.7%</strong> accuracy for Person Re-ID.
+								<strong>Result:</strong> Achieved <strong>88.7%</strong> accuracy for Person Re-ID (+12%).
 							</p>
 						</article>
 
@@ -201,7 +202,7 @@
 								license plate detection, text detection and text recognition modules.
 							</p>
 							<p>
-								<strong>Result:</strong> Achieved <strong>93.1%</strong> accuracy for License Plate Recognition.
+								<strong>Result:</strong> Achieved <strong>94.5%</strong> accuracy for License Plate Recognition.
 							</p>
 						</article>
 
@@ -209,31 +210,66 @@
 						<img src="../../images/smart_control_system/3.png" alt="VLM Attribute Recognition" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>5. VL-based Attribute Recognition (In Development)</h3>
+								<h3>5. VL-based Attribute Recognition</h3>
 							</header>
 							<p>
-								Currently developing a Vision Language (VL) model based approach for person
-								attribute recognition. The model recognizes detailed attributes including
-								upper body clothing, lower body clothing, shoes, accessories, and more.
+								Developed a person attribute recognition model that recognizes detailed attributes
+								including upper body clothing, lower body clothing, shoes, accessories, and more.
+								Two approaches were built and compared: <strong>SOLIDER</strong> (a ViT-based model)
+								and <strong>PromptPAR</strong> (a Vision-Language model based on CLIP).
 							</p>
 							<p>
-								<strong>Status:</strong> In development
+								<strong>Results (overall):</strong>
+							</p>
+							<div style="overflow-x:auto;">
+							<table style="width:100%; border-collapse:collapse; margin-bottom:0.5em;">
+								<thead>
+									<tr>
+										<th style="border:1px solid #ddd; padding:8px; text-align:left;">Model</th>
+										<th style="border:1px solid #ddd; padding:8px;">mA</th>
+										<th style="border:1px solid #ddd; padding:8px;">pos_recall</th>
+										<th style="border:1px solid #ddd; padding:8px;">neg_recall</th>
+										<th style="border:1px solid #ddd; padding:8px;">Acc</th>
+										<th style="border:1px solid #ddd; padding:8px;">Prec</th>
+										<th style="border:1px solid #ddd; padding:8px;">Rec</th>
+										<th style="border:1px solid #ddd; padding:8px;">F1</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr><td style="border:1px solid #ddd; padding:8px;">SOLIDER (ViT-based)</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">85.71%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">76.07%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">95.35%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">81.45%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">88.94%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">89.28%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">89.11%</td></tr>
+									<tr><td style="border:1px solid #ddd; padding:8px;">PromptPAR (CLIP-based)</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">84.04%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">74.45%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">93.63%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">62.96%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">71.36%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">83.95%</td><td style="border:1px solid #ddd; padding:8px; text-align:center;">75.08%</td></tr>
+								</tbody>
+							</table>
+							</div>
+							<p style="font-size:0.85em; color:#888; margin-top:0;">
+								Metrics are reported as the overall result across the combined evaluation datasets.
 							</p>
 						</article>
 
-						<!-- Abnormal Behavior Detection -->
-						<img src="../../images/smart_control_system/6.png" alt="Abnormal Behavior Detection" width="550" height="350" />
+						<!-- Anomaly Detection -->
+						<img src="../../images/smart_control_system/6.png" alt="Anomaly Detection" width="550" height="350" />
 						<article class="col-6">
 							<header>
-								<h3>6. Abnormal Behavior Detection (In Development)</h3>
+								<h3>6. Anomaly Detection (In Development)</h3>
 							</header>
 							<p>
-								Developing a two-stage abnormal behavior detection system that combines
-								rule-based algorithms for initial detection with VLM-based verification
-								for double-checking to reduce false positives.
+								Developing a <strong>three-stage anomaly detection pipeline</strong> that progressively
+								verifies detected events to minimize false positives before alerting the control center:
 							</p>
+							<ul>
+								<li><strong>Stage 1 &mdash; Algorithm-based detection:</strong> a rule-based algorithm detects
+									anomalous behaviors such as fighting, fainting (swoon), falling down, and more. Once an
+									anomaly is detected, a video clip is created from the 15 seconds before and after the event.</li>
+								<li><strong>Stage 2 &mdash; Video Foundation model verification:</strong> the clip is passed to a
+									Video Foundation model (similar to X-CLIP) that verifies whether the event is truly an anomaly.
+									<em>(not yet started)</em></li>
+								<li><strong>Stage 3 &mdash; VLM final check:</strong> if the clip is confirmed as real, it is sent to a
+									VLM (e.g., Qwen3-VL-8B) for a final check. If the situation is confirmed to be one of the
+									target anomalies, the system notifies the control center.</li>
+							</ul>
 							<p>
-								<strong>Status:</strong> In development (1st Algorithm + 2nd VLM Double-Check)
+								<strong>Status:</strong> In development &mdash; currently developing the VLM for anomaly detection
+								(Stage 1 Algorithm &rarr; Stage 2 Video Foundation model &rarr; Stage 3 VLM final check).
 							</p>
 						</article>
 

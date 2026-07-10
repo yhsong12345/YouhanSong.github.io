@@ -94,23 +94,44 @@
 								<h3>Tanzania SmartGate (January 2024 ~ December 2024)</h3>
 							</header>
 							<p>
-								sponsor: Tanzania Customs Service
+								Client: CUPIA, Tanzania Customs Service
 							</p>
 							<p>
-								Consolidated/Affiliated Institution: CUPIA / SECERN AI
+								Consolidated/Affiliated Institution: SECERN AI (AI Team 3)
 							</p>
-							<p> 
-								In this project, automatic gate pass system which is called smartgate 
+							<p>
+								In this project, automatic gate pass system which is called smartgate
 								is developed with AI model. The system is consist of Object Detection
 								Model, OCR and face recognition. For Object Detection, It would detect license plate and
 								Container number area, and OCR would detect and recognize
 								the results from detection. And the face recognition system is consist of face detection
 								and face recognition. Face detection is to detect and crop the face. With this result,
-								face recognition would compare the result to one of the list registered in the 
-								database. After comparing and verifying the identity, vehicle number, 
+								face recognition would compare the result to one of the list registered in the
+								database. After comparing and verifying the identity, vehicle number,
 								and container number, the gate would automaticaly open and the record will be stored
 								in the database.
 							</p>
+							<p>
+								<strong>Tech Stack:</strong> Python, PyTorch, ONNX, OpenVINO, Linux, Docker, Slurm
+							</p>
+							<p>
+								<strong>My Responsibilities:</strong>
+							</p>
+							<ul>
+								<li>Established data collection guidelines and labeled local-environment data</li>
+								<li>Developed license plate / container region detection and OCR models</li>
+								<li>Wrote the multi-model integration algorithm (perception module integration SW)</li>
+								<li>ONNX / OpenVINO model lightweighting and on-site deployment</li>
+							</ul>
+							<p>
+								<strong>Key Achievements:</strong>
+							</p>
+							<ul>
+								<li>License plate / container region detection: <strong>97.82%</strong></li>
+								<li>Text detection: <strong>94.28%</strong> &middot; recognition: <strong>92.35%</strong></li>
+								<li>ONNX / OpenVINO lightweighting &rarr; real-time on-site deployment at the port</li>
+								<li>Tanzania Customs Service PoC completed successfully</li>
+							</ul>
 						</article>
 						<img src="../../images/tanzania/tanzania_2.png" alt="" width="480" height="400" />
 						<article class="col-6">
@@ -129,6 +150,14 @@
 								we achieved 97.82% for detection of License plate and container area
 								and 94.28% for detection of text in license plate and container, and
 								92.35% for recognition.
+							</p>
+							<p>
+								<strong>Challenge &amp; Solution:</strong> The port gate is an outdoor environment with
+								non-standard conditions (lighting, angle, weather). We directly collected and labeled
+								local-environment data for domain adaptation to secure environmental diversity in the
+								training dataset. In addition, multiple AI models (license plate, container, OCR) had to run
+								simultaneously with real-time processing, so we unified each model's input/output and
+								designed a single integrated pipeline SW to secure real-time performance.
 							</p>
 						</article>
 						<img src="../../images/tanzania/tanzania_6.png" alt="" width="480" height="400" />
