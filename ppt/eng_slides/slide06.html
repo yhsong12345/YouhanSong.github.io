@@ -277,10 +277,11 @@
 <div class="mt-auto">
 <h4 class="text-sm font-bold text-gray-400 uppercase mb-3">Tech Stack &amp; Env</h4>
 <div class="flex flex-wrap gap-1">
-<span class="tech-tag"><i class="fa-brands fa-python mr-1 text-blue-400 text-xs"></i> Python</span>
 <span class="tech-tag"><i class="fa-solid fa-fire mr-1 text-orange-400 text-xs"></i> PyTorch</span>
-<span class="tech-tag"><i class="fa-solid fa-microchip mr-1 text-green-400 text-xs"></i> A100 GPU</span>
-<span class="tech-tag"><i class="fa-brands fa-linux mr-1 text-orange-400 text-xs"></i> Ubuntu 20.04</span>
+<span class="tech-tag"><i class="fa-solid fa-bolt mr-1 text-yellow-300 text-xs"></i> OpenVINO</span>
+<span class="tech-tag"><i class="fa-solid fa-diagram-project mr-1 text-blue-300 text-xs"></i> ONNX</span>
+<span class="tech-tag"><i class="fa-brands fa-docker mr-1 text-blue-400 text-xs"></i> Docker</span>
+<span class="tech-tag"><i class="fa-solid fa-server mr-1 text-green-400 text-xs"></i> Slurm</span>
 </div>
 </div>
 </div>
@@ -314,12 +315,20 @@ Demonstration
 <h3 class="text-xs font-bold text-white mb-1 pl-1 font-['Montserrat']">Performance Metrics (Accuracy)</h3>
 <!-- Metrics Grid -->
 <div class="grid grid-cols-3 gap-1.5 flex-1 min-h-0">
-<!-- Metric 1: Vehicle/Person Detection -->
-<div class="metric-card">
-<div class="chart-container" id="chartDetectionTrack"></div>
-<div class="text-center mt-[-8px] mb-0.5">
-<p class="highlight-value text-base">97.48<span class="text-xs font-medium text-gray-500">%</span></p>
-<p class="stat-label text-[8px]">Object Detection<br/><span class="text-[7px] opacity-70">(Car / Person)</span></p>
+<!-- Metric 1: Vehicle & Person Detection (separate values) -->
+<div class="metric-card justify-center py-1">
+<div class="flex items-center justify-center w-full gap-2">
+<div class="text-center">
+<div class="flex items-center justify-center mb-0.5"><i class="fa-solid fa-car text-cyan-400 text-xs"></i></div>
+<p class="highlight-value text-base">96.8<span class="text-xs font-medium text-gray-500">%</span></p>
+<p class="stat-label text-[8px]">Vehicle Det.<br/><span class="text-[7px] text-green-400">+10%</span></p>
+</div>
+<div class="w-px h-8 bg-slate-700"></div>
+<div class="text-center">
+<div class="flex items-center justify-center mb-0.5"><i class="fa-solid fa-person text-indigo-400 text-xs"></i></div>
+<p class="highlight-value text-base">97.2<span class="text-xs font-medium text-gray-500">%</span></p>
+<p class="stat-label text-[8px]">Person Det.<br/><span class="text-[7px] text-green-400">+7%</span></p>
+</div>
 </div>
 </div>
 <!-- Metric 2: License Plate Detection -->
@@ -335,7 +344,7 @@ Demonstration
 <div class="chart-container" id="chartLPR"></div>
 <div class="text-center mt-[-8px] mb-0.5">
 <p class="highlight-value text-base">97.84<span class="text-xs font-medium text-gray-500">%</span></p>
-<p class="stat-label text-[8px]">License Plate<br/><span class="text-[7px] opacity-70">Recognition (OCR)</span></p>
+<p class="stat-label text-[8px]">LP Recognition (OCR)<br/><span class="text-[7px] text-green-400">+13%</span></p>
 </div>
 </div>
 <!-- Metric 4: Attribute Recognition (Bar style) -->
@@ -358,12 +367,12 @@ Demonstration
 <div class="flex-1 pl-2.5">
 <div class="flex items-center mb-0.5">
 <i class="fa-solid fa-person text-cyan-400 mr-1 text-xs"></i>
-<h4 class="text-white font-bold text-xs">Person Attributes</h4>
+<h4 class="text-white font-bold text-xs">Person Attributes (VLM)</h4>
 </div>
 <p class="text-[8px] text-gray-400 mb-1">Gender, Age, Clothing Analysis</p>
 <div class="flex items-center justify-between mb-0.5">
 <span class="text-xs text-gray-300">Accuracy</span>
-<span class="text-xs font-bold text-cyan-300">82.34%</span>
+<span class="text-xs font-bold text-cyan-300">82.34% <span class="text-green-400">+12%</span></span>
 </div>
 <div class="progress-bg">
 <div class="progress-fill" style="width: 82.34%;"></div>
@@ -378,7 +387,7 @@ Demonstration
 <h4 class="text-white font-bold text-xs mb-0.5 uppercase tracking-wider text-center z-10">Total Integration</h4>
 <p class="text-[8px] text-blue-200 mb-1 text-center z-10">End-to-End System Performance</p>
 <div class="relative z-10 flex flex-col items-center">
-<span class="text-lg font-black text-white font-['Montserrat'] drop-shadow-lg">87.5%</span>
+<span class="text-lg font-black text-white font-['Montserrat'] drop-shadow-lg">87.52%</span>
 <div class="mt-1 px-1.5 py-0.5 bg-blue-500/20 rounded-full border border-blue-400/30">
 <p class="text-[8px] text-blue-300 font-bold uppercase">System Accuracy</p>
 </div>
@@ -425,12 +434,10 @@ Demonstration
             return chart;
         };
 
-        const chart1 = createGauge('chartDetectionTrack', 97.48, '#22d3ee');
         const chart2 = createGauge('chartLPD', 98.41, '#38bdf8');
         const chart3 = createGauge('chartLPR', 97.84, '#60a5fa');
 
         window.addEventListener('resize', () => {
-            chart1.resize();
             chart2.resize();
             chart3.resize();
         });

@@ -160,9 +160,9 @@
 </div>
 <h1 class="text-3xl font-black text-white font-['Montserrat'] mb-1">Korean-Specific LLM Development</h1>
 <div class="flex items-center space-x-3">
-<p class="text-base text-gray-300 font-light">Korean LLM Research &amp; Development</p>
+<p class="text-base text-gray-300 font-light">SECERN AI · AI Lab</p>
 <div class="h-4 w-px bg-gray-600"></div>
-<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">Internal R&amp;D</span>
+<span class="text-sm text-cyan-300 font-medium bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">In-house R&amp;D</span>
 </div>
 </div>
 <div class="text-right">
@@ -183,7 +183,7 @@
                         Project Goal
                     </h3>
 <p class="text-sm text-gray-300 leading-relaxed mb-3">
-                        Building a <span class="highlight-text">preprocessing pipeline</span> for Korean data and performing <span class="highlight-text">Instruction Tuning</span> on Llama/Qwen to maximize Korean reasoning capabilities
+                        Building a <span class="highlight-text">preprocessing pipeline</span> for Korean data and running a <span class="highlight-text">4-stage training pipeline</span> on <span class="highlight-text">Qwen3 1.7B / 8B</span> to maximize Korean reasoning capabilities
                     </p>
 <div class="mb-3">
 <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Key Responsibilities</h4>
@@ -194,11 +194,11 @@
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
-<span class="leading-snug">Korean Tokenizer optimization</span>
+<span class="leading-snug">Korean Tokenizer (151K → 165K vocab)</span>
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
-<span class="leading-snug">LLM Fine-tuning (CPT, SFT, DPO)</span>
+<span class="leading-snug">4-stage training (CPT→SFT→DPO→GRPO)</span>
 </li>
 <li class="flex items-start">
 <i class="fa-solid fa-check text-cyan-500 mt-0.5 mr-2 text-xs"></i>
@@ -208,16 +208,16 @@
 </div>
 <h4 class="text-xs font-bold text-gray-400 uppercase mb-1.5">Tech Stack</h4>
 <div class="flex flex-wrap gap-1 mb-2">
-<span class="tech-badge"><i class="fa-brands fa-python text-blue-400"></i> Python</span>
+<span class="tech-badge"><i class="fa-solid fa-robot text-yellow-400"></i> HuggingFace</span>
+<span class="tech-badge"><i class="fa-solid fa-bolt text-cyan-400"></i> vLLM</span>
 <span class="tech-badge"><i class="fa-solid fa-fire text-orange-500"></i> PyTorch</span>
-<span class="tech-badge"><i class="fa-solid fa-layer-group text-green-400"></i> NeMo</span>
-<span class="tech-badge"><i class="fa-solid fa-microchip text-purple-400"></i> HF</span>
+<span class="tech-badge"><i class="fa-brands fa-python text-blue-400"></i> Python</span>
 </div>
 <h4 class="text-xs font-bold text-gray-400 uppercase mb-1.5">Environment</h4>
 <div class="flex flex-wrap gap-1 mb-1">
+<span class="tech-badge"><i class="fa-solid fa-diagram-project text-blue-400"></i> Slurm</span>
+<span class="tech-badge"><i class="fa-solid fa-cube text-purple-400"></i> Singularity</span>
 <span class="tech-badge"><i class="fa-solid fa-server text-green-400"></i> H100/A100</span>
-<span class="tech-badge"><i class="fa-brands fa-linux text-orange-400"></i> Ubuntu</span>
-<span class="tech-badge"><i class="fa-solid fa-users text-cyan-400"></i> Team: 5</span>
 </div>
 </div>
 </div>
@@ -254,8 +254,8 @@
 <p class="font-bold text-white mb-1.5 text-xs"><i class="fa-solid fa-brain mr-1"></i> Fine-tuning</p>
 <ul class="list-disc list-inside text-gray-400 space-y-0.5 text-xs">
 <li>CPT / SFT</li>
-<li>DPO / PPO</li>
-<li>Korean Tokenizer</li>
+<li>DPO / GRPO</li>
+<li>SLERP merge (t=0.6)</li>
 </ul>
 </div>
 </div>
@@ -271,9 +271,9 @@
 <div class="bg-slate-800/50 border-x border-b border-slate-700 rounded-b-lg p-2.5 flex-1">
 <p class="font-bold text-white mb-1.5 text-xs"><i class="fa-solid fa-chart-bar mr-1"></i> Benchmarks</p>
 <ul class="list-disc list-inside text-gray-400 space-y-0.5 text-xs">
+<li>HAERAE / KoBEST</li>
+<li>IFEval_Ko / KMMLU</li>
 <li>GSM8K (Reasoning)</li>
-<li>IFEval_Ko</li>
-<li>Performance metrics</li>
 </ul>
 </div>
 </div>
@@ -284,27 +284,27 @@
 <h3 class="text-base font-bold text-white mb-2">Key Achievements</h3>
 <div class="grid grid-cols-2 gap-3 h-full">
 <div class="process-step" style="padding: 12px; margin-left: 10px;">
-<p class="text-sm font-bold text-cyan-300 mb-1">Advanced Data Pipeline</p>
+<p class="text-sm font-bold text-cyan-300 mb-1">1.7B — Best-in-class</p>
 <p class="text-xs text-gray-300 leading-relaxed">
-    Built <span class="text-white">Clean Architecture-based pipeline</span> with NeMo Curator for large-scale dataset processing
+    ko.avg <span class="text-white">53.78% (+14%)</span>, outperforming EXAONE-3.5-2.4B &amp; Kanana-1.5 while staying strong on English/math
 </p>
 </div>
 <div class="process-step" style="padding: 12px; margin-left: 10px;">
-<p class="text-sm font-bold text-cyan-300 mb-1">Tokenizer Optimization</p>
+<p class="text-sm font-bold text-cyan-300 mb-1">8B — Top Korean Score</p>
 <p class="text-xs text-gray-300 leading-relaxed">
-    Applied <span class="text-white">Korean-specific Tokenizer</span> to improve token efficiency for Llama/Qwen
+    ko.avg <span class="text-white">68.84% (+15%)</span> vs Qwen3-8B base; HAERAE +5.1%, KoBEST +7.4%, IFEval_Ko +9.1%
 </p>
 </div>
 <div class="process-step" style="padding: 12px; margin-left: 10px;">
-<p class="text-sm font-bold text-cyan-300 mb-1">Training Methodologies</p>
+<p class="text-sm font-bold text-cyan-300 mb-1">Preference Tuning (DPO)</p>
 <p class="text-xs text-gray-300 leading-relaxed">
-Applied <span class="text-white">SFT, DPO, PPO</span> to improve instruction following and Korean response quality
+Redesigned preference data to break DPO plateau — <span class="text-white">IFEval 52.87 → 64.88 (+12%)</span>
 </p>
 </div>
 <div class="process-step" style="padding: 12px; margin-left: 10px;">
-<p class="text-sm font-bold text-cyan-300 mb-1">Quantitative Evaluation</p>
+<p class="text-sm font-bold text-cyan-300 mb-1">SLERP Merge &amp; Tokenizer</p>
 <p class="text-xs text-gray-300 leading-relaxed">
-Evaluated with <span class="text-white">gsm8k, ifeval_ko</span> benchmarks and derived improvement directions
+Recovered post-CPT math drop via <span class="text-white">Base+CPT SLERP (t=0.6)</span>; tokenizer expanded <span class="text-white">151K → 165K</span>
 </p>
 </div>
 </div>

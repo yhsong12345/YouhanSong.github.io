@@ -163,7 +163,7 @@
                         주요내용
                     </h3>
 <p class="text-xs text-gray-300 leading-relaxed">
-한국어 환경에서 높은 성능과 응답 품질을 보이는 거대 언어 모델을 연구하고 개발하는 사내 R&D 프로젝트입니다. 데이터 전처리부터 모델의 다양한 훈련 기법 적용 및 성능 평가까지 전반적인 LLM 개발주기를 다루었습니다.
+Qwen3 1.7B / 8B를 기반으로 한국어 환경에서 높은 성능과 응답 품질을 보이는 거대 언어 모델을 연구·개발하는 SECERN AI AI Lab 사내 R&D 프로젝트입니다. 데이터 전처리부터 4단계 훈련(CPT→SFT→DPO→GRPO) 및 성능 평가까지 전반적인 LLM 개발주기를 다루었습니다.
 </p>
 </div>
 
@@ -180,7 +180,7 @@ NeMo Curator 기반 데이터 전처리 파이프라인 구축
 </li>
 <li class="text-xs text-gray-300 flex items-start">
 <i class="fa-solid fa-check text-cyan-400 mr-1.5 mt-0.5 text-[8px]"></i>
-LLM 연구 (훈련 레시피 및 토크나이저 확장)
+LLM 연구 (4단계 훈련 레시피 및 토크나이저 확장)
 </li>
 </ul>
 </div>
@@ -211,16 +211,16 @@ LLM 연구 (훈련 레시피 및 토크나이저 확장)
 <!-- Challenge 2: Training -->
 <div class="mb-2 p-2 rounded-lg border border-slate-700/50" style="background-color: rgba(15, 23, 42, 0.6);">
 <div class="flex items-center justify-between mb-1.5">
-<span class="text-xs font-bold text-purple-300 uppercase">Training Strategy</span>
-<span class="text-xs px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">4-Stage</span>
+<span class="text-xs font-bold text-purple-300 uppercase">Preference (DPO)</span>
+<span class="text-xs px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">52.87→64.88</span>
 </div>
 <div class="flex items-start gap-1.5 mb-1">
 <i class="fa-solid fa-triangle-exclamation text-red-400 text-[9px] mt-0.5"></i>
-<p class="text-xs text-gray-300 leading-snug">한국어↔영어/수학 Trade-off</p>
+<p class="text-xs text-gray-300 leading-snug">DPO 성능 정체 (plateau)</p>
 </div>
 <div class="flex items-start gap-1.5">
 <i class="fa-solid fa-check-circle text-green-400 text-[9px] mt-0.5"></i>
-<p class="text-xs text-gray-300 leading-snug">CPT→SFT→DPO→GRPO 순차 학습</p>
+<p class="text-xs text-gray-300 leading-snug">선호 데이터 재설계 → IFEval +12%</p>
 </div>
 </div>
 
@@ -243,9 +243,12 @@ LLM 연구 (훈련 레시피 및 토크나이저 확장)
 <div class="mt-auto">
 <h4 class="text-xs font-bold text-gray-500 uppercase mb-1">Tech Stack</h4>
 <div class="flex flex-wrap gap-0.5">
-<span class="tech-tag"><i class="fa-brands fa-python mr-1"></i>Python</span>
+<span class="tech-tag"><i class="fa-solid fa-robot mr-1 text-yellow-400"></i>HuggingFace</span>
+<span class="tech-tag"><i class="fa-solid fa-bolt mr-1 text-cyan-400"></i>vLLM</span>
 <span class="tech-tag"><i class="fa-solid fa-fire mr-1 text-orange-400"></i>PyTorch</span>
-<span class="tech-tag"><i class="fa-solid fa-layer-group mr-1 text-green-400"></i>NeMo</span>
+<span class="tech-tag"><i class="fa-brands fa-python mr-1"></i>Python</span>
+<span class="tech-tag"><i class="fa-solid fa-diagram-project mr-1 text-blue-400"></i>Slurm</span>
+<span class="tech-tag"><i class="fa-solid fa-cube mr-1 text-purple-400"></i>Singularity</span>
 <span class="tech-tag"><i class="fa-solid fa-microchip mr-1 text-green-400"></i>H100/A100</span>
 </div>
 </div>
@@ -461,14 +464,14 @@ LLM 연구 (훈련 레시피 및 토크나이저 확장)
 <div class="metric-card p-2.5 border-green-500/30" style="background-color: rgba(20, 83, 45, 0.2);">
 <div class="flex flex-col items-center">
 <i class="fa-solid fa-arrow-trend-up text-xl text-green-400 mb-1"></i>
-<p class="highlight-value text-lg text-green-300">+13.9%</p>
-<p class="stat-label text-[9px] text-green-200">ko.avg 향상<br/>(1.7B)</p>
+<p class="highlight-value text-lg text-green-300">+14%</p>
+<p class="stat-label text-[9px] text-green-200">ko.avg 향상 (1.7B)<br/>Best-in-class</p>
 </div>
 </div>
 <div class="metric-card p-2.5 border-purple-500/30" style="background-color: rgba(88, 28, 135, 0.2);">
 <div class="flex flex-col items-center">
 <i class="fa-solid fa-arrow-trend-up text-xl text-purple-400 mb-1"></i>
-<p class="highlight-value text-lg text-purple-300">+15.5%</p>
+<p class="highlight-value text-lg text-purple-300">+15%</p>
 <p class="stat-label text-[9px] text-purple-200">ko.avg 향상<br/>(8B)</p>
 </div>
 </div>

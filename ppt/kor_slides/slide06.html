@@ -170,6 +170,7 @@
 <p class="text-sm text-gray-300 font-light">Vehicle & Person Detection & Recognition System</p>
 <div class="h-3 w-px bg-gray-600"></div>
 <span class="text-xs text-cyan-300 font-medium bg-cyan-900/30 px-2 py-0.5 rounded-full border border-cyan-500/30">베트남 경찰국</span>
+<span class="text-xs text-cyan-300 font-medium bg-cyan-900/30 px-2 py-0.5 rounded-full border border-cyan-500/30">TriNam</span>
 </div>
 </div>
 <div class="text-right">
@@ -275,9 +276,11 @@ VLM 기반 수도 라벨링 및 속성 인식 모델 개발
 <div class="mt-auto">
 <h4 class="text-xs font-bold text-gray-500 uppercase mb-1">Tech Stack</h4>
 <div class="flex flex-wrap gap-0.5">
-<span class="tech-tag"><i class="fa-brands fa-python mr-1"></i>Python</span>
 <span class="tech-tag"><i class="fa-solid fa-fire mr-1 text-orange-400"></i>PyTorch</span>
-<span class="tech-tag"><i class="fa-solid fa-microchip mr-1 text-green-400"></i>A100</span>
+<span class="tech-tag"><i class="fa-solid fa-diagram-project mr-1 text-blue-300"></i>ONNX</span>
+<span class="tech-tag"><i class="fa-solid fa-bolt mr-1 text-yellow-300"></i>OpenVINO</span>
+<span class="tech-tag"><i class="fa-brands fa-docker mr-1 text-blue-400"></i>Docker</span>
+<span class="tech-tag"><i class="fa-solid fa-server mr-1 text-green-400"></i>Slurm</span>
 </div>
 </div>
 </div>
@@ -311,8 +314,13 @@ Demonstration
 <!-- Metric Cards -->
 <div class="metric-card">
 <div class="chart-container" id="chartDetection"></div>
-<p class="highlight-value text-lg">97.48<span class="text-xs text-gray-500">%</span></p>
-<p class="stat-label">Object Det.</p>
+<p class="highlight-value text-lg">96.8<span class="text-xs text-gray-500">%</span></p>
+<p class="stat-label">Vehicle Det. <span class="text-green-400">+10%</span></p>
+</div>
+<div class="metric-card">
+<div class="chart-container" id="chartPerson"></div>
+<p class="highlight-value text-lg">97.2<span class="text-xs text-gray-500">%</span></p>
+<p class="stat-label">Person Det. <span class="text-green-400">+7%</span></p>
 </div>
 <div class="metric-card">
 <div class="chart-container" id="chartLPD"></div>
@@ -322,12 +330,7 @@ Demonstration
 <div class="metric-card">
 <div class="chart-container" id="chartLPR"></div>
 <p class="highlight-value text-lg">97.84<span class="text-xs text-gray-500">%</span></p>
-<p class="stat-label">LP Recognition</p>
-</div>
-<div class="metric-card border-blue-500/30" style="background-color: rgba(30, 58, 138, 0.3);">
-<i class="fa-solid fa-server text-2xl text-blue-400 mb-1"></i>
-<p class="highlight-value text-xl text-blue-300">87.5<span class="text-xs">%</span></p>
-<p class="stat-label text-blue-200">System Total</p>
+<p class="stat-label">LP Recog. (OCR) <span class="text-green-400">+13%</span></p>
 </div>
 
 <!-- Attribute Metrics -->
@@ -346,15 +349,21 @@ Demonstration
 <div class="flex-1 pl-3">
 <div class="flex items-center mb-0.5">
 <i class="fa-solid fa-person text-purple-400 mr-1.5 text-xs"></i>
-<span class="text-xs text-white font-bold">Person Attr.</span>
-<span class="text-xs font-bold text-purple-300 ml-auto">82.3%</span>
+<span class="text-xs text-white font-bold">Person Attr. (VLM)</span>
+<span class="text-xs font-bold text-purple-300 ml-auto">82.34% <span class="text-green-400">+12%</span></span>
 </div>
 <div class="progress-bg">
-<div class="progress-fill" style="width: 82.3%; background-color: #a855f7;"></div>
+<div class="progress-fill" style="width: 82.34%; background-color: #a855f7;"></div>
 </div>
 </div>
 </div>
-<div class="metric-card col-span-2 flex-row items-center justify-center gap-6 px-3 py-2 border-green-500/30" style="background-color: rgba(20, 83, 45, 0.2);">
+<div class="metric-card col-span-2 flex-row items-center justify-center gap-4 px-3 py-2 border-blue-500/30" style="background-color: rgba(30, 58, 138, 0.3);">
+<div class="text-center">
+<i class="fa-solid fa-server text-lg text-blue-400 mb-0.5"></i>
+<p class="highlight-value text-lg text-blue-300">87.52<span class="text-xs">%</span></p>
+<p class="text-xs text-blue-200">System Total</p>
+</div>
+<div class="w-px h-8 bg-blue-500/30"></div>
 <div class="text-center">
 <p class="text-xs text-green-200 uppercase">Processing</p>
 <p class="highlight-value text-lg text-green-300">30+</p>
@@ -407,7 +416,8 @@ Demonstration
             return chart;
         };
 
-        createGauge('chartDetection', 97.48, '#22d3ee');
+        createGauge('chartDetection', 96.8, '#22d3ee');
+        createGauge('chartPerson', 97.2, '#818cf8');
         createGauge('chartLPD', 98.41, '#38bdf8');
         createGauge('chartLPR', 97.84, '#60a5fa');
     });
