@@ -113,7 +113,7 @@
         }
         .milestone-card {
             position: absolute;
-            width: 280px;
+            width: 220px;
             background: rgba(30, 41, 59, 0.8); /* Slate 800 */
             backdrop-filter: blur(12px);
             border: 1px solid rgba(148, 163, 184, 0.2);
@@ -150,10 +150,11 @@
         }
         
         /* Specific positioning for timeline items */
-        .item-1 { left: 15%; }
-        .item-2 { left: 40%; }
-        .item-3 { left: 65%; }
-        .item-4 { left: 90%; }
+        .item-1 { left: 12%; }
+        .item-2 { left: 31.5%; }
+        .item-3 { left: 51%; }
+        .item-4 { left: 70.5%; }
+        .item-5 { left: 90%; }
 
         .tag {
             display: inline-block;
@@ -204,8 +205,8 @@
 <!-- Item 1: High School -->
 <div class="milestone item-1">
 <div class="milestone-dot"></div>
-<div class="milestone-card card-top" style="transform: translate(-128.905px, -33.9223px);">
-<div class="connector connector-top" style="transform: translate(-13.69641px, 40.4911px);"></div>
+<div class="milestone-card card-top" style="transform: translate(-50%, -34px);">
+<div class="connector connector-top" style="transform: translate(-50%, 40px);"></div>
 <p class="year-label">2013.03 - 2016.02</p>
 <h3 class="text-lg font-bold text-white mb-1">대구 경신고등학교</h3>
 <p class="text-sm text-gray-400 mb-3">자율형 사립 고등학교</p>
@@ -216,9 +217,9 @@
 </div>
 <!-- Item 2: Bachelor -->
 <div class="milestone item-2">
-<div class="milestone-dot" style="position: relative; transform: translate(-166.219px, -1.69611px);"></div>
-<div class="milestone-card card-bottom" style="transform: translate(-305.301px, 18.6572px);">
-<div class="connector connector-bottom" style="transform: translate(-2.69614px, -33.4911px);"></div>
+<div class="milestone-dot"></div>
+<div class="milestone-card card-bottom" style="transform: translate(-50%, 19px);">
+<div class="connector connector-bottom" style="transform: translate(-50%, -33px);"></div>
 <p class="year-label">2017.08 - 2021.05</p>
 <h3 class="text-lg font-bold text-white mb-1">Iowa State Univ.</h3>
 <p class="text-sm text-cyan-400 mb-1 font-medium">B.S. Mechanical Engineering</p>
@@ -231,9 +232,9 @@
 </div>
 <!-- Item 3: Master -->
 <div class="milestone item-3">
-<div class="milestone-dot" style="position: relative; transform: translate(-251.025px, 0px);"></div>
-<div class="milestone-card card-top" style="transform: translate(-395.195px, -27.1379px);">
-<div class="connector connector-top" style="transform: translate(1.69641px, 35.4911px);"></div>
+<div class="milestone-dot"></div>
+<div class="milestone-card card-top" style="transform: translate(-50%, -27px);">
+<div class="connector connector-top" style="transform: translate(-50%, 35px);"></div>
 <p class="year-label">2021.08 - 2023.08</p>
 <h3 class="text-lg font-bold text-white mb-1">Texas A&amp;M Univ.</h3>
 <p class="text-sm text-cyan-400 mb-1 font-medium">M.S. Mechanical Engineering</p>
@@ -248,32 +249,31 @@
 </div>
 </div>
 </div>
-<!-- Item 4: Current Career -->
+<!-- Item 4: Career - Secern AI -->
 <div class="milestone item-4">
-<div class="milestone-dot" style="background-color: rgb(34, 211, 238); box-shadow: rgba(34, 211, 238, 0.5) 0px 0px 20px; position: relative; transform: translate(-362.968px, -1.69611px);"></div>
-<div class="milestone-card card-bottom" style="border-color: rgba(34, 211, 238, 0.4); background: rgba(15, 23, 42, 0.9); transform: translate(-503.746px, 23.7457px);">
-<div class="connector connector-bottom" style="background-color: rgb(34, 211, 238);transform: translate(1.39223px, -39.1872px);"></div>
-<div class="absolute -top-3 -right-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-lg">Current</div>
-<p class="year-label text-cyan-300">2023.09 - Present</p>
-<h3 class="text-xl font-bold text-white mb-1">(주)시선에이아이</h3>
+<div class="milestone-dot"></div>
+<div class="milestone-card card-top" style="transform: translate(-50%, -34px);">
+<div class="connector connector-top" style="transform: translate(-50%, 40px);"></div>
+<p class="year-label">2023.09 - 2026.09</p>
+<h3 class="text-lg font-bold text-white mb-1">(주)시선에이아이</h3>
 <p class="text-sm text-cyan-400 mb-2 font-medium">전문연구요원</p>
-<!-- <div class="space-y-1 mb-3">
-<div class="flex items-center text-xs text-gray-300">
-<i class="fa-solid fa-check text-cyan-500 mr-2 text-[10px]"></i>
-<p>한국어 특화 LLM 개발</p>
-</div>
-<div class="flex items-center text-xs text-gray-300">
-<i class="fa-solid fa-check text-cyan-500 mr-2 text-[10px]"></i>
-<p>Face/Object Recognition</p>
-</div>
-<div class="flex items-center text-xs text-gray-300">
-<i class="fa-solid fa-check text-cyan-500 mr-2 text-[10px]"></i>
-<p>모델 경량화 및 최적화</p>
-</div>
-</div> -->
 <div class="flex flex-wrap">
 <span class="tag tag-work">Career</span>
 <span class="tag tag-work">R&amp;D</span>
+</div>
+</div>
+</div>
+<!-- Item 5: Current/Next Career - Hanwha Systems -->
+<div class="milestone item-5">
+<div class="milestone-dot" style="background-color: rgb(34, 211, 238); box-shadow: rgba(34, 211, 238, 0.5) 0px 0px 20px;"></div>
+<div class="milestone-card card-bottom" style="border-color: rgba(34, 211, 238, 0.4); background: rgba(15, 23, 42, 0.9); transform: translate(-50%, 19px);">
+<div class="connector connector-bottom" style="background-color: rgb(34, 211, 238); transform: translate(-50%, -33px);"></div>
+<p class="year-label text-cyan-300">2026.09 - 현재</p>
+<h3 class="text-xl font-bold text-white mb-1">한화시스템</h3>
+<p class="text-sm text-cyan-400 mb-2 font-medium">해양사업부 무인체계팀</p>
+<div class="flex flex-wrap">
+<span class="tag tag-work">Career</span>
+<span class="tag tag-work">Unmanned Systems</span>
 </div>
 </div>
 </div>
