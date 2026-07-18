@@ -8,7 +8,7 @@
 	<head>
 		<title>SeeU ID</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
 	</head>
@@ -21,7 +21,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="#" id="logo">SeeU ID</a></h1>
+								<h1><a href="../../index.html" id="logo">SeeU ID</a></h1>
 							</header>
 						</div>
 
@@ -31,7 +31,7 @@
 								<li><a href="../../index.html">Home</a></li>
 								<li><a href="../../About_me.html">About Me</a></li>
 								<li>
-									<a href="../../Experience_and_Projects.html">Experience & Projects</a>
+									<a href="../../Experience_and_Projects.html">Experience &amp; Projects</a>
 									<ul>
 										<li>
 											<a href="../../experience_and_projects/project_hanwha_systems.html">Hanwha Systems &hellip;</a>
@@ -94,20 +94,20 @@
 
 				<div class="container">
 					<div class="row">
-						<img src="../../images/seeuid/seeuid_5.jpg" alt="" width="550" height="300" />
+						<img src="../../images/seeuid/seeuid_5.jpg" alt="SeeU ID card recognition system overview" width="550" height="300" />
 						<article class="col-6">
 							<header>
 								<h3>SeeU ID (May 2024 ~ November 2024)</h3>
 							</header>
 							<p>
-								sponsor: Indo China Bank, TriNam
+								Sponsor: Indo China Bank, TriNam
 							</p>
 							<p>
 								Consolidated/Affiliated Institution: SECERN AI
 							</p>
 							<p> 
-								In this project, we develop ID card detection and recognition system which is called
-								SeeU ID. SeeU ID is consist of OCR, image detection, face detection, and face recognition.
+								In this project, we developed ID card detection and recognition system which is called
+								SeeU ID. SeeU ID consists of OCR, image detection, face detection, and face recognition.
 								The purpose of the task is to read the information from ID and verify the
 								authority or accessibility for security.
 							</p>
@@ -115,21 +115,21 @@
 								The performance of the entire system is 96.24%
 							</p>
 						</article>
-						<img src="../../images/seeuid/seeuid_6.jpg" alt="" width="550" height="300" />
+						<img src="../../images/seeuid/seeuid_6.jpg" alt="ID card detection with segmentation" width="550" height="300" />
 						<article class="col-6">
 							<header>
 								<h3>1. ID card detection with segmentation</h3>
 							</header>
 							<p>
-								To read the information, ID card must be detected. And ID card could not be laid
-								in proper position. Therefore, we decide to detect ID card with segmentation model
-								and after many review, we choose YOLOv11 segmentation model for this task.
+								To read the information, ID card must be detected. And the ID card could not be placed
+								in the proper position. Therefore, we decide to detect ID card with segmentation model
+								and after many reviews, we chose YOLOv11 segmentation model for this task.
 							</p>
 							<p>
 								We achieved 98.47% accuracy in the test dataset.
 							</p>
 						</article>
-						<img src="../../images/seeuid/seeuid_7.png" alt="" width="550" height="300" />
+						<img src="../../images/seeuid/seeuid_7.png" alt="ID card alignment preprocessing" width="550" height="300" />
 						<article class="col-6">
 							<header>
 								<h3>2. Alignment of ID card</h3>
@@ -139,23 +139,23 @@
 								for image of ID card from segmentation model.
 							</p>
 						</article>
-						<img src="../../images/seeuid/seeuid_4.png" alt="" width="550" height="300" />
+						<img src="../../images/seeuid/seeuid_4.png" alt="OCR text detection and recognition on ID" width="550" height="300" />
 						<article class="col-6">
 							<header>
 								<h3>3. OCR</h3>
 							</header>
 							<p>
-								OCR model is used for this task. OCR model is consist of text detection and recognition.
+								OCR model is used for this task. OCR model consists of text detection and recognition.
 								We tested and evaluated models and dbnet and svtr models are chosen. 
 							</p>
 							<p>
 								We achieved 97.89% for detection of text and 98.82% for recognition.
 							</p>
 						</article>
-						<img src="../../images/seeuid/seeuid_1.jpg" alt="" width="450" height="600" />
+						<img src="../../images/seeuid/seeuid_1.jpg" alt="SeeU ID verification result sample" width="450" height="600" />
 						<article class="col-6">
-							<img src="../../images/seeuid/seeuid_2.png" alt="" width="750" height="300" />
-							<img src="../../images/seeuid/seeuid_3.png" alt="" width="750" height="300" />
+							<img src="../../images/seeuid/seeuid_2.png" alt="ID card recognition output example" width="750" height="300" />
+							<img src="../../images/seeuid/seeuid_3.png" alt="ID card OCR extracted information" width="750" height="300" />
 						</article>
 
 
