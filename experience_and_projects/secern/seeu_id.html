@@ -44,9 +44,9 @@
 											<ul>
 												<li><a href="../../experience_and_projects/secern/smart_control_system.html">Smart Monitoring System</a></li>
 												<li><a href="../../experience_and_projects/secern/ko_llm.html">LLM</a></li>
-												<li><a href="../../experience_and_projects/secern/seeu_track.html">Seeu Track</a></li>
+												<li><a href="../../experience_and_projects/secern/seeu_track.html">SeeU Track</a></li>
 												<li><a href="../../experience_and_projects/secern/face_recognition.html">Face Recognition System</a></li>
-												<li><a href="../../experience_and_projects/secern/seeu_id.html">Seeu ID</a></li>
+												<li><a href="../../experience_and_projects/secern/seeu_id.html">SeeU ID</a></li>
 												<li><a href="../../experience_and_projects/secern/gumi.html">Gumi MetaVerse</a></li>
 												<li><a href="../../experience_and_projects/secern/Tanzania.html">Tanzania SmartGate</a></li>
 											</ul>
@@ -100,19 +100,19 @@
 								<h3>SeeU ID (May 2024 ~ November 2024)</h3>
 							</header>
 							<p>
-								Sponsor: Indo China Bank, TriNam
+								<strong>Client:</strong> Indo China Bank, TriNam
 							</p>
 							<p>
-								Consolidated/Affiliated Institution: SECERN AI
+								<strong>Affiliation:</strong> SECERN AI
 							</p>
 							<p> 
-								In this project, we developed ID card detection and recognition system which is called
+								In this project, we developed an ID card detection and recognition system called
 								SeeU ID. SeeU ID consists of OCR, image detection, face detection, and face recognition.
 								The purpose of the task is to read the information from ID and verify the
 								authority or accessibility for security.
 							</p>
 							<p>
-								The performance of the entire system is 96.24%
+								The integrated system achieved 96.24% accuracy.
 							</p>
 						</article>
 						<img src="../../images/seeuid/seeuid_6.jpg" alt="ID card detection with segmentation" width="550" height="300" />
@@ -121,8 +121,8 @@
 								<h3>1. ID card detection with segmentation</h3>
 							</header>
 							<p>
-								To read the information, ID card must be detected. And the ID card could not be placed
-								in the proper position. Therefore, we decide to detect ID card with segmentation model
+								To read the information, ID card must be detected. Because an ID card may not be placed
+								in the correct orientation, we detected it using a segmentation model
 								and after many reviews, we chose YOLOv11 segmentation model for this task.
 							</p>
 							<p>
@@ -135,8 +135,8 @@
 								<h3>2. Alignment of ID card</h3>
 							</header>
 							<p>
-								To increase and ease of detecting and recognizing texts, we applied image alignment 
-								for image of ID card from segmentation model.
+								To improve the accuracy and ease of text detection and recognition, we applied image alignment
+								to the ID-card image produced by the segmentation model.
 							</p>
 						</article>
 						<img src="../../images/seeuid/seeuid_4.png" alt="OCR text detection and recognition on ID" width="550" height="300" />
@@ -146,7 +146,7 @@
 							</header>
 							<p>
 								OCR model is used for this task. OCR model consists of text detection and recognition.
-								We tested and evaluated models and dbnet and svtr models are chosen. 
+								We tested and evaluated models and the DBNet and SVTR models were chosen.
 							</p>
 							<p>
 								We achieved 97.89% for detection of text and 98.82% for recognition.
